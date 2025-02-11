@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../../img/liderlogo.png" type="image/png">
+
+<title>REGISTRO DE INSCRIPCION</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/css/fileinput.min.css"
+	crossorigin="anonymous">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+	rel="stylesheet">
+
+<link href="https://fonts.cdnfonts.com/css/dm-sans" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+	integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+	rel="stylesheet" />
+<!-- MDB -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+<link
+	href="
+		https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.min.css
+		"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+	integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+	crossorigin="" />
+
+<link rel="stylesheet" href="./static/css/formValidation.css"
+	th:href="@{/css/formValidation.css}" />
+<link rel="stylesheet" href="./static/css/sweetalert2.min.css"
+	th:href="@{/css/sweetalert2.min.css}" />
+<link rel="stylesheet" href="./static/css/datatables.min.css"
+	th:href="@{/css/datatables.min.css}" />
+<link rel="stylesheet" href="./static/css/dataTables.bootstrap5.min.css"
+	th:href="@{/css/dataTables.bootstrap5.min.css}" />
+<link rel="stylesheet" href="./static/css/responsive.bootstrap5.min.css"
+	th:href="@{/css/responsive.bootstrap5.min.css}" />
+<link rel="stylesheet" href="./static/css/fileinput.css"
+	th:href="@{/css/fileinput.css}" />
+
+<!-- 	<link href="https://unpkg.com/filepond@4.28.2/dist/filepond.css" rel="stylesheet"> -->
+
+<link rel="stylesheet" href="#" th:href="@{/css/tema/style.css}" />
+
+<style>
+.hidden_alert_curso {
+	display: none !important;
+}
+
+.modal_cursos_detalle {
+	margin: 0 10px;
+	display: flex;
+	flex-flow: row;
+	height: auto;
+	width: initial;
+}
+
+.file-preview .btn-close {
+	font-size: 8px;
+	margin: 4px;
+}
+
+.kv-fileinput-caption {
+	min-height: 22px !important;
+	font-size: 10px;
+	height: 22px !important;
+}
+
+.fileinput-remove-button, .fileinput-cancel-button, .btn-file {
+	/* 	    background: #ffb549; */
+	/* 	    color:white;  */
+	overflow: hidden;
+	/* 	    height: 22px; */
+	justify-content: center;
+	align-items: center;
+	padding: 6px !important;
+	/* 	    margin: auto; */
+	/* 	    display: flex; */
+}
+
+.fileinput-remove-button>*, .fileinput-cancel-button>*, .btn-file>* {
+	font-size: 9px;
+	margin: 1px;
+}
+
+.file-preview {
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	padding: 0px;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.file-drop-zone {
+	border: 0px;
+	min-height: 260px;
+	border-radius: 4px;
+	text-align: center;
+	/* vertical-align: middle; */
+	margin: 0px;
+	padding: 2px;
+}
+</style>
+
+
+<style type="text/css">
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td,
+	.table>tbody>tr>td, .table>tfoot>tr>td {
+	/* padding: 8px; */
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+	padding-top: 2px !important;
+	padding-bottom: 2px !important;
+	/* 		    font-size: 11px !important; */
+}
+</style>
+
+<style type="text/css">
+@keyframes letraCayendo { 
+0% {
+	transform: translateY(-10%);
+	opacity: 0;
+}100%{
+	transform:translateY (0);
+	opacity:1;
+}
+}
+
+/* Estilo individual para cada letra */
+.lt_welcome_efect span {
+	font-size: 1.2rem;
+	display: inline-block;
+	animation: letraCayendo 1s forwards;
+	/* Aplicamos la animación a cada letra */
+	animation-delay: calc(0.1s * var(- -index));
+	/* Delay creciente para cada letra */
+	animation-iteration-count: infinite;
+	/* Repetir la animación infinitamente */
+	animation-direction: alternate;
+	/* Alternar dirección de la animación */
+}
+</style>
+
+<style type="text/css">
+* {
+	font-size: 13px;
+
+	/*  				font-family: 'Roboto Condensed', sans-serif, "Helvetica Neue", Helvetica, Arial, sans-serif;  */
+}
+/* 			body{ */
+/* 				font-family: 'DM Sans', sans-serif; */
+/* 			} */
+body {
+	/*     		width: 100vw; */
+	height: auto;
+	/*  		 	font-family: "Poppins", sans-serif; */
+	/* 	font-family: 'DM Sans', sans-serif; */
+	font-family: 'DM Sans';
+	background-color: #eaeaea;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* 		        flex-direction: column; */
+	/* 		    background-image: url(../../img/poster3.png); */
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.lt_welcome {
+	font-size: 1.2em;
+	text-align: center;
+	position: relative;
+	/* Necesario para posicionar las letras individualmente */
+	overflow: hidden;
+	/* Para que las letras caigan dentro del contenedor */
+	/* 		    font-family: Arial, sans-serif; /* Fuente para el texto */
+	font-weight: bold;
+}
+
+.lt_detalle {
+	font-size: 12px;
+}
+
+.tarjeta {
+	/* box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
+	overflow: hidden;
+	height: auto;
+	width: auto;
+}
+
+.title_form {
+	/*         	background: red; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.logo_lider {
+	width: 120px;
+	margin: 2px 0;
+}
+.formulario-data{
+	padding: 15px;	
+}
+.card_data {
+	background: white;
+	border-radius: 5px;
+
+}
+
+.card_img {
+	text-align: center;
+	padding: 0.5rem 0;
+}
+
+.card_img img {
+	width: 190px;
+	height: 190px;
+	border-radius: 6px;
+}
+
+.btn_inscribirme {
+	display: inline-block;
+	border: 0px solid #804000;
+	background: linear-gradient(to bottom, #FF8000, #FA6900);
+	padding: 8px 48px;
+	color: #EEE;
+	text-decoration: none;
+	border-radius: 4px;
+	font-family: Segoe UI;
+	transition: all 0.05s linear, background-color 0.1s linear, color 0.1s
+		linear;
+	font-weight: bold;
+}
+
+.btn_inscribirme:hover {
+	background: linear-gradient(to bottom, #FF8000, #FF9000);
+	color: #FFF;
+}
+/* 
+ .btn_inscribirme:active { 
+ 	margin-top: 3px; 
+ 	box-shadow: 0 4px 0 #804000;
+ }  */
+.content-mas-detalles{
+	display: flex;
+    justify-content: center;
+}
+.btn-mas-detalles{
+	border: 0px;
+}
+.btn-mas-detalles:hover{
+	background: #e7e7e7;
+}
+</style>
+
+
+
+<style type="text/css">
+.evento_title {
+	background: #ebebeb;
+	color: black;
+	text-transform: uppercase;
+	font-size: 20px;
+	padding: 15px;
+	border-radius: 4px 4px 0px 0px;
+	font-weight: bold;
+	line-height: normal;
+	font-family: monospace;
+	font-style: italic;
+}
+
+.evento_body {
+	background: #fff;
+}
+
+.evento_content {
+	display: flex;
+}
+
+.evento_content_izq {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: 8px;
+	width: 70%;
+}
+
+.evento_content_der {
+	padding: 8px;
+	display: flex;
+	width: 30%;
+	flex-direction: column;
+}
+
+.evento_afiche {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.evento_body_detalle {
+	background: #fff;
+	padding: 10px;
+	max-height: max-content;
+	font-family: 'DM Sans';
+}
+
+.evento_form_register {
+	background: #d9ecff;
+	border-radius: 3px 3px 0 0;
+	text-decoration: none;
+	color: #222835;
+	height: auto;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	margin-top: 2px;
+	transition: 1s ease;
+}
+
+.evento_form_register:hover {
+	background: #0e0e0e;
+	color: white;
+}
+
+.evento_form_text {
+	font-size: 10px;
+}
+
+.evento_form_register i {
+	background: #ffffff;
+	padding: 9px;
+	margin: 5px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 8px -4px #000000;
+	color: black;
+}
+
+.evento_group_what {
+	background: #e9eaeb;
+	border-radius: 0 0 3px 3px;
+	text-decoration: none;
+	color: #222835;
+	height: auto;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	margin-top: 0.5px;
+	transition: 1s ease;
+}
+
+.evento_group_what:hover {
+	background: #0e0e0e;
+	color: white;
+}
+
+.evento_what_text {
+	font-size: 10px;
+}
+
+.evento_group_what i {
+	background: #31e00e;
+	padding: 9px;
+	margin: 5px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 8px -4px #000000;
+}
+
+.evento_cursos_title {
+	background: #ffffff;
+	color: #000000;
+	padding: 7px;
+	border-radius: 2px;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 2px 0px;
+	border-radius: 4px;
+}
+
+.evento_content_cursos {
+	background: #fff;
+	border-radius: 3px;
+	margin-top: 1px;
+	border-radius: 8px;
+	padding: 5px;
+}
+
+.card_evento_curso {
+	border: 1px solid currentColor;
+	border-color: #DEDEDE;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.evento_metodospagos {
+	background: #fff;
+	margin-top: 1px;
+	border-radius: 2px;
+	/* 	padding: 2px; */
+}
+
+.evento_metodospagos_title {
+	font-weight: bold;
+}
+
+.evento_content_metodospagos {
+	
+}
+
+.card_evento_metodopago {
+	border: 1px solid currentColor;
+	border-color: #DEDEDE;
+	border-radius: 2px;
+	display: flex;
+	flex-direction: row;
+	/* 	width: 100%; */
+	justify-content: end;
+}
+
+.card_evento_metodopago_img {
+	background: #ebebeb;
+	border-radius: 2px 0 0 2px;
+	/* 	flex: 1; */
+	justify-content: flex-end;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	/* 	width: 30%; */
+}
+
+.card_evento_metodopago_img img {
+	/* 	border-radius: 50%; */
+	width: 320px;
+	height: 190px;
+}
+
+.card_evento_curso_img_expositor {
+	background: #ebebeb;
+	border-radius: 8px 0 0 8px;
+	/* 	flex: 1; */
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	width: 30%;
+}
+
+.card_evento_curso_img_expositor img {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	/* 	    background: #ffffff; */
+	/* 	    z-index: 2; */
+	/* 	    position: relative; */
+}
+
+.card_evento_curso_contenido {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 5px;
+	width: 70%
+}
+
+.card_evento_curso_txt_nombre_curso {
+	font-size: 20px;
+}
+</style>
+
+<style type="text/css">
+.ocultar {
+	display: none;
+}
+
+.mostrar {
+	display: block;
+}
+</style>
+
+</head>
+<body>
+
+	<div class="tarjeta formulario-data">
+		<input type="hidden" th:value="${codigoeventoencript}"
+			id="codigoeventoencript">
+		<div class="title_form">
+			<img src="../../img/liderlogo.png" th:href="@{../img/liderlogo.png}"
+				alt="Imagen izquierda" class="logo_lider">
+
+			<div class="lt_welcome lt_welcome_efect">
+				<!-- 		<div class="lt_welcome"> -->
+				<span style="-index: 1;">B</span> <span style="-index: 2;">I</span>
+				<span style="-index: 3;">E</span> <span style="-index: 4;">N</span>
+				<span style="-index: 5;">V</span> <span style="-index: 6;">E</span>
+				<span style="-index: 7;">N</span> <span style="-index: 8;">I</span>
+				<span style="-index: 9;">D</span> <span style="-index: 10;">O</span>
+			</div>
+
+			<span class="badge bg-warning text-dark lt_detalle">Complete
+				el formulario de registro correctamente porfavor</span>
+			<!-- 		Complete el formulario de registro porfavor -->
+		</div>
+		<div class=" mt-1 ">
+			<form name="formulario" role="form" id="formulario" method="post"
+				enctype="multipart/form-data" data-fv-excluded="disabled">
+
+				<input type="" placeholder="idinscrito" name="id" value=""
+					style="display: none">
+				<input type="" placeholder="idevento" name="idevento" value=""
+					style="display: none">
+				<input type=""
+					placeholder="idpersona" name="idper" value="" style="display: none">
+				<input type="" placeholder="idparticipante" name="idpart" value=""
+					style="display: none"> <input placeholder="" class=""
+					name="cantidad" value="0" type="number" style="display: none">
+				<input placeholder="" class="" name="precio" value="0" type="number"
+					step="any" style="display: none"> <input placeholder=""
+					class="" name="descuento" value="0" type="number" step="any"
+					style="display: none"> <input placeholder="" class=""
+					name="subtotal" value="0" type="number" step="any"
+					style="display: none"> <input placeholder="" class=""
+					name="evento" value="" type="" step="any" style="display: none">
+				<input placeholder="" class="" name="anio" value="" type=""
+					style="display: none"> <input type="" name="estado"
+					value="1" style="display: none">
+				<div class="row" style="">
+					<div class="col-md-3"></div>
+					<div class="col-md-6 card_data">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="">
+									<label for="logo" class=""><b>SUBIR SU FOTOGRAFIA
+											(4X4) PARA SU CERTIFICADO</b></label> <input placeholder="Ingrese logo"
+										class="form-control fg-input data-per field_css"
+										name="archivoimgparticipante" id="archivoimgparticipante"
+										type="file" >
+								</div>
+
+							</div>
+
+							<div class="" style="padding-top: 10px;">
+
+								<div id="msg"></div>
+
+								<!-- Mensajes de Verificacion -->
+								<div id="error" class="alert alert-warning  ocultar"
+									role="alert">Hemos encontrado sus datos en nuestra base
+									de datos, complete o modifique su información!</div>
+								<div id="ok" class="alert alert-success ocultar" role="alert">
+									Completar todos los datos que se indican en el formmulario
+									porfavor..</div>
+									
+								<div id="error-inscrito" class="alert alert-danger ocultar" role="alert">
+									Usted ya está registrado en este evento, comuniquese con el encargado gracias..</div>
+							</div>
+
+							<div class="col-md-8">
+								<div class="">
+									<label for="ci" class=""><b>CEDULA</b></label> <input
+										placeholder="Ingrese carnet.. "
+										class="form-control fg-input data-per field_css" name="ci"
+										type="text" required="required">
+								</div>
+
+							</div>
+							<div class="col-md-4">
+								<div class="">
+									<label for="exp" class=""><b>EXPEDIDO</b></label> <select
+										required="required" class="form-select field_css"
+										aria-label=".form-select-sm example" id="exp" name="exp">
+										<option selected value="">Seleccionar</option>
+										<option value="TJA">TARIJA</option>
+										<option value="PT">POTOSI</option>
+										<option value="PD">PANDO</option>
+										<option value="LP">LA PAZ</option>
+										<option value="OR">ORURO</option>
+										<option value="CBBA">COCHABAMBA</option>
+										<option value="BE">BENI</option>
+										<option value="CH">CHUQUISACA</option>
+										<option value="SCZ">SANTA CRUZ</option>
+
+									</select>
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="">
+									<label for="nombre" class=""><b>NOMBRE COMPLETO</b></label> <input
+										placeholder="Ingrese su nombre completo.."
+										class="form-control fg-input data-per field_css"
+										name="nombres" type="text" required="required"
+										onkeyup="this.value = this.value.toUpperCase();">
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="">
+									<label for="nombre" class=""><b>APELLIDOS</b></label> <input
+										placeholder="Ingrese apellidos.."
+										class="form-control fg-input data-per field_css"
+										name="apellidos" type="text" required="required"
+										onkeyup="this.value = this.value.toUpperCase();">
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="">
+									<label for="genero" class=""><b>GENERO</b></label> <select
+										required="required" class="form-select field_css"
+										aria-label=".form-select-sm example" id="genero" name="genero">
+										<option selected value="">Seleccionar</option>
+										<option value="m">MASCULINO</option>
+										<option value="f">FEMENINO</option>
+										<option value="s">SIN ESPESIFICAR</option>
+
+									</select>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="">
+									<label for="fechanacimiento" class=""><b>FECHA DE
+											NACIMIENTO</b></label> <input placeholder="Ingrese Fecha Nacimiento.."
+										class="form-control fg-input data-per field_css"
+										name="fechanacimiento" type="date" required="required"
+										id="fechanacimiento" value="">
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="">
+									<label for="edad" class=""><b>EDAD</b></label> <input
+										placeholder="Edad.."
+										class="form-control fg-input data-per field_css" id="edad"
+										name="edad" type="number" required="required">
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="">
+									<label for="celular" class=""><b>TELEFONO/CELULAR
+											(Con WHATSAPP)</b></label> <input
+										placeholder="Ingresar su nro de celular.."
+										class="form-control fg-input data-per field_css"
+										name="celular" type="number" required="required">
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<div class="">
+									<label for="gradoacademico" class=""><b>GRADO
+											ACADEMICO</b></label> <select required="required"
+										class="form-select field_css"
+										aria-label=".form-select-sm example" id="gradoacademico"
+										name="gradoacademico">
+										<option selected value="">Seleccionar</option>
+
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="">
+									<label for="profesion" class=""><b>CARRERA </b></label> <select
+										required="required" class="form-select field_css"
+										aria-label=".form-select-sm example" id="profesion"
+										name="profesion">
+										<option selected value="">Seleccionar</option>
+
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="">
+									<label for="email" class=""><b>CORREO ELECTRONICO
+											(GMAIL)</b></label> <input placeholder="Ingrese su correo GMAIL.."
+										class="form-control fg-input data-per field_css" name="email"
+										type="text" required="required">
+								</div>
+
+							</div>
+
+							<div class="col-md-6">
+								<div class="">
+									<label for="departamento" class=""><b>CIUDAD DE RESIDENCIA</b></label> <select required="required"
+										class="form-select field_css"
+										aria-label=".form-select-sm example" id="departamento"
+										name="departamento">
+										<option selected value="">Seleccionar</option>
+
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="">
+									<label for="localidad" class=""><b>LUGAR DE RESIDENCIA</b></label> <input
+										placeholder="Region o localidad en el que se encuetra.."
+										class="form-control fg-input data-per field_css"
+										name="localidad" type="text" required="required"
+										onkeyup="this.value = this.value.toUpperCase();">
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="">
+									<label for="exampleFormControlInput1" class=""><b>DIRECCIÓN</b></label>
+									<textarea rows="" cols=""
+										placeholder="Ingrese la direccion donde vive "
+										class="form-control fg-input data-per field_css"
+										name="direccion" id="direccion" required="required"
+										onkeyup="this.value = this.value.toUpperCase();"></textarea>
+
+								</div>
+							</div>
+
+							<div class=" col-md-12 mt-1">
+
+								<div class="shadow evento_comprobantepago "
+									style="padding: 2px;">
+									<label for="logo" class=""><b>FOTO DEL COMPROBANTE
+											DE PAGO REALIZADO</b></label> <input placeholder="Ingrese logo"
+										class="form-control fg-input data-per field_css"
+										name="archivoimgpago" id="archivoimgpago" type="file"
+										required="required">
+								</div>
+
+
+							</div>
+							
+							<div class="col-md-12 content-mas-detalles mt-3">
+								<button class="btn-mas-detalles"><i class="fa fa-angle-double-down" aria-hidden="true"></i> Mas Detalles</button>
+							</div>
+							
+							<div class="mt-1 ">
+								<div class="contenido-detalles-evento  ocultar">
+
+								<div class="col-md-12  ">
+									<div class="evento_title">CONGRESO BOLIVIANO DE
+										CONTADURÍA PÚBLICA, CIENCIAS EMPRESARIALES Y FINANCIERAS</div>
+									<div class="shadow evento_body ">
+										<div class="evento_content">
+											<div class="evento_content_izq">
+												<div class=" shadow rounded evento_body_detalle">
+													<div class="row">
+														<div class="col-md-6">
+															<label><b>FECHA INICIO: </b></label> <span
+																class="evento_f_inicio"> 12-02-2024</span>
+														</div>
+														<div class="col-md-6">
+															<label><b>FECHA FIN: </b></label> <span
+																class="evento_f_fin"> 22-02-2024</span>
+														</div>
+														<div class="col-md-6">
+															<label><b>HORA DE INICIO: </b></label> <span
+																class="evento_hora">11:00</span>
+														</div>
+														<div class="col-md-6">
+															<label><b>MODALIDAD: </b></label> <span
+																class="evento_modalidad">PRESENCIAL</span>
+														</div>
+
+														<div class="col-md-6">
+															<label><b>PRECIO: </b></label> <span
+																class="evento_precio">200.00</span> Bs.
+														</div>
+														<div class="col-md-6">
+															<label><b>CERTIFICADO: </b></label> <span
+																class="evento_certificado">SI</span>
+														</div>
+														<!-- 														 
+														<div class="col-md-6">
+															<label><b>EVALUACIONES: </b></label> <span
+																class="evento_evaluacion">NO</span>
+														</div>-->
+														<div class="col-md-12">
+															<label><b>LUGAR DEL EVENTO: </b></label> <span
+																class="evento_lugarevento">Lugar del evento</span>
+														</div>
+													</div>
+
+												</div>
+												<div class=" shadow evento_cursos_title mt-2">
+													<div class="">.:DETALLE:.</div>
+												</div>
+												<div class="shadow evento_content_cursos">
+
+													<div class="card_evento_curso">
+														<div class="card_evento_curso_img_expositor">
+															<a href="../../img/poster1.png"
+																th:href="@{/img/poster1.png}" data-fancybox=""> <img
+																src="../../img/poster1.png" alt="Trendy Pants and Shoes"
+																class="img-fluid img-thumbnail " /></a>
+														</div>
+														<div class="card_evento_curso_contenido">
+															<div class="row mb-1">
+																<div class="col-md-6">
+																	<b>Categoria: </b><span
+																		class="card_evento_curso_txt_categoria">Auditoria</span>
+																</div>
+																<div class="col-md-6">
+																	<b>Nivel: </b><span class="card_evento_curso_txt_nivel">Basico</span>
+
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-12">
+																	<b> <span
+																		class="card_evento_curso_txt_nombre_curso">Auditoria
+																			Intermedia 2</span></b>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-12">
+																	<b>Fecha: </b><span
+																		class="card_evento_curso_txt_fechacurso">yyyy-mm-dd</span>
+																</div>
+
+															</div>
+															<div class="row">
+																<div class="col-md-12">
+																	<b>De Horas: </b><span
+																		class="card_evento_curso_txt_hora_inicial">12:00</span>
+																	- <span class="card_evento_curso_txt_hora_final">14:00</span>
+																</div>
+
+															</div>
+															<div class="row mb-1">
+																<div class="col-md-12">
+																	<b>En: </b><span
+																		class="card_evento_curso_txt_lugarcurso">Carrera
+																		de Contabilidad Redes </span>
+																</div>
+
+															</div>
+															<div class="row">
+																<div class="col-md-12">
+																	<b>Por: </b><span
+																		class="card_evento_curso_txt_gradoacademico">PhD.</span>
+																	<span class="card_evento_curso_txt_expositor">Luis
+																		Fernando Garcia P</span>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-12">
+																	<b><span class="card_evento_curso_txt_rubro">
+																			Catedrático Emérito UMSA</span> </b>
+																</div>
+															</div>
+														</div>
+
+													</div>
+
+												</div>
+
+											</div>
+											<div class="evento_content_der">
+												<div class="">
+													<label><b>EVENTO: </b></label> <span class="evento_tipo">REQUIERE INVERSIÓN</span>
+												</div>
+												<div class="evento_afiche text-center">
+													<div class="evento_afiche_img">
+														<a href="../../img/poster1.png"
+															th:href="@{../../img/poster1.png}" data-fancybox="">
+															<img src="../../img/poster1.png"
+															th:src="@{../../img/poster1.png}" alt=""
+															class="img-fluid img-thumbnail rounded"
+															style="width: 100%; height: 300px;">
+														</a>
+													</div>
+
+
+												</div>
+											</div>
+
+										</div>
+
+
+
+
+
+
+
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="evento_cursos"></div>
+								</div>
+								<div class="col-md-12">
+
+									<div class=" shadow evento_metodospagos">
+										<div class="evento_metodospagos_title">Metodos de Pago</div>
+										<div class=" evento_content_metodospagos">
+											<div class="card_evento_metodopago">
+												<div class="card_evento_metodopago_img">
+													<img src="../../img/poster1.png"
+														alt="Trendy Pants and Shoes"
+														class="img-fluid img-thumbnail " />
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+
+								</div>
+								</div>
+								<div class="mt-3 mb-1 col-md-12 text-center">
+									<div class="mx-auto">
+										<div id="registrado" class="alert alert-success  ocultar"
+											role="alert" style="margin-top: 10px;">Hemos registrado
+											con exito su inscripcion, revise su correo@gmail porfavor..</div>
+										<button id="btnGuardar_modal " type="submit"
+											class=" btn_inscribirme" style="">
+											<i class="fa fa-floppy-o" aria-hidden="true" style=""></i>
+											INSCRIBIRME
+										</button>
+
+										
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+
+
+	<script src="./static/js/jquery-3.6.3.min.js"
+		th:src="@{/js/jquery-3.6.3.min.js}"></script>
+	<!-- 	<script src="#" th:src="@{/js/formValidation.min.js}"></script> -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/js/fileinput.min.js"></script>
+
+	<!-- MDB -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.jquery.min.js"></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+	<script type="" src="./static/js/formValidation.js"
+		th:src="@{/js/formValidation.js}"></script>
+	<script type="" src="./static/js/framework/bootstrap.js"
+		th:src="@{/js/framework/bootstrap.js}"></script>
+	<script type="" src="./static/js/language/es_ES.js"
+		th:src="@{/js/language/es_ES.js}"></script>
+	<script type="" src="./static/js/jquery.loadJSON.min.js"
+		th:src="@{/js/jquery.loadJSON.min.js}"></script>
+	<script type="" src="./static/js/sweetalert2.all.min.js"
+		th:src="@{/js/sweetalert2.all.min.js}"></script>
+	<script type="" src="./static/js/datatables.min.js"
+		th:src="@{/js/datatables.min.js}"></script>
+	<script type="" src="./static/js/dataTables.bootstrap5.min.js"
+		th:src="@{/js/dataTables.bootstrap5.min.js}"></script>
+	<script type="" src="./static/js/responsive.bootstrap5.min.js"
+		th:src="@{/js/responsive.bootstrap5.min.js}"></script>
+	<script type="" src="./static/js/jform.min.js"
+		th:src="@{/js/jform.min.js}"></script>
+	<script type="" src="./static/js/jquery.form.min.js"
+		th:src="@{/js/jquery.form.min.js}"></script>
+	<script type="" src="./static/js/fileinput.js"
+		th:src="@{/js/fileinput.js}"></script>
+	<script type="" src="./static/js/locales/es.js"
+		th:src="@{/js/locales/es.js}"></script>
+	<!-- 		<script type="" src="./static/js/tema/script.js" th:src="@{/js/tema/script.js}"></script> -->
+
+	<script type="text/javascript">
+		
+		var nameEntity_a="../../RestInscritos"
+		var nameEntity_p="../../RestParticipantes"
+		var nameEntity="../../RestPersonas"
+		var nameEntity1="../../RestGradosAcademicos"
+		var nameEntity2="../../RestProfesiones" 
+		var nameEntity3="../../RestDepartamentos"
+		var nameEntity4="../../RestProvincias"
+		var nameEntity5="../../RestEventos"
+		var nameEntity6="../../RestExpositores"
+		var nameEntity7="../../RestMetodosPagos"
+	
+		
+		
+	
+		$('#formulario').find('input[name="archivoimgparticipante"]').fileinput({
+		  	language:'es',
+		    showUpload: false, // Ocultar el botÃ³n de carga
+		    showRemove: true, 
+            showCaption: true,
+            showCancel: true
+		});
+		
+		
+		$('#formulario').find('input[name="archivoimgpago"]').fileinput({
+		  	language:'es',
+		    showUpload: false, // Ocultar el botÃ³n de carga
+		    showRemove: true, 
+            showCaption: true,
+            showCancel: true
+		});
+		logouserdefault();
+		
+		function resetdataformulario() {
+		    // Resetear inputs específicos
+		    $('#formulario').find('input[name="id"], input[name="idpart"], input[name="idper"], input[name="nombres"], input[name="apellidos"], input[name="fechanacimiento"], input[name="edad"], input[name="celular"], input[name="email"], input[name="localidad"]').val('');
+
+		    // Resetear textarea específico
+		    $('#formulario').find('textarea[name="direccion"]').val('');
+
+		    // Resetear selects al primer valor
+		    document.querySelector("#formulario select[name='exp']").selectedIndex = 0;
+		    document.querySelector("#formulario select[name='genero']").selectedIndex = 0;
+		    document.querySelector("#formulario select[name='gradoacademico']").selectedIndex = 0;
+		    document.querySelector("#formulario select[name='profesion']").selectedIndex = 0;
+		    document.querySelector("#formulario select[name='departamento']").selectedIndex = 0;
+		}
+
+		function logouserdefault(){
+			$('#formulario').find('input[name="archivoimgparticipante"]').val('')
+			$('#formulario').find('input[name="archivoimgparticipante"]').fileinput('destroy');
+			$('#formulario').find('input[name="archivoimgparticipante"]').fileinput({
+			  	language:'es',
+			    showUpload: false, // Ocultar el botÃ³n de carga
+			    showRemove: true, 
+	            showCaption: true,
+	            showCancel: true
+			});
+/*
+			$('#fileInput').val('');
+			$('#formulario').find('input[name="archivoimgparticipante"]').val('');
+			var xhr = new XMLHttpRequest();
+		    let nombrelogodefecto="usuario.jpg";
+		    xhr.open("GET", "../../img/"+nombrelogodefecto);
+		    xhr.responseType = "blob";
+		    xhr.onload = function() {
+		        var blob = xhr.response;
+		        var file = new File([blob], nombrelogodefecto);
+		        var inputFile = document.getElementById('archivoimgparticipante');
+		        var fileList = new DataTransfer();
+		        fileList.items.add(file);
+		        inputFile.files = fileList.files;
+		        inputFile.title = nombrelogodefecto;
+		    };
+		    xhr.send();
+			
+//				alert('form')
+
+			
+			
+			$('#formulario').find('input[name="archivoimgparticipante"]').fileinput({
+			  	language:'es',
+			    showUpload: false, // Ocultar el botÃ³n de carga
+			    showRemove: true, 
+                showCaption: true,
+                showCancel: true,
+//	 		  	 ,maxImageWidth: 300 // Ancho mï¿½ximo de la imagen previa en pï¿½xeles
+//	 		     ,maxImageHeight: 300 
+			    initialPreview: [
+			        `<img src="../../img/${nombrelogodefecto}" class="file-preview-image" alt="Vista previa" title="${nombrelogodefecto}">`
+			    ],
+			    initialPreviewConfig: [
+			        {
+			            caption: nombrelogodefecto, // Texto que aparecerÃ¡ debajo de la imagen en la vista previa
+			            width: '200px', // Ancho de la imagen en la vista previa
+			            url: '/', // URL opcional para el enlace de eliminaciÃ³n (en este caso, se establece como '#')
+			            key: 1 // Clave Ãºnica para el elemento de vista previa
+			        }
+			    ],
+			    fileActionSettings: {
+			        removeIcon: '', // Vaciar el icono del botÃ³n de eliminar
+			        removeClass: 'hide-remove', // Aplicar una clase para ocultar el botÃ³n de eliminar
+			        removeTitle: '', // Vaciar el tÃ­tulo del botÃ³n de eliminar
+			    },
+//				    browseTitle: 'Mi tÃ­tulo personalizado',
+//				    browseLabel: 'Seleccionar archivo',
+	    		initialCaption: nombrelogodefecto //para poner el nombre en la caja del file
+
+			});
+*/
+
+			
+		}
+		
+		
+		
+		// Función para calcular la edad a partir de la fecha de nacimiento
+		function calcularEdad(fechaNacimiento) {
+		    var hoy = new Date();
+		    var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+		    var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+		    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+		        edad--;
+		    }
+		    return edad;
+		}
+
+		// Evento para el campo de entrada de fecha de nacimiento
+		document.querySelector('#formulario input[name="fechanacimiento"]').addEventListener('input', function() {
+		    var fechaNacimiento = new Date(this.value); // Obtener fecha de nacimiento del campo
+		    var edad = calcularEdad(fechaNacimiento); // Calcular la edad
+		    document.getElementById('edad').value = edad; // Mostrar la edad en un campo de texto
+		});
+
+		
+			/*
+		   var s_departamento = document.getElementById('departamento');
+
+	        // Añadimos un event listener para el evento 'change'
+	       s_departamento.addEventListener('change', function() {
+	            var id = this.value;
+// 	            console.log('iddep:', id);
+	            // Aquí puedes hacer lo que quieras con la opción seleccionada
+                fetch(nameEntity4+'/provincias/'+id, {
+	            	method: 'GET', // Especificamos que estamos utilizando el método GET
+	            	headers: {
+                	   'Content-Type': 'application/json'
+              		}
+        		})
+        		 .then(response => response.json())
+                 .then(data => {
+                	 
+//                 	 console.log("ProvinviasById:",data)
+                     // Limpiamos el contenido anterior
+                     document.getElementById('provincia').innerHTML = '';
+   	   		         var option0 = document.createElement('option');
+   	   		  		 option0.value = "";
+  	   		 		 option0.textContent = "Seleccionar";
+                	 document.getElementById('provincia').appendChild(option0)
+                     data.forEach(item => {
+         	   		    if (item.estado == 1) {
+        	   		        var option = document.createElement('option');
+        	   		        option.value = item.id;
+        	   		        option.textContent = item.nombre;
+        	   		        document.getElementById('provincia').appendChild(option);
+        	   		    }
+                     });
+
+                     
+
+                 })
+                 .catch(error => {
+                     console.error('Error al traer la lista:', error);
+                 });
+	            
+	        });
+			*/
+			var xhr = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+	  		xhr.open('GET', nameEntity1 );//abre una solicitud GET y hacia la direccion establecida
+	  		xhr.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+	  		xhr.onload = function() {//cuando se complete la solicitud de manera exitosa
+	   		  if (xhr.status === 200) {//se verifica el estado de la respuesta
+	   		    var data = xhr.response;//se asigna la respuesta
+	   		    // Hacer algo con el resultado aqu�
+	 		     console.log("GRADOS ACADEMICOS:",data);
+		   		 data.forEach(function(item) {
+		   		    if (item.estado == 1) {
+		   		        var option = document.createElement('option');
+		   		        option.value = item.id;
+		   		        option.textContent = item.nombre;
+//	 	   		        document.getElementById('gradoacademico').appendChild(option);
+		                var select1 = document.querySelector('#formulario select[name="gradoacademico"]');
+		                if (select1) {
+		                    select1.appendChild(option);
+		                }
+		   		    }
+		   		});
+	   		  }
+	   		};
+	   		xhr.send();
+   		
+			var xhr1 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+	  		xhr1.open('GET', nameEntity2 );//abre una solicitud GET y hacia la direccion establecida
+	  		xhr1.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+	  		xhr1.onload = function() {//cuando se complete la solicitud de manera exitosa
+	   		  if (xhr1.status === 200) {//se verifica el estado de la respuesta
+	   		    var data = xhr1.response;//se asigna la respuesta
+	   		    // Hacer algo con el resultado aqu�
+	 		     console.log("PROFESIONES:",data);
+		   		 data.forEach(function(item) {
+		   		    if (item.estado == 1) {
+		   		        var option = document.createElement('option');
+		   		        option.value = item.id;
+		   		        option.textContent = item.nombre;
+//	 	   		        document.getElementById('profesion').appendChild(option);
+		                var select2 = document.querySelector('#formulario select[name="profesion"]');
+		                if (select2) {
+		                    select2.appendChild(option);
+		                }
+		   		    }
+		   		});
+	   		  }
+	   		};
+	   		xhr1.send();
+	   		
+			var xhr3 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+	  		xhr3.open('GET', nameEntity3 );//abre una solicitud GET y hacia la direccion establecida
+	  		xhr3.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+	  		xhr3.onload = function() {//cuando se complete la solicitud de manera exitosa
+	   		  if (xhr3.status === 200) {//se verifica el estado de la respuesta
+	   		    var data = xhr3.response;//se asigna la respuesta
+	   		    // Hacer algo con el resultado aqu�
+	 		     console.log("DEPARTAMENTOS:",data);
+		   		 data.forEach(function(item) {
+		   		    if (item.estado == 1) {
+		   		        var option = document.createElement('option');
+		   		        option.value = item.id;
+		   		        option.textContent = item.nombre;
+//	 	   		        document.getElementById('departamento').appendChild(option);
+		                var select3 = document.querySelector('#formulario select[name="departamento"]');
+		                if (select3) {
+		                    select3.appendChild(option);
+		                }
+		   		    }
+		   		});
+	   		  }
+	   		};
+	   		xhr3.send();
+   		
+// 		var xhr4 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+//   		xhr4.open('GET', nameEntity4 );//abre una solicitud GET y hacia la direccion establecida
+//   		xhr4.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+//   		xhr4.onload = function() {//cuando se complete la solicitud de manera exitosa
+//    		  if (xhr4.status === 200) {//se verifica el estado de la respuesta
+//    		    var data = xhr4.response;//se asigna la respuesta
+   		   
+//  		     console.log("PROVINCIAS:",data);
+// 	   		 data.forEach(function(item) {
+// 	   		    if (item.estado == 1) {
+// 	   		        var option = document.createElement('option');
+// 	   		        option.value = item.id;
+// 	   		        option.textContent = item.nombre;
+// 	   		        document.getElementById('provincia').appendChild(option);
+// 	   		    }
+// 	   		});
+//    		  }
+//    		};
+//    		xhr4.send();
+   		
+   		
+   		
+   		
+   		
+   		
+   		//cargando el evento con sus cursos respectivos
+   		
+   		let codigoeventoencript=document.getElementById("codigoeventoencript").value;
+// 		console.log("codigoeventoencript:",codigoeventoencript)
+		
+		$.get(nameEntity5 + '/findByCodeEncrypt/' + codigoeventoencript, function (data) {
+			console.log("Evento_data_by_crypt:",data);
+			
+			$('#formulario').find('input[name="idevento"]').val(data.id);
+			let xcant=1;
+			let xprec=data.precio;
+			$('#formulario').find('input[name="cantidad"]').val(xcant);
+			$('#formulario').find('input[name="precio"]').val(xprec);
+			let xsubt= xcant*xprec;
+			$('#formulario').find('input[name="subtotal"]').val(xsubt);
+			$('#formulario').find('input[name="evento"]').val(data.id);
+			
+// 			const body = document.querySelector('body');
+// 			const selectElement = body.querySelector('#select-anios');
+// 			const isGestion = selectElement.options[selectElement.selectedIndex].textContent;
+// 			const selectedValue = selectElement.value;
+			$('#formulario').find('input[name="anio"]').val(data.anio.id);
+			
+			
+			
+			
+            $('#formulario').find('.evento_title').html(data.detalle);
+            $('#formulario').find('.evento_f_inicio').html(data.fechainicial);
+            $('#formulario').find('.evento_f_fin').html(data.fechafinal);
+            $('#formulario').find('.evento_hora').html(data.hora);
+            let xmodalidad="";
+            if (data.modalidad=="p") {
+            	xmodalidad="PRESENCIAL"
+			} if(data.modalidad=="sm"){
+				xmodalidad="SEMI PRESENCIAL"
+			}else {
+				xmodalidad="VIRTUAL"
+			}
+			$('#formulario').find('.evento_modalidad').html(xmodalidad);
+			
+            let xpago="";
+            if (data.tipo=="p") {
+            	xpago="REQUIERE INVERSIÓN"
+			}else {
+				xpago="INGRESO GRATUITO"
+			}
+			$('#formulario').find('.evento_tipo').html(xpago);
+			$('#formulario').find('.evento_precio').html(data.precio);
+			
+            let xcertificado="";
+            if (parseInt(data.concertificado)==1) {
+            	xcertificado="SI"
+			}else {
+				xcertificado="NO"
+			}
+            $('#formulario').find('.evento_certificado').html(xcertificado);
+            
+            let xevaluacion="";
+            if (parseInt(data.conevaluacion)==1) {
+            	xevaluacion="SI"
+			}else {
+				xevaluacion="NO"
+			}
+//             $('#formulario').find('.evento_evaluacion').html(xevaluacion);
+            
+            
+            $('#formulario').find('.evento_lugarevento').html(data.lugarevento);
+            
+            
+			//mostrando afiche del evento
+			
+			$('#formulario').find('.evento_afiche_img').html('')
+			$('#formulario').find('.evento_afiche_img').html(`
+
+
+					<a href="${nameEntity5}/afiche/${data.imagen}" th:href="@{${nameEntity5}/afiche/${data.imagen}}" data-fancybox="">
+					<img src="${nameEntity5}/afiche/${data.imagen}" th:src="@{${nameEntity5}/afiche/${data.imagen}}" alt="" class="img-fluid img-thumbnail rounded" style="width: 100%;height: 300px;">	
+				</a>
+  			`);
+			
+			
+			$('#formulario').find('.evento_form_register_link').html('')
+			$('#formulario').find('.evento_form_register_link').html(`
+				<a class="evento_form_register" 
+				   href="/evento/code/j2aj10jZNHNYtJ2lCHZCynULb0RilaY58ahxxBYXCjWrDZylI3oaiaVeedsS" 
+				   onclick="mostrarevento(event, this.href)"> 
+				   <i class="fa fa-id-card-o " aria-hidden="true"></i> 
+				   <span class="evento_form_text">FORMULARIO DE REGISTRO</span>
+				</a>
+			
+			`);
+			
+			$('#formulario').find('.evento_group_what_link').html('')
+			$('#formulario').find('.evento_group_what_link').html(`
+				<a class="evento_group_what" 
+				   href="${data.linkgrupo}" 
+				   onclick="mostrargrupowhat(event, this.href)">
+				   <i class="fa fa-whatsapp" aria-hidden="true"></i> 
+				   <span class="evento_what_text">GRUPO DE WHATSAPP</span>
+				</a>
+
+			`);
+//				$('#formulario2').find('.evento_content_cursos').html('')
+			
+			// Ejecutar la función
+			$('#formulario').find('.evento_content_metodospagos').empty();
+			$('#formulario').find('.evento_metodospagos').empty();
+			if (parseInt(data.metodopagosino)==1 && data.tipo=="p") {
+				$('#formulario').find('.evento_metodospagos').html(`
+						
+						<div class="evento_metodospagos_title" style="padding: 2px;">Metodos de Pago</div>
+						<div class="evento_content_metodospagos" style="padding: 2px;"></div>
+						`);
+				const arraymetodospagos = data.metodopagos;
+				for (let index = 0; index < arraymetodospagos.length; index++) {
+					const mp = arraymetodospagos[index];
+					$('#formulario').find('.evento_content_metodospagos').append(`
+						<div class="card_evento_metodopago">
+							<div class="card_evento_metodopago_img">
+			  					<a href="${nameEntity7}/logo_mp/${mp.imagen}" th:href="@{${nameEntity7}/logo_mp/${mp.imagen}}" data-fancybox="">
+									<img src="${nameEntity7}/logo_mp/${mp.imagen}" th:src="@{${nameEntity7}/logo_mp/${mp.imagen}}" alt="" class="img-fluid img-thumbnail " style="">	
+								</a>
+
+			                </div>
+		                </div>
+					`);
+				}
+			}else{
+				$('#formulario').find('.evento_comprobantepago').empty();
+				$('#formulario').find('.evento_metodospagos').empty();
+				
+				
+			}
+			
+			
+//				$('#formulario').find('.evento_content_cursos').html('')
+			
+			// Ejecutar la función
+			renderEventDetails(data);
+			
+			function renderEventDetails(data) {
+			    // Limpiar el contenedor antes de agregar contenido
+			    $('#formulario').find('.evento_content_cursos').empty();
+
+			    // Recorrer el array de cursos de manera síncrona
+			    const eventodetalle = data.eventodetalle; // Supongo que es un array
+			    for (let index = 0; index < eventodetalle.length; index++) {
+			        const eventocurso = eventodetalle[index];
+			        console.log(index);
+			        console.log(`${eventocurso.id}`);
+
+			        let margen_arriba = "mt-1";
+			        if (index === 0) {
+			            margen_arriba = "";
+			        }
+			        let xnivel=""
+			        if (eventocurso.curso.nivel=="b") {
+			        	xnivel="BASICO"
+					}if((eventocurso.curso.nivel=="i")){
+						xnivel="INTERMEDIO"
+					}else {
+						xnivel="AVANZADO"
+					}
+					let gradoabreviaruta=eventocurso.expositor.gradoacademico.abreviatura;
+					gradoabreviaruta=gradoabreviaruta.trim()
+					console.log("abrevia:",gradoabreviaruta)
+			        let xgradoabre = "";
+			        if (gradoabreviaruta!="") {
+			        	console.log("abre1:",gradoabreviaruta)
+			        	xgradoabre = eventocurso.expositor.gradoacademico.abreviatura+".";
+			        }else if( gradoabreviaruta== "" || gradoabreviaruta != " "){
+			        	console.log("abre2:",gradoabreviaruta)
+			        	xgradoabre=""
+			        }
+
+			        // Agregar contenido al DOM de forma síncrona
+			        $('#formulario').find('.evento_content_cursos').append(`
+			            <div class="card_evento_curso ${margen_arriba}">
+			                <div class="card_evento_curso_img_expositor">
+			  					<a href="${nameEntity6}/logo_expositor/${eventocurso.expositor.imagen}" th:href="@{${nameEntity6}/logo_expositor/${eventocurso.expositor.imagen}}" data-fancybox="">
+									<img src="${nameEntity6}/logo_expositor/${eventocurso.expositor.imagen}" th:src="@{${nameEntity6}/logo_expositor/${eventocurso.expositor.imagen}}" alt="" class="img-fluid img-thumbnail " style="">	
+								</a>
+
+			                </div>
+			                <div class="card_evento_curso_contenido">
+			                    <div class="row mb-1">
+			                        <div class="col-md-6">
+			                            <b>Categoria: </b><span class="card_evento_curso_txt_categoria">${eventocurso.categoria || "Auditoria"}</span>
+			                        </div>
+			                        <div class="col-md-6">
+			                            <b>Nivel: </b><span class="card_evento_curso_txt_nivel">${xnivel || "Básico"}</span>
+			                        </div>
+			                    </div>
+			                    <div class="row">
+			                        <div class="col-md-12">
+			                            <b><span class="card_evento_curso_txt_nombre_curso">${eventocurso.curso.nombrecurso || "Curso Desconocido"}</span></b>
+			                        </div>
+			                    </div>
+								<div class="row ">
+									<div class="col-md-12">
+										<b>Fecha: </b><span
+											class="card_evento_curso_txt_fechacurso">${eventocurso.fechacurso || "yyyy-mm-dd"}</span>
+									</div>
+
+								</div>
+			                    <div class="row ">
+			                        <div class="col-md-12">
+			                            <b>De Horas: </b><span class="card_evento_curso_txt_hora_inicial">${eventocurso.horainicio || "12:00"}</span> - 
+			                                            <span class="card_evento_curso_txt_hora_final">${eventocurso.horafin || "14:00"}</span>
+			                        </div>
+			                    </div>
+								<div class="row mb-1">
+									<div class="col-md-12">
+										<b>En: </b><span
+											class="card_evento_curso_txt_lugarcurso">${eventocurso.lugarcurso || "Lugar de Curso"}</span>
+									</div>
+
+								</div>
+			                    <div class="row">
+			                        <div class="col-md-12">
+			                            <b>Por: </b><span class="card_evento_curso_txt_gradoacademico">${xgradoabre  || ""}</span> <span class="card_evento_curso_txt_expositor">${eventocurso.expositor.persona.nombres || "Nombres"} ${eventocurso.expositor.persona.apellidos || "Apellidos"}</span>
+			                        </div>
+			                    </div>
+			                    <div class="row">
+			                        <div class="col-md-12">
+			                            <b><span class="card_evento_curso_txt_rubro">${eventocurso.expositor.rubro || "Rubro del expositor"}</span></b>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        `);
+			    }
+			}
+
+		}, 'json');
+		
+		
+		
+		function mostrarevento(event, url) {
+			event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+		  	window.open(url, '_blank'); // Abre la URL en una nueva pestaña
+		}
+		function mostrargrupowhat(event, url) {
+		    event.preventDefault(); // Evita que el enlace se abra en la misma pestaña
+	    	window.open(url, '_blank'); // Abre la URL en una nueva pestaña
+		}
+		
+		
+		$("#formulario").submit(function (event) {
+            const swalWithBootstrapButtons = Swal.mixin({
+            	  customClass: {
+            	    confirmButton: 'btn btn-success',
+            	    cancelButton: 'btn btn-danger'
+            	  },
+            	  buttonsStyling: false
+            	})
+            
+			swalWithBootstrapButtons.fire({
+				  title: "¿Estas Seguro de continuar?",   
+	              text: "Se registrara su inscripción en el Sistema",   
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonText: 'Si, Continuar!',
+				  cancelButtonText: 'No, Cancelar!',
+				  reverseButtons: true
+				}).then((result) => {
+// 					console.log("GOPCION:",GOPCION)
+				  if (result.isConfirmed) {
+// 	               	   if(GOPCION=="ADD"){
+	            		   saveEntityForm1()
+// 	            	   }else{
+// 	            		   updateEntityForm1()
+// 	            	   }
+	               	
+				  } else if (
+				    result.dismiss === Swal.DismissReason.cancel
+				  ) {
+				    swalWithBootstrapButtons.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+                        text:"Se ha cancelado operacion",
+                        timer:700,
+                        showCancelButton:false,
+                     	showConfirmButton:false
+				    })
+				  }
+				  $('.modal').modal('hide')  
+				})
+            
+				 event.preventDefault();
+		 	 });
+		
+		
+		async function saveEntityForm1(){
+            
+            let formData = new FormData(document.getElementById('formulario'))
+	        let selectedOptions = Array.from($('#expositores option:selected'));
+
+             console.log("forDAta:",formData)
+//				 let imagenform = formData.get('arte');
+             
+         	$.ajax({
+          	   	url:nameEntity_a+"/guardarinscrito",
+          	    type: "POST",
+//					'contentType': "application/json",
+				contentType: false,
+				processData: false,
+//					'contentType':false,
+				data: formData,
+//              	    'dataType': 'json',
+                 success:function(res){
+					console.log('registrado',res)
+//                          $('#formulario')[0].reset();
+//                          $('.modal').modal('hide')
+                  	Swal.fire({
+                         title:"Registrado",
+                         text:"Se ha registrado exitosamente",
+                         icon:"success",
+                         timer:500,   
+                         showConfirmButton: false 
+                     }).then(() => {
+                         // Recargar la página después de mostrar la alerta
+                         document.getElementById("registrado").classList.add("mostrar");
+                         setTimeout(() => {
+                             location.reload();
+                         }, 7000); // 5000 ms = 5 segundos
+                     });
+//                     $('#table').dataTable().fnDraw('page');
+//                      }
+                 },
+                 error:function(err){
+                	 console.log(err)
+   	 				Swal.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+                        timer:500,
+                        showCancelButton:false,
+                     	showConfirmButton:false
+				    })
+                 }
+             })
+		}
+         	
+        //resetear los datos de validacion
+      	document.getElementById("ok").classList.add("ocultar");
+        document.getElementById("error").classList.add("ocultar");
+        document.getElementById("error-inscrito").classList.add("ocultar");
+   		document.getElementById("ok").classList.remove("mostrar");
+        document.getElementById("error").classList.remove("mostrar");
+        document.getElementById("error-inscrito").classList.remove("mostrar");
+
+//         document.getElementById("registrado").classList.add("mostrar");
+        document.getElementById("registrado").classList.add("ocultar");
+        
+//    		$('#formulario').find('input[name="ci"]').on('blur mouseout mouseover',function(){
+   		$('#formulario').find('input[name="ci"]').on('blur focus',function(){
+   			let ci_val=$(this).val()
+   			console.log('ci_val:',ci_val)
+	        
+   			if (ci_val!="") {
+
+				//si no esta vacio los datos del carnet iremos a buscar los datos del estudiante.
+		 		validarEstudiante(ci_val);
+			}
+			
+//    		if(ok) {
+//    				document.getElementById("ok").classList.add("ocultar");
+// 		        document.getElementById("error").classList.add("mostrar");
+// 			}
+
+    
+   		})
+   		
+  		$(".btn-mas-detalles").click(function (e) {
+        	e.preventDefault();
+  			$(".contenido-detalles-evento").toggle(100); // 300ms de animación
+		});
+   		
+   		function validarEstudiante(value) {
+            function asyncSqrt(value,callback){
+                // alert('1')
+                $.ajax({
+                    url:nameEntity_a+"/findEstudiante/",
+                    data:{
+                        ci:value,
+                        idevento:$('#formulario').find('input[name="idevento"]').val()
+                    },
+                    // type:"post", 
+                    dataType:"json",
+                    // async:false,
+                    // cache:false,
+                    success:function(resp)
+                    {
+//                         respCi=resp.estado
+                        callback(resp)
+                    },  
+                    error:function(err){
+                        alert('sin respuesta del servidor')
+                    }
+
+                })
+            }
+            
+            asyncSqrt(value,function(result){
+                console.log('result: ',result)
+                if (result.inscrito) {
+                	document.getElementById("error").classList.remove("mostrar");
+                	document.getElementById("ok").classList.remove("mostrar");
+//     		        document.getElementById("error").classList.remove("ocultar");
+//     		        document.getElementById("ok").classList.remove("ocultar");
+    		        document.getElementById("error-inscrito").classList.remove("ocultar");
+				} else {
+	                if(result.persona==null){
+	    	   			// Si no se encontraron datos del carnet ingresado
+	    		        document.getElementById("error").classList.remove("mostrar");
+	    		        document.getElementById("error-inscrito").classList.remove("mostrar");
+	    		        document.getElementById("ok").classList.remove("ocultar");
+	    		        logouserdefault()//formateamos la imagen del participante
+	    		        resetdataformulario();
+	                }else{
+	                	resetdataformulario();
+	                	document.getElementById("ok").classList.add("ocultar");
+	                	document.getElementById("error-inscrito").classList.add("ocultar");
+	    		        document.getElementById("error").classList.add("mostrar");	
+	                	if(result.participante!=null){
+	                		//aqui ponemos los datos del estudiante si se registro como participante
+	                		console.log(result.persona)
+	                		console.log(result.participante)
+	                		let persona=result.persona
+	                		let participante=result.participante
+	                		
+	                		if (participante.imagen!=null) {
+		                		//********aqui cargamos la imagen del participante, si en caso tiene registrado
+		                		$('#formulario').find('input[name="archivoimgparticipante"]').val('')
+			    				$('#formulario').find('input[name="archivoimgparticipante"]').fileinput('destroy');
+		                		
+		                		var xhr1 = new XMLHttpRequest();
+			          			let nombrelogodefecto = participante.imagen; // Nombre del archivo que deseas cargar
+			//           			console.log("nombrelogodefecto:", nombrelogodefecto);
+			          			xhr1.open("GET", nameEntity_p + "/logourl/" + nombrelogodefecto, true);
+			          			xhr1.responseType = 'blob'; // Cambia el tipo de respuesta a blob
+		                		
+			    			    xhr1.onload = function() {
+			    			        var blob = xhr1.response;
+			    			        var file = new File([blob], nombrelogodefecto);
+			    			        var inputFile = document.getElementById('archivoimgparticipante');
+			    			        var fileList = new DataTransfer();
+			    			        fileList.items.add(file);
+			    			        inputFile.files = fileList.files;
+			    			        inputFile.title = nombrelogodefecto;
+			    			    };
+			    			    xhr1.send();
+			    				$('#formulario').find('input[name="archivoimgparticipante"]').fileinput({
+			    				  	language:'es',
+			    				    showUpload: false, // Ocultar el botÃ³n de carga
+			    				    showRemove: true, 
+			                        showCaption: true,
+			                        showCancel: true,
+//			    		 		  	 ,maxImageWidth: 300 // Ancho mï¿½ximo de la imagen previa en pï¿½xeles
+//			    		 		     ,maxImageHeight: 300 
+			   				     	initialPreview: [
+						                `<img src="${nameEntity_p}/logourl/${nombrelogodefecto}" class="file-preview-image" alt="Vista previa" title="${nombrelogodefecto}">`
+						            ],
+						            initialPreviewConfig: [
+						                {
+						                    caption: nombrelogodefecto, // Texto que aparecerá debajo de la imagen en la vista previa
+						                    width: '200px', // Ancho de la imagen en la vista previa
+						                    url: '/', // URL opcional para el enlace de eliminación (en este caso, se establece como '#')
+						                    key: 1 // Clave única para el elemento de vista previa
+						                }
+						            ],
+						            fileActionSettings: {
+						                removeIcon: '', // Vaciar el icono del botón de eliminar
+						                removeClass: 'hide-remove', // Aplicar una clase para ocultar el botón de eliminar
+						                removeTitle: '', // Vaciar el título del botón de eliminar
+						            },
+						            initialCaption: nombrelogodefecto // Para poner el nombre en la caja del file
+
+			    				});
+			          			//*********************fin de agregar logo
+							}else{
+								logouserdefault()
+							}
+	                		
+
+		          			
+	                		$('#formulario').find('input[name="idper"]').val(persona.id);
+	                		$('#formulario').find('input[name="idpart"]').val(participante.id);
+	                		$('#formulario').find('input[name="ci"]').val(persona.ci);
+	             			document.querySelectorAll("#exp > option").forEach(function(option) {
+	               			    if (option.value == persona.exp) {
+	               			        option.selected = true;
+	               			    }
+	               			});
+	              			$('#formulario').find('input[name="nombres"]').val(persona.nombres);
+	              			$('#formulario').find('input[name="apellidos"]').val(persona.apellidos);
+	             			
+	              			if(persona.genero!=null){
+	                  			document.querySelectorAll("#genero > option").forEach(function(option) {
+	                   			    if (option.value == persona.genero) {
+	                   			        option.selected = true;
+	                   			    }
+	                   			});
+	             			}
+	              			if(persona.fechanacimiento!=null){
+	              				$('#formulario').find('input[name="fechanacimiento"]').val(persona.fechanacimiento);
+	              			}
+	              			if(persona.edad!=null){
+	              				$('#formulario').find('input[name="edad"]').val(persona.edad);
+	              			}
+	              			$('#formulario').find('input[name="celular"]').val(persona.celular);
+	              			//grado academico
+	              			if(participante.gradoacademico!=null){
+	                  			document.querySelectorAll("#gradoacademico > option").forEach(function(option) {
+	                   			    if (option.value == participante.gradoacademico.id) {
+	                   			        option.selected = true;
+	                   			    }
+	                   			});
+	             			}
+	              			//profesion
+	              			if(participante.profesion!=null){
+	                  			document.querySelectorAll("#profesion > option").forEach(function(option) {
+	                   			    if (option.value == participante.profesion.id) {
+	                   			        option.selected = true;
+	                   			    }
+	                   			});
+	             			}
+	              			
+	              			$('#formulario').find('input[name="email"]').val(persona.email);
+	              			//ciudad
+	              			if(participante.departamento!=null){
+	                  			document.querySelectorAll("#departamento > option").forEach(function(option) {
+	                   			    if (option.value == participante.departamento.id) {
+	                   			        option.selected = true;
+	                   			    }
+	                   			});
+	             			}
+	              			if(participante.localidad!=null){
+	              				$('#formulario').find('input[name="localidad"]').val(participante.localidad);
+	              			}
+	              			$('#formulario').find('textarea[name="direccion"]').val(persona.direccion);
+	                		
+	                	}else{
+	                		//si solo tenemos datos de la persona, mostramos sus datos personales
+	                		console.log('persona:',result.persona)
+	                		let persona=result.persona
+	                		console.log('participante:',result.participante)
+	                		logouserdefault()
+	                		
+//	                 		$('#formulario').find('input[name="id"]').val(persona.id);
+	              			$('#formulario').find('input[name="idper"]').val(persona.id);
+	              			$('#formulario').find('input[name="ci"]').val(persona.ci);
+	             			document.querySelectorAll("#exp > option").forEach(function(option) {
+	               			    if (option.value == persona.exp) {
+	               			        option.selected = true;
+	               			    }
+	               			});
+	              			$('#formulario').find('input[name="nombres"]').val(persona.nombres);
+	              			$('#formulario').find('input[name="apellidos"]').val(persona.apellidos);
+	             			
+	              			if(persona.genero!=null){
+	                  			document.querySelectorAll("#genero > option").forEach(function(option) {
+	                   			    if (option.value == persona.genero) {
+	                   			        option.selected = true;
+	                   			    }
+	                   			});
+	             			}
+	              			if(persona.fechanacimiento!=null){
+	              				$('#formulario').find('input[name="fechanacimiento"]').val(persona.fechanacimiento);
+	              			}
+	              			if(persona.edad!=null){
+	              				$('#formulario').find('input[name="edad"]').val(persona.edad);
+	              			}
+	              			$('#formulario').find('input[name="celular"]').val(persona.celular);
+	              			$('#formulario').find('input[name="email"]').val(persona.email);
+	              			$('#formulario').find('textarea[name="direccion"]').val(persona.direccion);
+	                	}
+	                }
+				}
+                
+
+                
+            })
+   		}
+	</script>
+
+
+</body>
+</html>

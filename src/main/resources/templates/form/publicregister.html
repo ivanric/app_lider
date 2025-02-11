@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../img/liderlogo.png" type="image/png">
+
+	<title>REGISTRO DE PARTICIPANTES</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/css/fileinput.min.css" crossorigin="anonymous">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- Google Fonts -->
+	<link
+	  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+	  rel="stylesheet"
+	/>
+	<!-- MDB -->
+	<link
+	  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+	  rel="stylesheet"
+	/>
+	<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+	
+	<link href="
+	https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.min.css
+	" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <link rel="stylesheet" href="./static/css/formValidation.css" th:href="@{/css/formValidation.css}"/>
+    <link rel="stylesheet" href="./static/css/sweetalert2.min.css" th:href="@{/css/sweetalert2.min.css}"/>
+    <link rel="stylesheet" href="./static/css/datatables.min.css" th:href="@{/css/datatables.min.css}"/>
+    <link rel="stylesheet" href="./static/css/dataTables.bootstrap5.min.css" th:href="@{/css/dataTables.bootstrap5.min.css}"/>
+    <link rel="stylesheet" href="./static/css/responsive.bootstrap5.min.css" th:href="@{/css/responsive.bootstrap5.min.css}"/>
+    <link rel="stylesheet" href="./static/css/fileinput.css" th:href="@{/css/fileinput.css}"/>
+	
+    <link rel="stylesheet" href="#" th:href="@{/css/tema/style.css}"/>
+	<style type="text/css">
+		.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+		    /* padding: 8px; */
+		    line-height: 1.42857143;
+		    vertical-align: top;
+		    border-top: 1px solid #ddd;
+		    padding-top: 2px !important;
+		    padding-bottom: 2px !important;
+/* 		    font-size: 11px !important; */
+		}
+	</style>
+
+	<style type="text/css">
+
+	  /* Animación de letras cayendo */
+	  @keyframes letraCayendo {
+	    0% {
+	      transform: translateY(-10%);
+	      opacity: 0;
+	    }
+	    100% {
+	      transform: translateY(0);
+	      opacity: 1;
+	    }
+	  }
+	
+	  /* Estilo individual para cada letra */
+	  .lt_welcome_efect span {
+	    display: inline-block;
+	    animation: letraCayendo 1s forwards; /* Aplicamos la animación a cada letra */
+	    animation-delay: calc(0.1s * var(--index)); /* Delay creciente para cada letra */
+	    animation-iteration-count: infinite; /* Repetir la animación infinitamente */
+	    animation-direction: alternate; /* Alternar dirección de la animación */
+	  }
+	</style>
+	
+	<style type="text/css">
+	
+        body {
+/*     		width: 100vw; */
+    		height: auto;
+ 		 	font-family: "Poppins", sans-serif;
+              background-color: #eaeaea; 
+             display: flex;
+		    justify-content: center;
+		    align-items: center;
+/* 		        flex-direction: column; */
+/* 		    background-image: url(../../img/poster3.png); */
+ 		    background-size: cover; 
+
+		    
+		    background-repeat: no-repeat;
+        }
+        
+       	.lt_welcome {
+		    font-size: 1.2em;
+		    text-align: center;
+		    position: relative; /* Necesario para posicionar las letras individualmente */
+		    overflow: hidden; /* Para que las letras caigan dentro del contenedor */
+		    font-family: Arial, sans-serif; /* Fuente para el texto */
+		    font-weight: bold;
+		}
+		
+		.lt_detalle{
+		 font-size: 1em;
+		}
+        .tarjeta {
+		    overflow: hidden;
+		    width: auto;
+        }
+        .title_form{
+/*         	background: red; */
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: center;
+		    align-items: center;
+        }
+    	.logo_lider{
+			width: 120px;
+			margin: 2px 0;
+		}
+		.card_data{
+			background: white;
+			border-radius:5px;
+			padding: 10px;
+			margin: 10px;
+		}
+		.card_img{
+			text-align: center;
+			padding:0.5rem 0;
+		}  
+        .card_img img {
+		    width: 190px;
+		    height: 190px;
+	        border-radius: 6px;
+        }     
+
+	</style>
+</head>
+<body>
+
+	  <div class="tarjeta">
+	  	<div class="title_form">
+			<img src="../../img/liderlogo.png" th:href="@{../img/liderlogo.png}"  alt="Imagen izquierda" class="logo_lider">	
+			
+			<div class="lt_welcome lt_welcome_efect">
+	<!-- 		<div class="lt_welcome"> -->
+		      <span style="--index: 1;">B</span>
+			  <span style="--index: 2;">I</span>
+			  <span style="--index: 3;">E</span>
+			  <span style="--index: 4;">N</span>
+			  <span style="--index: 5;">V</span>
+			  <span style="--index: 6;">E</span>
+			  <span style="--index: 7;">N</span>
+			  <span style="--index: 8;">I</span>
+			  <span style="--index: 9;">D</span>
+			  <span style="--index: 10;">O</span>
+			</div>
+				
+			<span class="badge bg-warning text-dark lt_detalle">Complete el formulario de registro porfavor</span>
+	<!-- 		Complete el formulario de registro porfavor -->
+		</div>
+	  	<div class="card_data mt-1">
+	  	  <form name="formulario" role="form" id="formulario" method="post"
+			enctype="multipart/form-data" data-fv-excluded="disabled">
+<!--   	    	
+  	    	<div class="card_img">
+        		<img class=" imagen-socio " src="../img/user.png" th:src="@{/img/user.png}" th:href="@{/img/user.png}"  alt="Imagen del Socio">
+          	</div>
+         -->  	
+          	<div class="row">
+          		<div  class="col-md-6">
+   					<div class="row">
+						<div class="col-md-12">
+							<div class="mb-1">
+								<label for="logo" class=""><b>LOGO</b></label>
+								<input placeholder="Ingrese logo"
+									class="form-control fg-input data-per field_css"
+									name="logo" id="logo" type="file" required="required">
+							</div>
+
+						</div>
+
+					
+						<div class="col-md-8">
+							<div class="mb-1">
+								<label for="ci" class=""><b>CEDULA</b></label>
+								<input placeholder="Ingrese carnet.. "
+									class="form-control fg-input data-per field_css"
+									name="ci" type="text" required="required">
+							</div>
+
+						</div>
+						<div class="col-md-4">
+							<div class="mb-1">
+								<label for="exp" class=""><b>EXP</b></label>
+									<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="exp" name="exp"> 
+									  <option selected value="">Seleccionar</option>
+									  <option  value="TJA">TARIJA</option>
+									  <option  value="PT">POTOSI</option>
+									  <option  value="PD">PANDO</option>
+									  <option  value="LP">LA PAZ</option>
+									  <option  value="OR">ORURO</option>
+									  <option  value="CBBA">COCHABAMBA</option>
+									  <option  value="BE">BENI</option>
+									  <option  value="CH">CHUQUISACA</option>
+									  <option  value="SCZ">SANTA CRUZ</option>
+									 
+									</select>
+							</div>
+
+						</div>
+						<div class="col-md-12">
+							<div class="mb-1">
+								<label for="nombre" class=""><b>NOMBRE COMPLETO</b></label>
+								<input placeholder="Ingrese nombre.."
+									class="form-control fg-input data-per field_css"
+									name="nombrecompleto" type="text" required="required" onkeyup="this.value = this.value.toUpperCase();">
+							</div>
+
+						</div>
+						<div class="col-md-12">
+							<div class="mb-1">
+								<label for="genero" class=""><b>GENERO</b></label>
+									<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="genero" name="genero"> 
+									  <option selected value="">Seleccionar</option>
+									  <option  value="m">MASCULINO</option>
+									  <option  value="f">FEMENINO</option>
+									 
+									</select>
+							</div>
+
+						</div>
+
+					</div>
+          		</div>
+          		<div  class="col-md-6">
+          			<div class="row">
+     					<div class="col-md-12">
+							<div class="mb-1">
+							  <label for="fechanacimiento" class=""><b>FECHA DE NACIMIENTO</b></label>		
+							  <input placeholder="Ingrese Fecha Nacimiento.." 
+											class="form-control fg-input data-per field_css"
+											name="fechanacimiento" type="date" required="required" id="fechanacimiento"
+										    value="">
+							</div>
+	
+						</div>
+						
+						<div class="col-md-12">
+							<div class="mb-1">
+								<label for="edad" class=""><b>EDAD</b></label>
+								<input placeholder="Edad.."
+									class="form-control fg-input data-per field_css" id="edad"
+									name="edad" type="number" required="required">
+							</div>
+
+						</div>
+		    			<div class="col-md-12">
+							<div class="mb-1">
+								<label for="gradoacademico" class=""><b>GRADO ACADEMICO</b></label>
+								<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="gradoacademico" name="gradoacademico">
+								  <option selected value="">Seleccionar</option>
+								 
+								</select>
+							</div>
+		    			</div>
+					    <div class="col-md-12">
+							<div class="mb-1">
+								<label for="profesion" class=""><b>CARRERA</b></label>
+								<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="profesion" name="profesion">
+								  <option selected value="">Seleccionar</option>
+								 
+								</select>
+							</div>
+		    			</div>
+ 						<div class="col-md-12">
+							<div class="mb-1">
+								<label for="celular" class=""><b>TELEFONO/CELULAR (Con WHATSAPP)</b></label>
+								<input placeholder="Celular.."
+									class="form-control fg-input data-per field_css"
+									name="celular" type="number" required="required">
+							</div>
+
+						</div>
+						<div class="col-md-12">
+							<div class="mb-1">
+								<label for="correo" class=""><b>CORREO</b></label>
+								<input placeholder="Ingrese correo.."
+									class="form-control fg-input data-per field_css"
+									name="correo" type="text" required="required" onkeyup="this.value = this.value.toUpperCase();">
+							</div>
+
+						</div>
+		    			
+		    			<div class="col-md-12">
+							<div class="mb-1">
+								<label for="ciudad" class=""><b>CIUDAD</b></label>
+								<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="ciudad" name="ciudad">
+								  <option selected value="">Seleccionar</option>
+								 
+								</select>
+							</div>
+		    			</div>
+					    <div class="col-md-12">
+							<div class="mb-1">
+								<label for="provincia" class=""><b>PROVINCIA</b></label>
+								<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="provincia" name="provincia">
+								  <option selected value="">Seleccionar</option>
+								 
+								</select>
+							</div>
+		    			</div>
+          			</div>
+	          	</div>
+          	</div>
+          </form>
+	  	</div>
+	  </div>
+	
+	
+		
+	<script  src="./static/js/jquery-3.6.3.min.js" th:src="@{/js/jquery-3.6.3.min.js}"></script>
+<!-- 	<script src="#" th:src="@{/js/formValidation.min.js}"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/js/fileinput.min.js" ></script>
+
+	<!-- MDB -->
+	<script
+	  type="text/javascript"
+	  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+	></script>
+	
+	  <script
+		src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+		
+	<script src="https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.jquery.min.js"></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>		
+	
+	<script type="" src="./static/js/formValidation.js" th:src="@{/js/formValidation.js}"></script>
+	<script type="" src="./static/js/framework/bootstrap.js" th:src="@{/js/framework/bootstrap.js}"></script>
+	<script type="" src="./static/js/language/es_ES.js" th:src="@{/js/language/es_ES.js}"></script>
+	<script type="" src="./static/js/jquery.loadJSON.min.js" th:src="@{/js/jquery.loadJSON.min.js}"></script>
+	<script type="" src="./static/js/sweetalert2.all.min.js" th:src="@{/js/sweetalert2.all.min.js}"></script>
+	<script type="" src="./static/js/datatables.min.js" th:src="@{/js/datatables.min.js}"></script>
+	<script type="" src="./static/js/dataTables.bootstrap5.min.js" th:src="@{/js/dataTables.bootstrap5.min.js}"></script>
+	<script type="" src="./static/js/responsive.bootstrap5.min.js" th:src="@{/js/responsive.bootstrap5.min.js}"></script>
+	<script type="" src="./static/js/jform.min.js" th:src="@{/js/jform.min.js}"></script>
+	<script type="" src="./static/js/jquery.form.min.js" th:src="@{/js/jquery.form.min.js}"></script>
+	<script type="" src="./static/js/fileinput.js" th:src="@{/js/fileinput.js}"></script>
+	<script type="" src="./static/js/locales/es.js" th:src="@{/js/locales/es.js}"></script>
+<!-- 	<script type="" src="./static/js/tema/script.js" th:src="@{/js/tema/script.js}"></script> -->
+	
+	<script type="text/javascript">
+		
+		var nameEntity="../RestPersonas"
+		var nameEntity1="../RestGradosAcademicos"
+		var nameEntity2="../RestProfesiones" 
+		var nameEntity3="../RestDepartamentos"
+		var nameEntity4="../RestProvincias"
+	
+	
+		$('#formulario').find('input[name="logo"]').fileinput({
+		  	language:'es'
+		});
+		
+		// Función para calcular la edad a partir de la fecha de nacimiento
+		function calcularEdad(fechaNacimiento) {
+		    var hoy = new Date();
+		    var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+		    var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+		    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+		        edad--;
+		    }
+		    return edad;
+		}
+
+		// Evento para el campo de entrada de fecha de nacimiento
+		document.querySelector('#formulario input[name="fechanacimiento"]').addEventListener('input', function() {
+		    var fechaNacimiento = new Date(this.value); // Obtener fecha de nacimiento del campo
+		    var edad = calcularEdad(fechaNacimiento); // Calcular la edad
+		    document.getElementById('edad').value = edad; // Mostrar la edad en un campo de texto
+		});
+
+		
+		
+		   var s_ciudad = document.getElementById('ciudad');
+
+	        // Añadimos un event listener para el evento 'change'
+	       s_ciudad.addEventListener('change', function() {
+	            var id = this.value;
+// 	            console.log('iddep:', id);
+	            // Aquí puedes hacer lo que quieras con la opción seleccionada
+                fetch(nameEntity4+'/provincias/'+id, {
+	            	method: 'GET', // Especificamos que estamos utilizando el método GET
+	            	headers: {
+                	   'Content-Type': 'application/json'
+              		}
+        		})
+        		 .then(response => response.json())
+                 .then(data => {
+                	 
+//                 	 console.log("ProvinviasById:",data)
+                     // Limpiamos el contenido anterior
+                     document.getElementById('provincia').innerHTML = '';
+   	   		         var option0 = document.createElement('option');
+   	   		  		 option0.value = "";
+  	   		 		 option0.textContent = "Seleccionar";
+                	 document.getElementById('provincia').appendChild(option0)
+                     data.forEach(item => {
+         	   		    if (item.estado == 1) {
+        	   		        var option = document.createElement('option');
+        	   		        option.value = item.id;
+        	   		        option.textContent = item.nombre;
+        	   		        document.getElementById('provincia').appendChild(option);
+        	   		    }
+                     });
+
+                     
+
+                 })
+                 .catch(error => {
+                     console.error('Error al traer la lista:', error);
+                 });
+	            
+	        });
+		
+			var xhr = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+	  		xhr.open('GET', nameEntity1 );//abre una solicitud GET y hacia la direccion establecida
+	  		xhr.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+	  		xhr.onload = function() {//cuando se complete la solicitud de manera exitosa
+	   		  if (xhr.status === 200) {//se verifica el estado de la respuesta
+	   		    var data = xhr.response;//se asigna la respuesta
+	   		    // Hacer algo con el resultado aqu�
+	 		     console.log("GRADOS ACADEMICOS:",data);
+		   		 data.forEach(function(item) {
+		   		    if (item.estado == 1) {
+		   		        var option = document.createElement('option');
+		   		        option.value = item.id;
+		   		        option.textContent = item.nombre;
+//	 	   		        document.getElementById('gradoacademico').appendChild(option);
+		                var select1 = document.querySelector('#formulario select[name="gradoacademico"]');
+		                if (select1) {
+		                    select1.appendChild(option);
+		                }
+		   		    }
+		   		});
+	   		  }
+	   		};
+	   		xhr.send();
+   		
+			var xhr1 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+	  		xhr1.open('GET', nameEntity2 );//abre una solicitud GET y hacia la direccion establecida
+	  		xhr1.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+	  		xhr1.onload = function() {//cuando se complete la solicitud de manera exitosa
+	   		  if (xhr1.status === 200) {//se verifica el estado de la respuesta
+	   		    var data = xhr1.response;//se asigna la respuesta
+	   		    // Hacer algo con el resultado aqu�
+	 		     console.log("PROFESIONES:",data);
+		   		 data.forEach(function(item) {
+		   		    if (item.estado == 1) {
+		   		        var option = document.createElement('option');
+		   		        option.value = item.id;
+		   		        option.textContent = item.nombre;
+//	 	   		        document.getElementById('profesion').appendChild(option);
+		                var select2 = document.querySelector('#formulario select[name="profesion"]');
+		                if (select2) {
+		                    select2.appendChild(option);
+		                }
+		   		    }
+		   		});
+	   		  }
+	   		};
+	   		xhr1.send();
+	   		
+			var xhr3 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+	  		xhr3.open('GET', nameEntity3 );//abre una solicitud GET y hacia la direccion establecida
+	  		xhr3.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+	  		xhr3.onload = function() {//cuando se complete la solicitud de manera exitosa
+	   		  if (xhr3.status === 200) {//se verifica el estado de la respuesta
+	   		    var data = xhr3.response;//se asigna la respuesta
+	   		    // Hacer algo con el resultado aqu�
+	 		     console.log("DEPARTAMENTOS:",data);
+		   		 data.forEach(function(item) {
+		   		    if (item.estado == 1) {
+		   		        var option = document.createElement('option');
+		   		        option.value = item.id;
+		   		        option.textContent = item.nombre;
+//	 	   		        document.getElementById('ciudad').appendChild(option);
+		                var select3 = document.querySelector('#formulario select[name="ciudad"]');
+		                if (select3) {
+		                    select3.appendChild(option);
+		                }
+		   		    }
+		   		});
+	   		  }
+	   		};
+	   		xhr3.send();
+   		
+		var xhr4 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+  		xhr4.open('GET', nameEntity4 );//abre una solicitud GET y hacia la direccion establecida
+  		xhr4.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+  		xhr4.onload = function() {//cuando se complete la solicitud de manera exitosa
+   		  if (xhr4.status === 200) {//se verifica el estado de la respuesta
+   		    var data = xhr4.response;//se asigna la respuesta
+   		    // Hacer algo con el resultado aqu�
+ 		     console.log("PROVINCIAS:",data);
+	   		 data.forEach(function(item) {
+	   		    if (item.estado == 1) {
+	   		        var option = document.createElement('option');
+	   		        option.value = item.id;
+	   		        option.textContent = item.nombre;
+	   		        document.getElementById('provincia').appendChild(option);
+	   		    }
+	   		});
+   		  }
+   		};
+   		xhr4.send();
+	</script>
+	
+	
+</body>
+</html>

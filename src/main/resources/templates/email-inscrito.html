@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { color: rgb(255, 128, 0); }
+        p { margin: 5px 0; }
+        .details { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <img src="cid:liderLogo" alt="Lider Logo" style="width: 150px; height: auto;">
+    <h1>¡Gracias por registrarte!</h1>
+    <p>Hola, <b th:text="${nombre}"></b></p>
+    <p th:text="${detalle}">.</p>
+    <div class="details">
+        <p><b>Detalle:</b></p>
+        <ul>
+            <li><b>Evento:</b> <span th:text="${evento}"></span></li>
+            <li><b>Fecha de inicio:</b> <span th:text="${fecha}"></span></li>
+            <li><b>Únete al grupo de Whatsapp:</b> <span th:text="${grupo}"></span></li>
+        </ul>
+    </div>
+    <p>Atentamente,<br><span th:text="${pagina}"></span></p>
+</body>
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  
+		<link rel="icon" href="../../img/liderlogo.png" type="image/png">
+		<title>VALIDACION</title>
+	
+	      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/css/fileinput.min.css" crossorigin="anonymous">
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+		
+		<link href="https://fonts.cdnfonts.com/css/dm-sans" rel="stylesheet">
+                
+		
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Google Fonts -->
+		<link
+		  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+		  rel="stylesheet"
+		/>
+	    <!-- MDB -->
+	    <link
+		  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+		  rel="stylesheet"
+		/>
+		<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		
+		<link href="
+		https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.min.css
+		" rel="stylesheet">
+	
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+	
+	    <link rel="stylesheet" href="./static/css/formValidation.css" th:href="@{/css/formValidation.css}"/>
+	    <link rel="stylesheet" href="./static/css/sweetalert2.min.css" th:href="@{/css/sweetalert2.min.css}"/>
+	    <link rel="stylesheet" href="./static/css/datatables.min.css" th:href="@{/css/datatables.min.css}"/>
+	    <link rel="stylesheet" href="./static/css/dataTables.bootstrap5.min.css" th:href="@{/css/dataTables.bootstrap5.min.css}"/>
+	    <link rel="stylesheet" href="./static/css/responsive.bootstrap5.min.css" th:href="@{/css/responsive.bootstrap5.min.css}"/>
+	    <link rel="stylesheet" href="./static/css/fileinput.css" th:href="@{/css/fileinput.css}"/>
+    
+    <style>
+    	@import url('https://fonts.googleapis.com/css?family=Montserrat');
+        body {
+    		width: 100%;
+    		height: auto;
+			font-family: "Poppins", sans-serif;
+              background-color: #eaeaea; 
+             display: flex;
+		    justify-content: center;
+		    align-items: center;
+/*    		    background-image: url(../../img/poster1.png); */
+		    background-size: cover;
+		    background-repeat: no-repeat;
+		    
+        }
+
+        .tarjeta {
+/* 		    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; */
+		    overflow: hidden;
+		    /* border-radius: 10px; */
+		    /* width: 25rem; */
+		    /* margin: 10px; */
+/* 		    background-image: url(../../img/fondocatalogo.png); */
+/* 		    background-size: contain; */
+/* 		    background-repeat: no-repeat; */
+		    height: auto;
+		    width: auto;
+        }
+
+        .titulo {
+/*             background-color: #ffffff; */
+            color: #3eba3e; /* Cambiado a verde */
+            text-align: center;
+            padding-top: 12px; /* Añadido un padding para separar el texto del borde */
+            border-radius: 10px 10px 0 0;
+        	display: flex;
+        	justify-content: center;
+        	align-items: center;
+        	font-weight: 900;
+        }
+
+        .titulo img {
+            width: 50px; /* Ajustar el tamaño */
+          
+        }
+
+  
+
+        .contenido {
+			align-items:center;
+        }
+		.logo_cadet{
+			width: 120px;
+			margin: 1rem 0px 0px 0.5rem;
+		}
+        .datos-socio {
+            flex: 1;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .datos-socio h2 {
+            margin-top: 0;
+        }
+
+
+        .dato span {
+            font-weight: bold;
+        }
+		.cont-imagen-socio{
+			text-align: center;
+		    padding: 10px;
+		}
+        .imagen-socio {
+		    width: 190px;
+		    height: 190px;
+	        border-radius: 6px;
+        }
+
+        .boton-socio {
+            background-color: #f0f0f0;
+            color: #000;
+            text-align: center;
+            padding: 10px;
+            border-radius: 0 0 10px 10px;
+            text-decoration: none; /* Eliminar subrayado */
+            display: flex;
+		    height: 4rem;
+		    align-items: center;
+		    justify-content: center;
+		    font-weight: 900;
+		    font-size: 18px;
+        }
+		.boton-activo-socio{
+			background-color: #3eba3e;
+			color: #fff;
+		}
+		.boton-inactivo-socio{
+			background-color: #ff6900;
+			color: #fff;
+		}
+		.detallesocio{
+		    margin: 10px;
+		}
+		.nombresocio {
+   			color: #333;
+			text-transform: uppercase;
+			font-weight: 600;
+			font-size: 22px;
+		}
+		.profesion{
+		   font-family: arial, cursive;
+   			
+		}
+		.decripcion_empresa{
+			font-size: 10px;
+			text-align: justify;
+		}
+		
+    </style>
+    <style>
+.selected {
+	background-color: #B0BED9;
+}
+
+.contenido_gestion {
+	padding: 20px 10px 0px 10px;
+}
+ 
+.ocultar {
+    display: none;
+}
+ 
+.mostrar {
+    display: block;
+}
+
+td {
+    vertical-align: middle !important;
+}
+.input_cata{
+	background: #ffffff;
+    width:60%;
+    border: none;
+    height: 2em;
+    padding: 0 0.5rem;
+    outline: none;
+}
+.label_cata{
+	background: #ffffff;
+    width: 40%; 
+    border: none;
+    padding: 0 0.5rem;
+    align-items: center;
+    display: flex;
+    font-weight: 900;
+}
+.input_group_cata{
+	display: flex;
+}
+
+.select2-results{
+	position:relative;
+	z-index: 9000;
+}
+.titulo_socio{
+	text-align: center;
+    margin-bottom: 0;
+    font-weight: bold;
+    padding: 6px;
+}
+.card_socio{
+/* 	padding: 10px; */
+/* 	    padding-top: 10rem; */
+}
+.titulo_descuentos{
+	border-radius: 2px;
+    background-color: #01c339;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+	color: white;
+}
+.boton_catalogo{
+	width: 100%;
+    border: none;
+    background: #0884af;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición */
+    margin: 2px;
+        
+}
+.boton_catalogo:hover{
+	background: #1a24c8;
+	transform: scale(1.01);
+}
+.boton_card{
+	    font-size: 9px;
+    height: 21px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-radius: 2px;
+	
+}
+.card_boton_opc{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+</style>
+<style type="text/css">
+
+	.cont-data{
+		padding: 10px;
+	}
+	.cont-data-nombre{
+		text-align: center;
+    	text-transform: uppercase;
+    	font-weight: 800;
+		font-size: 20px;
+	}
+	.cont-data-apellidos{
+		text-align: center;
+    	text-transform: uppercase;
+    	font-weight: 800;
+		font-size: 20px;
+	}
+	.cont-data-recomendacion{
+		text-align:justify;
+		font-size: 12px;
+	}
+	.cont-data-fecha{
+		
+	}
+	.cont-descargar-certificado{
+		justify-content: center;
+		display: flex;
+	}
+	.cont-descargar-certificado button {
+		background: orange;
+		color: white;
+		padding: 10px 20px;
+		border: 0px;
+		border-radius: 2px;
+		font-weight: 700;
+		
+	}
+	.contenido-certificado{
+		margin: 10px;
+		padding: 10px;
+	
+	}
+
+</style>
+</head>
+<body>
+
+	<form name="formulario" role="form" id="formulario" method="post"
+		enctype="multipart/form-data" data-fv-excluded="disabled">
+
+		<div class="modal fade" id="modalAdicionar" tabindex="-1"
+			role="dialog" data-backdrop="static" data-keyboard="false"
+			aria-hidden="true" style="display: none; padding-left: 0">
+
+			<div class="modal-dialog modal-md" role="document">
+				<div class="modal-content">
+					<div class="card">
+						<div class="modal-header">
+		<h5 class="modal-title title-catalogo"></h5> 
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      
+						</div>
+						<div class="modal-body">
+							<div class="images_catalogo">
+								<div class="rowimg row"></div>
+							</div>
+
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="">
+    <div class="tarjeta" id="targeta">
+    	<input type="hidden" th:value="${code}" id="codigo">
+    			<img src="../../img/LOGOLIDER.png" th:href="@{../img/LOGOLIDER.png}"  alt="Imagen izquierda" class="logo_cadet">	
+							
+				<div class="card_socio">
+
+<!-- 							
+				        	<div class="titulo">
+								<span><b>COLEGIO DE ADMINISTRADORES <br>DE EMPRESAS DE TARIJA</b></span>
+							</div>-->
+								
+					        <div class="contenido">
+					         	<div class="cont-imagen-socio">
+									<img class=" imagen-socio " src="../../img/pngegg.png" th:href="@{../img/pngegg.png}"  alt="Imagen del Socio">
+			            
+								</div>
+								<div class="cont-data">
+									<h2>Validamos que:</h2>
+									<div class="cont-data-nombre">
+										Juan Carlos	
+									</div>
+									<div class="cont-data-apellidos">
+										
+										Calderon Rueda	
+									</div>
+									<div class="cont-data-recomendacion">
+										con número de folio:<span class="cont-data-recomendacion-folio">AL-CB-1-12</span>
+										a particiapado del curso  
+										<span class="cont-data-recomendacion-nombrecurso">
+										<b> MICROSOFT EXCEL NIVEL INTERMEDIO</b>
+										</span>
+										con un valor curicular de 
+										<span class="cont-data-valorcurricular">
+										0
+										</span> horas académicas </br> 
+										en fecha 
+										<span class="cont-data-fechacurso">
+										00/00/0000
+										</span>.</br>
+										dictado por el expositor 
+										<span class="cont-data-expositor">
+										expositor/a </br>
+										</span></br> 
+										
+									</div>
+									<div class="cont-empresa-avalado">
+								 		POR: ACADEMIA LIDER
+									 </div>
+								 </div>
+
+								 
+								 
+								 <div class="cont-descargar-certificado">
+								 	<button class="btn-btn-succes"  onclick="funcVerCertificado()">Descargar Certificado</button>
+								 </div>
+								 
+								 <div class="contenido-certificado  ocultar" id="contenido-certificado">
+								 	 <embed id="frameReporteCertificado" width="100%" height="700px"  ></embed>
+								 </div>
+								<!-- 
+								<div class="row mt-1">
+									<div class="col-md-12 input_group_cata">
+										<label for="exampleFormControlInput1" class="label_cata">Cedula</label>
+										<input placeholder="Ingrese carnet de identidad" class="input_cata fg-input data-per field_css"
+												name="ci" type="text" required="required" readonly="readonly">
+										
+									</div>
+							
+								</div>
+								<div class="row">
+									<div class="col-md-12 input_group_cata">
+										<label for="exampleFormControlInput1" class="label_cata">Matricula</label>
+										<input placeholder="Ingrese carnet de identidad" class="input_cata fg-input data-per field_css"
+												name="matricula" type="text" required="required" readonly="readonly">
+									</div>
+				
+								</div>
+	
+								<div class="row">
+									<div class="col-md-12 input_group_cata">
+										
+										<label for="exampleFormControlInput1" class="label_cata">Nombre</label>
+	
+										<input placeholder="LIC. Nombre Completo del Socio.." class="input_cata fg-input data-per field_css"
+												name="nombresocio" type="text" required="required"
+												onkeyup="this.value = this.value.toUpperCase();" readonly="readonly">
+										
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 input_group_cata">
+									
+										<label for="exampleFormControlInput1" class="label_cata">Celular</label>
+										<input placeholder="Celular" class="input_cata form-control fg-input data-per field_css"
+												name="celular" type="number" required="required" readonly="readonly">
+										
+	
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 input_group_cata">
+										
+									  <label for="exampleFormControlInput1" class="label_cata">F.Emision</label>		
+									  <input placeholder="Ingrese Fecha Emision" class="input_cata fg-input data-per field_css"
+														name="fechaemision" type="date" required="required" id="fechaemision"
+													    value="" readonly="readonly">
+									
+	
+									</div>
+								</div>
+		
+								<div class="row">
+									<div class="col-md-12 input_group_cata">
+										
+									  <label for="exampleFormControlInput1" class="label_cata">F.Expiracion</label>		
+									  <input placeholder="Ingrese Fecha Expiracion" class="input_cata fg-input data-per field_css"
+														name="fechaexpiracion" type="date" required="required" id="fechaexpiracion"
+													    value="" readonly="readonly">
+										
+	
+									</div>
+								</div>
+								<div class="titulo_descuentos" >
+									  EMPRESAS</div>
+								<ul class="nav nav-tabs nav-justified " id="ex1" role="tablist">
+								  <li class="nav-item" role="presentation">
+								    <a
+								      data-mdb-tab-init
+								      class="nav-link active"
+								      id="ex3-tab-1"
+								      href="#ex3-tabs-1"
+								      role="tab"
+								      aria-controls="ex3-tabs-1"
+								      aria-selected="true"
+								      >SERVICIOS</a
+								    >
+								  </li>
+								  <li class="nav-item" role="presentation">
+								    <a
+								      data-mdb-tab-init
+								      class="nav-link"
+								      id="ex3-tab-2"
+								      href="#ex3-tabs-2"
+								      role="tab"
+								      aria-controls="ex3-tabs-2"
+								      aria-selected="false"
+								      >PRODUCTOS</a
+								    >
+								  </li>
+								
+								</ul>
+
+								<div class="tab-content" id="ex2-content">
+								  <div
+								    class="tab-pane fade show active"
+								    id="ex3-tabs-1"
+								    role="tabpanel"
+								    aria-labelledby="ex3-tab-1"
+								  >
+	   								<div class="descuentos_socios_serv" style="max-width: 450px;">
+									
+									</div>
+								  </div>
+								  <div
+								    class="tab-pane fade"
+								    id="ex3-tabs-2"
+								    role="tabpanel"
+								    aria-labelledby="ex3-tab-2"
+								  >
+   	   									<div class="descuentos_socios_prod" style="max-width: 450px;">
+	
+										</div>
+								  </div>
+								
+								</div>
+		
+								 -->
+
+
+							</div>
+						
+						</div>
+
+
+
+    </div>
+    </div>
+    
+	
+		<script  src="./static/js/jquery-3.6.3.min.js" th:src="@{/js/jquery-3.6.3.min.js}"></script>
+	<!-- 	<script src="#" th:src="@{/js/formValidation.min.js}"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/js/fileinput.min.js" ></script>
+	
+		<!-- MDB -->
+		<script
+		  type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+		></script>
+		
+		  <script
+			src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+			
+		<script src="https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.jquery.min.js"></script>
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>		
+		
+		<script type="" src="./static/js/formValidation.js" th:src="@{/js/formValidation.js}"></script>
+		<script type="" src="./static/js/framework/bootstrap.js" th:src="@{/js/framework/bootstrap.js}"></script>
+		<script type="" src="./static/js/language/es_ES.js" th:src="@{/js/language/es_ES.js}"></script>
+		<script type="" src="./static/js/jquery.loadJSON.min.js" th:src="@{/js/jquery.loadJSON.min.js}"></script>
+		<script type="" src="./static/js/sweetalert2.all.min.js" th:src="@{/js/sweetalert2.all.min.js}"></script>
+		<script type="" src="./static/js/datatables.min.js" th:src="@{/js/datatables.min.js}"></script>
+		<script type="" src="./static/js/dataTables.bootstrap5.min.js" th:src="@{/js/dataTables.bootstrap5.min.js}"></script>
+		<script type="" src="./static/js/responsive.bootstrap5.min.js" th:src="@{/js/responsive.bootstrap5.min.js}"></script>
+		<script type="" src="./static/js/jform.min.js" th:src="@{/js/jform.min.js}"></script>
+		<script type="" src="./static/js/jquery.form.min.js" th:src="@{/js/jquery.form.min.js}"></script>
+		<script type="" src="./static/js/fileinput.js" th:src="@{/js/fileinput.js}"></script>
+		<script type="" src="./static/js/locales/es.js" th:src="@{/js/locales/es.js}"></script>
+    <script type="text/javascript">
+    
+    var nameEntity="../../RestCertificadosCursos"
+    var nameEntity2="../../RestCatalogos"
+    	var GDATO_ID_CERT="";
+    let id=document.getElementById("codigo").value;
+    console.log("idcrypt:",id)
+    $.get(nameEntity+'/findByNrodocumento/'+id, function(data) {
+		console.log('datos a cargar:',data)
+		var id_cert=data.id
+			GDATO_ID_CERT=id_cert
+//			$('#formulario2').loadJSON(data);
+			$('#targeta').find('input[name="id"]').html(data.id);
+			$('#targeta').find('.cont-data-nombre').html(data.nombres_part);
+			$('#targeta').find('.cont-data-apellidos').html(data.apellidos_part);
+			$('#targeta').find('.cont-data-recomendacion-folio').html(data.nrofolio);
+			$('#targeta').find('.cont-data-valorcurricular').html(data.horasacademicas);
+			$('#targeta').find('.cont-data-fechacurso').html(data.fechainicial);
+			$('#targeta').find('.cont-data-expositor').html(data.nombres_exp+ ' ' +data.apellidos_exp );
+
+
+			
+    }, 'json');
+    document.getElementById("contenido-certificado").classList.add("ocultar");
+    document.getElementById("contenido-certificado").classList.remove("mostrar");
+	function funcVerCertificado() {
+		 
+	    if (GDATO_ID_CERT != "") {
+	        // Construir la URL para obtener el reporte
+	        var urlCertificado = nameEntity + "/Imprimir_d1/" + GDATO_ID_CERT;
+	        // Mostrar en el embed
+// 	        $("#frameReporteCertificado").attr("src", urlCertificado);
+// 	        document.getElementById("contenido-certificado").classList.add("mostrar");
+// 	        document.getElementById("contenido-certificado").classList.remove("ocultar");
+
+	        // Forzar descarga
+	        var link = document.createElement("a");
+	        link.href = urlCertificado;
+	        link.download = "CERTIFICADO.pdf";
+	        document.body.appendChild(link);
+	        link.click();
+	        document.body.removeChild(link);
+	    } else {
+	        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL CERTIFICADO!");
+	    }
+
+	} 
+    	
+
+    </script>
+</body>
+
+</html>

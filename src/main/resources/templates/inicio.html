@@ -1,0 +1,583 @@
+	<!DOCTYPE html>
+	<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <link rel="icon" href="./img/liderlogo.png" type="image/png">
+	
+		<title>INICIO</title>
+	
+	      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/css/fileinput.min.css" crossorigin="anonymous">
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+		
+		<link href="https://fonts.cdnfonts.com/css/dm-sans" rel="stylesheet">
+                
+		
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- Google Fonts -->
+		<link
+		  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+		  rel="stylesheet"
+		/>
+	    <!-- MDB -->
+	    <link
+		  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+		  rel="stylesheet"
+		/>
+		<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		
+		<link href="
+		https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.min.css
+		" rel="stylesheet">
+	
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+	
+	    <link rel="stylesheet" href="./static/css/formValidation.css" th:href="@{/css/formValidation.css}"/>
+	    <link rel="stylesheet" href="./static/css/sweetalert2.min.css" th:href="@{/css/sweetalert2.min.css}"/>
+	    <link rel="stylesheet" href="./static/css/datatables.min.css" th:href="@{/css/datatables.min.css}"/>
+	    <link rel="stylesheet" href="./static/css/dataTables.bootstrap5.min.css" th:href="@{/css/dataTables.bootstrap5.min.css}"/>
+	    <link rel="stylesheet" href="./static/css/responsive.bootstrap5.min.css" th:href="@{/css/responsive.bootstrap5.min.css}"/>
+	    <link rel="stylesheet" href="./static/css/fileinput.css" th:href="@{/css/fileinput.css}"/>
+	    
+	<!-- 	<link href="https://unpkg.com/filepond@4.28.2/dist/filepond.css" rel="stylesheet"> -->
+		
+	    <link rel="stylesheet" href="#" th:href="@{/css/tema/style.css}"/>
+	    <link rel="stylesheet" href="#" th:href="@{/css/tema/mybuttons.css}"/>
+	    <link rel="stylesheet" href="#" th:href="@{/css/tema/mymenu.css}"/>
+		<style type="text/css">
+			*{
+/*   				font-size: 13px;    */
+
+/*  				font-family: 'Roboto Condensed', sans-serif, "Helvetica Neue", Helvetica, Arial, sans-serif;  */
+			}
+			html{
+/* 				font-size: 13px; */
+			}
+			body{
+/*  				font-size: 12px;  */
+/* 				font-family: 'DM Sans', sans-serif; */
+				font-family: "Roboto", sans-serif;
+				 padding-top: 8rem; /*space for navbar*/
+			}
+			
+
+			.modal-body{
+				font-size: 11px !important;
+			}
+			.modal-body  input {
+				font-size: 11px !important;
+			}
+			
+			.modal-body  select{
+				font-size: 11px !important;
+			}
+			.table>:not(caption)>*>* {
+			  	padding: 2px; 
+			}
+
+			.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+	
+			    line-height: 1.7; 
+			    vertical-align: top;
+	/* 		    border-top: 1px solid #ddd; */
+	 		    padding-top: 2px !important; 
+			    padding-bottom: 2px !important;
+			    
+ 		    	font-size: 13px !important;  
+			}
+			
+			.table > tbody > tr > td > input, .table > tbody > tr > td > select, .table > tbody > tr > td > select > *{
+	
+		    	font-size: 10px !important;
+			}
+			/* Reducir el tamaño del texto en el área seleccionada de chosen */
+			.chosen-container .chosen-single span {
+			    font-size: 10px; /* Ajusta este valor al tamaño deseado */
+			}
+			.chosen-container .chosen-results li {
+			    font-size: 10px;
+			}
+			.table > thead > tr > th{
+				font-weight:bold;
+				text-transform: uppercase;
+				text-align: center; 
+		
+			}
+			
+
+
+		</style>
+		
+		<style type="text/css">
+
+			
+			/* Modal */
+			.modal-content {
+			  border: 1px solid #e1e4e8;
+			  border-radius: 8px;
+			  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			}
+			
+.modal-header {
+    background-color: white;
+    color: #232f3e;
+    border-bottom: 1px solid #e1e4e8;
+    padding: 16px;
+}
+			
+			.modal-title {
+			  font-size: 18px;
+			  font-weight: 600;
+			  text-transform: uppercase;
+			}
+			
+			.modal-body {
+			  padding: 20px;
+			  color: #333;
+			}
+			
+			/* Botones */
+			.btn-primary {
+			  background-color: #0073bb;
+			  border-color: #0073bb;
+			  color: #fff;
+			  font-weight: 500;
+			  text-transform: uppercase;
+			  padding: 10px 20px;
+			  border-radius: 4px;
+			}
+			
+			.btn-primary:hover {
+			  background-color: #005fa3;
+			  border-color: #005fa3;
+			}
+			
+.btn-secondary {
+    background-color: #ededed;
+    border-color: #e1e4e8;
+    color: #333;
+    padding: 5px 15px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+			
+			.btn-secondary:hover {
+			  background-color: #e1e4e8;
+			}
+			
+			/* Formulario */
+			.form-control {
+			  border: 1px solid #d1d5db;
+			  border-radius: 4px;
+			  padding: 9.2px;
+			  font-size: 12px;
+			}
+			
+			.form-control:focus {
+			  border-color: #0073bb;
+			  box-shadow: 0 0 4px rgba(0, 115, 187, 0.5);
+			}
+			
+			.form-label {
+			  font-size: 14px;
+			  font-weight: 600;
+			  color: #232f3e;
+			}
+			
+			.form-select {
+			  border: 1px solid #d1d5db;
+			  border-radius: 4px;
+			  padding: 10px;
+			  font-size: 12px;
+			  background-color: #fff;
+			}
+			
+			.form-select:focus {
+			  border-color: #0073bb;
+			  box-shadow: 0 0 4px rgba(0, 115, 187, 0.5);
+			}
+			
+			/* Mensajes */
+			.alert {
+			  border-radius: 4px;
+			  font-size: 14px;
+			}
+			
+			/* Espaciado */
+			.mb-4 {
+			  margin-bottom: 16px !important;
+			}
+				
+			
+		</style>
+		
+	</head>
+	<body>
+		<div class="">
+			<!-- Navbar -->
+			<nav class="navbar navbar-expand-lg navbar-dark navbar-menu fixed-top" style="">
+			  <!-- Container wrapper -->
+			  <div class="container">
+			    <!-- Navbar brand -->
+			    <a class="navbar-brand me-2" href="/">
+					<img src="/img/LOGOLIDERWHITE.png" alt="">
+			    </a>
+				                    
+			    <!-- Toggle button -->
+			    <button
+			      data-mdb-collapse-init
+			      class="navbar-toggler"
+			      type="button"
+			      data-mdb-target="#navbarButtonsExample"
+			      aria-controls="navbarButtonsExample"
+			      aria-expanded="false"
+			      aria-label="Toggle navigation"
+			    >
+			      <i class="fa fa-bars"></i>
+			    </button>
+			
+			    <!-- Collapsible wrapper -->
+			    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+			      <!-- Left links -->
+			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<!-- 			        <li class="nav-item"> -->
+<!-- 			          <a class="nav-link" href="/">INICIO</a> -->
+<!-- 			        </li> -->
+			        
+			        
+			         <li class="nav-item dropdown">
+			          <a
+			            data-mdb-dropdown-init
+			            class="nav-link dropdown-toggle"
+			            href="#"
+			            id="navbarDropdown"
+			            role="button"
+			            aria-expanded="false"
+			          >
+			            Mis Datos
+			          </a>
+			          <!-- Dropdown menu -->
+			          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			            <li>
+	              	       	<a href="#" data-href="/institucion/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                            	Empresa
+	                         </a>
+			            </li>
+			            <li>
+			                    	
+                            <a href="#" data-href="/anios/gestion" class=" dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+                            	
+                            	Registro de Gestiones
+                            </a>
+			            </li>
+			            <li>
+	              	       	<a href="#" data-href="/roles/gestion" class=" dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+                               
+                               	Registro de Roles
+                            </a>
+			            </li>
+			            <li>
+			                <a href="#" data-href="/usuarios/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+                              	
+                              	Registro de Usuarios
+                             </a>
+           				 </li>
+			          </ul>
+
+			        </li>
+			        
+			        <li class="nav-item dropdown">
+			          <a
+			            data-mdb-dropdown-init
+			            class="nav-link dropdown-toggle"
+			            href="#"
+			            id="navbarDropdown2"
+			            role="button"
+			            aria-expanded="false"
+			          >
+			            Mis Registros
+			          </a>
+			          <!-- Dropdown menu -->
+			          <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+			            <li>
+                            <a href="#" data-href="/profesion/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                              
+	                         Registro de Profesiones</a>
+			            </li>
+			            <li>
+	                         <a href="#" data-href="/gradoacademico/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                          Registro de G.Academicos</a>
+			            </li>
+			            <li>
+                                <a href="#" data-href="/categoria/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                               
+	                                Registro de Categorias</a>
+			            </li>
+			            <li>
+				                <a href="#" data-href="/expositor/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                         
+	                                Registro de Expositores</a>
+           				 </li>
+           				 <li>
+           				 		   <a href="#" data-href="/banco/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                                
+	                                Registro de Bancos</a>
+           				 </li>
+           				 <li>
+           				 	      <a href="#" data-href="/metodopago/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                              
+	                                Registro de Metodos de Pago</a>
+           				 </li>
+<!--            				 <li> -->
+<!--            				 	        <a href="#" data-href="/curso/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)"> -->
+<!-- 	                                Registro de Cursos</a> -->
+<!--            				 </li> -->
+           				 <li>
+           				 		  <a href="#" data-href="/evento/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                               
+	                                Registro de Eventos</a>
+           				 </li>
+<!--            				 <li> -->
+<!--            				 	       <a href="#" data-href="/participantes/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">                            -->
+<!-- 	                                Registro de Participantes</a>	  -->
+<!--            				 </li> -->
+           				 <li>
+           				 		    <a href="#" data-href="/inscritos/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                                
+	                                Registro de Inscritos</a>
+           				 </li>
+			          </ul>
+
+			        </li>
+			        
+			        <li class="nav-item dropdown">
+			          <a
+			            data-mdb-dropdown-init
+			            class="nav-link dropdown-toggle"
+			            href="#"
+			            id="navbarDropdown3"
+			            role="button"
+			            aria-expanded="false"
+			          >
+			            Mis Reportes
+			          </a>
+			          <!-- Dropdown menu -->
+			          <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+			            <li>
+	              	       	<a href="#" data-href="/institucion/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+	                            	Empresa
+	                         </a>
+			            </li>
+			            <li>
+			                    	
+                            <a href="#" data-href="/anios/gestion" class=" dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
+                            	
+                            	Registro de Gestiones
+                            </a>
+			            </li>
+
+			          </ul>
+
+			        </li>
+			      </ul>
+			      <!-- Left links -->
+			      
+			      
+			
+			      <div class="d-flex align-items-center">
+						<ul class="navbar-nav d-flex align-items-center">
+	                    	<li class="nav-item me-2 "> 
+	                    		<select class="form-select form-select-sm " id="select-anios" style="width: 120px" title="gestiones">
+									<option value="">Selec. Gestion</option>
+								</select>
+	                    	</li>
+	                        <li class="nav-item dropdown">
+	                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+	                                <img src="img/user.png" class="avatar img-fluid rounded" alt="">
+	                            </a>
+	                            <div class="dropdown-menu dropdown-menu-end">
+	                                <a href="#" class="dropdown-item">PERFIL</a>
+	                                <a href="#" class="dropdown-item">CONFIGURACION</a>
+	                                <a href="/logout" class="dropdown-item">DESCONECTAR</a>
+	                            </div>
+	                        </li>
+	                    </ul>
+			      </div>
+			    </div>
+			    <!-- Collapsible wrapper -->
+			  </div>
+			  <!-- Container wrapper -->
+			</nav>
+			<!-- Navbar -->
+		</div>
+	
+	    <div class="wrapper">
+	    	
+	    
+	 
+	        <div class="main" >
+
+	            <main class="content ">
+	                <div class="contenedor" id="contenedor">
+	                    <div class="mb-3">
+	                        <h4>PANEL DE ADMINISTRACION</h4>
+	                    </div>
+	
+	                    <!-- Table Element -->
+	                    <div class="card border-0">
+	                        <div class="card-header">
+	
+	                            <h6 class="card-subtitle text-muted">
+	                                Bienvenido al Sistema!
+	                            </h6>
+	                        </div>
+	
+		                </div>
+	                </div>
+	            </main>
+	<!--             <a href="#" class="theme-toggle"> -->
+	<!--                 <i class="fa-regular fa-moon"></i> -->
+	<!--                 <i class="fa-regular fa-sun"></i> -->
+	<!--             </a> -->
+
+	        </div>
+	    </div>
+	
+	
+		<!-- FIN HEADER -->
+		
+		<div class="modal fade" tabindex="-1" role="dialog" id="reportes" data-backdrop="static" data-keyboard="false" aria-hidden="true" style="display: none; padding-left: 0">
+		  <div class="modal-dialog modal-xl" style="--mdb-modal-width:97%;">
+		  
+		    <div class="modal-content cont-reportes"  >
+		      <iframe id="frameReportes" width="100%" height="900px"></iframe>
+		    </div>
+		  </div>
+		</div>
+			
+			
+		<script  src="./static/js/jquery-3.6.3.min.js" th:src="@{/js/jquery-3.6.3.min.js}"></script>
+	<!-- 	<script src="#" th:src="@{/js/formValidation.min.js}"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.5.4/js/fileinput.min.js" ></script>
+	
+		<!-- MDB -->
+		<script
+		  type="text/javascript"
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+		></script>
+		
+		  <script
+			src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+			
+		<script src="https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.jquery.min.js"></script>
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>		
+		
+		<script type="" src="./static/js/formValidation.js" th:src="@{/js/formValidation.js}"></script>
+		<script type="" src="./static/js/framework/bootstrap.js" th:src="@{/js/framework/bootstrap.js}"></script>
+		<script type="" src="./static/js/language/es_ES.js" th:src="@{/js/language/es_ES.js}"></script>
+		<script type="" src="./static/js/jquery.loadJSON.min.js" th:src="@{/js/jquery.loadJSON.min.js}"></script>
+		<script type="" src="./static/js/sweetalert2.all.min.js" th:src="@{/js/sweetalert2.all.min.js}"></script>
+		<script type="" src="./static/js/datatables.min.js" th:src="@{/js/datatables.min.js}"></script>
+		<script type="" src="./static/js/dataTables.bootstrap5.min.js" th:src="@{/js/dataTables.bootstrap5.min.js}"></script>
+		<script type="" src="./static/js/responsive.bootstrap5.min.js" th:src="@{/js/responsive.bootstrap5.min.js}"></script>
+		<script type="" src="./static/js/jform.min.js" th:src="@{/js/jform.min.js}"></script>
+		<script type="" src="./static/js/jquery.form.min.js" th:src="@{/js/jquery.form.min.js}"></script>
+		<script type="" src="./static/js/fileinput.js" th:src="@{/js/fileinput.js}"></script>
+		<script type="" src="./static/js/locales/es.js" th:src="@{/js/locales/es.js}"></script>
+		<script type="" src="./static/js/tema/script.js" th:src="@{/js/tema/script.js}"></script>
+		
+	
+	<!-- 	<script src="https://unpkg.com/filepond@4.28.2/dist/filepond.js"></script> -->
+		<script type="text/javascript">
+		
+		// Realiza una solicitud GET a la URL "/RestAnios/"
+			fetch('/RestAnios/')
+		    .then(response => response.json()) // Convierte la respuesta a JSON
+		    .then(data => {
+		        let seleccion = '';
+		        const today = new Date();
+		        const year = today.getFullYear();
+		        const selectAnios = document.querySelector('#select-anios');
+
+		        data.forEach(array => {
+		            if (array.nombre == year) {
+		                seleccion = 'selected';
+		            } else {
+		                seleccion = '';
+		            }
+
+		            // Crea el elemento option
+		            const option = document.createElement('option');
+		            option.value = array.id;
+		            option.accessKey = array.id;
+		            option.selected = seleccion ? true : false;
+
+		            // Crea el elemento a y lo añade dentro del option
+		            const anchor = document.createElement('a');
+		            anchor.href = '';
+		            anchor.textContent = array.nombre;
+
+		            option.appendChild(anchor);
+
+		            // Añade el option al select
+		            selectAnios.appendChild(option);
+		        });
+		    })
+		    .catch(error => {
+		        console.error('Error:', error);
+		    });
+
+			function gestion(link){
+	// 			var enlace=$(link).data('href');
+				var enlace = link.dataset.href;
+// 				console.log(enlace)
+	      		
+	
+	    		$.post(enlace,function(resp){
+	//     			console.log("resp:",resp)
+	    			$('#contenedor').html(resp);
+	    		})
+	    		
+	//     		var xhr = new XMLHttpRequest();
+	// 		    xhr.open('POST', enlace, true);
+	// 		    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');	
+	// 		    xhr.onreadystatechange = function() {
+	// 		        if (xhr.readyState === XMLHttpRequest.DONE) {
+	// 		            if (xhr.status === 200) {
+	// 		                var resp = xhr.responseText;
+	// 		                document.getElementById('contenedor').innerHTML = resp;
+	// 		            } else {
+	// 		                console.error('Error al realizar la solicitud: ' + xhr.status);
+	// 		            }
+	// 		        }
+	// 		    };
+	// 		    xhr.send();  // Si necesitas enviar datos, añádelos a xhr.send(datos)
+			}
+	
+		</script>
+		<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const navbarToggler = document.querySelector(".navbar-toggler");
+        const navLinks = document.querySelectorAll(".navbar-nav .dropdown-item");
+
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                const navbarCollapse = document.querySelector("#navbarButtonsExample");
+                if (navbarCollapse.classList.contains("show")) {
+                    navbarToggler.click(); // Simula el clic en el botón para cerrar el menú
+                }
+            });
+        });
+    });
+</script>
+		
+		
+	</body>
+	</html>

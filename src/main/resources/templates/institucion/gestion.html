@@ -1,0 +1,233 @@
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content=""> 
+	<style type="text/css">
+        .ocultar{
+            display: none;
+        }
+	</style>
+</head>
+<body>
+	
+	    <div class="row">
+            <div class="col-md-12">
+				<form id="formulario"  method="post"  name="formulario" role="form" 
+				    data-fv-excluded="disabled">
+					<div class="row">
+					
+						<input type="" name="id" value="" style="display: none"> 
+						<input type="" name="representante" value="" style="display: none"> 
+						<input type="" name="fax" value="" style="display: none"> 
+						<input type="" name="host" value="" style="display: none"> 
+						<input type="" name="port" value="" style="display: none"> 
+						<input type="" name="estado" value="1" style="display: none"> 
+						
+						<div class="col-md-2">
+							<img alt="" src="/img/liderlogo.png" style="width: 150px">
+						</div>
+						<div class="col-md-10">
+							                   
+				                    <div class="row">
+				                        <div class="col-md-6">
+											<div class="mb-3">
+												<label class="">Empresa</label>
+												<input placeholder="Ingrese nombre Empresa"
+													class="form-control fg-input data-per field_css"
+													name="compania" type="text" required="required">
+											</div>
+				                        </div>
+				                        <div class="col-md-6">
+											<div class="mb-3">
+												<label class="">Institucion</label>
+												<input placeholder="Ingrese institucion"
+													class="form-control fg-input data-per field_css"
+													name="institucion" type="text" required="required">
+											</div>
+				                        </div>
+				                     </div>
+				                     <div class="row">
+				                        <div class="col-md-6">
+											<div class="mb-3">
+												<label class="">NIT</label>
+												<input placeholder="Ingrese nit"
+													class="form-control fg-input data-per field_css"
+													name="nit" type="text" required="required">
+											</div>
+				                        </div>
+				                        <div class="col-md-6">
+											<div class="mb-3">
+												<label class="">Correo</label>
+												<input placeholder="Ingrese correo"
+													class="form-control fg-input data-per field_css"
+													name="correo" type="email" required="required">
+											</div>
+				                        </div>
+				                     </div>
+				                     <div class="row">
+				                        <div class="col-md-6">
+											<div class="mb-3">
+												<label class="">Direccion</label>
+												<input placeholder="Ingrese nit"
+													class="form-control fg-input data-per field_css"
+													name="direccion" type="text" required="required">
+											</div>
+				                        </div>
+				                        <div class="col-md-6">
+											<div class="mb-3">
+												<label  class="">Telefono</label>
+												<input placeholder="Ingrese telefono"
+													class="form-control fg-input data-per field_css"
+													name="telefono" type="number" required="required">
+											</div>
+				                        </div>
+				                     </div>
+				           
+				                    <button type="submit"  id="btn" class="btn btn-warning waves-effect" style="background-color: #FFB74D"><i class="fa fa-save fa-3x"></i></button>
+				               
+						</div>
+					</div>           
+
+
+				</form>  
+
+            </div>   
+        </div>  
+
+
+	
+    <script type="text/javascript">
+
+		var GOPCION=""
+		var GID=""
+		var GSEARCH=""
+		var GESTADO='';
+		var DTtable=''
+		var nameEntity="../RestInstitucion"
+    
+		//let id=document.getElementById("codigo").value;
+// 		console.log("DATO:",id)
+    	var xhr = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+  		xhr.open('GET', nameEntity );//abre una solicitud GET y hacia la direccion establecida
+  		xhr.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+  		xhr.onload = function() {//cuando se complete la solicitud de manera exitosa
+  		  if (xhr.status === 200) {//se verifica el estado de la respuesta
+  		    var objeto = xhr.response;//se asigna la respuesta
+  		    // Hacer algo con el resultado aqu�
+  		    console.log("resultado por AJAX VANILLA",objeto);
+  		    console.log("resultado por AJAX VANILLA",objeto[0].compania);
+  		  	let boton = document.getElementById("boton-socio");
+  		    if (objeto!=null) {
+
+	    		//DATOS
+  		    	if (objeto[0].estado==1) {
+  		    		GID=objeto[0].id
+  		    		document.querySelector('#formulario input[name="id"]').value = objeto[0].id;
+  		    		document.querySelector('#formulario input[name="compania"]').value = objeto[0].compania;
+  		    		document.querySelector('#formulario input[name="institucion"]').value = objeto[0].institucion;
+  		    		document.querySelector('#formulario input[name="nit"]').value = objeto[0].nit;
+  		    		document.querySelector('#formulario input[name="correo"]').value = objeto[0].correo;
+  		    		document.querySelector('#formulario input[name="direccion"]').value = objeto[0].direccion;
+  		    		document.querySelector('#formulario input[name="telefono"]').value = objeto[0].telefono;
+  	  		    	
+				}
+
+			}
+  		  }
+  		};
+  		xhr.send();
+  		
+  		
+		$("#formulario").submit(function (event) {
+            const swalWithBootstrapButtons = Swal.mixin({
+            	  customClass: {
+            	    confirmButton: 'btn btn-success',
+            	    cancelButton: 'btn btn-danger'
+            	  },
+            	  buttonsStyling: false
+            	})
+            
+			swalWithBootstrapButtons.fire({
+				  title: "¿Estas Seguro de continuar?",   
+	              text: "Se registrara en el Sistema",   
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonText: 'Si, Continuar!',
+				  cancelButtonText: 'No, Cancelar!',
+				  reverseButtons: true
+				}).then((result) => {
+// 					console.log("GOPCION:",GOPCION)
+				  if (result.isConfirmed) {
+				        $.ajax({
+				      	   	url:nameEntity+"/"+GID,
+				      	    type: "PUT",
+								'contentType': "application/json",
+								'data': JsonDataFormMod(),
+				      	    'dataType': 'json',
+				             success:function(res){
+				            	 
+// 				            	 console.log("resp:",res)
+				            	 objectMod=res
+// 				            	 console.log("objectMod:",objectMod)
+//				             	 $('#formulario').data('formValidation').resetForm();
+// 				                 $('#formulario')[0].reset();
+// 									 updateTable(id,res)
+								document.querySelector('#formulario input[name="id"]').value = objectMod.id;
+			  		    		document.querySelector('#formulario input[name="compania"]').value = objectMod.compania;
+			  		    		document.querySelector('#formulario input[name="institucion"]').value = objectMod.institucion;
+			  		    		document.querySelector('#formulario input[name="nit"]').value = objectMod.nit;
+			  		    		document.querySelector('#formulario input[name="correo"]').value = objectMod.correo;
+			  		    		document.querySelector('#formulario input[name="direccion"]').value = objectMod.direccion;
+			  		    		document.querySelector('#formulario input[name="telefono"]').value = objectMod.telefono;
+				                 $('.modal').modal('hide')
+				                  Swal.fire({
+				                     title:"Registrado",
+				                     text:"Se ha modificado exitosamente",
+				                     icon:"success",
+				                     timer:700,   
+				                     showConfirmButton: false 
+				                 });  
+				                 $('#table').dataTable().fnDraw('page');
+				             }
+				        	
+				         })
+	               	
+				  } else if (
+				    result.dismiss === Swal.DismissReason.cancel
+				  ) {
+				    swalWithBootstrapButtons.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+                        text:"Se ha cancelado operacion",
+                        timer:700,
+                        showCancelButton:false,
+                     	showConfirmButton:false
+				    })
+				  }
+				  $('.modal').modal('hide')  
+				})
+            
+				 event.preventDefault();
+		 	 });
+  		
+
+		 function JsonDataFormMod() {
+				var serialized = $('#formulario').serializeArray();
+		        var s = '';
+		        var data = {};
+		        for(s in serialized){
+		            data[serialized[s]['name']] = serialized[s]['value']
+		        }
+		        data.provincia=null;
+		        return JSON.stringify(data);
+		}
+    </script>
+	
+	
+	
+</body>
+</html>

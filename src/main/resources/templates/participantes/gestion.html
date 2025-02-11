@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	>
+<head>
+<title>SOCIOS</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<link rel="icon" href="../img/logo_cadet.png" type="image/png">
+<meta name="author" content="">
+<style>
+.selected {
+	background-color: #B0BED9;
+}
+
+.contenido_gestion {
+	padding: 20px 10px 0px 10px;
+}
+ 
+.ocultar {
+    display: none;
+}
+ 
+.mostrar {
+    display: block;
+}
+
+td {
+    vertical-align: middle !important;
+}
+.input_cata{
+	background: #f9f9f9;
+    width: 100%;
+    border: none;
+    height: 2em;
+    padding: 0 0.5rem;
+    outline: none;
+}
+.label_cata{
+	background: #fffbdd;
+    width: 35%; 
+    border: none;
+    height: 2rem;
+    padding: 0 0.5rem;
+    align-items: center;
+    display: flex;
+    font-weight: 900;
+}
+.input_group_cata{
+	display: flex;
+}
+
+.select2-results{
+	position:relative;
+	z-index: 9000;
+}
+.hide-remove {
+    display: none !important;
+}
+.kv-preview-data img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+</style>
+</head>
+<body >
+	<form name="formulario" role="form" id="formulario" method="post"
+		enctype="multipart/form-data" data-fv-excluded="disabled">
+
+		<div class="modal fade" id="modalAdicionar" tabindex="-1"
+			role="dialog" data-backdrop="static" data-keyboard="false"
+			aria-hidden="true" style="display: none; padding-left: 0">
+
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="card">
+						<div class="modal-header" style="display: flex;flex-direction: column;">
+							<span><b>.:PARTICIPANTE:.</b></span>
+							<div class="opciones_btn_modal" style="display: flex"></div>
+						</div>
+						<div class="modal-body">
+
+							<div id="div_put"></div>
+							<input type="" name="id" value="" style="display: none">
+							<input type="" name="codigo" value="" style="display: none"> 
+							<input type="" name="codigom" value="" style="display: none"> 
+							<input type="" name="estado" value="1" style="display: none"> 
+							
+				          	<div class="row">
+				          		<div  class="col-md-6">
+				   					<div class="row">
+										<div class="col-md-12">
+											<div class="mb-1">
+												<label for="logo" class=""><b>LOGO</b></label>
+												<input placeholder="Ingrese logo"
+													class="form-control fg-input data-per field_css"
+													name="logo" id="logo" type="file" required="required">
+											</div>
+				
+										</div>
+				
+									
+										<div class="col-md-8">
+											<div class="mb-1">
+												<label for="ci" class=""><b>CEDULA</b></label>
+												<input placeholder="Ingrese carnet.. "
+													class="form-control fg-input data-per field_css"
+													name="ci" type="text" required="required">
+											</div>
+				
+										</div>
+										<div class="col-md-4">
+											<div class="mb-1">
+												<label for="exp" class=""><b>EXP</b></label>
+													<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="exp" name="exp"> 
+													  <option selected value="">Seleccionar</option>
+													  <option  value="TJA">TARIJA</option>
+													  <option  value="PT">POTOSI</option>
+													  <option  value="PD">PANDO</option>
+													  <option  value="LP">LA PAZ</option>
+													  <option  value="OR">ORURO</option>
+													  <option  value="CBBA">COCHABAMBA</option>
+													  <option  value="BE">BENI</option>
+													  <option  value="CH">CHUQUISACA</option>
+													  <option  value="SCZ">SANTA CRUZ</option>
+													 
+													</select>
+											</div>
+				
+										</div>
+										<div class="col-md-12">
+											<div class="mb-1">
+												<label for="nombre" class=""><b>NOMBRE Y APELLIDO</b></label>
+												<input placeholder="Ingrese nombre.."
+													class="form-control fg-input data-per field_css"
+													name="nombrecompleto" type="text" required="required" onkeyup="this.value = this.value.toUpperCase();">
+											</div>
+				
+										</div>
+										<div class="col-md-12">
+											<div class="mb-1">
+												<label for="genero" class=""><b>GENERO</b></label>
+													<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="genero" name="genero"> 
+													  <option selected value="">Seleccionar</option>
+													  <option  value="m">MASCULINO</option>
+													  <option  value="f">FEMENINO</option>
+													 
+													</select>
+											</div>
+				
+										</div>
+				
+									</div>
+				          		</div>
+				          		<div  class="col-md-6">
+				          			<div class="row">
+				     					<div class="col-md-12">
+											<div class="mb-1">
+											  <label for="fechanacimiento" class=""><b>FECHA DE NACIMIENTO</b></label>		
+											  <input placeholder="Ingrese Fecha Nacimiento.." 
+															class="form-control fg-input data-per field_css"
+															name="fechanacimiento" type="date" required="required" id="fechanacimiento"
+														    value="">
+											</div>
+					
+										</div>
+										
+										<div class="col-md-12">
+											<div class="mb-1">
+												<label for="edad" class=""><b>EDAD</b></label>
+												<input placeholder="Edad.."
+													class="form-control fg-input data-per field_css" id="edad"
+													name="edad" type="number" required="required" readonly="readonly">
+											</div>
+				
+										</div>
+						    			<div class="col-md-12">
+											<div class="mb-1">
+												<label for="gradoacademico" class=""><b>GRADO ACADEMICO</b></label>
+												<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="gradoacademico" name="gradoacademico">
+												  <option selected value="">Seleccionar</option>
+												 
+												</select>
+											</div>
+						    			</div>
+									    <div class="col-md-12">
+											<div class="mb-1">
+												<label for="profesion" class=""><b>CARRERA</b></label>
+												<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="profesion" name="profesion">
+												  <option selected value="">Seleccionar</option>
+												 
+												</select>
+											</div>
+						    			</div>
+				 						<div class="col-md-12">
+											<div class="mb-1">
+												<label for="celular" class=""><b>TELEFONO/CELULAR (Con WHATSAPP)</b></label>
+												<input placeholder="Celular.."
+													class="form-control fg-input data-per field_css"
+													name="celular" type="number" required="required">
+											</div>
+				
+										</div>
+										<div class="col-md-12">
+											<div class="mb-1">
+												<label for="correo" class=""><b>CORREO</b></label>
+												<input placeholder="Ingrese correo.."
+													class="form-control fg-input data-per field_css"
+													name="email" type="text" required="required" >
+											</div>
+				
+										</div>
+						    			
+						    			<div class="col-md-12">
+											<div class="mb-1">
+												<label for="ciudad" class=""><b>CIUDAD</b></label>
+												<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id=departamento name="departamento">
+												  <option selected value="">Seleccionar</option>
+												 
+												</select>
+											</div>
+						    			</div>
+									    <div class="col-md-12">
+											<div class="mb-1">
+												<label for="provincia" class=""><b>LUGAR DE RESIDENCIA</b></label>
+												<input placeholder="Ingrese provincia (Ej: Cercado)"
+													class="form-control fg-input data-per field_css" id="localidad"
+													name="localidad" type="text" required="required" onkeyup="this.value = this.value.toUpperCase();">
+											
+											</div>
+						    			</div>
+										<div class="col-md-12">
+											<div class="mb-1">
+		
+												<label for="exampleFormControlInput1" class=""><b>DIRECCIÓN DE SU RESIDENCIA</b></label>
+												<textarea rows="" cols="" placeholder="Ingrese el dirección " 
+													class="form-control fg-input data-per field_css" name="direccion" id="direccion"
+													required="required"></textarea>
+										
+											</div>
+		
+										</div>
+				          			</div>
+					          	</div>
+				          	</div>
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<form name="formulario2" role="form" id="formulario2" method="post"
+		enctype="multipart/form-data" data-fv-excluded="disabled">
+
+		<div class="modal fade" id="modalPlantilla" tabindex="-1"
+			role="dialog" data-backdrop="static" data-keyboard="false"
+			aria-hidden="true" style="display: none; padding-left: 0">
+
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="card">
+						<div class="modal-header" style="display: flex;flex-direction: column;">
+							<span><b>.:AGREGAR PLANTILLA:.</b></span>
+							<div class="opciones_btn_modal2" style="display: flex"></div>
+						</div>
+
+						<div class="modal-body">
+
+							<div id="div_put"></div>
+							<input type="" name="id" value="" style="display: none">
+							<input type="" name="codigo" value="" style="display: none"> 
+							<input type="" name="codigom" value="" style="display: none"> 
+							<input type="" name="estado" value="1" style="display: none"> 
+	
+							<div class="row">
+
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+										<label for="logo" class=""><b>PLANTILLA</b></label>
+										<input placeholder="Ingrese plantilla de certificado"
+											class="form-control fg-input data-per  "
+											name="certificado_imagen" id="certificado_imagen" type="file" required="required"
+										    data-allow-reorder="true"
+											>
+									</div>
+
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+										<label for="exampleFormControlInput1" class=""><b>CODIGO CURSO</b></label>
+										<input placeholder="Ingrese codigo de curso"
+											class="form-control fg-input data-per "
+											name="nrodocumentom" type="text" required="required" disabled="disabled" onkeyup="this.value = this.value.toUpperCase();">
+										<input placeholder="Ingrese codigo de curso"
+											class="" name="nrodocumento" type="hidden" required="">
+									</div>
+
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+										<label for="exampleFormControlInput1" class=""><b>CATEGORIA</b></label>
+										<select  disabled="disabled" required="required" class="form-select " aria-label=".form-select-sm example" id="categoria" name="categoria">
+										  <option selected value="">Seleccionar</option>
+										 
+										</select>
+										<input placeholder="Ingrese codigo de curso"
+											class="" name="idcategoria_m" type="hidden" required="">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+										<label for="exampleFormControlInput1" class=""><b>NOMBRE CURSO</b></label>
+										<input placeholder="Ingrese de curso"
+											class="form-control fg-input " disabled="disabled"
+											name="nombrecurso" type="text" required="required">
+									</div>
+
+								</div>
+							</div>
+
+
+							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+										<label for="exampleFormControlInput1" class=""><b>MODALIDAD</b></label>
+											<select required="required" class="form-select" disabled="disabled" aria-label=".form-select-sm example" id="modalidad" name="modalidad"> 
+											  <option selected value="">Seleccionar</option>
+											  <option  value="p">PRESENCIAL</option>
+											  <option  value="sm">SEMI PRESENCIAL</option>
+											  <option  value="v">VIRTUAL</option>
+											 
+											</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+										<label for="exampleFormControlInput1" class=""><b>NIVEL</b></label>
+											<select required="required" class="form-select" disabled="disabled" aria-label=".form-select-sm example" id="nivel" name="nivel"> 
+											  <option selected value="">Seleccionar</option>
+											  <option  value="p">BASICO</option>
+											  <option  value="sm">INTERMEDIO</option>
+											  <option  value="v">AVANZADO</option>
+											 
+											</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+									  <label for="exampleFormControlInput1" class=""><b>FECHA INICIO</b></label>		
+									  <input placeholder="Ingrese Fecha Inicio" 
+													class="form-control fg-input data-per"
+													name="fechainicial" type="date" required="required" id="fechainicial"
+												    value="" disabled="disabled" >
+									</div>
+
+								</div>
+							</div>
+	
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+									  <label for="exampleFormControlInput1" class=""><b>FECHA FINAL</b></label>		
+									  <input placeholder="Ingrese Fecha Final" 
+													class="form-control fg-input data-per "
+													name="fechafinal" type="date" required="required" id="fechafinal"
+												    value="" disabled="disabled" >
+									</div>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+									  <label for="exampleFormControlInput1" class=""><b>HORA</b></label>		
+									  <input placeholder="Ingrese Hora" 
+													class="form-control fg-input data-per "
+													name="hora" type="time" required="required" id="hora"
+												    value="" disabled="disabled" >
+									</div>
+
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-md-12 ">
+									<div class="mb-1">
+										<label for="exampleFormControlInput1" class=""><b>EXPOSITORES</b></label>	
+										<select  class="form-select" id="expositores" name="expositores" multiple="multiple" disabled="disabled">  
+										 
+										</select>
+										 <div class="invalid-feedback">
+						                    PORFAVOR SELECCIONA UNA OPCION
+						                </div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-1">
+										<label for="exampleFormControlInput1" class=""><b>LINK GRUPO</b></label>
+										<input placeholder="Ingrese link del grupo WHATSAPP"
+											class="form-control fg-input data-per "
+											name="linkgrupo" type="text" required="required" disabled="disabled">
+									</div>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<form name="formulario3" role="form" id="formulario3" method="post"
+		enctype="multipart/form-data" data-fv-excluded="disabled">
+
+		<div class="modal fade" id="modalRenovarQr" tabindex="-1"
+			role="dialog" data-backdrop="static" data-keyboard="false"
+			aria-hidden="true" style="display: none; padding-left: 0">
+
+			<div class="modal-dialog modal-md" role="document">
+				<div class="modal-content">
+					<div class="card">
+						<div class="modal-header">
+							<div class="row" style="display: contents;">
+								<div class="col-md-4 ">
+									<b class="" style="font-size: 16px">RENOVAR QR</b>
+								</div>
+								<div class="col-md-8" style="text-align: right;">
+									<div class="opciones_btn_modal3"></div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-body">
+
+							<div id="div_put"></div>
+							<input type="" name="id" value="" style="display: none"> 
+							<input type="" name="codigo" value="" style="display: none"> 
+							<input type="" name="codigom" value="" style="display: none"> 
+							<input type="" name="estado" value="1" style="display: none"> 
+							<div class="row mt-1">
+								<div class="col-md-12 ">
+									<div class="" style="border-radius: 2px; background-color: #fffbdd;padding: 1px;text-align: center;font-weight: bold;">
+									  QR</div>
+									<div class="renovar-rq-socio" style=""></div>
+								</div>
+							</div>
+						
+							<div class="row mt-1">
+								<div class="col-md-12 input_group_cata">
+									<label for="exampleFormControlInput1" class="label_cata">Cod. Curso</label>
+									<input placeholder="Ingrese carnet de identidad" class="input_cata fg-input data-per field_css"
+											name="nrodocumento" type="text" required="required" readonly="readonly">
+									
+								</div>
+						
+							</div>
+
+
+							<div class="row mt-1">
+								<div class="col-md-12 input_group_cata">
+									
+									<label for="exampleFormControlInput1" class="label_cata">Nombre Curso</label>
+
+									<input placeholder="Nombre curso.." class="input_cata fg-input data-per field_css"
+											name="nombrecurso" type="text" required="required"
+											onkeyup="this.value = this.value.toUpperCase();" readonly="readonly">
+									
+								</div>
+							</div>
+							<div class="row mt-1">
+				    			<div class="col-md-12">
+									<label for="gradoacademico" class=""><b>CATEGORIA</b></label>
+									<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="categoria" name="categoria">
+									  <option selected value="">Seleccionar</option>
+									 
+									</select>
+				    			</div>
+							</div>
+							<div class="row mt-1">
+				    			<div class="col-md-12">
+									<label for="gradoacademico" class=""><b>MODALIDAD</b></label>
+											<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="modalidad" name="modalidad"> 
+											  <option selected value="">Seleccionar</option>
+											  <option  value="p">PRESENCIAL</option>
+											  <option  value="sm">SEMI PRESENCIAL</option>
+											  <option  value="v">VIRTUAL</option>
+											 
+											</select>
+				    			</div>
+							</div>
+							
+							<div class="row mt-1">
+								<div class="col-md-12 input_group_cata">
+								
+									<label for="exampleFormControlInput1" class="label_cata">Celular</label>
+									<input placeholder="Celular" class="input_cata form-control fg-input data-per field_css"
+											name="celular" type="number" required="required" readonly="readonly">
+									
+
+								</div>
+							</div>
+							<div class="row mt-1">
+								<div class="col-md-12 input_group_cata">
+									
+								  <label for="exampleFormControlInput1" class="label_cata">F.Emision</label>		
+								  <input placeholder="Ingrese Fecha Emision" class="input_cata fg-input data-per field_css"
+													name="fechaemision" type="date" required="required" id="fechaemision"
+												    value="" readonly="readonly">
+								
+
+								</div>
+							</div>
+	
+							<div class="row mt-1">
+								<div class="col-md-12 input_group_cata">
+									
+								  <label for="exampleFormControlInput1" class="label_cata">F.Expiracion</label>		
+								  <input placeholder="Ingrese Fecha Expiracion" class="input_cata fg-input data-per field_css"
+													name="fechaexpiracion" type="date" required="required" id="fechaexpiracion"
+												    value="" readonly="readonly">
+								</div>
+							</div>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<h4 class="">
+		<b>.: PARTICIPANTES :.</b>
+	</h4>
+	<div class="contenido_gestion">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="row" style="margin-bottom: 10px;">
+						<div class="col-md-2 col-xs-12">
+							<input type="text" id="js_filtro" name="" class="form-control"
+								placeholder=" Buscar..">
+						</div>
+
+						<div class="col-md-3 col-xs-12" style="text-align: right;">
+							<div class="opciones_estado"></div>
+							<div class="form-check form-check-inline">
+								<input type="radio" class="form-check-input " name="iestado" id="activos" value="1" autocomplete="off" checked>
+								<label for="activos">habilitados</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input type="radio" class="form-check-input" name="iestado"
+										id="inactivo" value="0" autocomplete="off"> 
+								<label for="inactivo">deshabilitados</label>
+							</div>
+						</div>
+						<div class="col-md-5 col-xs-12" style="text-align: right;">
+							<div>
+								<span class="opciones_btn_nuevo"></span> 
+								<span class="opciones_btn_eliminar"></span> 
+								<span class="opciones_btn_habilitar"></span>
+								<span class="opciones_btn_certificado">
+									<button id="btnCertificado" class="btn btn-secondary waves-effect btn-sm " style="margin: 0 2px;" onclick="funcSavePlanillaCertificado()" data-mdb-ripple-init>AGREGAR CERTIFICADO</button>
+								</span>
+								<span class="opciones_btn_qr">
+									<button id="btnHabilitarQr" class="btn btn-secondary waves-effect btn-sm" style="margin: 0 2px;" onclick="funcRenovarQr()" data-mdb-ripple-init>PARTICIPANTES</button>
+								</span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 table-responsive">
+<!-- 					<table id="table" class="table  table-hover table-bordered  table-sm " style="width: 100%; background: white;"> -->
+					<table id="table" class="table align-middle mb-0 bg-white" style="width: 100%; background: white;">
+						<thead class="bg-light">
+							<tr>
+<!-- 								<th width="">LOGO </th> -->
+								<th>CI</th>
+								<th>NOMBRE COMPLETO</th>
+<!-- 								<th>CANT.CURSOS</th> -->
+								<th>CORREO</th>
+								<th>CELULAR</th>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="card">
+
+		<div class="card-body">
+			<div class="card-title text-center subscribe">
+
+				<button type="button" class="btn_3d_success" >Mostrar Cursos</button>
+
+			</div>
+			<h5 class="">
+				<b>.: CURSOS DEL PARTICIPANTE:.</b>
+			</h5>
+			<div class="row">
+				<div class="col-md-3 col-xs-12">
+					<input type="text" id="js_filtro_curso_detalle" name=""
+						class="form-control" placeholder="Buscar por nombre ..">
+				</div>
+				<div class="col-md-2 col-xs-12">
+					<select class="form-select "
+						aria-label=".form-select-sm example" id="scategoriacurso"
+						name="scategoriacurso">
+						<option selected="" value="">Categoria</option>
+
+					</select>
+
+				</div>
+				
+				<div class="col-md-4 col-xs-12" style="">
+					<div class="opciones_estado"></div>
+					<div class="form-check form-check-inline">
+						<input type="radio" class="form-check-input "
+							name="iestado_curso" id="activos_curso" value="1"
+							autocomplete="off" checked> <label
+							for="activos_curso">habilitados</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input type="radio" class="form-check-input"
+							name="iestado_curso" id="inactivos_curso" value="0"
+							autocomplete="off"> <label for="inactivos_curso">deshabilitados</label>
+					</div>
+				</div>
+			 </div>
+		
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		
+	$(document).ready(function() {
+    });
+		var GOPCION=""
+// 		var result=Get_Opciones(null);
+		var GID=""
+		var GSEARCH=""
+		var GESTADO='';
+		var DTtable=''
+		var nameEntity="../RestParticipantes"
+// 		var nameEntity1="../RestCategorias"
+// 		var nameEntity2="../RestExpositores"
+		var nameEntity1="../RestGradosAcademicos"
+		var nameEntity2="../RestProfesiones" 
+		var nameEntity3="../RestDepartamentos"
+		var nameEntity4="../RestProvincias"
+
+// 		let G_JSON_ENTITY=null;
+// 		let G_JSON_PERSONA_ENTITY=null;
+
+// 		let G_ARRAY_EMPRESA=null;
+// 		let G_JSON_EMPRESA=null;
+
+		if (typeof G_JSON_ENTITY === 'undefined') {
+		    let G_JSON_ENTITY = null;
+		    // Aqu� puedes inicializar G_JSON_ENTITY como necesites
+		}
+		if (typeof G_JSON_PERSONA_ENTITY === 'undefined') {
+		    let G_JSON_PERSONA_ENTITY = null;
+		    // Aqu� puedes inicializar G_JSON_ENTITY como necesites
+		}
+// 	    function ExisteOpcion(opc){
+// 	        var resultado=false;
+// 	        for (var i = 0; i < result.AccionesUser.length; i++) {
+// 	            if(result.AccionesUser[i].codigo==opc){
+// 	                resultado=true;         
+// 	            }
+// 	        }          
+// 	        return resultado;
+// 	    }
+
+		// Función para calcular la edad a partir de la fecha de nacimiento
+		function calcularEdad(fechaNacimiento) {
+		    var hoy = new Date();
+		    var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+		    var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+		    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+		        edad--;
+		    }
+		    return edad;
+		}
+		
+		// Evento para el campo de entrada de fecha de nacimiento
+		document.querySelector('#formulario input[name="fechanacimiento"]').addEventListener('input', function() {
+		    var fechaNacimiento = new Date(this.value); // Obtener fecha de nacimiento del campo
+		    var edad = calcularEdad(fechaNacimiento); // Calcular la edad
+		    document.getElementById('edad').value = edad; // Mostrar la edad en un campo de texto
+		});
+
+		var xhr = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+  		xhr.open('GET', nameEntity1 );//abre una solicitud GET y hacia la direccion establecida
+  		xhr.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+  		xhr.onload = function() {//cuando se complete la solicitud de manera exitosa
+   		  if (xhr.status === 200) {//se verifica el estado de la respuesta
+   		    var data = xhr.response;//se asigna la respuesta
+   		    // Hacer algo con el resultado aqu�
+ 		     console.log("GRADOS ACADEMICOS:",data);
+	   		 data.forEach(function(item) {
+	   		    if (item.estado == 1) {
+	   		        var option = document.createElement('option');
+	   		        option.value = item.id;
+	   		        option.textContent = item.nombre;
+// 	   		        document.getElementById('gradoacademico').appendChild(option);
+	                var select1 = document.querySelector('#formulario select[name="gradoacademico"]');
+	                if (select1) {
+	                    select1.appendChild(option);
+	                }
+	   		    }
+	   		});
+   		  }
+   		};
+   		xhr.send();
+		
+   		
+  		
+		var xhr1 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+  		xhr1.open('GET', nameEntity2 );//abre una solicitud GET y hacia la direccion establecida
+  		xhr1.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+  		xhr1.onload = function() {//cuando se complete la solicitud de manera exitosa
+   		  if (xhr1.status === 200) {//se verifica el estado de la respuesta
+   		    var data = xhr1.response;//se asigna la respuesta
+   		    // Hacer algo con el resultado aqu�
+ 		     console.log("PROFESIONES:",data);
+	   		 data.forEach(function(item) {
+	   		    if (item.estado == 1) {
+	   		        var option = document.createElement('option');
+	   		        option.value = item.id;
+	   		        option.textContent = item.nombre;
+// 	   		        document.getElementById('profesion').appendChild(option);
+	                var select2 = document.querySelector('#formulario select[name="profesion"]');
+	                if (select2) {
+	                    select2.appendChild(option);
+	                }
+	   		    }
+	   		});
+   		  }
+   		};
+   		xhr1.send();
+   		
+		var xhr3 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+  		xhr3.open('GET', nameEntity3 );//abre una solicitud GET y hacia la direccion establecida
+  		xhr3.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+  		xhr3.onload = function() {//cuando se complete la solicitud de manera exitosa
+   		  if (xhr3.status === 200) {//se verifica el estado de la respuesta
+   		    var data = xhr3.response;//se asigna la respuesta
+   		    // Hacer algo con el resultado aqu�
+ 		     console.log("DEPARTAMENTOS:",data);
+	   		 data.forEach(function(item) {
+	   		    if (item.estado == 1) {
+	   		        var option = document.createElement('option');
+	   		        option.value = item.id;
+	   		        option.textContent = item.nombre;
+// 	   		        document.getElementById('departamento').appendChild(option);
+	                var select3 = document.querySelector('#formulario select[name="departamento"]');
+	                if (select3) {
+	                    select3.appendChild(option);
+	                }
+	   		    }
+	   		});
+   		  }
+   		};
+   		xhr3.send();
+   		
+/*
+		var xhr = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+  		xhr.open('GET', nameEntity1);//abre una solicitud GET y hacia la direccion establecida
+  		xhr.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+  		xhr.onload = function() {//cuando se complete la solicitud de manera exitosa
+   		  if (xhr.status === 200) {//se verifica el estado de la respuesta
+   		    var data = xhr.response;//se asigna la respuesta
+   		    // Hacer algo con el resultado aqu�
+//  		     console.log(":",data);
+	   		 data.forEach(function(item) {
+// 	   			console.log('CATEGORIA:',item)
+	   		    if (item.estado == 1) {
+	   		        var option = document.createElement('option');
+	   		        option.value = item.id;
+	   		        option.textContent = item.nombre;
+	   		    	option.setAttribute('data-abr', item.abreviatura); 
+	   		    	
+	   		        var option2 = document.createElement('option');
+	   		        option2.value = item.id;
+	   		        option2.textContent = item.nombre;
+	   		    	option2.setAttribute('data-abr', item.abreviatura); 
+    				// Encontrar el <select> dentro del formulario y agregar el <option>
+	                var select1 = document.querySelector('#formulario select[name="categoria"]');
+	                if (select1) {
+	                    select1.appendChild(option);
+	                }
+	                var select2 = document.querySelector('#formulario2 select[name="categoria"]');
+	                if (select2) {
+	                    select2.appendChild(option2);
+	                }
+	   		    }
+	   		});
+   		  }
+   		};
+   		xhr.send();
+   		
+   		*/
+   		$('#formulario').find('select[name="expositores"]').chosen({
+   			width: '100%',
+  		    no_results_text: 'No se encontraron resultados',
+   	        placeholder_text_multiple: 'Seleccionar expositores',
+   	        placeholder_text_single: 'Selecciona una opción',
+   	        search_contains: true
+   		});
+   		$('#formulario2').find('select[name="expositores"]').chosen({
+   			width: '100%',
+  		    no_results_text: 'No se encontraron resultados',
+   	        placeholder_text_multiple: 'Seleccionar expositores',
+   	        placeholder_text_single: 'Selecciona una opción',
+   	        search_contains: true
+   		});
+   		
+   		/*
+		var xhr1 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+  		xhr1.open('GET', nameEntity2 );//abre una solicitud GET y hacia la direccion establecida
+  		xhr1.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+  		xhr1.onload = function() {//cuando se complete la solicitud de manera exitosa
+   		  if (xhr1.status === 200) {//se verifica el estado de la respuesta
+   		    var data = xhr1.response;//se asigna la respuesta
+   		    // Hacer algo con el resultado aqu�
+//  		     console.log("expositores:",data);
+	   		 data.forEach(function(item) {
+	   		    if (item.estado == 1) {
+	   		        var option = document.createElement('option');
+	   		        option.value = item.id;
+	   		        option.textContent = ' CI : [' +item.persona.ci +' ] - EXPOSITOR : [ ' + item.persona.nombrecompleto+ ' ]';
+// 	   		        document.getElementById('expositores').appendChild(option);
+	   		    	var option2 = document.createElement('option');
+	   		        option2.value = item.id;
+	   		        option2.textContent = ' CI : [' +item.persona.ci +' ] - EXPOSITOR : [ ' + item.persona.nombrecompleto+ ' ]';
+// 	   		            
+	   		     	var select_expositores1 = document.querySelector('#formulario select[name="expositores"]');
+	   		     	var select_expositores2 = document.querySelector('#formulario2 select[name="expositores"]');
+	               
+	   		     	if (select_expositores1) {
+// 	                	console.log('option-select:',option)
+	                	select_expositores1.appendChild(option);
+	                }
+	                if (select_expositores2) {
+// 	                	console.log('option-select2:',option2)
+	                	select_expositores2.appendChild(option2);
+	                }
+	   		        
+	                var arrayChosen=[];
+
+                    // Establece los valores seleccionados
+                    Array.from(select_expositores1.options).forEach(function(option) {
+                        option.selected = arrayChosen.includes(option.value);
+                    });	
+	                var arrayChosen2=[];
+                    Array.from(select_expositores2.options).forEach(function(option2) {
+                        option2.selected = arrayChosen2.includes(option2.value);
+                    });	
+	   				$('#formulario').find('select[name="expositores"]').trigger('chosen:updated');
+	   				$('#formulario2').find('select[name="expositores"]').trigger('chosen:updated');
+	   		        
+// 	   		    	 $('select[name="expositores"]').chosen({ width: '100%' });
+	   		    	 
+	   		    }
+	   		});
+   		  }
+   		};
+   		xhr1.send();
+   		*/
+   		
+		$('#formulario').find('input[name="logo"]').fileinput({
+		  	language:'es',
+		    showUpload: false, // Ocultar el botÃ³n de carga
+		    showRemove: true, 
+            showCaption: true,
+            showCancel: true,
+            previewFileType: 'any'
+		});
+		
+		$('#formulario2').find('input[name="certificado_imagen"]').fileinput({
+		  	language:'es',
+		    showUpload: false, // Ocultar el botÃ³n de carga
+		    showRemove: true, 
+            showCaption: true,
+            showCancel: true,
+            previewFileType: 'any'
+		});
+		
+
+
+	      
+		GSEARCH=$('#js_filtro').val()
+		GESTADO=$('input[name="iestado"]:checked').val();
+		
+		
+// 		listarTable()
+		$('#js_filtro').on('keyup',function(){
+			GSEARCH=$(this).val()
+// 			console.log(GSEARCH)
+
+		})
+		
+        
+		
+
+        $('input[name="iestado"]').on('change',function(){
+        	GESTADO=$('input[name="iestado"]:checked').val();
+        	GSEARCH=$('#js_filtro').val()
+        	setButtonCrud(GESTADO)
+        	GDATO="";//para que al momento de eliminar o habilitar se tenga que seleccionar un registro de la tabla
+        	$('#table').dataTable().fnDraw('page');
+        })
+
+        
+		document.getElementById("categoria").addEventListener("change", function() {
+		    // Código a ejecutar cuando el valor del elemento con id "categoria" cambia
+		    let val_idcat;
+		    let idcat = this.value;
+		    let categoria_abriatura = this.options[this.selectedIndex].getAttribute('data-abr');
+		    if (isNaN(idcat)) {
+		        val_idcat = idcat;
+		    } else {
+		        val_idcat = idcat;
+		    }
+		
+		    var xhr = new XMLHttpRequest();
+		    xhr.open('GET', nameEntity + '/getTotCursoPorCategoria/' + val_idcat);
+		    xhr.responseType = 'json';
+		
+		    xhr.onload = function() {
+		        if (xhr.status === 200) {
+		            var result2 = xhr.response;
+		            console.log('getTotCursoPorCategoria:', result2);
+		            
+		            
+		            let NRO_DOCUMENTO = 'AL' + '-' +categoria_abriatura + '-' + result2;
+               	    if(GOPCION=="ADD"){
+    		            // Asignar valor a inputs con name="nrodocumentom" y name="nrodocumento"
+    		            document.getElementById('formulario').querySelector('input[name="codigo"]').value = result2; 
+    		            var formulario = document.getElementById('formulario');
+    		            var inputs = formulario.querySelectorAll('input[name="nrodocumentom"], input[name="nrodocumento"]');
+    		            inputs.forEach(function(input) {
+    		                input.value = NRO_DOCUMENTO;
+    		            });
+            	    }else  if(GOPCION=="EDIT"){
+            	    	var idcategoria_m_value_edit = document.getElementById('formulario').querySelector('input[name="idcategoria_m"]').value;
+            	    	var codigo_m_value_edit = document.getElementById('formulario').querySelector('input[name="codigom"]').value;
+            	    	var nrodocumento_m_value_edit = document.getElementById('formulario').querySelector('input[name="idcategoria_m"]').getAttribute('data-nrodocumento');
+
+
+            	    	if (idcategoria_m_value_edit!=val_idcat) {
+							//si se esta seleccionando una categoria diferente a la que estaba al modificar, ahi si se cambia el nrodocumento y codigo
+	    		            document.getElementById('formulario').querySelector('input[name="codigo"]').value = result2; 
+	    		            
+	    		            var formulario = document.getElementById('formulario');
+	    		            var inputs = formulario.querySelectorAll('input[name="nrodocumentom"], input[name="nrodocumento"]');
+	    		            inputs.forEach(function(input) {
+	    		                input.value = NRO_DOCUMENTO;
+	    		            });
+						}else{
+							document.getElementById('formulario').querySelector('input[name="codigo"]').value = codigo_m_value_edit; 
+							document.getElementById('formulario').querySelector('input[name="codigom"]').value = codigo_m_value_edit; 
+				            var formulario = document.getElementById('formulario');
+	    		            var inputs = formulario.querySelectorAll('input[name="nrodocumentom"], input[name="nrodocumento"]');
+	    		            inputs.forEach(function(input) {
+	    		                input.value = nrodocumento_m_value_edit;
+	    		            });
+						}
+            	    }
+
+		        }
+		    };
+		
+		    xhr.send();
+		});
+
+        
+        
+        
+        
+        DTtable=$('#table').DataTable({
+            "oLanguage": {
+                     "sUrl": "../js/Spanish.lang"
+
+            }
+        ,
+            "dom":'rt<button>ip',
+            "pageLength":5,
+             responsive:true,
+            "processing": true,
+            "serverSide": true, 
+            
+            "ajax": {
+            "type": "GET",
+              "url": nameEntity+""+"/listar",
+          	"data": function ( d ) {
+                    d.estado = GESTADO
+                    // d.estado = 1;
+                    // filtro:filtro
+             }
+            }
+            ,
+            "columns": [
+//                 { "data": "id" },
+                { "data": "id" },
+                { "data": "id" },
+//                 { "data": "id" },
+                { "data": "id" },
+                { "data": "id" }
+//                 { "data": "id" }
+      		]
+            ,
+            "createdRow":function(row,data,index){
+                console.log("DATA:",data)
+            	/*
+                $('td',row).eq(0).html(
+            			`
+            			<div style="">
+							<a href="../participanteslogos/${data.imagen}" th:href="@{/participanteslogos/${data.imagen}}" data-fancybox>
+								<img src="../participanteslogos/${data.imagen}" th:src="@{/participanteslogos/${data.imagen}}" alt="" class="img-thumbnail" style="width:50px;height:50px;">	
+							</a>
+						</div>
+            			`
+            			+""+`<input type="hidden" value="${data.id}" class="idhidden">`
+            	).addClass('text-center');
+
+				*/
+                $('td',row).eq(0).html(data.persona.ci+""+`<input type="hidden" value="${data.id}" class="idhidden">`).addClass('text-center');
+                $('td',row).eq(1).html(data.persona.nombrecompleto).addClass('text-center');
+//                 $('td',row).eq(2).html(data.cantidad_cursos).addClass('text-center');
+                $('td',row).eq(2).html(data.persona.email).addClass('text-center');
+                $('td',row).eq(3).html(data.persona.celular).addClass('text-center');
+
+                /*
+				let destado=''
+				if (data.estado==1) {
+					destado='<span class="badge rounded-pill bg-opacity-25  bg-success bg-gradient text-success" style="">HABILITADO</span>'
+				}else{
+					destado='<span class="badge rounded-pill bg-opacity-25  bg-warning bg-gradient text-warning " style="">DESHABILITADO</span>'
+				}
+                
+                $('td',row).eq(8).html(destado).addClass('text-center');
+  				*/
+            } 
+        
+            ,
+            "drawCallback":function(settings){
+ 	   
+                
+// //                 $('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+                
+            	$('#js_filtro').on( 'keyup', function () {
+                    DTtable.search(this.value ).draw();
+                }) 
+
+            }
+        });
+        
+		
+
+
+
+		setButtonCrud(GESTADO)
+		function setButtonCrud(estado) {
+			if (estado==1) {
+				$('.opciones_btn_habilitar').html("")
+// 		 	    if(ExisteOpcion('adicionar')){
+			        $('.opciones_btn_nuevo').html(`<button id="btnAdicionar" class="btn btn-secondary btn-md waves-effect btn-sm" onclick="funtNewFormModal()" style="margin: 0 2px;">Nuevo</button>`)  
+// 			    }
+
+			}else{
+// 			    if(ExisteOpcion('habilitar')){
+			    	$('.opciones_btn_nuevo').html('')
+			    	$('.opciones_btn_eliminar').html('')
+			        $('.opciones_btn_habilitar').html(`<button id="btnHabilitar" class="btn btn-secondary  btn-sm waves-effect btn" style="margin: 0 2px;" onclick="funtUpdateRow()">Habilitar</button>`)  
+// 			    }
+			}
+		}
+		
+		
+	  //INICIO QUERY PRINCIPAL
+
+			
+			//eventos
+			var GDATO="";
+			//click en la tabla
+			$('#table tbody').on( 'click dblclick', 'tr', function (e) {
+				let G_JSON_ENTITY=new Object();
+				if(e.type=='dblclick'){//mostramos el modal para el CRUD
+// 					console.log($(this).find("td:eq(1)").text());
+					
+					addDisabledForm()
+					opcionesCrudModal();
+					getEntityId()
+
+					
+					
+					
+					
+					
+	          		$('#modalAdicionar').modal('show');
+				}
+				
+// 				console.log("GESTADO:",GESTADO)
+// 				console.log('event?? ', e);
+				var row = $(this).closest('tr');
+// 				console.log('row:',row);
+				var idr = parseInt(row.find('.idhidden').val(), 10);
+// 				console.log('idr:',idr);
+          		 if ( $(this).hasClass('selected') ) {
+                       $(this).removeClass('selected');
+                       GDATO=""
+                  }
+                  else {
+                      $('#table tr.selected').removeClass('selected');
+                      $(this).addClass('selected');
+                      
+           	          	 GDATO=$(this).find("td:eq(0)").text();
+//                    console.log('GDATO:',GDATO);
+                      
+                  }
+
+				GID=idr
+// 				console.log('GID:',GID);
+			})
+			
+
+			function JsonDataForm() {
+				var serialized = $('#formulario').serializeArray();
+		        var s = '';
+		        var data = new Object();
+				data.celular=$("input[name='celular']").val();
+				data.ci=$("input[name='ci']").val();
+				data.email=$("input[name='email']").val();
+				var estado_data=parseInt($("input[name='estado']").val());
+// 				console.log('estado_data:',estado_data)
+				data.estado=1;
+				data.id=null;
+				data.nombrecompleto=$("input[name='nombrecompleto']").val();
+				data.password=$("input[name='password']").val();
+				
+
+		        return data;
+			}
+
+			
+			function funtNewFormModal() {
+				$('.field_css').removeAttr('disabled') 
+				opcionesNuevo()
+				getEntityIdNew()
+
+       			$('#modalAdicionar').modal('show');
+			}
+			function funtDeleteRow() {
+				if (GDATO!="" ) {
+					updateStatusEntity(1)//si quiero dar de baja pongo 1
+				}else{
+					alert("!seleccione un registro de la lista para eliminar el registro!")
+				}
+			}
+			function funtUpdateRow(){
+				if (GDATO!="" ) {
+					updateStatusEntity(0)//si quiero dar de baja pongo 0
+				}else{
+					alert("!seleccione un registro de la lista para habilitar el registro!")
+				}
+			}
+
+			function funcSavePlanillaCertificado() {
+			    // Resetea el formulario
+			    $('#formulario2')[0].reset();
+			    let G_JSON_ENTITY = new Object();
+
+			    $('.roles_sistema').html('')
+
+			    // Elimina la selección previa en los selects
+			    let elem_gradoacademico = document.getElementById("categoria").getElementsByTagName("option");
+			    for (var i = 0; i < elem_gradoacademico.length; i++) {
+			        elem_gradoacademico[i].removeAttribute("selected");
+			    }
+			    let elem_modalidad = document.getElementById("modalidad").getElementsByTagName("option");
+			    for (var i = 0; i < elem_modalidad.length; i++) {
+			        elem_modalidad[i].removeAttribute("selected");
+			    }
+			    let elem_nivel = document.getElementById("nivel").getElementsByTagName("option");
+			    for (var i = 0; i < elem_nivel.length; i++) {
+			        elem_nivel[i].removeAttribute("selected");
+			    }
+
+			    // Selecciona los expositores
+			    var arrayChosen = [];
+			    var select = document.querySelector('#formulario2 select[name="expositores"]');
+
+			    Array.from(select.options).forEach(function (option) {
+			    	option.selected = arrayChosen.includes(parseInt(option.value));
+			    });
+
+			    // Si jQuery Chosen está siendo utilizado, actualiza su UI
+			    $('#formulario2').find('select[name="expositores"]').trigger('chosen:updated');
+
+			    if (GDATO != "") {
+			        $.get(nameEntity + '/' + GID, function (data) {
+			            console.log('datos a modificar planilla:', data)
+			            G_JSON_ENTITY = data;
+			            $('#formulario2').find('input[name="id"]').val(data.id);
+			            $('#formulario2').find('input[name="codigo"]').val(data.codigo);
+			            $('#formulario2').find('input[name="codigom"]').val(data.codigo);
+			            $('#formulario2').find('input[name="nrodocumentom"]').val(data.nrodocumento);
+			            $('#formulario2').find('input[name="nrodocumento"]').val(data.nrodocumento);
+			            $('#formulario2').find('input[name="nombrecurso"]').val(data.nombrecurso);
+			            $('#formulario2').find('input[name="fechainicial"]').val(data.fechainicial);
+			            $('#formulario2').find('input[name="fechafinal"]').val(data.fechafinal);
+			            $('#formulario2').find('input[name="hora"]').val(data.hora);
+			            $('#formulario2').find('input[name="linkgrupo"]').val(data.linkgrupo);
+
+			            $('#formulario2').find('input[name="idcategoria_m"]').val(data.categoria.id).attr('data-nrodocumento', data.nrodocumento);
+
+			            // Selecciona la categoría
+			            document.querySelectorAll("#categoria > option").forEach(function (option) {
+			                if (option.value == data.categoria.id) {
+			                    option.selected = true;
+			                }
+			            });
+
+			            // Selecciona la modalidad
+			            document.querySelectorAll("#modalidad > option").forEach(function (option) {
+			                if (option.value == data.modalidad) {
+			                    option.selected = true;
+			                }
+			            });
+
+			            // Selecciona el nivel
+			            document.querySelectorAll("#nivel > option").forEach(function (option) {
+			                if (option.value == data.nivel) {
+			                    option.selected = true;
+			                }
+			            });
+
+			            // Selecciona los expositores
+			            arrayChosen = data.expositores.map(function (item) { return item.id; });
+			            console.log('array_plamtailla_2: ', arrayChosen);
+			            var select_expositores = document.querySelector('#formulario2 select[name="expositores"]');
+
+			            // Depuración: Verifica las opciones del select y arrayChosen
+			            console.log('Select options:', Array.from(select_expositores.options).map(opt => opt.value));
+			            console.log('ArrayChosen:', arrayChosen);
+
+			            Array.from(select_expositores.options).forEach(function (option) {
+			            	if (arrayChosen.includes(parseInt(option.value))) {
+			                    option.selected = true;
+			                } else {
+			                    option.selected = false;
+			                }
+			                console.log(`Option value: ${option.value}, Selected: ${option.selected}`); // Depuración
+			            });
+
+			            // Si jQuery Chosen está siendo utilizado, actualiza su UI
+			            $('#formulario2').find('select[name="expositores"]').trigger('chosen:updated');
+			            
+			            
+	  	                
+	  	                
+  	    			    var xhr1 = new XMLHttpRequest();
+  	    			    let nombrelogodefecto=data.imagencertificado;
+  	    			    xhr1.open("GET", "../plantillas/"+nombrelogodefecto);
+  	    			    xhr1.responseType = "blob";
+  	    			    xhr1.onload = function() {
+  	    			        var blob = xhr1.response;
+  	    			        var file = new File([blob], nombrelogodefecto);
+  	    			        var inputFile = document.getElementById('certificado_imagen');
+  	    			        var fileList = new DataTransfer();
+  	    			        fileList.items.add(file);
+  	    			        inputFile.files = fileList.files;
+  	    			        inputFile.title = nombrelogodefecto;
+  	    			    };
+  	    			    xhr1.send();
+  	    				
+  	    				$('#formulario2').find('input[name="certificado_imagen"]').fileinput('destroy');
+  	    				
+  	    				
+  	    				$('#formulario2').find('input[name="certificado_imagen"]').fileinput({
+  	    				  	language:'es',
+  	    				    showUpload: false, // Ocultar el botÃ³n de carga
+  	    				    showRemove: true, 
+  	                        showCaption: true,
+  	                        showCancel: true,
+//  	    		 		  	 ,maxImageWidth: 300 // Ancho mï¿½ximo de la imagen previa en pï¿½xeles
+//  	    		 		     ,maxImageHeight: 300 
+  	    				    initialPreview: [
+  	    				        `<img src="../plantillas/${nombrelogodefecto}" class="file-preview-image" alt="Vista previa" title="${nombrelogodefecto}">`
+  	    				    ],
+  	    				    initialPreviewConfig: [
+  	    				        {
+  	    				            caption: nombrelogodefecto, // Texto que aparecerÃ¡ debajo de la imagen en la vista previa
+  	    				            width: '200px', // Ancho de la imagen en la vista previa
+  	    				            url: '/', // URL opcional para el enlace de eliminaciÃ³n (en este caso, se establece como '#')
+  	    				            key: 1 // Clave Ãºnica para el elemento de vista previa
+  	    				        }
+  	    				    ],
+  	    				    fileActionSettings: {
+  	    				        removeIcon: '', // Vaciar el icono del botÃ³n de eliminar
+  	    				        removeClass: 'hide-remove', // Aplicar una clase para ocultar el botÃ³n de eliminar
+  	    				        removeTitle: '', // Vaciar el tÃ­tulo del botÃ³n de eliminar
+  	    				    },
+//  	     				    browseTitle: 'Mi titulo personalizado',
+//  	     				    browseLabel: 'Seleccionar archivo',
+  	    		    		initialCaption: nombrelogodefecto //para poner el nombre en la caja del file
+
+  	    				});
+  	    			    
+
+			        }, 'json');
+			        opcionesPlantillaForm()
+			        $('#modalPlantilla').modal('show');
+			    } else {
+			        alert("¡Seleccione un registro para seleccionar catálogos!");
+			    }
+			}
+
+			
+			function funcRenovarQr() {
+//				 $('#formulario2')[0].reset();
+//			let G_JSON_ENTITY=new Object();
+				if (GDATO!="" ) {
+					$.get(nameEntity+'/'+GID, function(data) {
+	//    				console.log('DATOS A MODIFICAR:',data)
+						G_JSON_ENTITY=data;
+	   				
+	//					console.log("G_JSON_ENTITY_MMODIFICAR_CATALOGO :",data)
+	//		  			$('#formulario3').loadJSON(data);
+			  			$('#formulario3').find('input[name="id"]').val(data.id);
+			  			$('#formulario3').find('input[name="codigo"]').val(data.codigo);
+			  			$('#formulario3').find('input[name="ci"]').val(data.persona.ci);
+			  			$('#formulario3').find('input[name="matricula"]').val(data.matricula);
+			  			$('#formulario3').find('input[name="nombresocio"]').val(data.nombresocio);
+			  			$('#formulario3').find('input[name="celular"]').val(data.persona.celular);
+			  			$('#formulario3').find('input[name="fechaemision"]').val(data.fechaemision);
+			  			$('#formulario3').find('input[name="fechaexpiracion"]').val(data.fechaexpiracion);
+			  			$('#formulario3').find('.renovar-rq-socio').html(`
+			  					<a href="../qrcodes/${data.nrodocumento}.png" th:href="@{/qrcodes/${data.nrodocumento}.png}" data-fancybox="">
+								<img src="../qrcodes/${data.nrodocumento}.png" th:src="@{/qrcodes/${data.nrodocumento}.png}" alt="" class="img-thumbnail w-100">	
+								</a>
+			  					
+			  					
+	  					`);
+						
+	                      
+			  		  	
+			  			
+			        }, 'json');
+					opcionesRenovarQrForm()
+		      		$('#modalRenovarQr').modal('show');
+				}else{
+					alert("!SELECCIONE UN REGISTRO DE LA LISTA PARA RENOVAR QR!")
+				}
+	
+			}
+		
+			
+			
+			$('#btnEditar').click(function(){
+// 				console.log(GDATO)
+				if (GDATO!="" ) {
+					opcionesEditarForm()
+					getEntityId()
+					removeDisabledForm()
+	       			$('#modalAdicionar').modal('show');
+				}else{
+					alert("!seleccione un registro de la lista para editar!")
+				}
+				
+			})
+			function addDisabledForm() {
+				
+				$('body .field_css').attr('disabled', 'disabled');
+			}
+			function removeDisabledForm() {
+				
+				$('.field_css').removeAttr('disabled');
+			}
+			function addActionform(action) {
+				$('#formulario').removeAttr("action")
+				$('#formulario').attr("action",action)
+				
+			}
+			function addActionformEmpresa(action) {
+				$('#formulario2').removeAttr("action")
+				$('#formulario2').attr("action",action)
+				
+			}
+			function addActionformQr(action) {
+				$('#formulario3').removeAttr("action")
+				$('#formulario3').attr("action",action)
+				
+			}
+			function addPutForm(value) {
+				$('#formulario #div_put').html("")
+				
+				if(value!== undefined){
+				//+console.log("value",value)
+					$('#formulario #div_put').html(`<input type="hidden" name="_method" value="PUT">`)
+				}
+			}
+			
+			function nuevo() {
+				opcionesNuevo()
+				getEntityIdNew()
+				removeDisabledForm()
+			}
+			function editar() {
+				opcionesEditarForm()
+				getEntityId()
+                removeDisabledForm()
+			}
+			function eliminar() {
+				updateStatusEntity(1)
+
+			}
+			function opcionesNuevo() {
+				GOPCION="ADD"
+					$('.opciones_btn_modal').html('')
+                $('.opciones_btn_modal').html(`<button id="btnGuardar_modal" type="submit"  class="btn btn-secondary  waves-effect btn-sm" style="margin: 0 2px;">Guardar</button>`)  
+       	        $('.opciones_btn_modal').append(`<button id="btnCancelar_modal"  type="button"  data-bs-dismiss="modal" aria-label="Close" class="btn btn-light waves-effect btn-sm" style="margin: 0 2px;">Cancelar</button>`)  
+                addActionform(nameEntity)
+//        	        $('#formulario').data('formValidation').resetForm(true);
+                $('#formulario')[0].reset();
+			}
+			function opcionesEditarForm() {
+				GOPCION="EDIT"
+					$('.opciones_btn_modal').html('')
+                $('.opciones_btn_modal').html(`<button id="btnGuardar_modal" type="submit"  class="btn btn-secondary waves-effect btn-sm" style="margin: 0 2px;">Guardar</button>`)  
+       	        $('.opciones_btn_modal').append(`<button id="btnCancelar_modal"  type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-light waves-effect btn-sm" style="margin: 0 2px;">Cancelar</button>`)  
+                addActionform(nameEntity)
+//        	        $('#formulario').data('formValidation').resetForm(true);
+                $('#formulario')[0].reset();
+      
+			}
+			function opcionesPlantillaForm() {
+				GOPCION="PLANTILLA"
+				$('.opciones_btn_modal2').html('')
+                $('.opciones_btn_modal2').html(`<button id="btnGuardar_modal" type="submit"  class="btn btn-success  btn-xs btn-sm waves-effect btn-sm" style="margin: 0 2px;">Guardar</button>`)  
+       	        $('.opciones_btn_modal2').append(`<button id="btnCancelar_modal"  type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-danger   btn-xs btn-sm waves-effect btn-sm" style="margin: 0 2px;">Cancelar</button>`)  
+                addActionformEmpresa(nameEntity)
+//        	        $('#formulario').data('formValidation').resetForm(true);
+                $('#formulario2')[0].reset();
+      
+			}
+			function opcionesRenovarQrForm() {
+				GOPCION="QR"
+				$('.opciones_btn_modal3').html('')
+                $('.opciones_btn_modal3').html(`<button id="btnGuardar_modal" type="submit"  class="btn btn-success  btn-xs btn-sm waves-effect btn-sm" style="margin: 0 2px;">Renovar</button>`)  
+       	        $('.opciones_btn_modal3').append(`<button id="btnCancelar_modal"  type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-danger   btn-xs btn-sm waves-effect btn-sm" style="margin: 0 2px;">Cancelar</button>`)  
+                addActionformQr(nameEntity)
+//        	        $('#formulario').data('formValidation').resetForm(true);
+                $('#formulario3')[0].reset();
+      
+			}
+			function getEntityId() {
+//                 console.log('pedir roles mod')
+            	var check=""
+            	
+            	let elem_exp = document.getElementById("exp").getElementsByTagName("option");
+			    for(var i = 0; i < elem_exp.length; i++) {
+			    	elem_exp[i].removeAttribute("selected");
+			    } 
+           	    let elem_genero = document.getElementById("genero").getElementsByTagName("option");
+   			    for(var i = 0; i < elem_genero.length; i++) {
+   			    	elem_genero[i].removeAttribute("selected");
+   			    }  	
+   	      	    let elem_gradoacademico = document.getElementById("gradoacademico").getElementsByTagName("option");
+			    for(var i = 0; i < elem_gradoacademico.length; i++) {
+			    	elem_gradoacademico[i].removeAttribute("selected");
+			    }  	
+			    
+          	    let elem_profesion = document.getElementById("profesion").getElementsByTagName("option");
+			    for(var i = 0; i < elem_profesion.length; i++) {
+			    	elem_profesion[i].removeAttribute("selected");
+			    }  
+			    
+          	    let elem_departamento = document.getElementById("departamento").getElementsByTagName("option");
+			    for(var i = 0; i < elem_departamento.length; i++) {
+			    	elem_departamento[i].removeAttribute("selected");
+			    }  
+
+                
+          		$.get(nameEntity+'/'+GID, function(data){
+          			console.log('datos a modificar:',data)
+					G_JSON_ENTITY=data;
+// 					console.log("G_JSON_ENTITY_MMODIFICAR :",G_JSON_ENTITY)
+//           			$('#formulario').loadJSON(data);
+          			$('#formulario').find('input[name="id"]').val(data.id);
+          			$('#formulario').find('input[name="codigo"]').val(data.codigo);
+          			$('#formulario').find('input[name="codigom"]').val(data.codigo);
+          			$('#formulario').find('input[name="ci"]').val(data.persona.ci);
+         			document.querySelectorAll("#formulario #exp > option").forEach(function(option) {
+           			    if (option.value == data.persona.exp) {
+           			        option.selected = true;
+           			    }
+           			});
+          			$('#formulario').find('input[name="nombrecompleto"]').val(data.persona.nombrecompleto);
+    				
+
+          			document.querySelectorAll("#formulario #genero > option").forEach(function(option) {
+           			    if (option.value == data.persona.genero){
+           			        option.selected = true;
+           			    }
+           			});
+    				
+          			$('#formulario').find('input[name="fechanacimiento"]').val(data.persona.fechanacimiento);
+          			$('#formulario').find('input[name="edad"]').val(data.persona.edad);
+          			
+         			document.querySelectorAll("#formulario  #gradoacademico > option").forEach(function(option) {
+           			    if (option.value == data.gradoacademico.id) {
+           			        option.selected = true;
+           			    }
+           			});
+         			document.querySelectorAll("#formulario  #profesion > option").forEach(function(option) {
+           			    if (option.value == data.profesion.id) {
+           			        option.selected = true;
+           				}
+         			});
+             		$('#formulario').find('input[name="celular"]').val(data.persona.celular); 
+          			$('#formulario').find('input[name="email"]').val(data.persona.email);
+          			
+         			document.querySelectorAll("#formulario  #departamento > option").forEach(function(option) {
+           			    if (option.value == data.departamento.id) {
+           			        option.selected = true;
+           				}
+         			});
+           			$('#formulario').find('input[name="localidad"]').val(data.localidad);
+          			$('#formulario').find('textarea[name="direccion"]').val(data.persona.direccion);
+          			
+          			
+
+          			
+         			var xhr1 = new XMLHttpRequest();
+         			let nombrelogodefecto = data.imagen; // Nombre del archivo que deseas cargar
+					console.log("nombrelogodefecto:",nombrelogodefecto)
+         			// Configura la solicitud HTTP GET al endpoint de Spring Boot
+         			xhr1.open("GET", nameEntity + "/logourl/" + nombrelogodefecto, true);
+         			xhr1.responseType = "blob"; // Especifica el tipo de respuesta como Blob
+
+         			
+//     			    var xhr1 = new XMLHttpRequest();
+//     			    let nombrelogodefecto=data.nombrelogo;
+//     			    xhr1.open("GET", nameEntity+"/logo_empresa/"+nombrelogodefecto);
+//     			    xhr1.responseType = "blob";
+    			    xhr1.onload = function() {
+    			        var blob = xhr1.response;
+    			        var file = new File([blob], nombrelogodefecto);
+    			        var inputFile = document.getElementById('logo');
+    			        var fileList = new DataTransfer();
+    			        fileList.items.add(file);
+    			        inputFile.files = fileList.files;
+    			        inputFile.title = nombrelogodefecto;
+    			    };
+    			    xhr1.send();
+    				
+    				$('#formulario').find('input[name="logo"]').fileinput('destroy');
+    				
+    				
+    				$('#formulario').find('input[name="logo"]').fileinput({
+    				  	language:'es',
+    				    showUpload: false, // Ocultar el botÃ³n de carga
+    				    showRemove: true, 
+                        showCaption: true,
+                        showCancel: true,
+//    		 		  	 ,maxImageWidth: 300 // Ancho mï¿½ximo de la imagen previa en pï¿½xeles
+//    		 		     ,maxImageHeight: 300 
+   				     	initialPreview: [
+			                `<img src="${nameEntity}/logourl/${nombrelogodefecto}" class="file-preview-image" alt="Vista previa" title="${nombrelogodefecto}">`
+			            ],
+			            initialPreviewConfig: [
+			                {
+			                    caption: nombrelogodefecto, // Texto que aparecerá debajo de la imagen en la vista previa
+			                    width: '200px', // Ancho de la imagen en la vista previa
+			                    url: '/', // URL opcional para el enlace de eliminación (en este caso, se establece como '#')
+			                    key: 1 // Clave única para el elemento de vista previa
+			                }
+			            ],
+			            fileActionSettings: {
+			                removeIcon: '', // Vaciar el icono del botón de eliminar
+			                removeClass: 'hide-remove', // Aplicar una clase para ocultar el botón de eliminar
+			                removeTitle: '', // Vaciar el título del botón de eliminar
+			            },
+			            initialCaption: nombrelogodefecto // Para poner el nombre en la caja del file
+
+    				});
+    			    
+          			
+          			
+		        }, 'json');
+			}
+			function getEntityIdNew() {
+				
+
+			}
+			
+			
+			function opcionesCrudModal() {
+				$('body').find('.opciones_btn_modal').html('')
+				
+				if(GESTADO!=0){
+					$('.opciones_btn_modal').html(`<button id="btnAdicionar_modal" type="button"  class="btn btn-secondary waves-effect btn-sm" data-mdb-ripple-init style="margin: 0 2px;" onclick="nuevo()">Nuevo</button>`)  
+	    	        
+				}
+                $('.opciones_btn_modal').append(`<button id="btnEditar_modal" type="button"  class="btn btn-secondary waves-effect btn-sm" data-mdb-ripple-init style="margin: 0 2px;" onclick="editar()">Editar</button>`)  
+    	        if(GESTADO!=0){
+    	        	$('.opciones_btn_modal').append(`<button id="btnEliminar_modal" type="button"  class="btn btn-secondary waves-effect btn-sm" data-mdb-ripple-init style="margin: 0 2px;" onclick="eliminar()">Eliminar</button>`)  
+        	        
+    	        }
+    	        $('.opciones_btn_modal').append(`<button id="btnCancelar_modal" type="button"  data-bs-dismiss="modal" aria-label="Close" class="btn btn-light waves-effect btn-sm" data-mdb-ripple-init style="margin: 0 2px;">Cancelar</button>`)  
+   	        	addActionform(nameEntity)
+//     	        $('#formulario').data('formValidation').resetForm(true);
+                $('#formulario')[0].reset();
+			}
+			
+
+
+			async function saveEntityForm1() {
+                 
+                let formData = new FormData(document.getElementById('formulario'))
+		        let selectedOptions = Array.from($('#expositores option:selected'));
+
+                 console.log("forDAta:",formData)
+// 				 let imagenform = formData.get('arte');
+                 
+             	$.ajax({
+              	   	url:nameEntity+"/guardar",
+              	    type: "POST",
+//						'contentType': "application/json",
+					contentType: false,
+					processData: false,
+//						'contentType':false,
+					data: formData,
+//	              	    'dataType': 'json',
+                     success:function(res){
+						console.log('registrado',res)
+                             $('#formulario')[0].reset();
+                             $('.modal').modal('hide')
+                      	Swal.fire({
+                             title:"Registrado",
+                             text:"Se ha registrado exitosamente",
+                             icon:"success",
+                             timer:700,   
+                             showConfirmButton: false 
+                         });   
+                        $('#table').dataTable().fnDraw('page');
+//                          }
+                     },
+                     error:function(err){
+                    	 console.log(err)
+       	 				Swal.fire({
+					    	icon:'error',
+					    	title:"Cancelado",
+	                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+	                        timer:2000,
+	                        showCancelButton:false,
+	                     	showConfirmButton:false
+					    })
+                     }
+                 })
+			}
+
+			function updateTable(id,objectMod){
+                $('#table > tbody  > tr').each(function(index, tr) {
+             	   
+	               	var row = $(this).closest('tr');
+	    			var idrow = parseInt(row.find('.idhidden').val(), 10);
+					//console.log('idrow:',idrow);
+                	if(id==idrow){
+                		$(this).find("td:eq(1)").html(objectMod.nombre);
+                	}
+               	 });
+			}
+
+			function updateEntityForm1() {
+	            
+	                let formData = new FormData(document.getElementById('formulario'))
+	                console.log("ID MOD:",GID)
+	                console.log("forDAta mod:",formData)
+
+	    	        $.ajax({
+	              	   	url:nameEntity+"/modificar/"+GID,
+	              	    type: "POST",
+//						'contentType': "application/json",
+						contentType: false,
+						processData: false,
+//						'contentType':false,
+						data: formData,
+//	              	    'dataType': 'json',
+	                     success:function(res){
+	                    	 objectMod=res
+	                         $('#formulario')[0].reset();
+	                         $('.modal').modal('hide')
+	                          Swal.fire({
+	                             title:"Registrado",
+	                             text:"Se ha modificado exitosamente",
+	                             icon:"success",
+	                             timer:700,   
+	                             showConfirmButton: false 
+	                         });  
+	                         $('#table').dataTable().fnDraw('page');
+	                     },
+	                     error:function(err){
+	                    	 console.log('error',err)
+	       	 				Swal.fire({
+						    	icon:'error',
+						    	title:"Cancelado",
+		                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+		                        timer:2000,
+		                        showCancelButton:false,
+		                     	showConfirmButton:false
+						    })
+	                     }
+	                	
+	                 })
+				}
+			function updatePlantillaCurso1() {
+	            
+                let formData = new FormData(document.getElementById('formulario2'))
+                console.log("ID MOD:",GID)
+                console.log("forDAta mod plantilla:",formData)
+
+    	        $.ajax({
+              	   	url:nameEntity+"/modificar_plantilla/"+GID,
+              	    type: "PUT",
+//					'contentType': "application/json",
+					contentType: false,
+					processData: false,
+//					'contentType':false,
+					data: formData,
+//              	    'dataType': 'json',
+                     success:function(res){
+                    	 objectMod=res
+                         $('#formulario')[0].reset();
+                         $('.modal').modal('hide')
+                          Swal.fire({
+                             title:"Registrado",
+                             text:"Se ha modificado exitosamente",
+                             icon:"success",
+                             timer:700,   
+                             showConfirmButton: false 
+                         });  
+                         $('#table').dataTable().fnDraw('page');
+                     },
+                     error:function(err){
+                    	 console.log('error',err)
+       	 				Swal.fire({
+					    	icon:'error',
+					    	title:"Cancelado",
+	                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+	                        timer:2000,
+	                        showCancelButton:false,
+	                     	showConfirmButton:false
+					    })
+                     }
+                	
+                 })
+			}
+		
+	
+			function updatePlantillaCurso() {
+//                 console.log("G_JSON_ENTITY_ANTES:",G_JSON_ENTITY)
+                
+
+                async function construirJsonEntity() {
+
+// 					G_JSON_ENTITY=new Object()
+					G_ARRAY_EMPRESAS=new Array()
+					
+					
+					G_JSON_PERSONA_ENTITY=G_JSON_ENTITY.persona
+					
+					let id = $('#formulario2').find('input[name="id"]').val();
+				    G_JSON_ENTITY.id = id ? id : 0;
+					let codigo= $('#formulario2').find('input[name="codigo"]').val();
+				    G_JSON_ENTITY.codigo = codigo ? codigo : 0;
+				    
+				    G_JSON_ENTITY.matricula = $('#formulario2').find('input[name="matricula"]').val();
+				    G_JSON_ENTITY.nombresocio = $('#formulario2').find('input[name="nombresocio"]').val();
+				    G_JSON_ENTITY.fechaemision = $('#formulario2').find('input[name="fechaemision"]').val();
+				    G_JSON_ENTITY.fechaexpiracion = $('#formulario2').find('input[name="fechaexpiracion"]').val();
+				    G_JSON_ENTITY.estado = $('#formulario2').find('input[name="estado"]').val();
+
+// 			    	G_JSON_PERSONA_ENTITY.id=null;
+			    	G_JSON_PERSONA_ENTITY.ci=$('#formulario2').find('input[name="ci"]').val();;
+			    	G_JSON_PERSONA_ENTITY.nombrecompleto=null;
+			    	G_JSON_PERSONA_ENTITY.email=null;
+			    	G_JSON_PERSONA_ENTITY.celular=$('#formulario2').find('input[name="celular"]').val();
+			    	G_JSON_PERSONA_ENTITY.estado=1
+			    	
+			    	G_JSON_ENTITY.persona = G_JSON_PERSONA_ENTITY;
+					
+			    	/*
+			        let select = document.getElementById('catalogos');
+			        for (let option of select.options) {
+			            if (option.selected) {
+			      			$.get('../RestCatalogos/'+option.value+"", function(emp) {
+			      				console.log("empresa:",emp)
+			      				G_ARRAY_EMPRESAS.push(emp)
+			      			}, 'json')
+			            }else{
+			            	G_ARRAY_EMPRESAS=null
+			            }
+			        }
+			        G_JSON_ENTITY.catalogos=G_ARRAY_EMPRESAS;
+			        */
+			        
+			        let selectedOptions = Array.from($('#catalogos option:selected'));
+
+			        // Realizar una solicitud AJAX para cada opción seleccionada
+			        let promises = selectedOptions.map(option => {
+			            return new Promise((resolve, reject) => {
+			                $.get('../RestCatalogos/' + option.value, function(emp) {
+			                    
+			                	resolve(emp);
+			                }).fail(function(error) {
+			                    reject(error);
+			                });
+			            });
+			        });
+
+			        // Esperar a que se completen todas las solicitudes AJAX
+			        let empresas = await Promise.all(promises);
+
+			        // Agregar las empresas obtenidas al JSON
+			        G_JSON_ENTITY.catalogos = empresas;
+			    	
+				    return G_JSON_ENTITY;
+				}
+                
+             	async function obtenerJsonEntity(){
+				    try {
+				        let jsonEntity = await construirJsonEntity();
+// 				        console.log("JSON MODIFICAR PRE:",jsonEntity)
+				        return JSON.stringify(jsonEntity);
+				    } catch (error) {
+				        console.error('Error al construir el JSON de compra entity:', error);
+				        return null;
+				    }
+				}
+                
+				obtenerJsonEntity().then(json => {
+				    if (json !== null) {
+//        					console.log("JSON MODIFICAR SERVER EMP",json)
+               
+	        	        $.ajax({
+		              	   	url:nameEntity+"/catalogos/"+GID,
+		              	    type: "PUT",
+							'contentType': "application/json",
+							'data': json,
+		              	    'dataType': 'json',
+		              	  	async: false,
+		                     success:function(res){
+		                    	 objectMod=res
+		                         $('#formulario2')[0].reset();
+		                         $('.modal').modal('hide')
+		                          Swal.fire({
+		                             title:"Registrado",
+		                             text:"Se ha modificado exitosamente",
+		                             icon:"success",
+		                             timer:700,   
+		                             showConfirmButton: false 
+		                         });  
+		                         $('#table').dataTable().fnDraw('page');
+		                     },
+		                     error:function(err){
+		                    	 console.log(err)
+	           	 				Swal.fire({
+							    	icon:'error',
+							    	title:"Cancelado",
+			                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+			                        timer:2000,
+			                        showCancelButton:false,
+			                     	showConfirmButton:false
+							    })
+		                     }
+		                	
+		                 })
+				        
+				        
+				    } else {
+				        console.error('Error al obtener el JSON de compra entity');
+				    }
+				});
+                
+			}
+			
+			
+			function updateQRSocio() {
+//                 console.log("G_JSON_ENTITY_ANTES:",G_JSON_ENTITY)
+                
+
+                async function construirJsonEntity() {
+
+// 					G_JSON_ENTITY=new Object()
+					G_ARRAY_EMPRESAS=new Array()
+					
+					
+					G_JSON_PERSONA_ENTITY=G_JSON_ENTITY.persona
+					
+					let id = $('#formulario3').find('input[name="id"]').val();
+				    G_JSON_ENTITY.id = id ? id : 0;
+					let codigo= $('#formulario3').find('input[name="codigo"]').val();
+				    G_JSON_ENTITY.codigo = codigo ? codigo : 0;
+				    
+				    G_JSON_ENTITY.matricula = $('#formulario3').find('input[name="matricula"]').val();
+				    G_JSON_ENTITY.nombresocio = $('#formulario3').find('input[name="nombresocio"]').val();
+				    G_JSON_ENTITY.fechaemision = $('#formulario3').find('input[name="fechaemision"]').val();
+				    G_JSON_ENTITY.fechaexpiracion = $('#formulario3').find('input[name="fechaexpiracion"]').val();
+				    G_JSON_ENTITY.estado = $('#formulario3').find('input[name="estado"]').val();
+
+// 			    	G_JSON_PERSONA_ENTITY.id=null;
+			    	G_JSON_PERSONA_ENTITY.ci=$('#formulario3').find('input[name="ci"]').val();;
+			    	G_JSON_PERSONA_ENTITY.nombrecompleto=null;
+			    	G_JSON_PERSONA_ENTITY.email=null;
+			    	G_JSON_PERSONA_ENTITY.celular=$('#formulario3').find('input[name="celular"]').val();
+			    	G_JSON_PERSONA_ENTITY.estado=1
+			    	
+			    	G_JSON_ENTITY.persona = G_JSON_PERSONA_ENTITY;
+
+			        // Agregar las empresas obtenidas al JSON
+			        G_JSON_ENTITY.catalogos = null;
+			    	
+				    return G_JSON_ENTITY;
+				}
+                
+             	async function obtenerJsonEntity() {
+				    try {
+				        let jsonEntity = await construirJsonEntity();
+// 				        console.log("JSON MODIFICAR PRE:",jsonEntity)
+				        return JSON.stringify(jsonEntity);
+				    } catch (error) {
+				        console.error('Error al construir el JSON de compra entity:', error);
+				        return null;
+				    }
+				}
+                
+				obtenerJsonEntity().then(json => {
+				    if (json !== null) {
+//        					console.log("JSON MODIFICAR SERVER EMP",json)
+               
+	        	        $.ajax({
+		              	   	url:nameEntity+"/modificarqr/"+GID,
+		              	    type: "POST",
+							'contentType': "application/json",
+							'data': json,
+		              	    'dataType': 'json',
+		              	  	async: false,
+		                     success:function(res){
+		                    	 objectMod=res
+		                         $('#formulario3')[0].reset();
+		                         $('.modal').modal('hide')
+		                          Swal.fire({
+		                             title:"Registrado",
+		                             text:"Se ha modificado el QR del socio seleccionado",
+		                             icon:"success",
+		                             timer:700,   
+		                             showConfirmButton: false 
+		                         });  
+		                         $('#table').dataTable().fnDraw('page');
+		                     },
+		                     error:function(err){
+		                    	 console.log(err)
+	           	 				Swal.fire({
+							    	icon:'error',
+							    	title:"Cancelado",
+			                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+			                        timer:2000,
+			                        showCancelButton:false,
+			                     	showConfirmButton:false
+							    })
+		                     }
+		                	
+		                 })
+				        
+				        
+				    } else {
+				        console.error('Error al obtener el JSON de compra entity');
+				    }
+				});
+                
+			}
+				
+			
+			function updateStatusEntity(status) {
+				console.log("GID:",GID," STATUS:",status)
+				
+				
+				const swalWithBootstrapButtons = Swal.mixin({
+				  customClass: {
+				    confirmButton: 'btn btn-success',
+				    cancelButton: 'btn btn-danger'
+				  },
+				  buttonsStyling: false
+				})
+				
+				swalWithBootstrapButtons.fire({
+				  title: "¿Estas Seguro de continuar?",   
+	              text: "Se registrara en el Sistema",   
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonText: 'Si, Continuar!',
+				  cancelButtonText: 'No, Cancelar!',
+				  reverseButtons: true
+				}).then((result) => {
+				  if (result.isConfirmed) {
+	       				var data= {
+       	          	    	id:GID,
+       	          	    	codigo:"",
+       	          	    	nombre:"",
+       	          	    	estado:status
+       	          	    }
+	       				console.log(JSON.stringify(data))
+       	                $.ajax({
+       	              	   	url:nameEntity+"/updateStatus",
+       	              	    type: "POST",
+
+
+       		                contentType: "application/json",
+       		                dataType:'json',
+       						'data': JSON.stringify(data),
+       	 
+       	                     success:function(res){
+       							console.log('registrado',res)
+//        							removeRowLastTable(res.id)
+       							$('#table').dataTable().fnDraw('page');
+       	                         Swal.fire({
+       	                             title:"Completado",
+       	                             text:"Se ha completado la transaccion exitosamente",
+       	                             icon:"success",
+       	                             timer:700,   
+       	                             showConfirmButton: false 
+       	                         });
+       						   		
+       	                     }
+       	                 })
+	       	                 $('.modal').modal('hide')  
+					  
+	
+				  } else if (
+				    /* Read more about handling dismissals below */
+				    result.dismiss === Swal.DismissReason.cancel
+				  ) {
+					    swalWithBootstrapButtons.fire({
+					    	icon:'error',
+					    	title:"Cancelado",
+	                        text:"Se ha cancelado operacion",
+	                        timer:800,
+	                        showCancelButton:false,
+	                     	showConfirmButton:false
+					    })
+				  }
+				})
+	
+				
+
+			}
+// 	    $('#formulario').formValidation({
+
+//        	})
+//         .on('success.form.fv', function(e){
+//             e.preventDefault();
+//             var $form = $(e.target);
+
+		$("#formulario3").submit(function (event) {
+            const swalWithBootstrapButtons = Swal.mixin({
+            	  customClass: {
+            	    confirmButton: 'btn btn-success',
+            	    cancelButton: 'btn btn-danger'
+            	  },
+            	  buttonsStyling: false
+            	})
+            
+			swalWithBootstrapButtons.fire({
+				  title: "¿Estas Seguro de Renovar el QR de este socio?",   
+	              text: "Se modficara el código QR del socio seleccionado",   
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonText: 'Si, Continuar!',
+				  cancelButtonText: 'No, Cancelar!',
+				  reverseButtons: true
+				}).then((result) => {
+// 					console.log("GOPCION:",GOPCION)
+				  if (result.isConfirmed) {
+	               	   if(GOPCION=="QR"){
+	               			updateQRSocio()
+	            	   }
+	               	
+				  } else if (
+				    result.dismiss === Swal.DismissReason.cancel
+				  ) {
+				    swalWithBootstrapButtons.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+                        text:"Se ha cancelado operacion",
+                        timer:700,
+                        showCancelButton:false,
+                     	showConfirmButton:false
+				    })
+				  }
+				  $('.modal').modal('hide')  
+				})
+            
+			event.preventDefault();
+		});
+
+		$("#formulario2").submit(function (event) {
+            const swalWithBootstrapButtons = Swal.mixin({
+            	  customClass: {
+            	    confirmButton: 'btn btn-success',
+            	    cancelButton: 'btn btn-danger'
+            	  },
+            	  buttonsStyling: false
+            	})
+            
+			swalWithBootstrapButtons.fire({
+				  title: "¿Estas Seguro de continuar?",   
+	              text: "Se registrara en el Sistema",   
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonText: 'Si, Continuar!',
+				  cancelButtonText: 'No, Cancelar!',
+				  reverseButtons: true
+				}).then((result) => {
+// 					console.log("GOPCION:",GOPCION)
+				  if (result.isConfirmed) {
+	               	   if(GOPCION=="PLANTILLA"){
+	               			updatePlantillaCurso1()
+	            	   }
+	               	
+				  } else if (
+				    result.dismiss === Swal.DismissReason.cancel
+				  ) {
+				    swalWithBootstrapButtons.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+                        text:"Se ha cancelado operacion",
+                        timer:700,
+                        showCancelButton:false,
+                     	showConfirmButton:false
+				    })
+				  }
+				  $('.modal').modal('hide')  
+				})
+            
+			event.preventDefault();
+		});
+
+		$("#formulario").submit(function (event) {
+            const swalWithBootstrapButtons = Swal.mixin({
+            	  customClass: {
+            	    confirmButton: 'btn btn-success',
+            	    cancelButton: 'btn btn-danger'
+            	  },
+            	  buttonsStyling: false
+            	})
+            
+			swalWithBootstrapButtons.fire({
+				  title: "¿Estas Seguro de continuar?",   
+	              text: "Se registrara en el Sistema",   
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonText: 'Si, Continuar!',
+				  cancelButtonText: 'No, Cancelar!',
+				  reverseButtons: true
+				}).then((result) => {
+// 					console.log("GOPCION:",GOPCION)
+				  if (result.isConfirmed) {
+	               	   if(GOPCION=="ADD"){
+	            		   saveEntityForm1()
+	            	   }else{
+	            		   updateEntityForm1()
+	            	   }
+	               	
+				  } else if (
+				    result.dismiss === Swal.DismissReason.cancel
+				  ) {
+				    swalWithBootstrapButtons.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+                        text:"Se ha cancelado operacion",
+                        timer:700,
+                        showCancelButton:false,
+                     	showConfirmButton:false
+				    })
+				  }
+				  $('.modal').modal('hide')  
+				})
+            
+				 event.preventDefault();
+		 	 });
+//         })
+
+
+	</script>
+</body>
+</html>

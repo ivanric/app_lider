@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+    <fontFamily name="eras-itc-bold">
+        <normal>
+            <font><![CDATA[fonts/eras-itc-bold.ttf]]></font>
+            <pdfEmbedded>true</pdfEmbedded>
+        </normal>
+    </fontFamily>
+</fontFamilies> 

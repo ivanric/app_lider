@@ -1,0 +1,48 @@
+version: "3.8"
+
+services: 
+  lider_app:
+    container_name: "lider_app"
+    image: applider:1.0.0
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_URL=jdbc:postgresql://bd_posgresql:5432/certificadoslider
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=lider.2025
+    depends_on:
+     -  bd_posgresql
+    volumes:
+      - lider_app_data:/home  # Define un volumen llamado 'lider_app_data' montado en '/home' del contenedor
+  bd_posgresql:   
+    container_name: "lider_bd"
+    image: postgres:11
+    restart: always
+#    expose:
+#      - "5435"
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: lider.2025
+      POSTGRES_DB: certificadoslider
+#     command: -p 5432
+#     POSTGRES_PORT: 5435 
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data  # Volumen para persistir los datos de PostgreSQL
+    
+  pgadmin: 
+    container_name: "pgadmin_bd"
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "lider.2025"
+    ports:
+      - "3000:80"
+    depends_on:
+      - bd_posgresql
+      
+volumes:
+  lider_app_data:  # Define el volumen para la aplicación lider_app
+#  postgres_data:   # Define el volumen para la base de datos PostgreSQL

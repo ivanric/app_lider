@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.20.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificadosByIds" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="792" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c455b5f6-81e5-4e8e-9f19-3a5a6b3dc9d8">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CERTIFICADOS"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="253"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="741"/>
+	<parameter name="certificadosIds" class="java.lang.Integer[]">
+		<defaultValueExpression><![CDATA[new Integer[]{1,2,3,4,5}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fotoPlantillas" class="java.util.List"/>
+	<parameter name="fotoUsuarios" class="java.util.List"/>
+	<parameter name="fotosQr" class="java.util.List"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT DISTINCT 
+ct.id, 
+ct.nrofolio, 
+--TO_CHAR(ed.fechacurso, 'DD/MM/YYYY') AS fechacurso,
+--e.detalle, 
+c.nombrecurso,
+c.glosacertificado,
+upper(concat(c.dedicatoriacertificado,'')) as otorgadocertificado,
+cat.nombre as categoria,
+gr.abreviatura as gradoacademico,
+upper(concat(per.nombres,' ',per.apellidos)) as estudiante
+FROM certificadocurso ct
+JOIN participante pa ON ct.fk_participante = pa.id
+JOIN persona per ON pa.fk_persona = per.id
+JOIN gradoacademico gr ON gr.id=pa.fk_gradoacademico
+JOIN anio a ON ct.fk_anio = a.id
+JOIN curso c ON ct.fk_curso = c.id
+JOIN categoria cat ON c.fk_categoria = cat.id
+JOIN eventodetalle ed ON c.id = ed.fk_curso
+JOIN evento e ON ed.fk_evento = e.id
+JOIN inscritodetalle idt ON e.id = idt.fk_evento
+WHERE ct.estado = 1
+and $X{IN,ct.id,certificadosIds}]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificadocurso"/>
+	</field>
+	<field name="nrofolio" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nrofolio"/>
+		<property name="com.jaspersoft.studio.field.label" value="nrofolio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificadocurso"/>
+	</field>
+	<field name="nombrecurso" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombrecurso"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombrecurso"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="curso"/>
+	</field>
+	<field name="glosacertificado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="glosacertificado"/>
+		<property name="com.jaspersoft.studio.field.label" value="glosacertificado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="curso"/>
+	</field>
+	<field name="otorgadocertificado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="otorgadocertificado"/>
+		<property name="com.jaspersoft.studio.field.label" value="otorgadocertificado"/>
+	</field>
+	<field name="categoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="categoria"/>
+		<property name="com.jaspersoft.studio.field.label" value="categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="categoria"/>
+	</field>
+	<field name="gradoacademico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="gradoacademico"/>
+		<property name="com.jaspersoft.studio.field.label" value="gradoacademico"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="gradoacademico"/>
+	</field>
+	<field name="estudiante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estudiante"/>
+		<property name="com.jaspersoft.studio.field.label" value="estudiante"/>
+	</field>
+	<group name="Group1" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{nrofolio}]]></groupExpression>
+		<groupHeader>
+			<band height="500">
+				<textField>
+					<reportElement mode="Transparent" x="600" y="14" width="113" height="11" forecolor="#000000" uuid="b9b935dd-b9fa-434c-985f-ec40942545f8">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Eras Demi ITC" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nrofolio}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="21" y="232" width="750" height="28" uuid="32856008-6d37-4970-8fe5-fbacb777edb6">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Eras Bold ITC" size="24" isBold="true" pdfFontName="fonts/eras-itc-bold.ttf"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{estudiante}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="210" width="600" height="24" uuid="a3fe1a45-29a9-4646-9750-0ae247f5e055">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Eras Bold ITC" size="20" isBold="true" pdfFontName="fonts/eras-itc-bold.ttf"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{otorgadocertificado}]]></textFieldExpression>
+				</textField>
+				<image hAlign="Center" vAlign="Middle">
+					<reportElement mode="Transparent" x="600" y="26" width="113" height="113" forecolor="#E8E8E8" backcolor="#FAFAFA" uuid="d5634e56-18df-4cf2-a8a3-73024823fb65">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<pen lineWidth="0.0" lineStyle="Dotted"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<imageExpression><![CDATA[((java.util.List)$P{fotoUsuarios}).get($V{PAGE_NUMBER} - 1)]]></imageExpression>
+				</image>
+				<image>
+					<reportElement x="19" y="380" width="113" height="113" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<imageExpression><![CDATA[((java.util.List)$P{fotosQr}).get($V{PAGE_NUMBER} - 1)]]></imageExpression>
+				</image>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band height="612" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement mode="Transparent" x="0" y="0" width="791" height="612" backcolor="rgba(255, 255, 255, 0.4509804)" uuid="a51d95a5-c109-486a-b2fa-f3a25107c0f8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement fill="Solid"/>
+				<imageExpression><![CDATA[((java.util.List)$P{fotoPlantillas}).get($V{PAGE_NUMBER} - 1)]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="14" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</summary>
+</jasperReport>
