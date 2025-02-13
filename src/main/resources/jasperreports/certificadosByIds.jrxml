@@ -89,20 +89,20 @@ and $X{IN,ct.id,certificadosIds}]]>
 					<textFieldExpression><![CDATA[$F{nrofolio}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="21" y="232" width="750" height="28" uuid="32856008-6d37-4970-8fe5-fbacb777edb6">
+					<reportElement x="21" y="172" width="750" height="29" uuid="32856008-6d37-4970-8fe5-fbacb777edb6">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Eras Bold ITC" size="24" isBold="true" pdfFontName="fonts/eras-itc-bold.ttf"/>
+						<font fontName="Eras Bold ITC" size="25" isBold="true" pdfFontName="fonts/Montserrat/static/Montserrat-Bold.ttf"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{estudiante}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="100" y="210" width="600" height="24" uuid="a3fe1a45-29a9-4646-9750-0ae247f5e055">
+					<reportElement x="100" y="150" width="600" height="24" uuid="a3fe1a45-29a9-4646-9750-0ae247f5e055">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Eras Bold ITC" size="20" isBold="true" pdfFontName="fonts/eras-itc-bold.ttf"/>
+						<font fontName="Eras Bold ITC" size="20" isBold="true" pdfFontName="fonts/Montserrat/static/Montserrat-Bold.ttf"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{otorgadocertificado}]]></textFieldExpression>
 				</textField>
@@ -121,7 +121,7 @@ and $X{IN,ct.id,certificadosIds}]]>
 					<imageExpression><![CDATA[((java.util.List)$P{fotoUsuarios}).get($V{PAGE_NUMBER} - 1)]]></imageExpression>
 				</image>
 				<image>
-					<reportElement x="19" y="380" width="113" height="113" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
+					<reportElement x="19" y="355" width="113" height="113" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>

@@ -1,0 +1,142 @@
+body{
+	
+	padding-right:0px !important;
+}
+.contenedor-panel {
+    /* background: #ccc; */
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    /* height: 100vh; */
+    height: 100%;
+}
+
+header{
+	background:#ffffff;
+	width: 100%;
+	padding: 10px;
+	justify-content: center ;
+	align-items: center;
+	
+	/* FLEX */
+	display: flex;	
+	flex-direction: row;/* ELEMENTOS EN LINEA */
+	flex-wrap: initial;/* SI NO CABE EN LA LINEA  WRAP */
+    box-shadow: 0 2px 4px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.08);
+    position: relative;
+}
+header .logo{
+	color: #000;
+	display: flex;	
+	align-items: center;
+	width: auto;
+	font-size: 16px;
+	font-weight: 550;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px;
+    font-weight: 900;
+    
+}
+header .logo img{
+	width: 100px;
+/* 	vertical-align: top; */
+	margin-right: 10px;
+}
+
+header nav{
+	width: auto;
+	/*background: #20B300;*/
+	justify-content: flex-end;
+	/* FLEX */
+	display: flex;
+	flex-wrap: wrap;
+}
+header nav .menu_navegacion {
+	align-items: center !important;
+	background: #f5f5f5;
+	color: #000;
+	padding: 5px;
+	justify-content: flex-end;
+	/* FLEX */
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	/*HACE QUE SE AJUSTE EL ANCHO COMPLETO*/
+	flex-grow: 1;
+}
+header nav li{
+	text-decoration: none;
+	list-style: none;
+	margin: 0 5px;
+
+}
+
+header nav li p{
+	margin: 0;
+}
+header nav li:nth-child(2){
+	display: flex !important;
+	align-items: center;
+}
+header nav .conectado_user {
+    color: black;
+}
+header nav .conectado{
+	color:  #4ff21d;
+}
+
+header nav li img{
+	width: 40px;/*TAMAÑO DE LA IMAGEN*/
+	vertical-align: top;/*SE ALINEA LA IMAGEN*/
+	border-radius: 50%;
+}
+
+header nav li img:hover{
+	background: red;
+}
+header .salir{
+	text-decoration: none;
+
+}
+
+@media screen and (max-width:800px){
+
+	.contenedor{
+		width:100%;
+		flex-direction: column;
+	}
+
+	header{
+		flex-direction: column;
+		padding: 0;
+	}
+	header nav ul{
+		justify-content: flex-start;
+	}
+	
+	header .logo{
+		margin: 10px;
+    font-size: 10px;
+    font-weight: 900;
+	}
+	header .logo a{
+		font-size: 15px;
+	}
+	header .logo img {
+	    width: 60px;
+	    vertical-align: top;
+	}
+	header nav{
+		width: 100%;
+	}
+	.lista-procesos {
+		flex-direction: column;
+		
+	}
+
+
+}

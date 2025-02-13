@@ -230,16 +230,10 @@ a.sidebar-link {
     flex: 1;
     max-width: 100vw;
     width: 100vw;
-    background: #f3f3f387;
+/*     background: #f3f3f387; */
 }
 
-.contenedor {
-    background: #ffffff;
-    margin: 0.5rem;
-    height: auto;
-    padding: 1rem;
-    box-shadow: 2px 2px 18px 5px rgba(0, 0, 0, 0.08);
-}
+
 
 @media (min-width: 768px) {
     .content {

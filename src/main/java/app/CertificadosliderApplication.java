@@ -183,7 +183,7 @@ public class CertificadosliderApplication extends SpringBootServletInitializer {
             String password = bCryptPasswordEncoder.encode("LiderAcademia1234"); // Encrypt password
             System.out.println(password); //$2a$10$Pe2oBHzkQVDf5ubi5ubThe0xAIimT00ogdXiAQKmX3g4.4W/LG.pm
             
-            UsuarioEntity usuarioEntity = new UsuarioEntity(1, "javermed11@gmail.com", password, 1,null,null, rolesarray, persona);
+            UsuarioEntity usuarioEntity = new UsuarioEntity(1, "javiermed11@gmail.com", password, 1,null,null, rolesarray, persona);
             usuarioRepository.save(usuarioEntity);
             
             System.out.println("Usuarios agregados a la base de datos.");

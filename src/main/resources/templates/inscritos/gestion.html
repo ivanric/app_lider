@@ -2426,7 +2426,16 @@ td {
 		
 			// Define los valores de los parámetros
 // 		GID_PARTICIPANTE_DET= 1;
-		GID_ANIO_DET =$('body').find('#select-anios option:selected').val();
+// 		GID_ANIO_DET =$('body').find('#select-anios option:selected').val();
+		// Obtener el elemento body
+		var bodyANIO = document.querySelector('body');
+		// Encontrar el select con ID 'select-anios' dentro del body
+		var selectElementANIO = bodyANIO.querySelector('#select-anios');
+		
+		// Obtener el texto de la opción seleccionada
+// 		var isGestionANIO = selectElementANIO.options[selectElementANIO.selectedIndex].textContent;
+		var selectedValueANIO = selectElementANIO.value;
+		GID_ANIO_DET=selectedValueANIO;
 
 		mostrarEventosDetalle();
 		mostrarCategoriasDetalle();

@@ -47,6 +47,8 @@
 	    
 	<!-- 	<link href="https://unpkg.com/filepond@4.28.2/dist/filepond.css" rel="stylesheet"> -->
 		
+	    <link rel="stylesheet" href="#" th:href="@{/css/inicio.css}"/>
+	    <link rel="stylesheet" href="#" th:href="@{/css/menu2/menu2.css}"/>
 	    <link rel="stylesheet" href="#" th:href="@{/css/tema/style.css}"/>
 	    <link rel="stylesheet" href="#" th:href="@{/css/tema/mybuttons.css}"/>
 	    <link rel="stylesheet" href="#" th:href="@{/css/tema/mymenu.css}"/>
@@ -60,10 +62,8 @@
 /* 				font-size: 13px; */
 			}
 			body{
-/*  				font-size: 12px;  */
-/* 				font-family: 'DM Sans', sans-serif; */
+
 				font-family: "Roboto", sans-serif;
-				 padding-top: 8rem; /*space for navbar*/
 			}
 			
 
@@ -218,204 +218,121 @@
 		</style>
 		
 	</head>
-	<body>
-		<div class="">
-			<!-- Navbar -->
-			<nav class="navbar navbar-expand-lg navbar-dark navbar-menu fixed-top" style="">
-			  <!-- Container wrapper -->
-			  <div class="container">
-			    <!-- Navbar brand -->
-			    <a class="navbar-brand me-2" href="/">
-					<img src="/img/LOGOLIDERWHITE.png" alt="">
-			    </a>
-				                    
-			    <!-- Toggle button -->
-			    <button
-			      data-mdb-collapse-init
-			      class="navbar-toggler"
-			      type="button"
-			      data-mdb-target="#navbarButtonsExample"
-			      aria-controls="navbarButtonsExample"
-			      aria-expanded="false"
-			      aria-label="Toggle navigation"
-			    >
-			      <i class="fa fa-bars"></i>
-			    </button>
-			
-			    <!-- Collapsible wrapper -->
-			    <div class="collapse navbar-collapse" id="navbarButtonsExample">
-			      <!-- Left links -->
-			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<!-- 			        <li class="nav-item"> -->
-<!-- 			          <a class="nav-link" href="/">INICIO</a> -->
-<!-- 			        </li> -->
-			        
-			        
-			         <li class="nav-item dropdown">
-			          <a
-			            data-mdb-dropdown-init
-			            class="nav-link dropdown-toggle"
-			            href="#"
-			            id="navbarDropdown"
-			            role="button"
-			            aria-expanded="false"
-			          >
-			            Mis Datos
-			          </a>
-			          <!-- Dropdown menu -->
-			          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			            <li>
-	              	       	<a href="#" data-href="/institucion/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                            	Empresa
-	                         </a>
-			            </li>
-			            <li>
-			                    	
-                            <a href="#" data-href="/anios/gestion" class=" dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-                            	
-                            	Registro de Gestiones
-                            </a>
-			            </li>
-			            <li>
-	              	       	<a href="#" data-href="/roles/gestion" class=" dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-                               
-                               	Registro de Roles
-                            </a>
-			            </li>
-			            <li>
-			                <a href="#" data-href="/usuarios/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-                              	
-                              	Registro de Usuarios
-                             </a>
-           				 </li>
-			          </ul>
+	<body style="padding-right:0px !important;">
+		<div class="contenedor-panel">
+			<header>
+				<div class="logo">
+					<img src="../img/LOGOLIDER.png" th:src="@{/img/LOGOLIDER.png}" width="150" style="cursor: pointer;" onclick="event.preventDefault();window.location.href=''" >
+					
+					<div class="gob">
+						<p style="padding: 0;margin: 0">
+							<span onclick="event.preventDefault();window.location.href=''"  style="cursor: pointer;font-size: 12px;" class="unidad">ACADEMIA LIDER
+						
+							</span>
+						</p>
 
-			        </li>
-			        
-			        <li class="nav-item dropdown">
-			          <a
-			            data-mdb-dropdown-init
-			            class="nav-link dropdown-toggle"
-			            href="#"
-			            id="navbarDropdown2"
-			            role="button"
-			            aria-expanded="false"
-			          >
-			            Mis Registros
-			          </a>
-			          <!-- Dropdown menu -->
-			          <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
-			            <li>
-                            <a href="#" data-href="/profesion/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                              
-	                         Registro de Profesiones</a>
-			            </li>
-			            <li>
-	                         <a href="#" data-href="/gradoacademico/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                          Registro de G.Academicos</a>
-			            </li>
-			            <li>
-                                <a href="#" data-href="/categoria/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                               
-	                                Registro de Categorias</a>
-			            </li>
-			            <li>
-				                <a href="#" data-href="/expositor/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                         
-	                                Registro de Expositores</a>
-           				 </li>
-           				 <li>
-           				 		   <a href="#" data-href="/banco/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                                
-	                                Registro de Bancos</a>
-           				 </li>
-           				 <li>
-           				 	      <a href="#" data-href="/metodopago/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                              
-	                                Registro de Metodos de Pago</a>
-           				 </li>
-<!--            				 <li> -->
-<!--            				 	        <a href="#" data-href="/curso/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)"> -->
-<!-- 	                                Registro de Cursos</a> -->
-<!--            				 </li> -->
-           				 <li>
-           				 		  <a href="#" data-href="/evento/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                               
-	                                Registro de Eventos</a>
-           				 </li>
-<!--            				 <li> -->
-<!--            				 	       <a href="#" data-href="/participantes/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">                            -->
-<!-- 	                                Registro de Participantes</a>	  -->
-<!--            				 </li> -->
-           				 <li>
-           				 		    <a href="#" data-href="/inscritos/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                                
-	                                Registro de Inscritos</a>
-           				 </li>
-			          </ul>
+						
+					</div>
+				
+				</div>
+				<nav>
+				<div class="menu_navegacion">
 
-			        </li>
-			        
-			        <li class="nav-item dropdown">
-			          <a
-			            data-mdb-dropdown-init
-			            class="nav-link dropdown-toggle"
-			            href="#"
-			            id="navbarDropdown3"
-			            role="button"
-			            aria-expanded="false"
-			          >
-			            Mis Reportes
-			          </a>
-			          <!-- Dropdown menu -->
-			          <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
-			            <li>
-	              	       	<a href="#" data-href="/institucion/gestion" class="dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-	                            	Empresa
-	                         </a>
-			            </li>
-			            <li>
-			                    	
-                            <a href="#" data-href="/anios/gestion" class=" dropdown-item sidebar-link sidebar-link-proc" onclick="event.preventDefault();gestion(this)">
-                            	
-                            	Registro de Gestiones
-                            </a>
-			            </li>
+						<li>
+							<strong class="" style="color: black;">
+								GESTION
+							</strong>
+						</li>
+						<li style="width: 70px;">
+							<select class="tipe form-control" name="gestion" id="select-anios" onchange="CambiarGestion(this)">
+	<!-- 							<option>2009</option> -->
+							</select>
+						</li>
+						
+<!-- 						<li> -->
+<!-- 							<button style="background: transparent;border: none;"> -->
+<!-- 								<span class="fa fa-question-circle fa-2x" onclick="AYUDAWEB()"></span> -->
+<!-- 							</button> -->
+<!-- 						</li> -->
+<!-- 						<li style="width: 250px;"> -->
+<!-- 							<select class="tipe form-control" name="roles" id="select-Roles" onchange="GetMenus(this)">	 -->
+<!-- 							</select> -->
+<!-- 						</li> -->
 
-			          </ul>
+						<li>
+						Conectado: <i class="fa fa-circle conectado" ></i>&nbsp; 
+							
+						</li>
+							<strong> <h5 class="conectado_user"></h5></strong>
+						<li>
+						</li>
+						<li>
+							<img class="avatar" id="avatar" src="../static/img/user.png" th:src="@{/img/user.png}" alt="logo">
+						</li>
+						<li>
+							<div class="dropdown">
+							  <button class="btn btn-dafault dropdown-toggle" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
+							    <!-- Dropdown -->
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="left: 0px !important;z-index: 1011; color:black;">
+							    <li><a class="dropdown-item" href="#" onclick="event.preventDefault();" id="btn-change-password">USUARIO
+							    		<i class="fa fa-user"></i>
+							    	</a>
+							    </li>
+							    <li>
+							    	<a  href="/logout" class="dropdown-item salir " id="btn-desc">DESCONECAR
+										<i class="fa fa-sign-out btn-logout" ></i>
+									</a>
+								</li>
+							  </ul>
+							</div>
+						</li>
+					</div>
+				</nav>
+			</header>
+			<div class="menu2">
+				<div class="menu_bar">
+					<a href="#" class="bt-menu" onclick="event.preventDefault();"><span class="icon-list"  ></span>MENU</a>
+				</div>
+ 				<nav>
+					<ul class="menu2-men" style="margin-bottom:0px !important"> 
 
-			        </li>
-			      </ul>
-			      <!-- Left links -->
-			      
-			      
-			
-			      <div class="d-flex align-items-center">
-						<ul class="navbar-nav d-flex align-items-center">
-	                    	<li class="nav-item me-2 "> 
-	                    		<select class="form-select form-select-sm " id="select-anios" style="width: 120px" title="gestiones">
-									<option value="">Selec. Gestion</option>
-								</select>
-	                    	</li>
-	                        <li class="nav-item dropdown">
-	                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-	                                <img src="img/user.png" class="avatar img-fluid rounded" alt="">
-	                            </a>
-	                            <div class="dropdown-menu dropdown-menu-end">
-	                                <a href="#" class="dropdown-item">PERFIL</a>
-	                                <a href="#" class="dropdown-item">CONFIGURACION</a>
-	                                <a href="/logout" class="dropdown-item">DESCONECTAR</a>
-	                            </div>
-	                        </li>
-	                    </ul>
-			      </div>
-			    </div>
-			    <!-- Collapsible wrapper -->
-			  </div>
-			  <!-- Container wrapper -->
-			</nav>
-			<!-- Navbar -->
+						<li class="submenu">
+							<a href="#" onclick="event.preventDefault();gestion(this)"><span class="icon-rocket">
+								</span>Mi Sistema<span class="careta icon-chevron-down"></span>
+<!-- 								<span class="careta icon-chevron-down"></span> -->
+							</a>
+							
+							<ul class="children">
+								<li><a href="#" data-href="/institucion/gestion" onclick="event.preventDefault();gestion(this)">Datos de Empresa<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/roles/gestion" onclick="event.preventDefault();gestion(this)">Registro de Roles<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/usuarios/gestion" onclick="event.preventDefault();gestion(this)">Registro de Usuarios<span class="icon-dot-single"></span></a></li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a href="#" onclick="event.preventDefault();gestion(this)"><span class="icon-rocket">
+								</span>Mi Registros<span class="careta icon-chevron-down"></span>
+							</a>
+							
+							<ul class="children">
+								<li><a href="#" data-href="/anios/gestion" onclick="event.preventDefault();gestion(this)">Gestiones<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/profesion/gestion" onclick="event.preventDefault();gestion(this)">Profesiones<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/gradoacademico/gestion" onclick="event.preventDefault();gestion(this)">Nivel de Estudios<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/categoria/gestion" onclick="event.preventDefault();gestion(this)">Categorias<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/expositor/gestion" onclick="event.preventDefault();gestion(this)">Expositores<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/banco/gestion" onclick="event.preventDefault();gestion(this)">Bancos<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/metodopago/gestion" onclick="event.preventDefault();gestion(this)">Metodos de Pago<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/evento/gestion" onclick="event.preventDefault();gestion(this)">Eventos<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/inscritos/gestion" onclick="event.preventDefault();gestion(this)">Inscritos<span class="icon-dot-single"></span></a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+	
+			</div>	
 		</div>
+
 	
 	    <div class="wrapper">
 	    	
@@ -424,10 +341,10 @@
 	        <div class="main" >
 
 	            <main class="content ">
-	                <div class="contenedor" id="contenedor">
-	                    <div class="mb-3">
-	                        <h4>PANEL DE ADMINISTRACION</h4>
-	                    </div>
+	                <div class="contenedor" id="contenedor" style="padding: 10px;">
+	                    <b class="">
+	                      PANEL DE ADMINISTRACION
+	                    </b>
 	
 	                    <!-- Table Element -->
 	                    <div class="card border-0">
@@ -492,12 +409,13 @@
 		<script type="" src="./static/js/fileinput.js" th:src="@{/js/fileinput.js}"></script>
 		<script type="" src="./static/js/locales/es.js" th:src="@{/js/locales/es.js}"></script>
 		<script type="" src="./static/js/tema/script.js" th:src="@{/js/tema/script.js}"></script>
+		<script type="" src="./static/js/menu2.js" th:src="@{/js/menu2.js}"></script>
 		
 	
 	<!-- 	<script src="https://unpkg.com/filepond@4.28.2/dist/filepond.js"></script> -->
 		<script type="text/javascript">
+		/* 
 		
-		// Realiza una solicitud GET a la URL "/RestAnios/"
 			fetch('/RestAnios/')
 		    .then(response => response.json()) // Convierte la respuesta a JSON
 		    .then(data => {
@@ -533,11 +451,30 @@
 		    .catch(error => {
 		        console.error('Error:', error);
 		    });
+*/
+			$('#select-anios').empty();
+			$.getJSON("/RestAnios/", function (data) {
+			    let today = new Date();
+			    let year = today.getFullYear();
+			    let $selectAnios = $("#select-anios");
+			
+			    $.each(data, function (index, item) {
+			        let selected = item.nombre == year ? "selected" : "";
+			
+			        // Agregar opción al select
+			        let option = `<option value="${item.id}" accesskey="${item.id}" ${selected}>${item.nombre}</option>`;
+			        $selectAnios.append(option);
+			    });
+			}).fail(function (jqXHR, textStatus, errorThrown) {
+			    console.error("Error:", textStatus, errorThrown);
+			});
+
+
 
 			function gestion(link){
 	// 			var enlace=$(link).data('href');
 				var enlace = link.dataset.href;
-// 				console.log(enlace)
+				console.log("encale cert:",enlace)
 	      		
 	
 	    		$.post(enlace,function(resp){
@@ -545,37 +482,11 @@
 	    			$('#contenedor').html(resp);
 	    		})
 	    		
-	//     		var xhr = new XMLHttpRequest();
-	// 		    xhr.open('POST', enlace, true);
-	// 		    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');	
-	// 		    xhr.onreadystatechange = function() {
-	// 		        if (xhr.readyState === XMLHttpRequest.DONE) {
-	// 		            if (xhr.status === 200) {
-	// 		                var resp = xhr.responseText;
-	// 		                document.getElementById('contenedor').innerHTML = resp;
-	// 		            } else {
-	// 		                console.error('Error al realizar la solicitud: ' + xhr.status);
-	// 		            }
-	// 		        }
-	// 		    };
-	// 		    xhr.send();  // Si necesitas enviar datos, añádelos a xhr.send(datos)
 			}
 	
 		</script>
 		<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const navbarToggler = document.querySelector(".navbar-toggler");
-        const navLinks = document.querySelectorAll(".navbar-nav .dropdown-item");
 
-        navLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                const navbarCollapse = document.querySelector("#navbarButtonsExample");
-                if (navbarCollapse.classList.contains("show")) {
-                    navbarToggler.click(); // Simula el clic en el botón para cerrar el menú
-                }
-            });
-        });
-    });
 </script>
 		
 		

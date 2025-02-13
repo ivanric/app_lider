@@ -1,273 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./img/liderlogo.png" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  	
-    <!-- MDB -->
-    <link
-	  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
-	  rel="stylesheet"
-	/>
+    <title>ACADEMIA LIDER</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/img/liderlogo.png" type="image/png">
+    
+    <!-- Tailwind CSS -->
+<!--     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+	<script src="https://cdn.tailwindcss.com"></script>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" crossorigin="anonymous" />
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>LIDER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            font-family: "Helvetica Neue", Roboto, Arial, sans-serif;
-            overflow-x: hidden;
-            position: relative;
-            height: 100vh;
+            font-family: "Poppins", sans-serif;
         }
-
-        .background-waves {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .login-page {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #ffb33a, #ff6b00);
-            clip-path: ellipse(94% 72% at 37% 26%);
-            z-index: -1;
-            pointer-events: none;
+            height: 100vh; /* Ocupa toda la altura de la pantalla */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f3f4f6; /* Fondo más claro */
         }
-
-        .logo-card {
-            background-color: #ffffff;
-            border-radius: 15px;
-            padding: 0.5rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            top: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 1rem);
-            max-width: 400px;
-            z-index: 10;
-            text-align: center;
-        }
-
-        .logo-card img {
-            width: 150px;
-            height: auto;
-        }
-
-        form {
-            width: 16rem;
-        }
-
-        .formulario {
-            background-color: #ffffff;
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            padding: 1rem;
-            width: 100%;
-            max-width: 600px;
-            margin: 5rem auto;
-            animation: fadeIn 1s ease-out;
-            position: relative;
-            text-align: center;
-        }
-
-       
-        .btn-warning {
-            background: linear-gradient(to right, #FFB74D, #FF9800);
-            border: none;
-            color: #fff;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .btn-warning:hover {
-            background: linear-gradient(to right, #FF9800, #FF5722);
-            transform: translateY(-2px);
-        }
-
-        .alert-custom {
-            padding: 0.5rem;
-            border-radius: 5px;
-            font-size: 13px;
-            display: block;
-        }
-
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .alert-info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-
-        @keyframes logoBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .footer-text {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 14px;
-            color: #333;
-            text-align: right;
-            z-index: 10;
-        }
-
-        .footer-text span {
-            display: inline-block;
-            opacity: 0;
-            animation: fall 0.5s ease-out forwards;
-            animation-delay: calc(0.05s * var(--i));
-        }
-
-        @keyframes fall {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 576px) {
-            .logo-card img {
-                width: 120px;
-            }
-
-            .formulario {
-                margin: 2rem auto;
-                max-width: 100%;
-                padding: 2rem 1rem;
-            }
-
-            .formulario {
-                margin-top: 6rem;
-            }
-        }
-
-        .navbar-custom {
-            background-color: #FF6B00;
-            padding: 0.25rem 0.5rem; /* Reducir el padding para hacer el navbar más pequeño */
-        }
-        
-        .navbar-custom .navbar-brand {
-            color: #ffffff;
-            font-size: 1rem; /* Ajustar el tamaño del texto */
-            font-weight: 500; /* Hacer el texto un poco más delgado */
-        }
-
-        .navbar-custom .nav-link {
-            color: #ffffff;
-            font-size: 0.875rem; /* Ajustar el tamaño del texto */
-        }
-
-        .navbar-custom .nav-link:hover {
-            color: #FFB74D;
-        }
-
-        .navbar-custom .navbar-text {
-            color: #ffffff;
-            font-size: 0.75rem; /* Tamaño del texto ajustado */
-            margin-left: 0.5rem; /* Añadir espacio entre el texto y el logo */
-        }
-
-        .logo-3d {
-            position: absolute;
-            top: 100px;
-            left: 50px;
-            z-index: 20;
-            width: 150px;
-            height: auto;
-        }
-
-        .logo-card img {
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-        }
-    </style>
+    </style>   
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="/">ACADEMIA LIDER</a>
-            <div class="d-flex align-items-center">
-                <span class="navbar-text">
-                    &copy; 2024 LIDER. Todos los derechos reservados. | Desarrollado por <b>Ivan Ricardo Mamani Corzo</b> | 72368973
-                </span>
-            </div>
-        </div>
-    </nav>
-
-    <div class="background-waves"></div>
-
-    <img src="/img/logo3dlider.gif" alt="LIDER 3D" class="logo-3d">
-
-    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-        <div class="position-relative">
-            <div class="logo-card">
-                <img src="/img/user.png" alt="LIDER Logo" class="rounded-circle">
-            </div>
-            <div class="formulario">
-                <form action="login" method="post">
-                    <div style="margin-top: 3rem;">
-                        <div th:if="${param.error}" class="">
-                            <div class="alert alert-danger alert-custom">Usuario o contraseña inválidos</div>
-                        </div>
-                        <div th:if="${param.logout}" class="">
-                            <div class="alert alert-info alert-custom">Has cerrado sesión exitosamente</div>
-                        </div>
-					  <div data-mdb-input-init class="form-outline ">
-					    <input type="text" id="username" name="username" class="form-control" />
-					    <label class="form-label" for="username">Usuario</label>
-					  </div>
-					
-					  <!-- Password input -->
-					  <div data-mdb-input-init class="form-outline mt-3">
-					    <input type="password" name="password" id="password" class="form-control" />
-					    <label class="form-label" for="password">Contraseña</label>
-					  </div>
-                        <div class="d-grid gap-2 mt-3 mb-3">
-                            <button type="submit" class="btn btn-warning btn-lg" data-mdb-ripple-init>INGRESAR</button>
-                        </div>
+<body class="bg-gray-100">
+    <div class="login-page">
+        <div class="container mx-auto">
+            <div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg p-7">
+                <div class="flex justify-center mb-4">
+                    <img src="/img/liderlogo.png" alt="Logo lider" class="w-40 h-auto"> <!-- Añadido alt para accesibilidad -->
+                </div>
+                <form th:action="login" method="post" class="space-y-4">
+                    <!-- Usuario -->
+                    <div class="form-group">
+                        <label for="username" class="block text-gray-700">Usuario</label>
+                        <input type="text" id="username" name="username" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ingrese usuario" required>
+                    </div>
+                     
+                    <!-- Contraseña -->
+                    <div class="form-group">
+                        <label for="password" class="block text-gray-700">Contraseña</label>
+                        <input type="password" id="password" name="password" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ingrese su contraseña" required>
+                    </div>
+                    
+                    <!-- Botón de Iniciar Sesión -->
+                    <div>
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded"> 
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> INGRESAR
+                        </button>
                     </div>
                 </form>
+                <p class="text-center text-gray-500 mt-4"><b>ACADEMIA LIDER</b></p>
             </div>
         </div>
     </div>
-    <div class="footer-text" id="footer-text">
-        Academia Lider, formamos tu futuro.
-    </div>
 
-<!--     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Tailwind JS (Opcional) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.9.0/dist/cdn.min.js"></script>
 
-	<!-- MDB -->
-	<script
-	  type="text/javascript"
-	  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
-	></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Animación de texto al pie de página
-            const footerText = document.querySelector('#footer-text');
-            const text = footerText.textContent;
-            footerText.innerHTML = text.split('').map((char, i) => 
-                `<span style="--i:${i};">${char === ' ' ? '&nbsp;' : char}</span>`
-            ).join('');
-        });
-    </script>
 </body>
 </html>
