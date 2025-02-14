@@ -17,7 +17,7 @@ public interface MetodoPagoRepository extends GenericRepositoryNormal<MetodoPago
 	@Query(value="select COALESCE(max(id),0)+1 as id from metodopago",nativeQuery = true)
 	public int getIdPrimaryKey();
 	
-	@Query(value="SELECT COALESCE(max(codigo),0)+1 as id from metodopago",nativeQuery = true)
+	@Query(value="SELECT COALESCE(max(codigo),0)+1 as codigo from metodopago",nativeQuery = true)
 	public Integer getCodigo();
 	
 	@Query(value = "select t.* from metodopago t where (t.estado=:estado or :estado=-1) and  (upper(concat(t.id,t.titular,'')) like concat('%',upper(:search),'%')) ORDER BY t.id ASC LIMIT :length OFFSET :start ",

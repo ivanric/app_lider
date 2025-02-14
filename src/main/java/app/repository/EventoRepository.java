@@ -18,7 +18,7 @@ public interface EventoRepository extends GenericRepositoryNormal<EventoEntity, 
 	@Query(value="select COALESCE(max(id),0)+1 as id from evento",nativeQuery = true)
 	public int getIdPrimaryKey();
 	
-	@Query(value="SELECT COALESCE(max(codigo),0)+1 as id from evento",nativeQuery = true)
+	@Query(value="SELECT COALESCE(max(codigo),0)+1 as codigo from evento",nativeQuery = true)
 	public Integer getCodigo();
 	
 	@Query(value = "select t.* from evento t where (t.estado=:estado or :estado=-1) and  (upper(concat(t.id,t.detalle,'')) like concat('%',upper(:search),'%')) ORDER BY t.id ASC LIMIT :length OFFSET :start ",

@@ -18,7 +18,7 @@ public interface ParticipanteRepository extends GenericRepositoryNormal<Particip
 	@Query(value="select COALESCE(max(id),0)+1 as id from participante",nativeQuery = true)
 	public int getIdPrimaryKey();
 	
-	@Query(value="SELECT COALESCE(max(codigo),0)+1 as id from participante",nativeQuery = true)
+	@Query(value="SELECT COALESCE(max(codigo),0)+1 as codigo from participante",nativeQuery = true)
 	public Integer getCodigo();
 	
 	@Query(value = "select t.* from participante t,persona p where t.fk_persona=p.id and  (t.estado=:estado or :estado=-1) and  (upper(concat(t.id,p.ci,'')) like concat('%',upper(:search),'%')) ORDER BY t.id ASC LIMIT :length OFFSET :start ",

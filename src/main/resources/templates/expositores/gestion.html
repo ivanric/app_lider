@@ -77,21 +77,7 @@ td {
 							<input type="" name="codigo" value="" style="display: none"> 
 							<input type="" name="estado" value="1" style="display: none"> 
 							
-							
-							<div class="row">
-								<div class="col-md-12">
-									<div id="msg"></div>
 
-									<!-- Mensajes de Verificacion -->
-									<div id="error" class="alert alert-danger ocultar" role="alert">
-									    Las contraseñas no coinciden, vuelve a intentar !
-									</div>
-									<div id="ok" class="alert alert-success ocultar" role="alert">
-									    Las contraseñas coinciden !
-									</div>
-								</div>
-							</div>
-							
 							<div class="row">
 								<div class="col-md-12">
 									<div class="mb-1">
@@ -184,7 +170,7 @@ td {
 										<label for="nombre" class=""><b>RUBRO</b></label>
 										<input placeholder="Catedrático Emérito UMSA.."
 											class="form-control fg-input data-per field_css"
-											name="rubro" type="text" required="required" onkeyup="">
+											name="rubro" type="text" onkeyup="">
 									</div>
 		
 								</div>
@@ -195,7 +181,7 @@ td {
 										<label for="dedicacion" class=""><b>EXPERIENCIA</b></label>
 										<textarea rows="" cols="" placeholder="Detalle la experiencia en breve del expositor " 
 											class="form-control fg-input data-per field_css" name="dedicacion" id="dedicacion"
-											required="required"></textarea>
+											></textarea>
 									</div>
 		
 								</div>
@@ -208,7 +194,7 @@ td {
 										<label for="celular" class=""><b>TELEFONO/CELULAR (Con WHATSAPP)</b></label>
 										<input placeholder="Celular.."
 											class="form-control fg-input data-per field_css"
-											name="celular" type="number" required="required">
+											name="celular" type="number" >
 									</div>
 		
 								</div>
@@ -220,7 +206,7 @@ td {
 										<label for="correo" class=""><b>CORREO</b></label>
 										<input placeholder="Ingrese correo.."
 											class="form-control fg-input data-per field_css"
-											name="email" type="email" required="required" >
+											name="email" type="email"  >
 									</div>
 		
 								</div>
@@ -232,7 +218,7 @@ td {
 										<label for="exampleFormControlInput1" class=""><b>DIRECCIÓN</b></label>
 										<textarea rows="" cols="" placeholder="Ingrese el dirección del expositor " 
 											class="form-control fg-input data-per field_css" name="direccion" id="direccion"
-											required="required"></textarea>
+											></textarea>
 								
 									</div>
 
@@ -544,14 +530,7 @@ td {
 					opcionesCrudModal();
 					getEntityId()
 	        	    
-				    document.getElementById("ok").classList.add("ocultar");
-			        document.getElementById("error").classList.add("ocultar");
-		    		document.getElementById("ok").classList.remove("mostrar");
-			        document.getElementById("error").classList.remove("mostrar");
-					
-					
-					
-					
+
 					
 	          		$('#modalAdicionar').modal('show');
 				}
@@ -604,10 +583,7 @@ td {
 				$('.field_css').removeAttr('disabled') 
 				opcionesNuevo()
 				getEntityIdNew()
-	    		document.getElementById("ok").classList.add("ocultar");
-		        document.getElementById("error").classList.add("ocultar");
-	    		document.getElementById("ok").classList.remove("mostrar");
-		        document.getElementById("error").classList.remove("mostrar");
+	    		
        			$('#modalAdicionar').modal('show');
 			}
 			function funtDeleteRow() {
@@ -1073,38 +1049,7 @@ td {
 				 event.preventDefault();
 		 	 });
 //         })
-        function verificarPasswords() {
-		 
-		    // Ontenemos los valores de los campos de contraseï¿½as 
-		    pass1 = document.getElementById('password1');
-		    pass2 = document.getElementById('password2');
-		 
-		    // Verificamos si las constraseï¿½as no coinciden 
-		    if (pass1.value != pass2.value) {
-		    	document.getElementById("ok").classList.add("ocultar");
-		        // Si las constraseï¿½as no coinciden mostramos un mensaje 
-		        document.getElementById("error").classList.add("mostrar");
-		        return false;
-		    } else {
-		 
-		        // Si las contraseï¿½as coinciden ocultamos el mensaje de error
-		        document.getElementById("error").classList.remove("mostrar");
-		 
-		        // Mostramos un mensaje mencionando que las Contraseï¿½as coinciden 
-		        document.getElementById("ok").classList.remove("ocultar");
-		 
-		        // Desabilitamos el botï¿½n de login 
-// 		        document.getElementById("btnGuardar_modal").disabled = true;
-		 
-		        // Refrescamos la pï¿½gina (Simulaciï¿½n de envï¿½o del formulario) 
-// 		        setTimeout(function() {
-// 		            location.reload();
-// 		        }, 3000);
-		 
-		        return true;
-		    }
-		 
-		}
+
 
 	</script>
 </body>

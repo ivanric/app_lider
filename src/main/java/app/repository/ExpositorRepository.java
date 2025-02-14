@@ -17,7 +17,7 @@ public interface ExpositorRepository extends GenericRepositoryNormal<ExpositorEn
 	@Query(value="select COALESCE(max(id),0)+1 as id from expositor",nativeQuery = true)
 	public int getIdPrimaryKey();
 	
-	@Query(value="SELECT COALESCE(max(codigo),0)+1 as id from expositor",nativeQuery = true)
+	@Query(value="SELECT COALESCE(max(codigo),0)+1 as codigo from expositor",nativeQuery = true)
 	public Integer getCodigo();
 	
 	@Query(value = "select t.* from expositor t,persona p where t.fk_persona=p.id and  (t.estado=:estado or :estado=-1) and  (upper(concat(p.nombres,p.apellidos,'')) like concat('%',upper(:search),'%')) ORDER BY t.id ASC LIMIT :length OFFSET :start ",

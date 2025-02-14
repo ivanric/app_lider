@@ -153,6 +153,7 @@ public class ExpositorServiceImpl extends GenericServiceImplNormal<ExpositorEnti
 				);
 				entity.setImagen(nombre);
 			    entity.setImagenDriveId(fileKey);
+
 			}
         	
         	System.out.println("EntityPost:"+entity.toString());

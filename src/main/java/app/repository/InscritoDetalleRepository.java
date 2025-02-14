@@ -18,7 +18,7 @@ public interface InscritoDetalleRepository extends GenericRepositoryNormal<Inscr
 	@Query(value="select COALESCE(max(id),0)+1 as id from inscritodetalle",nativeQuery = true)
 	public int getIdPrimaryKey();
 	
-	@Query(value="SELECT COALESCE(max(codigo),0)+1 as id from inscritodetalle",nativeQuery = true)
+	@Query(value="SELECT COALESCE(max(codigo),0)+1 as codigo from inscritodetalle",nativeQuery = true)
 	public Integer getCodigo();
 	
 	/*

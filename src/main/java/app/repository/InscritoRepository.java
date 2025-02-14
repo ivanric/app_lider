@@ -20,7 +20,7 @@ public interface InscritoRepository extends GenericRepositoryNormal<InscritoEnti
 	@Query(value="select COALESCE(max(id),0)+1 as id from inscrito",nativeQuery = true)
 	public int getIdPrimaryKey();
 	
-	@Query(value="SELECT COALESCE(max(codigo),0)+1 as id from inscrito",nativeQuery = true)
+	@Query(value="SELECT COALESCE(max(codigo),0)+1 as codigo from inscrito",nativeQuery = true)
 	public Integer getCodigo();
 	
 	@Query(value = "SELECT DISTINCT pt.id,p.ci,concat(p.nombres,' ',p.apellidos) as nombrecompleto,p.email,p.celular,\r\n"

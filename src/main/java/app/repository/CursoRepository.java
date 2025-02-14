@@ -18,7 +18,7 @@ public interface CursoRepository extends GenericRepositoryNormal<CursoEntity, In
 	@Query(value="select COALESCE(max(id),0)+1 as id from curso",nativeQuery = true)
 	public int getIdPrimaryKey();
 	
-	@Query(value="SELECT COALESCE(max(codigo),0)+1 as id from curso",nativeQuery = true)
+	@Query(value="SELECT COALESCE(max(codigo),0)+1 as codigo from curso",nativeQuery = true)
 	public Integer getCodigo();
 	
 	@Query(value = "select t.* from curso t where (t.estado=:estado or :estado=-1) and  (upper(concat(t.id,t.nombrecurso,'')) like concat('%',upper(:search),'%')) ORDER BY t.id ASC LIMIT :length OFFSET :start ",
