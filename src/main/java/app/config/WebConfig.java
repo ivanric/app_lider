@@ -1,18 +1,17 @@
-package app.config;
-
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-@Configuration
-public class WebConfig implements WebMvcConfigurer {
+//package app.config;
+//
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.web.servlet.config.annotation.CorsRegistry;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+//@Configuration
+//public class WebConfig implements WebMvcConfigurer {
 //    @Override
 //    public void addCorsMappings(CorsRegistry registry) {
 //        registry.addMapping("/**")  // Permite todas las rutas
-//            .allowedOrigins("*")  // Permite solicitudes desde cualquier origen
-//            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")  // Permite todos los métodos
-//            .allowedHeaders("*")  // Permite todos los encabezados
-//            .allowCredentials(false)  // Si no deseas permitir credenciales (cookies, autenticación HTTP)
-//            .maxAge(3600);  // Cache de la configuración CORS durante 1 hora (en segundos)
+//                .allowedOrigins("https://lideracademia.com")  // Especifica los dominios permitidos
+//                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")  // Métodos permitidos
+//                .allowedHeaders("*")  // Permite todos los encabezados
+//                .allowCredentials(true)  // Permite el uso de cookies o autenticación
+//                .maxAge(3600);  // Duración de la configuración CORS (en segundos)
 //    }
-}
+//}
