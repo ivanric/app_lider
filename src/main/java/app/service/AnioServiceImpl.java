@@ -102,9 +102,7 @@ public class AnioServiceImpl extends GenericServiceImplNormal<AnioEntity, Intege
 	public AnioEntity update(Integer id, AnioEntity entity) throws Exception {
 		try {
 			System.out.println("Modificar Entity Service:"+entity.toString());
-			//observado
-			AnioEntity catalogoEntity2=AnioRepository.findById(id).get();
-			System.out.println("CATALOGO BD:"+catalogoEntity2.toString());
+
         	
 			 entity=genericRepository.save(entity);
 			return entity;

@@ -12,12 +12,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import app.entity.AnioEntity;
+import app.service.AnioService;
 import app.service.AnioServiceImpl;
 import app.service.InstitucionService;
 import app.util.Constantes;
@@ -83,4 +88,22 @@ public class RestAnio extends RestControllerGenericNormalImpl<AnioEntity,AnioSer
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
+    @PostMapping("/modificar/{id}")
+	public ResponseEntity<?> update(@PathVariable Integer id,@RequestParam("nombre") String nombre,
+	        @RequestParam("estado") Integer estado ){
+		try {
+			
+			
+			System.out.println("EntidadModificar LLEGO:");
+			//observado
+			AnioEntity anio2=servicio.findById(id);
+			anio2.setNombre(nombre);
+			System.out.println("CATALOGO BD:"+anio2.toString());
+			return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id,anio2));
+		} catch (Exception e) {//BAD_REQUEST= es error 400
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, Por favor intente mas tarde. \"}");
+		}
+	}
 }

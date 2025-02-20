@@ -545,99 +545,45 @@
 
 			
 			function updateEntityForm1() {
-//                 console.log("G_JSON_ENTITY_ANTES:",G_JSON_ENTITY)
-
-				
-				async function obtenerInstitucion() {
-				 	return new Promise((resolve, reject) => {
-				        $.get(nameEntity2 + "/" + 1, function(result) {
-// 				            console.log("INT SELECCIONADO:", result);
-				            resolve(result);
-				        }).fail(function(error) {
-				            reject(error);
-				        });
-				    });
-				}
-                async function construirJsonEntity() {
-
-// 					G_JSON_ENTITY=new Object()
-					
-					
-					let id = $('body').find('input[name="id"]').val();
-				    G_JSON_ENTITY.id = id ? id : 0;
-
-				    G_JSON_ENTITY.nombre = $('body').find('input[name="nombre"]').val();
-				    G_JSON_ENTITY.estado = $('body').find('input[name="estado"]').val();
-
-
-
-				    try {
-
-				        let insti = await obtenerInstitucion();
-				        G_JSON_ENTITY.institucion =insti;
-				    } catch (error) {
-				        console.error('Error al obtener roles:', error);
-				        G_JSON_ENTITY.institucion = null;
-				    }
-
-
-				    return G_JSON_ENTITY;
-				}
-                
-             	async function obtenerJsonEntity() {
-				    try {
-				        let jsonEntity = await construirJsonEntity();
-// 				        console.log("JSON MODIFICAR PRE:",jsonEntity)
-				        return JSON.stringify(jsonEntity);
-				    } catch (error) {
-				        console.error('Error al construir el JSON de compra entity:', error);
-				        return null;
-				    }
-				}
-                
-				obtenerJsonEntity().then(json => {
-				    if (json !== null) {
-//        					console.log("JSON MODIFICAR SERVER",json)
-               
-	        	        $.ajax({
-		              	   	url:nameEntity+"/"+GID,
-		              	    type: "PUT",
-							'contentType': "application/json",
-							'data': json,
-		              	    'dataType': 'json',
-		              	  	async: false,
-		                     success:function(res){
-		                    	 objectMod=res
-		                         $('#formulario')[0].reset();
-		                         $('.modal').modal('hide')
-		                          Swal.fire({
-		                             title:"Registrado",
-		                             text:"Se ha modificado exitosamente",
-		                             icon:"success",
-		                             timer:700,   
-		                             showConfirmButton: false 
-		                         });  
-		                         $('#table').dataTable().fnDraw('page');
-		                     },
-		                     error:function(err){
-		                    	 console.log(err)
-	           	 				Swal.fire({
-							    	icon:'error',
-							    	title:"Cancelado",
-			                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
-			                        timer:2000,
-			                        showCancelButton:false,
-			                     	showConfirmButton:false
-							    })
-		                     }
-		                	
-		                 })
-				        
-				        
-				    } else {
-				        console.error('Error al obtener el JSON de compra entity');
-				    }
-				});
+				let formData = new FormData(document.getElementById('formulario'))
+                console.log("ID MOD:",GID)
+                console.log("forDAta mod:",formData)
+				 let imagenform = formData.get('logo');
+    	        $.ajax({
+              	   	url:nameEntity+"/modificar/"+GID,
+              	    type: "POST",
+//					'contentType': "application/json",
+					contentType: false,
+					processData: false,
+//					'contentType':false,
+					data: formData,
+//              	    'dataType': 'json',
+                     success:function(res){
+                    	 objectMod=res
+                         $('#formulario')[0].reset();
+                         $('.modal').modal('hide')
+                          Swal.fire({
+                             title:"Registrado",
+                             text:"Se ha modificado exitosamente",
+                             icon:"success",
+                             timer:700,   
+                             showConfirmButton: false 
+                         });  
+                         $('#table').dataTable().fnDraw('page');
+                     },
+                     error:function(err){
+                    	 console.log(err)
+       	 				Swal.fire({
+					    	icon:'error',
+					    	title:"Cancelado",
+	                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+	                        timer:2000,
+	                        showCancelButton:false,
+	                     	showConfirmButton:false
+					    })
+                     }
+                	
+                 })
                 
 			}
 			

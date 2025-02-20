@@ -459,38 +459,45 @@
                	 });
 			}
 			function updateEntityForm() {
-				var id=$('#formulario').find('input[name="id"]').val()
-				var objectMod;
-				console.log(JsonDataFormMod())
-                $.ajax({
-              	   	url:nameEntity+"/"+id,
-              	    type: "PUT",
-						'contentType': "application/json",
-						'data': JsonDataFormMod(),
-              	    'dataType': 'json',
-                     success:function(res){
-                    	 
-                    	 console.log("resp:",res)
-                    	 objectMod=res
-                    	 console.log("objectMod:",objectMod)
-//                     	 $('#formulario').data('formValidation').resetForm();
-                         $('#formulario')[0].reset();
-// 						 updateTable(id,res)
-						 
-                         $('.modal').modal('hide')
-                          Swal.fire({
-                             title:"Registrado",
-                             text:"Se ha modificado exitosamente",
-                             icon:"success",
-                             timer:700,   
-                             showConfirmButton: false 
-                         });  
-                         $('#table').dataTable().fnDraw('page');
-                     }
-                	
-                 })
-
-                 
+				   let formData = new FormData(document.getElementById('formulario'))
+	                console.log("ID MOD:",GID)
+	                console.log("forDAta mod:",formData)
+					 let imagenform = formData.get('logo');
+	    	        $.ajax({
+	              	   	url:nameEntity+"/modificar/"+GID,
+	              	    type: "POST",
+//						'contentType': "application/json",
+						contentType: false,
+						processData: false,
+//						'contentType':false,
+						data: formData,
+//	              	    'dataType': 'json',
+	                     success:function(res){
+	                    	 objectMod=res
+	                         $('#formulario')[0].reset();
+	                         $('.modal').modal('hide')
+	                          Swal.fire({
+	                             title:"Registrado",
+	                             text:"Se ha modificado exitosamente",
+	                             icon:"success",
+	                             timer:700,   
+	                             showConfirmButton: false 
+	                         });  
+	                         $('#table').dataTable().fnDraw('page');
+	                     },
+	                     error:function(err){
+	                    	 console.log(err)
+	       	 				Swal.fire({
+						    	icon:'error',
+						    	title:"Cancelado",
+		                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+		                        timer:2000,
+		                        showCancelButton:false,
+		                     	showConfirmButton:false
+						    })
+	                     }
+	                	
+	                 })
 			}
 			
 			function updateStatusEntity(status) {

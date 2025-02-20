@@ -11,11 +11,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.entity.AnioEntity;
 import app.entity.GradoAcademicoEntity;
 import app.service.GradoAcademicoServiceImpl;
 import app.util.Constantes;
@@ -69,5 +72,16 @@ public class RestGradoAcademico extends RestControllerGenericNormalImpl<GradoAca
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
+    @PostMapping("/modificar/{id}")
+	public ResponseEntity<?> update(@PathVariable Integer id,@ModelAttribute GradoAcademicoEntity entidad ){
+		try {
+			System.out.println("EntidadModificar LLEGO:"+entidad.toString());
+			return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id,entidad));
+		} catch (Exception e) {//BAD_REQUEST= es error 400
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, Por favor intente mas tarde. \"}");
+		}
+	}
 
 }
