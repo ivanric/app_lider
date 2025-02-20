@@ -594,7 +594,7 @@ body {
 									<label for="ci" class=""><b>CEDULA</b></label> <input
 										placeholder="Ingrese carnet.. "
 										class="form-control fg-input data-per field_css" name="ci"
-										type="text" required="required">
+										type="text" required="required" autocomplete="off">
 								</div>
 
 							</div>
@@ -924,7 +924,7 @@ body {
 								<div class="col-md-12">
 
 									<div class=" shadow evento_metodospagos">
-										<div class="evento_metodospagos_title">Metodos de Pago</div>
+										<div class="evento_metodospagos_title">Formas de Inscripción</div>
 										<div class=" evento_content_metodospagos">
 											<div class="card_evento_metodopago">
 												<div class="card_evento_metodopago_img">
@@ -1030,7 +1030,7 @@ body {
 		var nameEntity7="../../RestMetodosPagos"
 	
 		
-		
+		var GID_EVENTO=""
 	
 		$('#formulario').find('input[name="archivoimgparticipante"]').fileinput({
 		  	language:'es',
@@ -1298,8 +1298,9 @@ body {
 		
 		$.get(nameEntity5 + '/findByCodeEncrypt/' + codigoeventoencript, function (data) {
 			console.log("Evento_data_by_crypt:",data);
-			
+			GID_EVENTO=data.id;
 			$('#formulario').find('input[name="idevento"]').val(data.id);
+			
 			let xcant=1;
 			let xprec=data.precio;
 			$('#formulario').find('input[name="cantidad"]').val(xcant);
@@ -1548,6 +1549,18 @@ body {
             	  buttonsStyling: false
             	})
             
+//             let ci_val_d=$('formulario').find('input[name="ci"]').val()
+//    			console.log('ci_val_d:',ci_val_d)
+	        
+//    			if (ci_val_d!="" && GID_EVENTO!="") {
+
+// 				//si no esta vacio los datos del carnet iremos a buscar los datos del estudiante.
+// 		 		validarEstudiante(ci_val_d,GID_EVENTO);
+// 			}else{
+// 				console.log("ci_val_d:",ci_val)
+// 				console.log("GID_EVENTO_D:",GID_EVENTO)
+// 			}
+            	
 			swalWithBootstrapButtons.fire({
 				  title: "¿Estas Seguro de continuar?",   
 	              text: "Se registrara su inscripción en el Sistema",   
@@ -1651,10 +1664,13 @@ body {
    			let ci_val=$(this).val()
    			console.log('ci_val:',ci_val)
 	        
-   			if (ci_val!="") {
+   			if (ci_val!="" && GID_EVENTO!="") {
 
 				//si no esta vacio los datos del carnet iremos a buscar los datos del estudiante.
-		 		validarEstudiante(ci_val);
+		 		validarEstudiante(ci_val,GID_EVENTO);
+			}else{
+				console.log("ci_val:",ci_val)
+				console.log("GID_EVENTO:",GID_EVENTO)
 			}
 			
 //    		if(ok) {
@@ -1670,14 +1686,15 @@ body {
   			$(".contenido-detalles-evento").toggle(100); // 300ms de animación
 		});
    		
-   		function validarEstudiante(value) {
+   		function validarEstudiante(value,ideven_p) {
             function asyncSqrt(value,callback){
                 // alert('1')
                 $.ajax({
                     url:nameEntity_a+"/findEstudiante/",
                     data:{
                         ci:value,
-                        idevento:$('#formulario').find('input[name="idevento"]').val()
+//                         idevento:$('#formulario').find('input[name="idevento"]').val()
+                        idevento:ideven_p
                     },
                     // type:"post", 
                     dataType:"json",
@@ -1703,18 +1720,29 @@ body {
 //     		        document.getElementById("error").classList.remove("ocultar");
 //     		        document.getElementById("ok").classList.remove("ocultar");
     		        document.getElementById("error-inscrito").classList.remove("ocultar");
+    		        
+    		        document.getElementById("ok").classList.add("ocultar");
+    		        document.getElementById("error").classList.add("ocultar");
+    		        setTimeout(() => {
+                        location.reload();
+                    }, 5000); // 5000 ms = 5 segundos
+                    return;
 				} else {
 	                if(result.persona==null){
 	    	   			// Si no se encontraron datos del carnet ingresado
 	    		        document.getElementById("error").classList.remove("mostrar");
 	    		        document.getElementById("error-inscrito").classList.remove("mostrar");
 	    		        document.getElementById("ok").classList.remove("ocultar");
+	    		        
+	    		        document.getElementById("error-inscrito").classList.add("ocultar");
+	    		        document.getElementById("error").classList.add("ocultar");
 	    		        logouserdefault()//formateamos la imagen del participante
 	    		        resetdataformulario();
 	                }else{
 	                	resetdataformulario();
 	                	document.getElementById("ok").classList.add("ocultar");
 	                	document.getElementById("error-inscrito").classList.add("ocultar");
+	                	
 	    		        document.getElementById("error").classList.add("mostrar");	
 	                	if(result.participante!=null){
 	                		//aqui ponemos los datos del estudiante si se registro como participante

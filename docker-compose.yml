@@ -20,7 +20,14 @@ services:
       - ~/.aws:/root/.aws:ro  # Monta las credenciales de AWS en el contenedor
 #      - C:/Users/USER/.aws:/root/.aws:ro  # Monta las credenciales de AWS en el contenedor
       - lider_app_data:/home  # Define un volumen llamado 'lider_app_data' montado en '/home' del contenedor
-
+    deploy:
+          resources:
+            limits:
+              cpus: "0.5"
+              memory: 512M
+            reservations:
+              cpus: "0.25"
+              memory: 256M
   bd_posgresql:   
     container_name: "lider_bd"
     image: postgres:11
@@ -31,7 +38,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: lider.2025
       POSTGRES_DB: certificadoslider
-
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Volumen persistente para los datos de la base de datos
   pgadmin: 
     container_name: "pgadmin_bd"
     image: dpage/pgadmin4
@@ -45,3 +53,4 @@ services:
       
 volumes:
   lider_app_data:  # Define el volumen para la aplicación lider_app
+  db_data:  # Volumen persistente para los datos de la base de datos

@@ -191,7 +191,29 @@
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-resources-plugin</artifactId>
 			    <version>3.1.0</version>
-			</plugin>   
+			</plugin>
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <version>3.1.2</version>
+    <executions>
+        <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+                <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+                <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                <overWriteReleases>false</overWriteReleases>
+                <overWriteSnapshots>false</overWriteSnapshots>
+                <overWriteIfNewer>true</overWriteIfNewer>
+                <includeScope>runtime</includeScope>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+ 
 		</plugins>
 		<resources>
 			 <!-- Incluye todos los archivos dentro de src/main/resources, incluyendo static y templates -->

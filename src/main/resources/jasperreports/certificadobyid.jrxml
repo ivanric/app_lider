@@ -100,14 +100,14 @@ AND (ct.id = $P{idcert_param} OR $P{idcert_param}= -1)]]>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Eras Demi ITC" size="9"/>
+					<font fontName="DejaVu Sans" size="9" pdfFontName="fonts/Montserrat/static/Montserrat-Regular.ttf" isPdfEmbedded="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nrofolio}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="170" splitType="Stretch">
+		<band height="184" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="600" y="1" width="113" height="113" uuid="d5634e56-18df-4cf2-a8a3-73024823fb65">
@@ -128,21 +128,21 @@ AND (ct.id = $P{idcert_param} OR $P{idcert_param}= -1)]]>
 	<detail>
 		<band height="134" splitType="Stretch">
 			<textField>
-				<reportElement x="20" y="-23" width="750" height="29" uuid="32856008-6d37-4970-8fe5-fbacb777edb6">
+				<reportElement x="20" y="-33" width="750" height="31" uuid="32856008-6d37-4970-8fe5-fbacb777edb6">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Eras Bold ITC" size="25" isBold="true" pdfFontName="fonts/Montserrat/static/Montserrat-Bold.ttf"/>
+					<font fontName="DejaVu Sans" size="25" isBold="true" pdfFontName="fonts/Montserrat/static/Montserrat-Bold.ttf"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{estudiante}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="-45" width="600" height="24" uuid="a3fe1a45-29a9-4646-9750-0ae247f5e055">
+				<reportElement x="100" y="-55" width="600" height="25" uuid="a3fe1a45-29a9-4646-9750-0ae247f5e055">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Eras Bold ITC" size="20" isBold="true" pdfFontName="fonts/Montserrat/static/Montserrat-Bold.ttf"/>
+					<font fontName="DejaVu Sans" size="20" isBold="true" pdfFontName="fonts/Montserrat/static/Montserrat-Bold.ttf"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{otorgadocertificado}]]></textFieldExpression>
 			</textField>
@@ -161,7 +161,7 @@ AND (ct.id = $P{idcert_param} OR $P{idcert_param}= -1)]]>
 	<summary>
 		<band height="172" splitType="Stretch">
 			<image>
-				<reportElement x="19" y="25" width="113" height="113" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
+				<reportElement mode="Transparent" x="19" y="25" width="113" height="113" backcolor="#FFFFFF" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>

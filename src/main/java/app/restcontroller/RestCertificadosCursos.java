@@ -272,19 +272,39 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
             parametros.put("dirPhotho_param", plantillaStream.readAllBytes());
 //            parametros.put("dirPhothoUser_param", userStream);
             parametros.put("dirPhothoQr_param", qrStream.readAllBytes());
+            
+            String formato = "pdf";
+            String nombreReporte = "CERTIFICADO";
+            String descarga = "inline"; // o inline attachment
+
+            // Lista de fuentes personalizadas
+            List<String> fuentes = List.of(
+                "fonts/Montserrat/static/Montserrat-Bold.ttf",
+                "fonts/Montserrat/static/Montserrat-Regular.ttf",
+                "fonts/eras-itc-bold.ttf"
+            );
+            // Verificar carga de fuentes
+            System.out.println("****************Cargando fuentes: " + fuentes);
+            
             URIS ubicacion = new URIS();
-            // Ruta del archivo JRXML
+    
             String urlReporte = ubicacion.jasperReport + "certificadobyid.jrxml";
-            InputStream jrxmlStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(urlReporte);
+            InputStream jrxmlStream = getClass().getClassLoader().getResourceAsStream(urlReporte);
             if (jrxmlStream == null) {
                 throw new RuntimeException("No se pudo encontrar el archivo JRXML.");
             }
+         // Ruta del archivo .jasper
+//            String urlReporte = ubicacion.jasperReport + "certificadobyid.jasper";
+//            InputStream jasperStream = getClass().getClassLoader().getResourceAsStream(urlReporte);
+//            if (jasperStream == null) {
+//                throw new RuntimeException("No se pudo encontrar el archivo .jasper.");
+//            }
 
             // Compilar y generar el reporte
             JasperReport reporte = JasperCompileManager.compileReport(jrxmlStream);
             try (Connection connection = dataSource.getConnection()) {
                 GeneradorReportes generador = new GeneradorReportes();
-                generador.generarReporte(response, reporte, "pdf", parametros, connection, "CERTIFICADO", "inline");
+                generador.generarReporte(response, reporte,formato, parametros, connection, nombreReporte, descarga);
             }
         } catch (Exception e) {
             System.out.println("Error al generar el reporte: "+ e.getMessage());
@@ -301,25 +321,123 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
     }
 
     
+//    @PostMapping("/Imprimir_certificados")
+//    public ResponseEntity<Map<String, String>> recibirCertificadosMarcados(@RequestBody Map<String, List<Integer>> requestData, HttpServletResponse response) {
+//        List<Integer> selectedIds = requestData.get("ids");  // Obtener los IDs de los certificados
+//
+//        Map<String, String> responseMap = new HashMap<>();
+//        if (selectedIds == null || selectedIds.isEmpty()) {
+//            // Respuesta de error si no se reciben IDs
+//            responseMap.put("message", "No se enviaron IDs válidos.");
+//            return ResponseEntity.badRequest().body(responseMap);
+//        }
+//
+//        try {
+//            // Convertir List<Integer> a Integer[]
+//            Integer[] certificadosIdsArray = selectedIds.toArray(new Integer[0]);
+//            System.out.println("Contenido de certificadosIdsArray:");
+//            for (Integer id : certificadosIdsArray) {
+//                System.out.println(id);
+//            }
+//            // Crear una lista de parámetros
+//            Map<String, Object> parametros = new HashMap<>();
+//            List<byte[]> fotoPlantillas = new ArrayList<>();
+//            List<byte[]> fotoUsuarios = new ArrayList<>();
+//            List<byte[]> fotosQr = new ArrayList<>();
+//
+//            // Recopilar las imágenes y agregar los parámetros
+//            for (Integer id : certificadosIdsArray) {
+//                CertificadoEntity certificadoEntity = servicio.findById(id);
+//                if (certificadoEntity == null) {
+//                    throw new RuntimeException("Certificado no encontrado para el ID: " + id);
+//                }
+//
+//                // Descargar las imágenes de S3
+//                InputStream plantillaStream = descargarArchivoS3(Constantes.nameFolderLogoCurso + "/" + certificadoEntity.getCurso().getImagencertificado(), "la plantilla");
+//                
+//                InputStream userStream=null;
+//                if (certificadoEntity.getParticipante().getImagen()!=null) {
+//                	 userStream = descargarArchivoS3(Constantes.nameFolderLogoParticipante + "/" + certificadoEntity.getParticipante().getImagen(), "la foto del usuario");
+//                    
+//                	 fotoUsuarios.add(userStream.readAllBytes());
+//    			}else {
+//    				fotoUsuarios.add(null);
+//    			}
+//                InputStream qrStream = descargarArchivoS3(Constantes.nameFolderQrIncritoCertificado + "/" + certificadoEntity.getLinkqr(), "el código QR");
+//
+//                // Guardar las imágenes en una lista de bytes
+//                fotoPlantillas.add(plantillaStream.readAllBytes());
+////                fotoUsuarios.add(userStream.);
+//                fotosQr.add(qrStream.readAllBytes());
+//            }   
+//     
+//            // Agregar los parámetros al mapa
+//            parametros.put("certificadosIds", certificadosIdsArray);
+//            parametros.put("fotoPlantillas", fotoPlantillas);
+//            parametros.put("fotoUsuarios", fotoUsuarios);
+//            parametros.put("fotosQr", fotosQr); 
+//
+//            String formato = "pdf";
+//            String nombreReporte = "CERTIFICADO";
+//            String descarga = "inline"; // o inline attachment
+//
+//            // Lista de fuentes personalizadas
+//            List<String> fuentes = List.of(
+//                "fonts/Montserrat/static/Montserrat-Bold.ttf",
+//                "fonts/Montserrat/static/Montserrat-Regular.ttf",
+//                "fonts/eras-itc-bold.ttf"
+//            );
+//            
+//            // Verificar carga de fuentes
+//            System.out.println("****************Cargando fuentes: " + fuentes);
+//            // Cargar el archivo JRXML
+//            URIS ubicacion = new URIS();
+//            String urlReporte = ubicacion.jasperReport + "certificadosByIds.jrxml";
+//            InputStream jrxmlStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(urlReporte);
+//            if (jrxmlStream == null) {
+//                throw new RuntimeException("No se pudo encontrar el archivo JRXML.");
+//            }
+//
+//            // Compilar el reporte
+//            JasperReport reporte = JasperCompileManager.compileReport(jrxmlStream);
+//
+//            try (Connection connection = dataSource.getConnection()) {
+//                GeneradorReportes generador = new GeneradorReportes();
+//                generador.generarReporte(response, reporte, formato, parametros, connection, nombreReporte, descarga);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Error al generar los certificados: " + e.getMessage());
+//            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+//            responseMap.put("message", "Error al generar los certificados.");
+//            return ResponseEntity.status(HttpServletResponse.SC_INTERNAL_SERVER_ERROR).body(responseMap);
+//        }
+//
+//        responseMap.put("message", "Certificados generados correctamente.");
+//        return ResponseEntity.ok(responseMap);
+//    }
     @PostMapping("/Imprimir_certificados")
-    public ResponseEntity<Map<String, String>> recibirCertificadosMarcados(@RequestBody Map<String, List<Integer>> requestData, HttpServletResponse response) {
-        List<Integer> selectedIds = requestData.get("ids");  // Obtener los IDs de los certificados
+    public void recibirCertificadosMarcados(@RequestBody Map<String, List<Integer>> requestData, HttpServletResponse response) {
+        List<Integer> selectedIds = requestData.get("ids");
 
-        Map<String, String> responseMap = new HashMap<>();
         if (selectedIds == null || selectedIds.isEmpty()) {
-            // Respuesta de error si no se reciben IDs
-            responseMap.put("message", "No se enviaron IDs válidos.");
-            return ResponseEntity.badRequest().body(responseMap);
+            try {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.setContentType("text/plain; charset=UTF-8");
+                response.getWriter().write("No se enviaron IDs válidos.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
         }
 
         try {
-            // Convertir List<Integer> a Integer[]
             Integer[] certificadosIdsArray = selectedIds.toArray(new Integer[0]);
             System.out.println("Contenido de certificadosIdsArray:");
             for (Integer id : certificadosIdsArray) {
                 System.out.println(id);
             }
-            // Crear una lista de parámetros
+
+            // Mapa de parámetros para el reporte
             Map<String, Object> parametros = new HashMap<>();
             List<byte[]> fotoPlantillas = new ArrayList<>();
             List<byte[]> fotoUsuarios = new ArrayList<>();
@@ -332,55 +450,60 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
                     throw new RuntimeException("Certificado no encontrado para el ID: " + id);
                 }
 
-                // Descargar las imágenes de S3
+                // Descargar imágenes de S3
                 InputStream plantillaStream = descargarArchivoS3(Constantes.nameFolderLogoCurso + "/" + certificadoEntity.getCurso().getImagencertificado(), "la plantilla");
-                
-                InputStream userStream=null;
-                if (certificadoEntity.getParticipante().getImagen()!=null) {
-                	 userStream = descargarArchivoS3(Constantes.nameFolderLogoParticipante + "/" + certificadoEntity.getParticipante().getImagen(), "la foto del usuario");
-                    
-                	 fotoUsuarios.add(userStream.readAllBytes());
-    			}else {
-    				fotoUsuarios.add(null);
-    			}
                 InputStream qrStream = descargarArchivoS3(Constantes.nameFolderQrIncritoCertificado + "/" + certificadoEntity.getLinkqr(), "el código QR");
 
-                // Guardar las imágenes en una lista de bytes
+                // Manejo de imagen del usuario (puede ser nula)
+                InputStream userStream = null;
+                if (certificadoEntity.getParticipante().getImagen() != null) {
+                    userStream = descargarArchivoS3(Constantes.nameFolderLogoParticipante + "/" + certificadoEntity.getParticipante().getImagen(), "la foto del usuario");
+                    fotoUsuarios.add(userStream.readAllBytes());
+                } else {
+                    fotoUsuarios.add(null);
+                }
+
+                // Guardar imágenes en listas de bytes
                 fotoPlantillas.add(plantillaStream.readAllBytes());
-//                fotoUsuarios.add(userStream.);
                 fotosQr.add(qrStream.readAllBytes());
-            }   
-     
+            }
+
             // Agregar los parámetros al mapa
             parametros.put("certificadosIds", certificadosIdsArray);
             parametros.put("fotoPlantillas", fotoPlantillas);
             parametros.put("fotoUsuarios", fotoUsuarios);
-            parametros.put("fotosQr", fotosQr); 
+            parametros.put("fotosQr", fotosQr);
 
-            // Cargar el archivo JRXML
+            String formato = "pdf";
+            String nombreReporte = "CERTIFICADO";
+            String descarga = "inline"; // Puede ser "attachment" para descarga directa
+
+            // Cargar y compilar el archivo JRXML
             URIS ubicacion = new URIS();
             String urlReporte = ubicacion.jasperReport + "certificadosByIds.jrxml";
             InputStream jrxmlStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(urlReporte);
+
             if (jrxmlStream == null) {
                 throw new RuntimeException("No se pudo encontrar el archivo JRXML.");
             }
 
-            // Compilar el reporte
             JasperReport reporte = JasperCompileManager.compileReport(jrxmlStream);
 
+            // Generar el PDF usando tu método actual
             try (Connection connection = dataSource.getConnection()) {
                 GeneradorReportes generador = new GeneradorReportes();
-                generador.generarReporte(response, reporte, "pdf", parametros, connection, "CERTIFICADO", "inline");
+                generador.generarReporte(response, reporte, formato, parametros, connection, nombreReporte, descarga);
             }
         } catch (Exception e) {
-            System.out.println("Error al generar los certificados: " + e.getMessage());
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            responseMap.put("message", "Error al generar los certificados.");
-            return ResponseEntity.status(HttpServletResponse.SC_INTERNAL_SERVER_ERROR).body(responseMap);
+            e.printStackTrace();
+            try {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.setContentType("text/plain; charset=UTF-8");
+                response.getWriter().write("Error al generar los certificados: " + e.getMessage());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
-
-        responseMap.put("message", "Certificados generados correctamente.");
-        return ResponseEntity.ok(responseMap);
     }
 
 
