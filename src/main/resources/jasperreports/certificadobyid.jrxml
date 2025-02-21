@@ -96,13 +96,13 @@ AND (ct.id = $P{idcert_param} OR $P{idcert_param}= -1)]]>
 	<pageHeader>
 		<band height="11" splitType="Stretch">
 			<textField>
-				<reportElement mode="Transparent" x="600" y="0" width="113" height="11" forecolor="#000000" uuid="b9b935dd-b9fa-434c-985f-ec40942545f8">
+				<reportElement mode="Transparent" x="583" y="0" width="147" height="11" forecolor="#000000" uuid="b9b935dd-b9fa-434c-985f-ec40942545f8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="9" pdfFontName="fonts/Montserrat/static/Montserrat-Regular.ttf" isPdfEmbedded="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nrofolio}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["COD.CERT."+$F{nrofolio}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -159,9 +159,9 @@ AND (ct.id = $P{idcert_param} OR $P{idcert_param}= -1)]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="172" splitType="Stretch">
+		<band height="184" splitType="Stretch">
 			<image>
-				<reportElement mode="Transparent" x="19" y="25" width="113" height="113" backcolor="#FFFFFF" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
+				<reportElement mode="Transparent" x="19" y="70" width="113" height="113" backcolor="#FFFFFF" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
