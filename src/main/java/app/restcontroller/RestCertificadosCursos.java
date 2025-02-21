@@ -412,7 +412,7 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
             }
 //            Integer[] certificadosIdsArray = selectedIds.toArray(selectedIds);
             // Agregar parámetros al reporte
-            parametros.put("certificadosIds", selectedIds.toArray(new Integer[0]));
+            parametros.put("certificadosIds", selectedIds.toArray(new Integer[0]));//dato para
             parametros.put("fotoPlantillas", fotoPlantillas.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
             parametros.put("fotoUsuarios", fotoUsuarios.stream().map(file -> file != null ? file.getAbsolutePath() : null).collect(Collectors.toList()));
             parametros.put("fotosQr", fotosQr.stream().map(File::getAbsolutePath).collect(Collectors.toList()));
