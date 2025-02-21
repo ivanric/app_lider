@@ -13,6 +13,7 @@ services:
       - DATABASE_PASSWORD=lider.2025
       - AWS_REGION=sa-east-1  # Solo la región es necesaria
       - AWS_PROFILE=default
+      - JAVA_OPTS=-Xms512m -Xmx2g  # Aumentar memoria de la JVM
     depends_on:
       - bd_posgresql
     volumes:
@@ -24,10 +25,10 @@ services:
           resources:
             limits:
               cpus: "0.5"
-              memory: 512M
+              memory: 2G  # Cambiado de 512M a 2G
             reservations:
               cpus: "0.25"
-              memory: 256M
+              memory: 512M # Asegura que al menos 512 MB estén disponibles para el contenedor
   bd_posgresql:   
     container_name: "lider_bd"
     image: postgres:11
