@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import app.entity.CertificadoEntity;
+import app.entity.InstitucionEntity;
 import app.entity.PersonaEntity;
 import app.repository.CertificadoCursoRepository;
 import app.repository.PersonaRepository;
 import app.repository.GenericRepositoryNormal;
+import app.repository.InstitucionRepository;
 import app.util.Constantes;
 import app.util.QRCodeGeneratorService;
 
@@ -22,7 +24,7 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
 
 	@Autowired private PersonaRepository PersonaRepository;
 	@Autowired private CertificadoCursoRepository CertificadoCursoRepository;
-
+	@Autowired private InstitucionRepository InstitucionRepository;
 //	@Autowired private ArchivoService archivoService;
 	@Autowired QRCodeGeneratorService qrCodeGeneratorService;
 
@@ -84,10 +86,36 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
 	}
 	@Override
 	@Transactional
-	public List<Map<String, Object>> findAll_m( int estado,String search,int idevento,int idcategoria,int idanio,int idparticipante,int length,int start ) throws Exception {
+	public List<Map<String, Object>> findAll_listar_cursos( int estado,String search,int idevento,int idanio,int idparticipante,int length,int start ) throws Exception {
         try{
 //            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
-            List<Map<String, Object>> entities = CertificadoCursoRepository.findAll_m(estado, search,idevento,idcategoria,idanio,idparticipante, length, start);
+            List<Map<String, Object>> entities = CertificadoCursoRepository.findAll_listar_curso(estado, search,idevento,idanio,idparticipante, length, start);
+            return entities;
+        } catch (Exception e){
+        	e.printStackTrace();
+        	System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
+        }
+	}
+	@Override
+	public Integer getTotAll_cursos(int estado,String search,int idevento,int idcategoria,int idanio) throws Exception {
+		
+        try{
+        	int total = CertificadoCursoRepository.getTotAll_cursos(estado,search, idevento,idcategoria,idanio );
+          return total;
+      } catch (Exception e){
+      		System.out.println(e.getMessage());
+//          throw new Exception(e.getMessage());
+          return 0; 
+      }
+	}
+
+	@Override
+	@Transactional
+	public List<Map<String, Object>> getIdCertiByPart( int estado,String search,int idevento,int idcategoria,int idanio,int idparticipante ) throws Exception {
+        try{
+//            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
+            List<Map<String, Object>> entities = CertificadoCursoRepository.getIdCertiByPart(estado, search,idevento,idcategoria,idanio,idparticipante);
             return entities;
         } catch (Exception e){
         	e.printStackTrace();
@@ -97,10 +125,10 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
 	}
 	@Override
 	@Transactional
-	public List<Map<String, Object>> getIdCertiByPart( int estado,String search,int idevento,int idcategoria,int idanio,int idparticipante ) throws Exception {
+	public List<Map<String, Object>> getIdCertiByCurso( int estado,String search,int idevento,int idcategoria,int idanio,int idcurso) throws Exception {
         try{
 //            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
-            List<Map<String, Object>> entities = CertificadoCursoRepository.getIdCertiByPart(estado, search,idevento,idcategoria,idanio,idparticipante);
+            List<Map<String, Object>> entities = CertificadoCursoRepository.getIdCertiByCurso(estado, search,idevento,idcategoria,idanio,idcurso);
             return entities;
         } catch (Exception e){
         	e.printStackTrace();
@@ -122,6 +150,58 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
             throw new Exception(e.getMessage());
         }
 	}
+	 private S3Service s3Service;
+	@Override
+	public CertificadoEntity renovarQR(CertificadoEntity entidad) throws Exception {
+	    try {
+	        System.out.println("Modificar Entity QR*****************:" + entidad.toString());
+
+	        // Buscar y actualizar los datos del socio
+	        CertificadoEntity entitymod = CertificadoCursoRepository.findById(entidad.getId())
+	            .orElseThrow(() -> new Exception("CertificadoEntity no encontrado"));
+
+
+	        // Generar el contenido del QR
+	        String codigoDocumento = entitymod.getNrodocumento();
+	        String  nrofolio_x = entitymod.getNrofolio();
+	        System.out.println("************************** NUMERO DE DOCUMENTO UPDATE QR:" + codigoDocumento);
+
+	        InstitucionEntity institucionEntity = InstitucionRepository.findById(1)
+	            .orElseThrow(() -> new Exception("Institución no encontrada"));
+	        
+	        System.out.println("*************INSTITUCION:" + institucionEntity.toString());
+	        
+	        String bodyQR = institucionEntity.getHost() + "/certificado/" + codigoDocumento;
+	        System.out.println("****************CONTENIDO QR:" + bodyQR);
+
+	        // Intentar eliminar el QR anterior en Google Drive
+	        try {
+	            System.out.println("************* ELIMINANDO QR de nube: " + entitymod.getLinkqr());
+
+                s3Service.deleteFile(Constantes.nameFolderQrIncritoCertificado + "/" + entitymod.getLinkqr());
+	        } catch (Exception e) {
+	            System.out.println("No se pudo eliminar el QR anterior : " + e.getMessage());
+	        }
+
+
+	        qrCodeGeneratorService.generateQRCode(
+            		Constantes.nameFolderQrIncritoCertificado,
+            		bodyQR,
+            		"QRCERT - "+nrofolio_x
+            );
+	        
+	        
+	        
+	        entitymod.setLinkqr("QRCERT - "+nrofolio_x+ ".png");
+	        entitymod = genericRepository.save(entitymod);
+
+	        return entitymod;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        System.out.println(e.getMessage());
+	        throw new Exception(e.getMessage());
+	    }
+	}
 	
 	@Override
 	public Integer getTotAll(int estado,String search,int idevento,int idcategoria,int idanio,int idparticipante) throws Exception {
@@ -134,6 +214,31 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
 //          throw new Exception(e.getMessage());
           return 0; 
       }
+	}
+	@Override
+	public Integer getTotAll_curso(int estado,String search,int idevento,int idcategoria,int idanio,int idcurso) throws Exception {
+		
+        try{
+        	int total = CertificadoCursoRepository.getTotAll_curso(estado,search, idevento,idcategoria,idanio,idcurso );
+          return total;
+      } catch (Exception e){
+      		System.out.println(e.getMessage());
+//          throw new Exception(e.getMessage());
+          return 0; 
+      }
+	}
+	@Override
+	@Transactional
+	public List<Map<String, Object>> getCategoryByIdAnio(int idevento,int idanio) throws Exception {
+        try{
+//            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
+            List<Map<String, Object>> entities = CertificadoCursoRepository.getCategoryByIdAnio(idevento,idanio);
+            return entities;
+        } catch (Exception e){
+        	e.printStackTrace();
+        	System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
+        }
 	}
 	@Override
 	@Transactional
@@ -154,6 +259,20 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
         try{
 //            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
             List<Map<String, Object>> entities = CertificadoCursoRepository.getEventoById(idanio,idpart);
+            return entities;
+        } catch (Exception e){
+        	e.printStackTrace();
+        	System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
+        }
+	}
+	
+	@Override
+	@Transactional
+	public List<Map<String, Object>> getEventByIdAnio(int idanio) throws Exception {
+        try{
+//            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
+            List<Map<String, Object>> entities = CertificadoCursoRepository.getEventoByIdAnio(idanio);
             return entities;
         } catch (Exception e){
         	e.printStackTrace();
@@ -271,55 +390,32 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
 		}
 	}
 	*/
-	
-	
-	
-	
-	/*
-	@Override
-	public Integer getTotCursoPorCategoria(int idubicacion) throws Exception {
-		
-        try{
-        	int total = CertificadoCursoRepository.getTotCursoPorCategoria(idubicacion);
-          return total;
-      } catch (Exception e){
-      		System.out.println(e.getMessage());
-//          throw new Exception(e.getMessage());
-          return 0;
-      }
-	}
-	
+
 	@Override
 	@Transactional
-	public CertificadoEntity customPlantillaCurso(Integer id, CertificadoEntity entidad) throws Exception {
-		try {
-			System.out.println("Modificar plantilla Entity :"+entidad.toString());
-			//observado
-
-			CertificadoEntity entitymod=CertificadoCursoRepository.findById(id).get();
-			
-			System.out.println("Serv Modificar afiche LLEGO:"+entidad.getCertificado_imagen().getOriginalFilename());
-//			if (entidad.getAfiche()!=null) {
-			if (!entidad.getCertificado_imagen().isEmpty()) {
-				this.archivoService.eliminarArchivoCursoPlantilla(entitymod.getImagencertificado());
-				String nombre="ptl-"+entitymod.getNrodocumento()+entidad.getCertificado_imagen().getOriginalFilename().substring(entidad.getCertificado_imagen().getOriginalFilename().lastIndexOf('.'));
-    			System.out.println("Nombrea afiche a guardar:"+nombre);
-    			System.out.println("entitymod.getImagen():"+entitymod.getImagencertificado());     		
-
-				String nombrePlantilla=archivoService.guargarCursoPlantilla(entidad.getCertificado_imagen(),nombre);
-				entitymod.setImagencertificado(nombrePlantilla);
-			}
-
-			
-//			entitymod=genericRepository.save(entidad);
-			entitymod=genericRepository.save(entitymod);
-			return entitymod;
-		} catch (Exception e) { 
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			throw new Exception(e.getMessage());
-		}
+	public List<Map<String, Object>> findAll_m_curso(int estado,String search,int idevento,int idcategoria,int idanio,int idcurso,int length,int start ) throws Exception {
+        try{
+//            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
+            List<Map<String, Object>> entities = CertificadoCursoRepository.findAll_m_curso(estado, search,idevento,idcategoria,idanio,idcurso, length, start);
+            return entities;
+        } catch (Exception e){
+        	e.printStackTrace();
+        	System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
+        }
 	}
-    */ 
+	@Override
+	@Transactional
+	public List<Map<String, Object>> findAll_m(int estado,String search,int idevento,int idcategoria,int idanio,int idparticipante,int length,int start ) throws Exception {
+        try{
+//            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
+            List<Map<String, Object>> entities = CertificadoCursoRepository.findAll_m(estado, search,idevento,idcategoria,idanio,idparticipante, length, start);
+            return entities;
+        } catch (Exception e){
+        	e.printStackTrace();
+        	System.out.println(e.getMessage());
+            throw new Exception(e.getMessage());
+        }
+	}
 
 }

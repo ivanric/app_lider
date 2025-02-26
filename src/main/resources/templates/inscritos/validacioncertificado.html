@@ -52,7 +52,7 @@
     		width: 100%;
     		height: auto;
 			font-family: "Poppins", sans-serif;
-              background-color: #eaeaea; 
+              background-color: #f9f9f9; 
              display: flex;
 		    justify-content: center;
 		    align-items: center;
@@ -353,30 +353,32 @@ td {
 								
 					        <div class="contenido">
 					         	<div class="cont-imagen-socio">
-									<img class=" imagen-socio " src="../../img/pngegg.png" th:href="@{../img/pngegg.png}"  alt="Imagen del Socio">
+									<img class=" imagen-socio " src="../../img/icono-validacion.png" th:href="@{../img/icono-validacion.png}"  alt="Imagen del Socio">
 			            
 								</div>
 								<div class="cont-data">
-									<h2>Validamos que:</h2>
+									<h4>Validamos que:</h4>
 									<div class="cont-data-nombre">
 										NOMBRE COMPLETO	
 									</div>
 									<div class="cont-data-apellidos">
-										
 										APELLIDOS	
 									</div>
 									<div class="cont-data-recomendacion">
-										con número de folio:<span class="cont-data-recomendacion-folio">AL-CB-1-12</span>
-										a particiapado del curso  
-										<span class="cont-data-recomendacion-nombrecurso">
-										<b> NOMBRE DEL CURSO</b>
-										</span>
-										con un valor curicular de 
+										con número de folio <b>COD.CERT.<span class="cont-data-recomendacion-folio">AL-CB-1-12</span></b> 
+										a participado del curso  
+										<b> <span class="cont-data-recomendacion-nombrecurso">
+										NOMBRE DEL CURSO
+										</span></b>
+										con un valor curricular de 
 										<span class="cont-data-valorcurricular">
 										0
 										</span> horas académicas </br> 
 										en fecha 
 										<span class="cont-data-fechacurso">
+										00/00/0000
+										</span> al  
+										<span class="cont-data-fechacurso-fin">
 										00/00/0000
 										</span>.</br>
 										dictado por el expositor 
@@ -385,9 +387,12 @@ td {
 										</span></br> 
 										
 									</div>
-									<div class="cont-empresa-avalado">
-								 		POR: ACADEMIA LIDER
-									 </div>
+									<b>
+										<div class="cont-empresa-avalado" style="font-size: 15px;">
+								 			info@academialider.com.bo
+									 	</div>
+									</b>
+									
 								 </div>
 
 								 
@@ -574,8 +579,10 @@ td {
 			$('#targeta').find('.cont-data-nombre').html(data.nombres_part);
 			$('#targeta').find('.cont-data-apellidos').html(data.apellidos_part);
 			$('#targeta').find('.cont-data-recomendacion-folio').html(data.nrofolio);
+			$('#targeta').find('.cont-data-recomendacion-nombrecurso').html(data.nombre_curso);
 			$('#targeta').find('.cont-data-valorcurricular').html(data.horasacademicas);
 			$('#targeta').find('.cont-data-fechacurso').html(data.fechainicial);
+			$('#targeta').find('.cont-data-fechacurso-fin').html(data.fechafinal);
 			$('#targeta').find('.cont-data-expositor').html(data.nombres_exp+ ' ' +data.apellidos_exp );
 
 

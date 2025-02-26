@@ -65,7 +65,24 @@
 
 				font-family: "Roboto", sans-serif;
 			}
+			.progress-bar {
+			  border-radius:10px;
+			  background-color: rgb(255 255 255);
+			  width: 65%;
+			  overflow: hidden;
+			  height: 10px;
+	   		  border: none;
+	    	  border-radius: 10
+			}
 			
+			.progress-bar-value {
+			  width: 100%;
+			  height: 100%;
+	 		  box-shadow: 2px 14px 15px -7px rgba(30, 166, 250, 0.36);
+			  background-color: #f7bf42fa;
+			  animation: indeterminateAnimation 1s infinite linear;
+			  transform-origin: 0% 50%;
+			}
 
 			.modal-body{
 				font-size: 11px !important;
@@ -325,6 +342,7 @@
 								<li><a href="#" data-href="/metodopago/gestion" onclick="event.preventDefault();gestion(this)">Metodos de Pago<span class="icon-dot-single"></span></a></li>
 								<li><a href="#" data-href="/evento/gestion" onclick="event.preventDefault();gestion(this)">Eventos<span class="icon-dot-single"></span></a></li>
 								<li><a href="#" data-href="/inscritos/gestion" onclick="event.preventDefault();gestion(this)">Inscritos<span class="icon-dot-single"></span></a></li>
+								<li><a href="#" data-href="/cursos/gestion" onclick="event.preventDefault();gestion(this)">Cursos<span class="icon-dot-single"></span></a></li>
 							</ul>
 						</li>
 					</ul>
@@ -377,7 +395,54 @@
 		    </div>
 		  </div>
 		</div>
-			
+			<div class="modal fade"  id="cargando" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"  style=" text-align: center; z-index: 20001;background: rgb(1 3 24 / 95%)">
+			<div class="modal-dialog modal-lg progress" style="width: 100%; text-align: center;" id="ModalMensaje"  >
+				<div class="" id="mdMj" >
+					<div class="modal-header" style="border: none">
+					
+					</div>
+					<div class="modal-body">
+						<div class="row text-center">
+<!-- 							<div class="col md 12" id="ContLoading"> -->
+							
+<!-- 								<img src="../static/img/gif/fashon.gif" th:src="@{/img/gif/fashon.gif}"  id="loadding" style="border-radius: 50%;"> -->
+								<img src="../static/img/gif/eess1.png" th:src="@{/img/gif/eess1.png}"  id="loadding" style="width: 15rem;">
+<!-- 							</div> -->
+							
+
+
+
+							
+						</div>
+						
+						<div class="row" >
+							<div class="col-md-12">
+<!-- 								<img src="../static/img/gif/loading_gif_png1.gif" th:src="@{/img/gif/loading_gif_png1.gif}"   style=""> -->
+							
+<!-- 							    <div class="progress"> -->
+<!-- 						        <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div> -->
+<!-- 						    </div> -->
+
+
+								<div class="texto_progress">NO CIERRE LA VENTANA, ESTAMOS CARGANDO INFORMACION.. </div>
+								<div class="demo-container">
+								  <img src="../static/img/gif/eess2_inv.png" th:src="@{/img/gif/eess2_inv.png}"  id="loadding" style="width: 10rem;">
+								
+								  <div class="progress-bar">
+								    <div class="progress-bar-value"></div>
+								  </div>
+								  <img src="../static/img/gif/eess2.png" th:src="@{/img/gif/eess2.png}"  id="loadding" style="width: 10rem;">
+								</div>
+								
+								
+<!-- 								<h3><b>No cierre la ventana porvor! </b> </h3> -->
+							</div>
+						</div>
+					</div>
+				</div>
+	
+			</div> 
+		</div>
 			
 		<script  src="./static/js/jquery-3.6.3.min.js" th:src="@{/js/jquery-3.6.3.min.js}"></script>
 	<!-- 	<script src="#" th:src="@{/js/formValidation.min.js}"></script> -->

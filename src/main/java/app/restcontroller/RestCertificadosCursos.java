@@ -66,7 +66,55 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
         this.dataSource = dataSource;
     }
 	 
+	@GetMapping("/listar")
+	public ResponseEntity<?> getAll_listar(HttpServletRequest request,@Param("draw")int draw,@Param("length")int length,@Param("start")int start,@Param("estado")int estado,@Param("idevento")int idevento,@Param("idcategoria")int idcategoria,@Param("idanio")int idanio)throws IOException{
+		String total="";
+		Map<String, Object> Data = new HashMap<String, Object>();
+		try {
+			System.out.println("LISTAR CURSOS DE LOS INSCRITOS");
+			String search = request.getParameter("search[value]");
+			int tot=Constantes.NUM_MAX_DATATABLE;
+			System.out.println("tot:"+tot+"estado:"+estado+"search:"+search+"length:"+length+"start:"+start+"idevento:"+idevento+"idcategoria:"+idcategoria+"idanio:"+idanio);
+			List<?> lista= servicio.findAll_listar_cursos(estado, search,idevento,idcategoria,idanio, length, start);
+			System.out.println("listar CURSOS DE INSCRITOS:"+lista.toString()); 
+			try {
 
+					total=String.valueOf(servicio.getTotAll_cursos(estado,search,idevento,idcategoria,idanio));	
+						
+			} catch (Exception e) {
+				total="0";
+			}
+			Data.put("draw", draw);
+			Data.put("recordsTotal", total);
+			Data.put("data", lista);
+			if(!search.equals(""))
+				Data.put("recordsFiltered", lista.size());
+			else
+				Data.put("recordsFiltered", total);		
+			return ResponseEntity.status(HttpStatus.OK).body(Data);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Data);
+		}
+	}
+	
+	
+	@GetMapping("/getEventByIdAnio/{idAnio}")
+	public ResponseEntity<?> getEventByIdAnio( @PathVariable Integer idAnio) {
+	    System.out.println(", ID Año: " + idAnio);
+	    List<?> lista = new ArrayList<>();
+	    try {
+	        lista = servicio.getEventByIdAnio(idAnio);
+	        return ResponseEntity.ok(lista);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(lista);
+	    }
+	}
+
+	
 	
 	@GetMapping("/listarbyParticipante")
 	public ResponseEntity<?> getAll(HttpServletRequest request,@Param("draw")int draw,@Param("length")int length,@Param("start")int start,@Param("estado")int estado,@Param("idevento")int idevento,@Param("idcategoria")int idcategoria,@Param("idanio")int idanio,@Param("idparticipante")int idparticipante)throws IOException{
@@ -105,6 +153,45 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Data);
 		}
 	}
+	
+	
+	@GetMapping("/listarbyCurso")
+	public ResponseEntity<?> listarbyCurso(HttpServletRequest request,@Param("draw")int draw,@Param("length")int length,@Param("start")int start,@Param("estado")int estado,@Param("idevento")int idevento,@Param("idcategoria")int idcategoria,@Param("idanio")int idanio,@Param("idcurso")int idcurso)throws IOException{
+		String total="";
+		Map<String, Object> Data = new HashMap<String, Object>();
+		try {
+			System.out.println("LISTAR CURSOSSsssssss");
+			String search = request.getParameter("search[value]");
+			int tot=Constantes.NUM_MAX_DATATABLE;
+			System.out.println("tot:"+tot+"estado:"+estado+"search:"+search+"length:"+length+"start:"+start+"idevento:"+idevento+"idcategoria:"+idcategoria+"idanio:"+idanio+"idcurso:"+idcurso);
+			List<?> lista= servicio.findAll_m_curso(estado, search,idevento,idcategoria,idanio,idcurso, length, start);
+			List<?> listaidcertificados= servicio.getIdCertiByCurso(estado, search,idevento,idcategoria,idanio,idcurso);
+//			List<?> lista= servicio.findAll(estado, search,idevento,idcategoria,idanio,idparticipante, length, start);
+			System.out.println("listar:"+lista.toString()); 
+			try {
+				total=String.valueOf(servicio.getTotAll_curso(estado,search,idevento,idcategoria,idanio,idcurso));					
+			} catch (Exception e) {
+				total="0";
+			}
+			Data.put("draw", draw);
+			Data.put("recordsTotal", total);
+			Data.put("data", lista);
+			Data.put("listaidcertificados", listaidcertificados);
+			if(!search.equals(""))
+				Data.put("recordsFiltered", lista.size());
+			else
+				Data.put("recordsFiltered", total);
+			
+			return ResponseEntity.status(HttpStatus.OK).body(Data);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			// TODO: handle exception
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Data);
+		}
+	}
+	
+	
 	/*
 	@GetMapping("/getCategoryById/{id}")
 	public ResponseEntity<?> getCateogoryById(@PathVariable Integer id)throws IOException{
@@ -125,6 +212,19 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
 		}
 	}
 	*/
+	@GetMapping("/getCategoryByIdAnio/{idEvent}/{idAnio}")
+	public ResponseEntity<?> getCategoryByIdAnio(@PathVariable Integer idEvent, @PathVariable Integer idAnio) {
+	    System.out.println("ID Evento: " + idEvent + ", ID Año: " + idAnio);
+	    List<?> lista = new ArrayList<>();
+	    try {
+	        lista = servicio.getCategoryByIdAnio(idEvent,idAnio);
+	        return ResponseEntity.ok(lista);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(lista);
+	    }
+	}
+	
 	@GetMapping("/getCategoryById/{idPart}/{idEvent}/{idAnio}")
 	public ResponseEntity<?> getCatogoryById(@PathVariable Integer idPart,@PathVariable Integer idEvent, @PathVariable Integer idAnio) {
 	    System.out.println("ID Participante: " + idPart+"ID Evento: " + idEvent + ", ID Año: " + idAnio);
@@ -157,6 +257,22 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
         	servicio.updateStatus(entity.getEstado(), entity.getId());
         	CertificadoEntity entity2=servicio.findById(entity.getId());
             return ResponseEntity.status(HttpStatus.OK).body(entity2);
+        } catch (Exception e) {
+        	System.out.println(e.getMessage());
+        	e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+    
+    @PostMapping("/renovarqr")
+    public ResponseEntity<?> renovarqr(@RequestBody CertificadoEntity entity) {
+        try {
+        	System.out.println("Entidad:"+entity.toString());
+//        	servicio.updateStatus(entity.getEstado(), entity.getId());
+//        	CertificadoEntity entity2=servicio.findById(entity.getId());
+//            return ResponseEntity.status(HttpStatus.OK).body(entity2);
+//            return ResponseEntity.status(HttpStatus.OK).body(entity2);
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.renovarQR(entity));
         } catch (Exception e) {
         	System.out.println(e.getMessage());
         	e.printStackTrace();

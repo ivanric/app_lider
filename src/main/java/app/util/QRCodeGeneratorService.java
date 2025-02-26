@@ -187,15 +187,80 @@ public class QRCodeGeneratorService {
         File outputFile = new File(path);
         ImageIO.write(qrImage, "PNG", outputFile);
     }*/
-    private void processQRCode(String data, String path, String charset, int height, int width) throws WriterException, IOException {
-        // 🔹 Escalar el logo para que no afecte demasiado el QR
-        double logoScale = 0.18; // El logo ocupará un 18% del QR
-        int logoWidth = (int) (width * logoScale);
-        int logoHeight = (int) (height * logoScale);
+//    private void processQRCode(String data, String path, String charset, int height, int width) throws WriterException, IOException {
+//        // 🔹 Escalar el logo para que no afecte demasiado el QR
+//        double logoScale = 0.18; // El logo ocupará un 18% del QR
+//        int logoWidth = (int) (width * logoScale);
+//        int logoHeight = (int) (height * logoScale);
+//
+//        // 🔹 Generar código QR con márgenes adecuados
+//        Map<EncodeHintType, Object> hints = new HashMap<>();
+//        hints.put(EncodeHintType.MARGIN, 2); // Margen extra para mejorar el escaneo
+//
+//        BitMatrix matrix = new MultiFormatWriter().encode(
+//                new String(data.getBytes(charset), charset),
+//                BarcodeFormat.QR_CODE,
+//                width, height,
+//                hints
+//        );
+//
+//        // 🔹 Crear imagen QR en blanco
+//        BufferedImage qrImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+//        Graphics2D g = qrImage.createGraphics();
+//        g.setColor(Color.WHITE);
+//        g.fillRect(0, 0, width, height);
+//        g.setColor(Color.BLACK);
+//
+//        // 🔹 Dibujar el código QR normalmente
+//        for (int x = 0; x < width; x++) {
+//            for (int y = 0; y < height; y++) {
+//                if (matrix.get(x, y)) {
+//                    qrImage.setRGB(x, y, Color.BLACK.getRGB());
+//                }
+//            }
+//        }
+//
+//        // 🔹 Cargar y redimensionar la imagen del logo
+//        Resource resource = new ClassPathResource("static/img/liderlogo.png");
+//        InputStream logoStream = resource.getInputStream();
+//        BufferedImage logo = ImageIO.read(logoStream);
+//
+//        if (logo == null) {
+//            System.out.println("Error: No se pudo cargar el logo.");
+//            return;
+//        }
+//
+//        BufferedImage resizedLogo = new BufferedImage(logoWidth, logoHeight, BufferedImage.TYPE_INT_ARGB);
+//        Graphics2D g2d = resizedLogo.createGraphics();
+//        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+//        g2d.drawImage(logo, 0, 0, logoWidth, logoHeight, null);
+//        g2d.dispose();
+//
+//        // 🔹 Crear un fondo blanco detrás del logo
+//        int padding = 10; // Espacio blanco alrededor del logo para evitar que bloquee el QR
+//        BufferedImage logoWithWhiteBackground = new BufferedImage(logoWidth + padding * 2, logoHeight + padding * 2, BufferedImage.TYPE_INT_ARGB);
+//        Graphics2D gWhite = logoWithWhiteBackground.createGraphics();
+//        gWhite.setColor(Color.WHITE);
+//        gWhite.fillRect(0, 0, logoWithWhiteBackground.getWidth(), logoWithWhiteBackground.getHeight());
+//        gWhite.drawImage(resizedLogo, padding, padding, null);
+//        gWhite.dispose();
+//
+//        // 🔹 Posicionar el logo en el centro del QR
+//        int logoX = (width - logoWithWhiteBackground.getWidth()) / 2;
+//        int logoY = (height - logoWithWhiteBackground.getHeight()) / 2;
+//
+//        g.drawImage(logoWithWhiteBackground, logoX, logoY, null);
+//        g.dispose();
+//
+//        // 🔹 Guardar la imagen final
+//        File outputFile = new File(path);
+//        ImageIO.write(qrImage, "PNG", outputFile);
+//    }
 
-        // 🔹 Generar código QR con márgenes adecuados
+    private void processQRCode(String data, String path, String charset, int height, int width) throws WriterException, IOException {
+        // 🔹 Configuración para mejorar el escaneo del QR
         Map<EncodeHintType, Object> hints = new HashMap<>();
-        hints.put(EncodeHintType.MARGIN, 2); // Margen extra para mejorar el escaneo
+        hints.put(EncodeHintType.MARGIN, 2); // Ajusta los márgenes para mejor lectura
 
         BitMatrix matrix = new MultiFormatWriter().encode(
                 new String(data.getBytes(charset), charset),
@@ -204,14 +269,14 @@ public class QRCodeGeneratorService {
                 hints
         );
 
-        // 🔹 Crear imagen QR en blanco
+        // 🔹 Crear imagen QR en blanco y negro sin logo
         BufferedImage qrImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = qrImage.createGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, width, height);
         g.setColor(Color.BLACK);
 
-        // 🔹 Dibujar el código QR normalmente
+        // 🔹 Dibujar el código QR
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (matrix.get(x, y)) {
@@ -220,43 +285,12 @@ public class QRCodeGeneratorService {
             }
         }
 
-        // 🔹 Cargar y redimensionar la imagen del logo
-        Resource resource = new ClassPathResource("static/img/liderlogo.png");
-        InputStream logoStream = resource.getInputStream();
-        BufferedImage logo = ImageIO.read(logoStream);
-
-        if (logo == null) {
-            System.out.println("Error: No se pudo cargar el logo.");
-            return;
-        }
-
-        BufferedImage resizedLogo = new BufferedImage(logoWidth, logoHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = resizedLogo.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2d.drawImage(logo, 0, 0, logoWidth, logoHeight, null);
-        g2d.dispose();
-
-        // 🔹 Crear un fondo blanco detrás del logo
-        int padding = 10; // Espacio blanco alrededor del logo para evitar que bloquee el QR
-        BufferedImage logoWithWhiteBackground = new BufferedImage(logoWidth + padding * 2, logoHeight + padding * 2, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D gWhite = logoWithWhiteBackground.createGraphics();
-        gWhite.setColor(Color.WHITE);
-        gWhite.fillRect(0, 0, logoWithWhiteBackground.getWidth(), logoWithWhiteBackground.getHeight());
-        gWhite.drawImage(resizedLogo, padding, padding, null);
-        gWhite.dispose();
-
-        // 🔹 Posicionar el logo en el centro del QR
-        int logoX = (width - logoWithWhiteBackground.getWidth()) / 2;
-        int logoY = (height - logoWithWhiteBackground.getHeight()) / 2;
-
-        g.drawImage(logoWithWhiteBackground, logoX, logoY, null);
         g.dispose();
 
-        // 🔹 Guardar la imagen final
+        // 🔹 Guardar la imagen final sin logo
         File outputFile = new File(path);
         ImageIO.write(qrImage, "PNG", outputFile);
     }
-
 
 
     public String obtenerRutaArchivos(String carpeta) {

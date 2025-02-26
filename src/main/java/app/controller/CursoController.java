@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/curso")
+@RequestMapping("/cursos")
 public class CursoController {
 
     @RequestMapping("/gestion") 
