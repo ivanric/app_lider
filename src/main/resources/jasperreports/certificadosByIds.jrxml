@@ -139,7 +139,7 @@ and $X{IN,ct.id,certificadosIds}]]>
 		<band height="612" splitType="Prevent">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
-				<reportElement mode="Transparent" x="0" y="0" width="791" height="602" backcolor="rgba(255, 255, 255, 0.4509804)" uuid="a51d95a5-c109-486a-b2fa-f3a25107c0f8">
+				<reportElement mode="Transparent" x="0" y="8" width="791" height="598" backcolor="rgba(255, 255, 255, 0.4509804)" uuid="a51d95a5-c109-486a-b2fa-f3a25107c0f8">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
