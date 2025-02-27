@@ -34,9 +34,15 @@ COPY ${JAR_FILE} app.jar
 EXPOSE 8080
 
 # Definir opciones de la JVM para aumentar memoria
-ENV JAVA_OPTS="-Xms512m -Xmx2g"
+#ENV JAVA_OPTS="-Xms512m -Xmx2g"
+# Definir opciones de la JVM para permitir ajuste dinámico de memoria
+ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=80.0"
+
+
 
 # Comando para ejecutar la aplicación
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 # Comando para ejecutar la aplicación con las opciones de memoria
-ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "app.jar"]
+#ENTRYPOINT ["java", "-Djava.awt.headless=true", "-jar", "app.jar"]
+# Comando para ejecutar la aplicación con las opciones de memoria ajustables
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.awt.headless=true -jar app.jar"]

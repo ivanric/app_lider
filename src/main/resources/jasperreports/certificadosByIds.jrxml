@@ -77,7 +77,7 @@ and $X{IN,ct.id,certificadosIds}]]>
 	<group name="Group1" isStartNewPage="true">
 		<groupExpression><![CDATA[$F{nrofolio}]]></groupExpression>
 		<groupHeader>
-			<band height="509">
+			<band height="531">
 				<textField>
 					<reportElement mode="Transparent" x="583" y="14" width="147" height="11" forecolor="#000000" uuid="b9b935dd-b9fa-434c-985f-ec40942545f8">
 						<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -89,7 +89,7 @@ and $X{IN,ct.id,certificadosIds}]]>
 					<textFieldExpression><![CDATA["COD.CERT."+$F{nrofolio}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="21" y="172" width="750" height="30" uuid="32856008-6d37-4970-8fe5-fbacb777edb6">
+					<reportElement x="21" y="175" width="750" height="30" uuid="32856008-6d37-4970-8fe5-fbacb777edb6">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -98,7 +98,7 @@ and $X{IN,ct.id,certificadosIds}]]>
 					<textFieldExpression><![CDATA[$F{estudiante}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="100" y="150" width="600" height="24" uuid="a3fe1a45-29a9-4646-9750-0ae247f5e055">
+					<reportElement x="100" y="153" width="600" height="24" uuid="a3fe1a45-29a9-4646-9750-0ae247f5e055">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -121,7 +121,7 @@ and $X{IN,ct.id,certificadosIds}]]>
 					<imageExpression><![CDATA[((java.util.List)$P{fotoUsuarios}).get($V{PAGE_NUMBER} - 1)]]></imageExpression>
 				</image>
 				<image>
-					<reportElement mode="Transparent" x="19" y="395" width="113" height="113" backcolor="#FFFFFF" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
+					<reportElement mode="Transparent" x="19" y="418" width="113" height="113" backcolor="#FFFFFF" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>

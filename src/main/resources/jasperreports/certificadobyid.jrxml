@@ -159,9 +159,9 @@ AND (ct.id = $P{idcert_param} OR $P{idcert_param}= -1)]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="184" splitType="Stretch">
+		<band height="188" splitType="Stretch">
 			<image>
-				<reportElement mode="Transparent" x="19" y="70" width="113" height="113" backcolor="#FFFFFF" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
+				<reportElement mode="Transparent" x="19" y="75" width="113" height="113" backcolor="#FFFFFF" uuid="a5e317e0-1a69-4f74-a604-8dd22d184ffb">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
