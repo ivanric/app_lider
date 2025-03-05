@@ -13,6 +13,9 @@ services:
       - DATABASE_PASSWORD=lider.2025
       - AWS_REGION=sa-east-1  # Solo la región es necesaria
       - AWS_PROFILE=default
+      - AWS_S3_ACCESS_KEY=AKIAXWMANA327N4EGHK
+      - AWS_S3_SECRET_KEY=AT2TwmdW+7IdBmy03b5cq3lNvaVyNkriRFAIgzpt
+      
     #  - JAVA_OPTS=-Xms512m -Xmx2g  # Aumentar memoria de la JVM
       - JAVA_OPTS=-XX:+UseContainerSupport -XX:MaxRAMPercentage=80.0  # Permite ajuste dinámico de memoria
     depends_on:
