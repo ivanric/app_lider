@@ -2697,7 +2697,7 @@ td {
 			})
 			
 	console.log("Certificados marcados: ", selectedIds);		
-			
+	/*		
 	function funcVerCertificadosMarcados() {
 	    // Verificar si el array selectedIds está vacío
 	    if (selectedIds.length === 0) {
@@ -2716,8 +2716,7 @@ td {
 	            // Aquí podrías agregar el código para mostrar los certificados
 	            
 	            var urlCertificados = nameEntity_INSCRITO + "/Imprimir_certificados/";
-	         // Enviar el array al backend usando fetch
-	         // Enviar la lista de IDs al backend
+
 	            fetch(urlCertificados, {
 	                method: 'POST',
 	                headers: { 
@@ -2727,13 +2726,12 @@ td {
 	            })
 	            .then(response => response.blob())
 	            .then(blob => { 
-	                // Crear una URL para el archivo PDF
 	                const url = window.URL.createObjectURL(blob);  
 	                
-	                // Establecer el src del iframe con la URL del PDF
+	         
 	                $("#frameReportes").attr("src", url);
 	                
-	                // Mostrar el modal con el iframe
+	        
 	                $("#reportes").modal('show');
 	            })
 	            .catch(error => {
@@ -2742,7 +2740,68 @@ td {
 
 	        }
 	    }
+	}*/
+	
+	
+	function funcVerCertificadosMarcados() {
+	    // Verificar si el array selectedIds está vacío
+	    if (selectedIds.length === 0) {
+	        alert("No se han seleccionado certificados.");
+	        return;
+	    }
+
+	    // Verificar si realmente hay checkboxes marcados en la tabla
+	    var checkedCount = $('#table .row-checkbox:checked').length;
+	    if (checkedCount === 0) {
+	        alert("No se ha seleccionado ningún certificado.");
+	        return;
+	    }
+
+	    // Mostrar el modal de carga antes de iniciar la solicitud
+	    $("#cargando").modal("show");
+
+	    // Iniciar medición del tiempo
+	    var start_time = new Date().getTime();
+
+	    // Construir la URL del backend
+	    var urlCertificados = nameEntity_INSCRITO + "/Imprimir_certificados/";
+
+	    // Enviar la lista de IDs al backend
+	    fetch(urlCertificados, {
+	        method: 'POST',
+	        headers: { 'Content-Type': 'application/json' },
+	        body: JSON.stringify({ ids: selectedIds })  
+	    })
+	    .then(response => response.blob())
+	    .then(blob => { 
+	        // Crear una URL para el archivo PDF
+	        const url = window.URL.createObjectURL(blob);  
+
+	        // Obtener referencia al iframe
+	        var frame = $("#frameReportes");
+
+	        // Configurar evento para cerrar el modal de carga después de cargar el PDF
+	        frame.off("load").on("load", function () {
+	            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+	            console.log("Tiempo de carga del reporte:", elapsed_time, "segundos");
+
+	            // Ocultar el modal de carga
+	            $("#cargando").modal("hide");
+
+	            // Mostrar el modal de reportes
+	            $("#reportes").modal("show");
+	        });
+
+	        // Asignar la URL al iframe (esto iniciará la carga del PDF)
+	        frame.attr("src", url);
+	    })
+	    .catch(error => {
+	        console.error("Error al generar los certificados:", error);
+	        $("#cargando").modal("hide");
+	        alert("Hubo un error al generar los certificados.");
+	    });
 	}
+
 
 			// Array para almacenar los IDs seleccionados
 // 			var selectedIds = [];
@@ -2857,22 +2916,57 @@ $('#btn_select_all_global').on('click', function () {
 
 
 
-			function funcVerCertificado() {
+// 			function funcVerCertificado() {
  
+// 			    if (GDATO_INSCRITO != "") {
+// 			        // Construir la URL para obtener el reporte
+// 			        var urlCertificado = nameEntity_INSCRITO + "/Imprimir_d1/" + GID_INSCRITO;
+
+// 			        // Establecer el src del iframe
+// 			        $("#frameReportes").attr("src", urlCertificado);
+
+// 			        // Mostrar el modal
+// 			        $("#reportes").modal('show');
+// 			    } else {
+// 			        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL CERTIFICADO!");
+// 			    }
+
+// 			} 
+
+			function funcVerCertificado() {
 			    if (GDATO_INSCRITO != "") {
-			        // Construir la URL para obtener el reporte
+			        // Mostrar el modal de carga antes de iniciar la solicitud
+			        $("#cargando").modal("show");
+			
+			        // Medir tiempo de carga
+			        var start_time = new Date().getTime();
+			
+			        // Construir la URL del reporte
 			        var urlCertificado = nameEntity_INSCRITO + "/Imprimir_d1/" + GID_INSCRITO;
-
-			        // Establecer el src del iframe
-			        $("#frameReportes").attr("src", urlCertificado);
-
-			        // Mostrar el modal
-			        $("#reportes").modal('show');
+			
+			        // Obtener referencia al iframe
+			        var frame = $("#frameReportes");
+			
+			        // Configurar evento para cerrar el modal cuando el iframe cargue completamente
+			        frame.off("load").on("load", function () {
+			            // Calcular el tiempo de carga
+			            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+			            console.log("Tiempo de carga del reporte:", elapsed_time, "segundos");
+			
+			            // Ocultar el modal de carga
+			            $("#cargando").modal("hide");
+			
+			            // Mostrar el modal de reportes
+			            $("#reportes").modal("show");
+			        });
+			
+			        // Asignar la URL al iframe (esto iniciará la carga del reporte)
+			        frame.attr("src", urlCertificado);
 			    } else {
 			        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL CERTIFICADO!");
 			    }
+			}
 
-			} 
 	</script>
 </body>
 </html>

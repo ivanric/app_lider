@@ -510,11 +510,98 @@ body {
 .mostrar {
 	display: block;
 }
+
+.texto_progress{
+	padding-bottom:20px;
+	font-family: "Roboto", sans-serif;
+	color: white;
+	font-size: 25px;
+	animation: mainFadeIn 2s forwards;
+	animation-delay: 1.6s;
+	display: flex;
+	align-items: baseline;
+	position: relative;
+	justify-content: center;
+}
+
+.demo-container {
+  justify-content: center;
+ 		  display: flex;
+ 		  align-items: center;
+}
+.progress {
+  width: 50% !important;
+   height: 70%; 
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 20px;
+  background: transparent;
+
+}
+.progress-bar {
+  border-radius:10px;
+  background-color: rgb(255 255 255);
+  width: 65%;
+  overflow: hidden;
+  height: 10px;
+ 		  border: none;
+  	  border-radius: 10
+}
+
+.progress-bar-value {
+  width: 100%;
+  height: 100%;
+	  box-shadow: 2px 14px 15px -7px rgba(30, 166, 250, 0.36);
+  background-color: #f7bf42fa;
+  animation: indeterminateAnimation 1s infinite linear;
+  transform-origin: 0% 50%;
+}
+@keyframes indeterminateAnimation {
+  0% {
+    transform:  translateX(0) scaleX(0);
+  }
+  40% {
+    transform:  translateX(0) scaleX(0.4);
+  }
+  100% {
+    transform:  translateX(100%) scaleX(0.5);
+  }
+}
+
 </style>
 
 </head>
 <body>
+		<div class="modal fade"  id="cargando" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"  style=" text-align: center; z-index: 20001;background: rgb(1 3 24 / 95%)">
+			<div class="modal-dialog modal-lg progress" style="width: 100%; text-align: center;" id="ModalMensaje"  >
+				<div class="" id="mdMj" >
 
+					<div class="modal-body">
+						<div class="row text-center" style="justify-content: center;">
+							<img src="../../img/LOGOLIDERWHITE.png" th:href="@{../img/LOGOLIDERWHITE.png}"  id="loadding" style="width: 15rem;">
+
+						</div>
+						
+						<div class="row" >
+							<div class="col-md-12 text-center" style="justify-content: center;">
+								<div class="texto_progress">Cargando..espere porfavor.. </div>
+								<div class="demo-container">
+<!-- 								  <img src="../static/img/gif/eess2_inv.png" th:src="@{/img/gif/eess2_inv.png}"  id="loadding" style="width: 10rem;"> -->
+								
+								  <div class="progress-bar">
+								    <div class="progress-bar-value"></div>
+								  </div>
+<!-- 								  <img src="../static/img/gif/eess2.png" th:src="@{/img/gif/eess2.png}"  id="loadding" style="width: 10rem;"> -->
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+	
+			</div> 
+		</div>
 	<div class="tarjeta formulario-data">
 		<input type="hidden" th:value="${codigoeventoencript}"
 			id="codigoeventoencript">
@@ -1573,7 +1660,7 @@ body {
 // 					console.log("GOPCION:",GOPCION)
 				  if (result.isConfirmed) {
 // 	               	   if(GOPCION=="ADD"){
-	            		   saveEntityForm1()
+						saveEntityForm1()
 // 	            	   }else{
 // 	            		   updateEntityForm1()
 // 	            	   }
@@ -1596,7 +1683,69 @@ body {
 				 event.preventDefault();
 		 	 });
 		
+		async function saveEntityForm1() {
+		    // Mostrar el modal de carga antes de la solicitud
 		
+		    $("#cargando").modal("show");
+
+		    // Iniciar medición del tiempo
+		    var start_time = new Date().getTime();
+
+		    let formData = new FormData(document.getElementById('formulario'));
+		    let selectedOptions = Array.from($('#expositores option:selected'));
+
+		    console.log("formData:", formData);
+
+		    $.ajax({
+		        url: nameEntity_a + "/guardarinscrito",
+		        type: "POST",
+		        contentType: false,
+		        processData: false,
+		        data: formData,
+		        success: function (res) {
+		            // Medir el tiempo de respuesta
+		            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+		            console.log("Tiempo de carga del servidor:", elapsed_time, "segundos");
+
+		            // Ocultar el modal de carga
+		            $("#cargando").modal("hide");
+
+		            console.log("Registrado:", res);
+
+		            Swal.fire({
+		                title: "Registrado",
+		                text: "Se ha registrado exitosamente",
+		                icon: "success",
+		                timer: 500,
+		                showConfirmButton: false
+		            }).then(() => {
+		                // Mostrar mensaje de registro y recargar después de unos segundos
+		                document.getElementById("registrado").classList.add("mostrar");
+		                setTimeout(() => {
+		                    location.reload();
+		                }, 7000); // 7 segundos
+		            });
+		        },
+		        error: function (err) {
+		            console.log(err);
+
+		            // Ocultar el modal de carga en caso de error
+		            $("#cargando").modal("hide");
+
+		            Swal.fire({
+		                icon: 'error',
+		                title: "Cancelado",
+		                text: "No se realizó la operación, comuníquese con el administrador del sistema. Gracias",
+		                timer: 500,
+		                showCancelButton: false,
+		                showConfirmButton: false
+		            });
+		        }
+		    });
+		}
+
+		
+		/*
 		async function saveEntityForm1(){
             
             let formData = new FormData(document.getElementById('formulario'))
@@ -1616,8 +1765,6 @@ body {
 //              	    'dataType': 'json',
                  success:function(res){
 					console.log('registrado',res)
-//                          $('#formulario')[0].reset();
-//                          $('.modal').modal('hide')
                   	Swal.fire({
                          title:"Registrado",
                          text:"Se ha registrado exitosamente",
@@ -1625,14 +1772,11 @@ body {
                          timer:500,   
                          showConfirmButton: false 
                      }).then(() => {
-                         // Recargar la página después de mostrar la alerta
                          document.getElementById("registrado").classList.add("mostrar");
                          setTimeout(() => {
                              location.reload();
                          }, 7000); // 5000 ms = 5 segundos
                      });
-//                     $('#table').dataTable().fnDraw('page');
-//                      }
                  },
                  error:function(err){
                 	 console.log(err)
@@ -1646,7 +1790,7 @@ body {
 				    })
                  }
              })
-		}
+		}*/
          	
         //resetear los datos de validacion
       	document.getElementById("ok").classList.add("ocultar");
