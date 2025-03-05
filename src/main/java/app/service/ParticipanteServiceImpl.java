@@ -160,6 +160,7 @@ public class ParticipanteServiceImpl extends GenericServiceImplNormal<Participan
 			entitymod.getPersona().setCelular(entidad.getPersona().getCelular());
 			entitymod.getPersona().setEmail(entidad.getPersona().getEmail());
 			entitymod.setDepartamento(entidad.getDepartamento());
+			entitymod.setProvincia(entidad.getProvincia());
 			entitymod.setLocalidad(entidad.getLocalidad());
 			entitymod.getPersona().setDireccion(entidad.getPersona().getDireccion());
 			

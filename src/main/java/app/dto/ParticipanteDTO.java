@@ -8,6 +8,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.multipart.MultipartFile;
 
+import app.entity.ProvinciaEntity;
+
 
 public class ParticipanteDTO {
 	
@@ -17,54 +19,56 @@ public class ParticipanteDTO {
 	
 	private String ci;
 	private String exp;
-	private Integer gradoacademico;
-	private String genero;
-	private Integer departamento;
 	private String nombres;
 	private String apellidos;
-	private Integer edad;
+	private String genero;
 	@DateTimeFormat(iso =ISO.DATE)
 	private LocalDate fechanacimiento;
-	private String localidad;
-	private Integer profesion;
+	private Integer edad;
 	private Integer celular;
+	private Integer gradoacademico;
+	private Integer profesion;
 	private String email;
+	private Integer departamento;
+	private Integer provincia;
+	private String localidad;
 	private String direccion;
 	private Integer estado;
 	  
 	@Transient//para que no se guarde en la bd, para que sea tempora
 //	@NotNull(message = "Por favor, seleccione un archivo")
-	private MultipartFile logo;
+	private MultipartFile archivoimgparticipante;
 	
 	public ParticipanteDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ParticipanteDTO(Integer id, Integer codigo, String imagen, String ci, String exp, Integer gradoacademico,
-			String genero, Integer departamento, String nombres, String apellidos, Integer edad,
-			LocalDate fechanacimiento, String localidad, Integer profesion, Integer celular, String email,
-			String direccion, Integer estado, MultipartFile logo) {
+	public ParticipanteDTO(Integer id, Integer codigo, String imagen, String ci, String exp, String nombres,
+			String apellidos, String genero, LocalDate fechanacimiento, Integer edad, Integer celular,
+			Integer gradoacademico, Integer profesion, String email, Integer departamento, Integer provincia,
+			String localidad, String direccion, Integer estado, MultipartFile archivoimgparticipante) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.imagen = imagen;
 		this.ci = ci;
 		this.exp = exp;
-		this.gradoacademico = gradoacademico;
-		this.genero = genero;
-		this.departamento = departamento;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
-		this.edad = edad;
+		this.genero = genero;
 		this.fechanacimiento = fechanacimiento;
-		this.localidad = localidad;
-		this.profesion = profesion;
+		this.edad = edad;
 		this.celular = celular;
+		this.gradoacademico = gradoacademico;
+		this.profesion = profesion;
 		this.email = email;
+		this.departamento = departamento;
+		this.provincia = provincia;
+		this.localidad = localidad;
 		this.direccion = direccion;
 		this.estado = estado;
-		this.logo = logo;
+		this.archivoimgparticipante = archivoimgparticipante;
 	}
 
 	public Integer getId() {
@@ -107,30 +111,6 @@ public class ParticipanteDTO {
 		this.exp = exp;
 	}
 
-	public Integer getGradoacademico() {
-		return gradoacademico;
-	}
-
-	public void setGradoacademico(Integer gradoacademico) {
-		this.gradoacademico = gradoacademico;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	public Integer getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(Integer departamento) {
-		this.departamento = departamento;
-	}
-
 	public String getNombres() {
 		return nombres;
 	}
@@ -147,12 +127,12 @@ public class ParticipanteDTO {
 		this.apellidos = apellidos;
 	}
 
-	public Integer getEdad() {
-		return edad;
+	public String getGenero() {
+		return genero;
 	}
 
-	public void setEdad(Integer edad) {
-		this.edad = edad;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 
 	public LocalDate getFechanacimiento() {
@@ -163,20 +143,12 @@ public class ParticipanteDTO {
 		this.fechanacimiento = fechanacimiento;
 	}
 
-	public String getLocalidad() {
-		return localidad;
+	public Integer getEdad() {
+		return edad;
 	}
 
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
-	}
-
-	public Integer getProfesion() {
-		return profesion;
-	}
-
-	public void setProfesion(Integer profesion) {
-		this.profesion = profesion;
+	public void setEdad(Integer edad) {
+		this.edad = edad;
 	}
 
 	public Integer getCelular() {
@@ -187,12 +159,52 @@ public class ParticipanteDTO {
 		this.celular = celular;
 	}
 
+	public Integer getGradoacademico() {
+		return gradoacademico;
+	}
+
+	public void setGradoacademico(Integer gradoacademico) {
+		this.gradoacademico = gradoacademico;
+	}
+
+	public Integer getProfesion() {
+		return profesion;
+	}
+
+	public void setProfesion(Integer profesion) {
+		this.profesion = profesion;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Integer getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Integer departamento) {
+		this.departamento = departamento;
+	}
+
+	public Integer getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Integer provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
 	}
 
 	public String getDireccion() {
@@ -211,23 +223,22 @@ public class ParticipanteDTO {
 		this.estado = estado;
 	}
 
-	public MultipartFile getLogo() {
-		return logo;
+	public MultipartFile getArchivoimgparticipante() {
+		return archivoimgparticipante;
 	}
 
-	public void setLogo(MultipartFile logo) {
-		this.logo = logo;
+	public void setArchivoimgparticipante(MultipartFile archivoimgparticipante) {
+		this.archivoimgparticipante = archivoimgparticipante;
 	}
 
 	@Override
 	public String toString() {
 		return "ParticipanteDTO [id=" + id + ", codigo=" + codigo + ", imagen=" + imagen + ", ci=" + ci + ", exp=" + exp
-				+ ", gradoacademico=" + gradoacademico + ", genero=" + genero + ", departamento=" + departamento
-				+ ", nombres=" + nombres + ", apellidos=" + apellidos + ", edad=" + edad + ", fechanacimiento="
-				+ fechanacimiento + ", localidad=" + localidad + ", profesion=" + profesion + ", celular=" + celular
-				+ ", email=" + email + ", direccion=" + direccion + ", estado=" + estado + ", logo=" + logo + "]";
+				+ ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero + ", fechanacimiento="
+				+ fechanacimiento + ", edad=" + edad + ", celular=" + celular + ", gradoacademico=" + gradoacademico
+				+ ", profesion=" + profesion + ", email=" + email + ", departamento=" + departamento + ", provincia="
+				+ provincia + ", localidad=" + localidad + ", direccion=" + direccion + ", estado=" + estado
+				+ ", archivoimgparticipante=" + archivoimgparticipante + "]";
 	}
-
-	
 	
 }

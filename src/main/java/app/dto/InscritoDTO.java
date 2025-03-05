@@ -14,6 +14,7 @@ import app.entity.DepartamentoEntity;
 import app.entity.EventoEntity;
 import app.entity.GradoAcademicoEntity;
 import app.entity.ProfesionEntity;
+import app.entity.ProvinciaEntity;
 
 
 public class InscritoDTO {
@@ -37,6 +38,7 @@ public class InscritoDTO {
 	private ProfesionEntity profesion;
 	private String email;
 	private DepartamentoEntity departamento;
+	private ProvinciaEntity provincia;
 	private String localidad;	
 	private String direccion;
 	private Integer estado;
@@ -70,9 +72,9 @@ public class InscritoDTO {
 	public InscritoDTO(Integer id, Integer idper, Integer idpart, Integer codigo, String imagenparticipante,
 			String imagenpago, String ci, String exp, String nombres, String apellidos, String genero,
 			LocalDate fechanacimiento, Integer edad, Integer celular, GradoAcademicoEntity gradoacademico,
-			ProfesionEntity profesion, String email, DepartamentoEntity departamento, String localidad,
-			String direccion, Integer estado, String nrocuenta, BancoEntity banco, double importe, double cantidad,
-			double precio, double descuento, double subtotal, EventoEntity evento, AnioEntity anio,
+			ProfesionEntity profesion, String email, DepartamentoEntity departamento, ProvinciaEntity provincia,
+			String localidad, String direccion, Integer estado, String nrocuenta, BancoEntity banco, double importe,
+			double cantidad, double precio, double descuento, double subtotal, EventoEntity evento, AnioEntity anio,
 			MultipartFile archivoimgparticipante, MultipartFile archivoimgpago) {
 		super();
 		this.id = id;
@@ -93,6 +95,7 @@ public class InscritoDTO {
 		this.profesion = profesion;
 		this.email = email;
 		this.departamento = departamento;
+		this.provincia = provincia;
 		this.localidad = localidad;
 		this.direccion = direccion;
 		this.estado = estado;
@@ -253,6 +256,14 @@ public class InscritoDTO {
 		this.departamento = departamento;
 	}
 
+	public ProvinciaEntity getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(ProvinciaEntity provincia) {
+		this.provincia = provincia;
+	}
+
 	public String getLocalidad() {
 		return localidad;
 	}
@@ -372,14 +383,13 @@ public class InscritoDTO {
 				+ exp + ", nombres=" + nombres + ", apellidos=" + apellidos + ", genero=" + genero
 				+ ", fechanacimiento=" + fechanacimiento + ", edad=" + edad + ", celular=" + celular
 				+ ", gradoacademico=" + gradoacademico + ", profesion=" + profesion + ", email=" + email
-				+ ", departamento=" + departamento + ", localidad=" + localidad + ", direccion=" + direccion
-				+ ", estado=" + estado + ", nrocuenta=" + nrocuenta + ", banco=" + banco + ", importe=" + importe
-				+ ", cantidad=" + cantidad + ", precio=" + precio + ", descuento=" + descuento + ", subtotal="
-				+ subtotal + ", evento=" + evento + ", anio=" + anio + ", archivoimgparticipante="
+				+ ", departamento=" + departamento + ", provincia=" + provincia + ", localidad=" + localidad
+				+ ", direccion=" + direccion + ", estado=" + estado + ", nrocuenta=" + nrocuenta + ", banco=" + banco
+				+ ", importe=" + importe + ", cantidad=" + cantidad + ", precio=" + precio + ", descuento=" + descuento
+				+ ", subtotal=" + subtotal + ", evento=" + evento + ", anio=" + anio + ", archivoimgparticipante="
 				+ archivoimgparticipante + ", archivoimgpago=" + archivoimgpago + "]";
 	}
 
-	
 	
 
 	

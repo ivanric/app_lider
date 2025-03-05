@@ -649,16 +649,7 @@ body {
 					<div class="col-md-3"></div>
 					<div class="col-md-6 card_data">
 						<div class="row">
-							<div class="col-md-12">
-								<div class="">
-									<label for="logo" class=""><b>SUBIR SU FOTOGRAFIA
-											(4X4) PARA SU CERTIFICADO</b></label> <input placeholder="Ingrese logo"
-										class="form-control fg-input data-per field_css"
-										name="archivoimgparticipante" id="archivoimgparticipante"
-										type="file" >
-								</div>
 
-							</div>
 
 							<div class="" style="padding-top: 10px;">
 
@@ -702,6 +693,16 @@ body {
 										<option value="SCZ">SANTA CRUZ</option>
 
 									</select>
+								</div>
+
+							</div>
+							<div class="col-md-12">
+								<div class="">
+									<label for="logo" class=""><b>SUBIR SU FOTOGRAFIA
+											(4X4) PARA SU CERTIFICADO (OPCIONAL)</b></label> <input placeholder="Ingrese logo"
+										class="form-control fg-input data-per field_css"
+										name="archivoimgparticipante" id="archivoimgparticipante"
+										type="file" >
 								</div>
 
 							</div>
@@ -816,14 +817,26 @@ body {
 							</div>
 							<div class="col-md-6">
 								<div class="">
-									<label for="localidad" class=""><b>LUGAR DE RESIDENCIA</b></label> <input
-										placeholder="Region o localidad en el que se encuetra.."
-										class="form-control fg-input data-per field_css"
-										name="localidad" type="text" required="required"
-										onkeyup="this.value = this.value.toUpperCase();">
-								</div>
+									<label for="departamento" class=""><b>SUCURSAL DE RESIDENCIA</b></label> 
+									<select 
+										class="form-select field_css"
+										aria-label=".form-select-sm example" id="provincia"
+										name="provincia">
+										<option selected value="">Seleccionar</option>
 
+									</select>
+								</div>
 							</div>
+<!-- 							<div class="col-md-6"> -->
+<!-- 								<div class=""> -->
+<!-- 									<label for="localidad" class=""><b>LUGAR DE RESIDENCIA</b></label> <input -->
+<!-- 										placeholder="Region o localidad en el que se encuetra.." -->
+<!-- 										class="form-control fg-input data-per field_css" -->
+<!-- 										name="localidad" type="text" required="required" -->
+<!-- 										onkeyup="this.value = this.value.toUpperCase();"> -->
+<!-- 								</div> -->
+
+<!-- 							</div> -->
 							<div class="col-md-12">
 								<div class="">
 									<label for="exampleFormControlInput1" class=""><b>DIRECCIÓN</b></label>
@@ -1124,7 +1137,9 @@ body {
 		    showUpload: false, // Ocultar el botÃ³n de carga
 		    showRemove: true, 
             showCaption: true,
-            showCancel: true
+            showCancel: true,
+            allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+            elErrorContainer: '#errorBlock' // (Opcional) Contenedor para mostrar mensajes de error
 		});
 		
 		
@@ -1160,7 +1175,9 @@ body {
 			    showUpload: false, // Ocultar el botÃ³n de carga
 			    showRemove: true, 
 	            showCaption: true,
-	            showCancel: true
+	            showCancel: true,
+	            allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+	            elErrorContainer: '#errorBlock' // (Opcional) Contenedor para mostrar mensajes de error
 			});
 /*
 			$('#fileInput').val('');
@@ -1239,7 +1256,7 @@ body {
 		});
 
 		
-			/*
+			
 		   var s_departamento = document.getElementById('departamento');
 
 	        // Añadimos un event listener para el evento 'change'
@@ -1280,7 +1297,7 @@ body {
                  });
 	            
 	        });
-			*/
+			
 			var xhr = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
 	  		xhr.open('GET', nameEntity1 );//abre una solicitud GET y hacia la direccion establecida
 	  		xhr.responseType = 'json';//el tipo de respuesta que espera desde el servidor
@@ -1711,7 +1728,6 @@ body {
 		            $("#cargando").modal("hide");
 
 		            console.log("Registrado:", res);
-
 		            Swal.fire({
 		                title: "Registrado",
 		                text: "Se ha registrado exitosamente",
@@ -1723,7 +1739,7 @@ body {
 		                document.getElementById("registrado").classList.add("mostrar");
 		                setTimeout(() => {
 		                    location.reload();
-		                }, 7000); // 7 segundos
+		                }, 3000); // 7 segundos
 		            });
 		        },
 		        error: function (err) {
@@ -1922,6 +1938,8 @@ body {
 			    				    showRemove: true, 
 			                        showCaption: true,
 			                        showCancel: true,
+			                        allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+			                        elErrorContainer: '#errorBlock', // (Opcional) Contenedor para mostrar mensajes de error
 //			    		 		  	 ,maxImageWidth: 300 // Ancho mï¿½ximo de la imagen previa en pï¿½xeles
 //			    		 		     ,maxImageHeight: 300 
 			   				     	initialPreview: [

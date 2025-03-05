@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	>
+<head>
+<meta http-equiv="Content-Type" content="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<style>
+.selected {
+	background-color: #B0BED9;
+}
+
+</style>
+</head>
+<body>
+	<form name="formulario" role="form" id="formulario" method="post"
+		enctype="multipart/form-data" data-fv-excluded="disabled">
+
+		<div class="modal fade" id="modalAdicionar" tabindex="-1"
+			role="dialog" data-backdrop="static" data-keyboard="false"
+			aria-hidden="true" style="display: none; padding-left: 0">
+
+			<div class="modal-dialog modal-md" role="document">
+				<div class="modal-content">
+					<div class="card">
+						<div class="modal-header" style="display: flex;flex-direction: column;">
+							<span><b>.:SUCURSAL DE RESIDENCIA:.</b></span>
+							<div class="opciones_btn_modal" style="display: flex"></div>
+						</div>
+						<div class="modal-body">
+
+							<div id="div_put"></div>
+							<input type="" name="id" value="" style="display: none"> 
+							<input type="" name="estado" value="1" style="display: none"> 
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mb-3">
+										<label for="exampleFormControlInput1" class=""><b>DEPARTAMENTO</b></label>
+										<select required="required" class="form-select field_css" aria-label=".form-select-sm example" id="departamento" name="departamento">
+										  <option selected value="">Seleccionar</option>
+										 
+										</select>
+									</div>
+									
+									<div class="mb-3">
+										<label for="exampleFormControlInput1" class="form-label">Nombre</label>
+										<input placeholder="Sucursal de residencia.. "
+											class="form-control fg-input data-per field_css"
+											name="nombre" type="text" required="required"
+											onkeyup="">
+									</div>
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<h4 class="">
+		<b>.: SUCURSALES DE RESIDENCIA :.</b>
+	</h4>
+	<div class="contenido_gestion">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="row" style="margin-bottom: 10px;">
+						<div class="col-md-3 col-xs-12">
+							<input type="text" id="js_filtro" name="" class="form-control"
+								placeholder=" Buscar..">
+						</div>
+
+						<div class="col-md-4 col-xs-12" style="text-align: right;">
+							<div class="opciones_estado"></div>
+							<div class="form-check form-check-inline">
+								<input type="radio" class="form-check-input " name="iestado" id="activos" value="1" autocomplete="off" checked>
+								<label for="activos">habilitados</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input type="radio" class="form-check-input" name="iestado"
+										id="inactivo" value="0" autocomplete="off"> 
+								<label for="inactivo">deshabilitados</label>
+							</div>
+						</div>
+						<div class="col-md-3 col-xs-12" style="text-align: right;">
+							<div>
+								<span class="opciones_btn_nuevo"></span> <span
+									class="opciones_btn_eliminar"></span> <span
+									class="opciones_btn_habilitar"></span>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 table-responsive">
+					<table id="table" class="table align-middle mb-0 bg-white" style="width: 100%; background: white;">
+						<thead class="bg-light">
+							<tr>
+								<th width="">#</th>
+								<th>SUCURSAL</th>
+								<th>DEPARTAMENTO</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		var GOPCION=""
+// 		var result=Get_Opciones(null);
+		var GID=""
+		var GSEARCH=""
+		var GESTADO='';
+		var DTtable=''
+		var nameEntity="../RestProvincias"
+		var nameEntity2="../RestDepartamentos"
+		if (typeof G_JSON_ENTITY === 'undefined') {
+		    let G_JSON_ENTITY = null;
+		    // Aqu� puedes inicializar G_JSON_ENTITY como necesites
+		}
+// 	    function ExisteOpcion(opc){
+// 	        var resultado=false;
+// 	        for (var i = 0; i < result.AccionesUser.length; i++) {
+// 	            if(result.AccionesUser[i].codigo==opc){
+// 	                resultado=true;         
+// 	            }
+// 	        }          
+// 	        return resultado;
+// 	    }
+		
+		$.get(nameEntity2, function(result){
+			console.log('categorias:',result)
+			
+			 $.each(result, function (idx, item) {
+				 if (item.estado==1) {
+					 $("#formulario").find("#departamento").append('<option value="' + item.id + '">' + item.nombre + '</option>');
+				}
+			        
+		     });
+		})
+		
+		
+		GSEARCH=$('#js_filtro').val()
+		GESTADO=$('input[name="iestado"]:checked').val();
+		
+		
+// 		listarTable()
+		$('#js_filtro').on('keyup',function(){
+			GSEARCH=$(this).val()
+// 			console.log(GSEARCH)
+
+		})
+		
+        
+		
+
+        $('input[name="iestado"]').on('change',function(){
+        	GESTADO=$('input[name="iestado"]:checked').val();
+        	GSEARCH=$('#js_filtro').val()
+        	setButtonCrud(GESTADO)
+        	GDATO="";//para que al momento de eliminar o habilitar se tenga que seleccionar un registro de la tabla
+        	$('#table').dataTable().fnDraw('page');
+        })
+
+        
+        DTtable=$('#table').DataTable({
+            "oLanguage": {
+                     "sUrl": "/js/Spanish.lang"
+
+            }
+        ,
+            "dom":'rt<button>ip',
+            "pageLength":10,
+             responsive:true,
+            "processing": true,
+            "serverSide": true, 
+            
+            "ajax": {
+            "type": "GET",
+              "url": nameEntity+""+"/listar",
+          	"data": function ( d ) {
+                    d.estado = GESTADO
+                    // d.estado = 1;
+                    // filtro:filtro
+             }
+            }
+            ,
+            "columns": [
+                { "data": "id" },
+                { "data": "id" },
+                { "data": "id" }
+      		]
+            ,
+            "createdRow":function(row,data,index){
+                console.log("table_data:",data)
+            	$('td',row).eq(0).html((data.id)+""+`<input type="hidden" value="${data.id}" class="idhidden">`).addClass('text-center');
+                $('td',row).eq(1).html(data.nombre);
+                $('td',row).eq(2).html(data.departamento.nombre);
+               
+            } 
+        
+            ,
+            "drawCallback":function(settings){
+ 	   
+                
+// //                 $('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+                
+            	$('#js_filtro').on( 'keyup', function () {
+                    DTtable.search(this.value ).draw();
+                }) 
+
+            }
+        });
+        
+		
+
+
+
+		setButtonCrud(GESTADO)
+		function setButtonCrud(estado) {
+			if (estado==1) {
+				$('.opciones_btn_habilitar').html("")
+// 		 	    if(ExisteOpcion('adicionar')){
+			        $('.opciones_btn_nuevo').html(`<button id="btnAdicionar" class="btn btn-secondary btn-sm" onclick="funtNewFormModal()" style="margin: 0 2px;">Nuevo</button>`)  
+// 			    }
+
+			}else{
+// 			    if(ExisteOpcion('habilitar')){
+			    	$('.opciones_btn_nuevo').html('')
+			    	$('.opciones_btn_eliminar').html('')
+			        $('.opciones_btn_habilitar').html(`<button id="btnHabilitar" class="btn btn-secondary btn-sm" style="margin: 0 2px;" onclick="funtUpdateRow()">Habilitar</button>`)  
+// 			    }
+			}
+		}
+		
+		
+		
+	  //INICIO QUERY PRINCIPAL
+
+			
+			//eventos
+			var GDATO="";
+			//click en la tabla
+			$('#table tbody').on( 'click dblclick', 'tr', function (e) {
+				
+				if(e.type=='dblclick'){//mostramos el modal para el CRUD
+// 					console.log($(this).find("td:eq(1)").text());
+					
+					addDisabledForm()
+					opcionesCrudModal();
+					getEntityId()
+
+					
+					let G_JSON_ENTITY=new Object();
+					
+					
+	          		$('#modalAdicionar').modal('show');
+				}
+				
+// 				console.log("GESTADO:",GESTADO)
+// 				console.log('event?? ', e);
+				var row = $(this).closest('tr');
+// 				console.log('row:',row);
+				var idr = parseInt(row.find('.idhidden').val(), 10);
+// 				console.log('idr:',idr);
+          		 if ( $(this).hasClass('selected') ) {
+                       $(this).removeClass('selected');
+                       GDATO=""
+                  }
+                  else {
+                      $('#table tr.selected').removeClass('selected');
+                      $(this).addClass('selected');
+                      
+           	          	 GDATO=$(this).find("td:eq(0)").text();
+//                    console.log('GDATO:',GDATO);
+                      
+                  }
+
+				GID=idr
+// 				console.log('GID:',GID);
+			})
+			
+
+			function JsonDataForm() {
+				var serialized = $('#formulario').serializeArray();
+		        var s = '';
+		        var data = new Object();
+				data.celular=$("input[name='celular']").val();
+				data.ci=$("input[name='ci']").val();
+				data.email=$("input[name='email']").val();
+				var estado_data=parseInt($("input[name='estado']").val());
+// 				console.log('estado_data:',estado_data)
+				data.estado=1;
+				data.id=null;
+				data.nombrecompleto=$("input[name='nombrecompleto']").val();
+				data.password=$("input[name='password']").val();
+				
+
+		        return data;
+			}
+
+			
+			function funtNewFormModal() {
+				$('.field_css').removeAttr('disabled') 
+				opcionesNuevo()
+				getEntityIdNew()
+
+       			$('#modalAdicionar').modal('show');
+			}
+			function funtDeleteRow() {
+				if (GDATO!="" ) {
+					updateStatusEntity(1)//si quiero dar de baja pongo 1
+				}else{
+					alert("!seleccione un registro de la lista para eliminar el registro!")
+				}
+			}
+			function funtUpdateRow() {
+				if (GDATO!="" ) {
+					updateStatusEntity(0)//si quiero dar de baja pongo 0
+				}else{
+					alert("!seleccione un registro de la lista para habilitar el registro!")
+				}
+			}
+			
+			$('#btnEditar').click(function(){
+// 				console.log(GDATO)
+				if (GDATO!="" ) {
+					opcionesEditarForm()
+					getEntityId()
+					removeDisabledForm()
+	       			$('#modalAdicionar').modal('show');
+				}else{
+					alert("!seleccione un registro de la lista para editar!")
+				}
+				
+			})
+			function addDisabledForm() {
+				
+				$('body .field_css').attr('disabled', 'disabled');
+			}
+			function removeDisabledForm() {
+				
+				$('.field_css').removeAttr('disabled');
+			}
+			function addActionform(action) {
+				$('#formulario').removeAttr("action")
+				$('#formulario').attr("action",action)
+				
+			}
+			function addPutForm(value) {
+				$('#formulario #div_put').html("")
+				
+				if(value!== undefined){
+				//+console.log("value",value)
+					$('#formulario #div_put').html(`<input type="hidden" name="_method" value="PUT">`)
+				}
+			}
+			
+			function nuevo() {
+				opcionesNuevo()
+				getEntityIdNew()
+				removeDisabledForm()
+			}
+			function editar() {
+				opcionesEditarForm()
+				getEntityId()
+                removeDisabledForm()
+			}
+			function eliminar() {
+				updateStatusEntity(1)
+
+			}
+			function opcionesNuevo() {
+				GOPCION="ADD"
+					$('.opciones_btn_modal').html('')
+                $('.opciones_btn_modal').html(`<button id="btnGuardar_modal" type="submit"  class="btn btn-secondary  waves-effect btn-sm" style="margin: 0 2px;">Guardar</button>`)  
+       	        $('.opciones_btn_modal').append(`<button id="btnCancelar_modal"  type="button"  data-bs-dismiss="modal" aria-label="Close" class="btn btn-light waves-effect btn-sm" style="margin: 0 2px;">Cancelar</button>`)  
+                addActionform(nameEntity)
+//        	        $('#formulario').data('formValidation').resetForm(true);
+                $('#formulario')[0].reset();
+			}
+			function opcionesEditarForm() {
+				GOPCION="EDIT"
+					$('.opciones_btn_modal').html('')
+                $('.opciones_btn_modal').html(`<button id="btnGuardar_modal" type="submit"  class="btn btn-secondary  waves-effect btn-sm" style="margin: 0 2px;">Guardar</button>`)  
+       	        $('.opciones_btn_modal').append(`<button id="btnCancelar_modal"  type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-light waves-effect btn-sm" style="margin: 0 2px;">Cancelar</button>`)  
+                addActionform(nameEntity)
+//        	        $('#formulario').data('formValidation').resetForm(true);
+                $('#formulario')[0].reset();
+                
+               
+			}
+			function getEntityId() {
+				
+				//reset
+           	    let elem_categoria = document.getElementById("departamento").getElementsByTagName("option");
+   			    for(var i = 0; i < elem_categoria.length; i++) {
+   			    	elem_categoria[i].removeAttribute("selected");
+   			    }  	
+				
+          		$.get(nameEntity+'/'+GID, function(data) {
+          			console.log('datos a modificar:',data)
+					G_JSON_ENTITY=data;
+          			$('#formulario').find('input[name="id"]').val(data.id);
+          			$('#formulario').find('input[name="nombre"]').val(data.nombre);
+          			
+    				document.querySelectorAll("#formulario #departamento > option").forEach(function(option) {
+           			    if (option.value == data.departamento.id) {
+           			        option.selected = true;
+           			    }else{
+//            			    	console.log('data:',option.value)
+           			    }
+           			});
+
+
+		        }, 'json');
+			}
+			function getEntityIdNew() {
+				
+				//AQUI SE CARGA LOS EXTRAS
+			}
+			
+			
+			function opcionesCrudModal() {
+				$('body').find('.opciones_btn_modal').html('')
+				
+				if(GESTADO!=0){
+					$('.opciones_btn_modal').html(`<button id="btnAdicionar_modal" type="button"  class="btn btn-secondary waves-effect btn-sm" data-mdb-ripple-init style="margin: 0 2px;" onclick="nuevo()">Nuevo</button>`)  
+	    	        
+				}
+                $('.opciones_btn_modal').append(`<button id="btnEditar_modal" type="button"  class="btn btn-secondary waves-effect btn-sm" data-mdb-ripple-init style="margin: 0 2px;" onclick="editar()">Editar</button>`)  
+    	        if(GESTADO!=0){
+    	        	$('.opciones_btn_modal').append(`<button id="btnEliminar_modal" type="button"  class="btn btn-secondary waves-effect btn-sm" data-mdb-ripple-init style="margin: 0 2px;" onclick="eliminar()">Eliminar</button>`)  
+        	        
+    	        }
+    	        $('.opciones_btn_modal').append(`<button id="btnCancelar_modal" type="button"  data-bs-dismiss="modal" aria-label="Close" class="btn btn-light waves-effect btn-sm" data-mdb-ripple-init style="margin: 0 2px;">Cancelar</button>`)  
+   	        	addActionform(nameEntity)
+//     	        $('#formulario').data('formValidation').resetForm(true);
+                $('#formulario')[0].reset();
+			}
+			
+
+
+			async function saveEntityForm1() {
+                
+                let formData = new FormData(document.getElementById('formulario'))
+
+                 console.log("forDAta:",formData)
+// 				 let imagenform = formData.get('arte');
+                 
+             	$.ajax({
+              	   	url:nameEntity+"/guardar",
+              	    type: "POST",
+// 						'contentType': "application/json",
+					contentType: false,
+					processData: false,
+//						'contentType':false,
+					data: formData,
+//	              	    'dataType': 'json',
+                     success:function(res){
+						console.log('registrado',res)
+                             $('#formulario')[0].reset();
+                             $('.modal').modal('hide')
+                      	Swal.fire({
+                             title:"Registrado",
+                             text:"Se ha registrado exitosamente",
+                             icon:"success",
+                             timer:700,   
+                             showConfirmButton: false 
+                         });   
+                        $('#table').dataTable().fnDraw('page');
+//                          }
+                     },
+                     error:function(err){
+                    	 console.log(err)
+       	 				Swal.fire({
+					    	icon:'error',
+					    	title:"Cancelado",
+	                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+	                        timer:2000,
+	                        showCancelButton:false,
+	                     	showConfirmButton:false
+					    })
+                     }
+                 })
+			}
+             	
+             	
+			function updateTable(id,objectMod){
+                $('#table > tbody  > tr').each(function(index, tr) {
+             	   
+	               	var row = $(this).closest('tr');
+	    			var idrow = parseInt(row.find('.idhidden').val(), 10);
+					//console.log('idrow:',idrow);
+                	if(id==idrow){
+                		$(this).find("td:eq(1)").html(objectMod.nombre);
+                	}
+               	 });
+			}
+
+			
+			function updateEntityForm1() {
+	            
+                let formData = new FormData(document.getElementById('formulario'))
+                console.log("ID MOD:",GID)
+                console.log("forDAta mod:",formData)
+
+    	        $.ajax({
+              	   	url:nameEntity+"/modificar/"+GID,
+              	    type: "POST",
+//					'contentType': "application/json",
+					contentType: false,
+					processData: false,
+//					'contentType':false,
+					data: formData,
+//              	    'dataType': 'json',
+                     success:function(res){
+                    	 objectMod=res
+                         $('#formulario')[0].reset();
+                         $('.modal').modal('hide')
+                          Swal.fire({
+                             title:"Registrado",
+                             text:"Se ha modificado exitosamente",
+                             icon:"success",
+                             timer:700,   
+                             showConfirmButton: false 
+                         });  
+                         $('#table').dataTable().fnDraw('page');
+                     },
+                     error:function(err){
+                    	 console.log('error',err)
+       	 				Swal.fire({
+					    	icon:'error',
+					    	title:"Cancelado",
+	                        text:"No se realizo la operacion, comunicarse con el administrador del Sistema, Gracias",
+	                        timer:2000,
+	                        showCancelButton:false,
+	                     	showConfirmButton:false
+					    })
+                     }
+                	
+                 })
+			}
+			
+			
+			
+			function updateStatusEntity(status) {
+				console.log("GID:",GID," STATUS:",status)
+				const swalWithBootstrapButtons = Swal.mixin({
+				  customClass: {
+				    confirmButton: 'btn btn-success',
+				    cancelButton: 'btn btn-danger'
+				  },
+				  buttonsStyling: false
+				})
+				
+				swalWithBootstrapButtons.fire({
+				  title: "¿Estas Seguro de continuar?",   
+	              text: "Se registrara en el Sistema",   
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonText: 'Si, Continuar!',
+				  cancelButtonText: 'No, Cancelar!',
+				  reverseButtons: true
+				}).then((result) => {
+				  if (result.isConfirmed) {
+	       				var data= {
+       	          	    	id:GID,
+       	          	    	codigo:"",
+       	          	    	nombre:"",
+       	          	    	estado:status
+       	          	    }
+	       				console.log(JSON.stringify(data))
+       	                $.ajax({
+       	              	   	url:nameEntity+"/updateStatus",
+       	              	    type: "POST",
+
+
+       		                contentType: "application/json",
+       		                dataType:'json',
+       						'data': JSON.stringify(data),
+       	 
+       	                     success:function(res){
+       							console.log('registrado',res)
+//        							removeRowLastTable(res.id)
+       							$('#table').dataTable().fnDraw('page');
+       	                         Swal.fire({
+       	                             title:"Completado",
+       	                             text:"Se ha completado la transaccion exitosamente",
+       	                             icon:"success",
+       	                             timer:700,   
+       	                             showConfirmButton: false 
+       	                         });
+       						   		
+       	                     }
+       	                 })
+	       	                 $('.modal').modal('hide')  
+					  
+	
+				  } else if (
+				    /* Read more about handling dismissals below */
+				    result.dismiss === Swal.DismissReason.cancel
+				  ) {
+					    swalWithBootstrapButtons.fire({
+					    	icon:'error',
+					    	title:"Cancelado",
+	                        text:"Se ha cancelado operacion",
+	                        timer:800,
+	                        showCancelButton:false,
+	                     	showConfirmButton:false
+					    })
+				  }
+				})
+	
+				
+
+			}
+// 	    $('#formulario').formValidation({
+
+//        	})
+//         .on('success.form.fv', function(e){
+//             e.preventDefault();
+//             var $form = $(e.target);
+
+		$("#formulario").submit(function (event) {
+            const swalWithBootstrapButtons = Swal.mixin({
+            	  customClass: {
+            	    confirmButton: 'btn btn-success',
+            	    cancelButton: 'btn btn-danger'
+            	  },
+            	  buttonsStyling: false
+            	})
+            
+			swalWithBootstrapButtons.fire({
+				  title: "¿Estas Seguro de continuar?",   
+	              text: "Se registrara en el Sistema",   
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonText: 'Si, Continuar!',
+				  cancelButtonText: 'No, Cancelar!',
+				  reverseButtons: true
+				}).then((result) => {
+					console.log("GOPCION:",GOPCION)
+				  if (result.isConfirmed) {
+	               	   if(GOPCION=="ADD"){
+	            		   saveEntityForm1()
+	            	   }else{
+	            		   updateEntityForm1()
+	            	   }
+	               	
+				  } else if (
+				    result.dismiss === Swal.DismissReason.cancel
+				  ) {
+				    swalWithBootstrapButtons.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+                        text:"Se ha cancelado operacion",
+                        timer:700,
+                        showCancelButton:false,
+                     	showConfirmButton:false
+				    })
+				  }
+				  $('.modal').modal('hide')  
+				})
+            
+				 event.preventDefault();
+		 	 });
+//         })
+	</script>
+</body>
+</html>

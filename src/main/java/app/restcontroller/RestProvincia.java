@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.entity.AnioEntity;
 import app.entity.ProvinciaEntity;
 import app.service.ProvinciaServiceImpl;
 import app.util.Constantes;
@@ -72,7 +74,7 @@ public class RestProvincia extends RestControllerGenericNormalImpl<ProvinciaEnti
     }
     
     @GetMapping("/provincias/{id}")
-    public ResponseEntity<?> provincias(@PathVariable String id){ 
+    public ResponseEntity<?> provincias(@PathVariable String id){
         try { 
         	System.out.println("ID A BUSCAR");
         	List<?> lista= servicio.findAll(Integer.parseInt(id));
@@ -84,5 +86,24 @@ public class RestProvincia extends RestControllerGenericNormalImpl<ProvinciaEnti
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
+    
+    @PostMapping("/modificar/{id}")
+	public ResponseEntity<?> update(@PathVariable Integer id,ProvinciaEntity entity){
+		try {
+			
+			
+			System.out.println("EntidadModificar LLEGO:");
+			//observado
+//			ProvinciaEntity provinciaEntity2=servicio.findById(id);
+//			provinciaEntity2.setNombre(entity.getNombre());
+			
+//			System.out.println("CATALOGO BD:"+provinciaEntity2.toString());
+			return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id,entity));
+		} catch (Exception e) {//BAD_REQUEST= es error 400
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, Por favor intente mas tarde. \"}");
+		}
+	}
 
 }

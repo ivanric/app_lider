@@ -172,6 +172,10 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
     			ParticipanteEntity.setGradoacademico(InscritoDTO.getGradoacademico());
     			ParticipanteEntity.setProfesion(InscritoDTO.getProfesion());
     			ParticipanteEntity.setDepartamento(InscritoDTO.getDepartamento());
+    			if (InscritoDTO.getProvincia()!=null) {
+    				ParticipanteEntity.setProvincia(InscritoDTO.getProvincia());
+    			}
+    			ParticipanteEntity.setProvincia(InscritoDTO.getProvincia());
     			ParticipanteEntity.setLocalidad(InscritoDTO.getLocalidad());
     			ParticipanteEntity.setPersona(persona2);
     			ParticipanteEntity.setEstado(1);

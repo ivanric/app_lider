@@ -34,6 +34,7 @@ import app.service.DepartamentoService;
 import app.service.GradoAcademicoService;
 import app.service.ParticipanteServiceImpl;
 import app.service.ProfesionService;
+import app.service.ProvinciaService;
 import app.service.S3Service;
 import app.util.Constantes;
 
@@ -44,6 +45,7 @@ public class RestParticipante extends RestControllerGenericNormalImpl<Participan
 	@Autowired GradoAcademicoService gradoAcademicoService;
 	@Autowired ProfesionService profesionService;
 	@Autowired DepartamentoService departamentoService;
+	@Autowired ProvinciaService ProvinciaService;
     @Autowired
     private S3Service s3Service;
 	
@@ -104,7 +106,7 @@ public class RestParticipante extends RestControllerGenericNormalImpl<Participan
 		System.out.println("EntidadSave LLEGO:"+ParticipanteDTO.toString());
 
 		try {
-			System.out.println("**AFICHE**:"+ParticipanteDTO.getLogo().getOriginalFilename());
+			System.out.println("**AFICHE**:"+ParticipanteDTO.getArchivoimgparticipante().getOriginalFilename());
 			
 			PersonaEntity personaEntity=new PersonaEntity();
 			personaEntity.setCi(ParticipanteDTO.getCi());
@@ -122,7 +124,7 @@ public class RestParticipante extends RestControllerGenericNormalImpl<Participan
 			
 			ParticipanteEntity ParticipanteEntity=new ParticipanteEntity();
 			ParticipanteEntity.setImagen(ParticipanteDTO.getImagen());
-			ParticipanteEntity.setLogo(ParticipanteDTO.getLogo());
+			ParticipanteEntity.setLogo(ParticipanteDTO.getArchivoimgparticipante());
 			ParticipanteEntity.setGradoacademico(gradoAcademicoService.findById(ParticipanteDTO.getGradoacademico()));
 			ParticipanteEntity.setProfesion(profesionService.findById(ParticipanteDTO.getProfesion()));
 			ParticipanteEntity.setDepartamento(departamentoService.findById(ParticipanteDTO.getDepartamento()));
@@ -138,7 +140,7 @@ public class RestParticipante extends RestControllerGenericNormalImpl<Participan
 	}
     
     @PostMapping("/modificar/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, ParticipanteDTO ParticipanteDTO, @RequestParam("logo") MultipartFile file) {
+    public ResponseEntity<?> update(@PathVariable Integer id, ParticipanteDTO ParticipanteDTO, @RequestParam("archivoimgparticipante") MultipartFile file) {
         try {
 
 			PersonaEntity personaEntity=new PersonaEntity();
@@ -158,10 +160,14 @@ public class RestParticipante extends RestControllerGenericNormalImpl<Participan
 			ParticipanteEntity ParticipanteEntity=new ParticipanteEntity();
 			ParticipanteEntity.setCodigo(ParticipanteDTO.getCodigo());
 			ParticipanteEntity.setImagen(ParticipanteDTO.getImagen());
-			ParticipanteEntity.setLogo(ParticipanteDTO.getLogo());
+			ParticipanteEntity.setLogo(ParticipanteDTO.getArchivoimgparticipante());
 			ParticipanteEntity.setGradoacademico(gradoAcademicoService.findById(ParticipanteDTO.getGradoacademico()));
 			ParticipanteEntity.setProfesion(profesionService.findById(ParticipanteDTO.getProfesion()));
 			ParticipanteEntity.setDepartamento(departamentoService.findById(ParticipanteDTO.getDepartamento()));
+			if (ParticipanteDTO.getProvincia()!=null) {
+				ParticipanteEntity.setProvincia(ProvinciaService.findById(ParticipanteDTO.getProvincia()));
+			}
+			
 			ParticipanteEntity.setLocalidad(ParticipanteDTO.getLocalidad());
 			ParticipanteEntity.setPersona(personaEntity);
             

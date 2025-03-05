@@ -30,7 +30,7 @@ services:
 #            reservations:
 #              cpus: "0.25"
 #              memory: 512M # Asegura que al menos 512 MB estén disponibles para el contenedor
-  bd_posgresql:   
+  bd_posgresql:
     container_name: "lider_bd"
     image: postgres:11
     restart: always

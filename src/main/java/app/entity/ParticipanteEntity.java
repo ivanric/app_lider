@@ -58,6 +58,10 @@ public class ParticipanteEntity  implements Serializable{
     @ManyToOne(optional = false)
     @JoinColumn(name = "fk_departamento")
     private DepartamentoEntity departamento;
+    
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "fk_provincia")
+    private ProvinciaEntity provincia;
 	
 	@Column(name = "localidad") 
 	private String localidad;
@@ -94,10 +98,9 @@ public class ParticipanteEntity  implements Serializable{
 //		super();
 	}
 
-	
 	public ParticipanteEntity(Integer id, Integer codigo, String imagen, String imagenDriveId,
 			GradoAcademicoEntity gradoacademico, ProfesionEntity profesion, DepartamentoEntity departamento,
-			String localidad, PersonaEntity persona, Integer cantidad_cursos, Integer estado,
+			ProvinciaEntity provincia, String localidad, PersonaEntity persona, Integer cantidad_cursos, Integer estado,
 			List<CertificadoEntity> detallecertificados, MultipartFile logo) {
 		super();
 		this.id = id;
@@ -107,6 +110,7 @@ public class ParticipanteEntity  implements Serializable{
 		this.gradoacademico = gradoacademico;
 		this.profesion = profesion;
 		this.departamento = departamento;
+		this.provincia = provincia;
 		this.localidad = localidad;
 		this.persona = persona;
 		this.cantidad_cursos = cantidad_cursos;
@@ -114,156 +118,130 @@ public class ParticipanteEntity  implements Serializable{
 		this.detallecertificados = detallecertificados;
 		this.logo = logo;
 	}
-
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public Integer getCodigo() {
 		return codigo;
 	}
 
-
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
-
 
 	public String getImagen() {
 		return imagen;
 	}
 
-
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-
 
 	public String getImagenDriveId() {
 		return imagenDriveId;
 	}
 
-
 	public void setImagenDriveId(String imagenDriveId) {
 		this.imagenDriveId = imagenDriveId;
 	}
-
 
 	public GradoAcademicoEntity getGradoacademico() {
 		return gradoacademico;
 	}
 
-
 	public void setGradoacademico(GradoAcademicoEntity gradoacademico) {
 		this.gradoacademico = gradoacademico;
 	}
-
 
 	public ProfesionEntity getProfesion() {
 		return profesion;
 	}
 
-
 	public void setProfesion(ProfesionEntity profesion) {
 		this.profesion = profesion;
 	}
-
 
 	public DepartamentoEntity getDepartamento() {
 		return departamento;
 	}
 
-
 	public void setDepartamento(DepartamentoEntity departamento) {
 		this.departamento = departamento;
 	}
 
+	public ProvinciaEntity getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(ProvinciaEntity provincia) {
+		this.provincia = provincia;
+	}
 
 	public String getLocalidad() {
 		return localidad;
 	}
 
-
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
-
 
 	public PersonaEntity getPersona() {
 		return persona;
 	}
 
-
 	public void setPersona(PersonaEntity persona) {
 		this.persona = persona;
 	}
 
-
 	public Integer getCantidad_cursos() {
-//		int cont=0;
-//		for (int i = 0; i < detallecertificados.size(); i++) {
-//			cont= cont+(i+1);
-//		}
-		this.cantidad_cursos=detallecertificados.size();
 		return cantidad_cursos;
 	}
-
 
 	public void setCantidad_cursos(Integer cantidad_cursos) {
 		this.cantidad_cursos = cantidad_cursos;
 	}
 
-
 	public Integer getEstado() {
 		return estado;
 	}
-
 
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
 
-
 	public List<CertificadoEntity> getDetallecertificados() {
 		return detallecertificados;
 	}
-
 
 	public void setDetallecertificados(List<CertificadoEntity> detallecertificados) {
 		this.detallecertificados = detallecertificados;
 	}
 
-
 	public MultipartFile getLogo() {
 		return logo;
 	}
-
 
 	public void setLogo(MultipartFile logo) {
 		this.logo = logo;
 	}
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-
 	@Override
 	public String toString() {
-		return "ParticipanteEntity [id=" + id + ", codigo=" + codigo + ", imagen=" + imagen + ", imagenDriveId="
-				+ imagenDriveId + ", gradoacademico=" + gradoacademico + ", profesion=" + profesion + ", departamento="
-				+ departamento + ", localidad=" + localidad + ", persona=" + persona + ", cantidad_cursos="
-				+ cantidad_cursos + ", estado=" + estado + ", logo=" + logo + "]";
+	    return "ParticipanteEntity [id=" + id + ", codigo=" + codigo + ", imagen=" + imagen + 
+	           ", imagenDriveId=" + imagenDriveId + ", gradoacademico=" + gradoacademico + 
+	           ", profesion=" + profesion + ", departamento=" + departamento + 
+	           ", provincia=" + provincia + ", localidad=" + localidad + 
+	           ", persona=" + persona + ", cantidad_cursos=" + cantidad_cursos + 
+	           ", estado=" + estado + ", logo=" + (logo != null ? "Existe" : "No existe") + "]";
 	}
-	
 
+	
+	
 	
 }

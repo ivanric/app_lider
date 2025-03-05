@@ -104,10 +104,11 @@ public class ProvinciaServiceImpl extends GenericServiceImplNormal<ProvinciaEnti
 		try {
 			System.out.println("Modificar Entity Service:"+entity.toString());
 			//observado
-			ProvinciaEntity catalogoEntity2=ProvinciaRepository.findById(id).get();
-			System.out.println("CATALOGO BD:"+catalogoEntity2.toString());
-        	
-			 entity=genericRepository.save(entity);
+			ProvinciaEntity entity2=ProvinciaRepository.findById(id).get();
+			entity2.setNombre(entity.getNombre());
+			entity2.setDepartamento(entity.getDepartamento());
+			System.out.println("CATALOGO BD:"+entity2.toString());
+			 entity=genericRepository.save(entity2);
 			return entity;
 		} catch (Exception e) { 
 			e.printStackTrace(); 
@@ -115,7 +116,6 @@ public class ProvinciaServiceImpl extends GenericServiceImplNormal<ProvinciaEnti
 			throw new Exception(e.getMessage());
 		}
 	}
-
 
 	@Override
 	public List<ProvinciaEntity> findAll(int iddep) throws Exception {
