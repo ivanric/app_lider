@@ -8,6 +8,7 @@ import java.nio.file.StandardCopyOption;
 import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -495,10 +496,13 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
         }
 
         try {
-            // Parámetros del reporte
+            
+        	// **Ordenar selectedIds antes de procesarlo**
+            Collections.sort(selectedIds);
+        	// Parámetros del reporte
             Map<String, Object> parametros = new HashMap<>();
             List<File> fotoPlantillas = new ArrayList<>();
-            List<File> fotoUsuarios = new ArrayList<>();
+            List<File> fotoUsuarios = new ArrayList<>(); 
             List<File> fotosQr = new ArrayList<>();
 
             // Recopilar imágenes desde S3

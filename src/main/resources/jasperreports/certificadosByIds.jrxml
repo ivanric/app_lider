@@ -34,7 +34,8 @@ JOIN eventodetalle ed ON c.id = ed.fk_curso
 JOIN evento e ON ed.fk_evento = e.id
 JOIN inscritodetalle idt ON e.id = idt.fk_evento
 WHERE ct.estado = 1
-and $X{IN,ct.id,certificadosIds}]]>
+and $X{IN,ct.id,certificadosIds}
+ORDER BY ct.id]]>
 	</queryString>
 	<field name="id" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
