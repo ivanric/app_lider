@@ -11,14 +11,18 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import app.dto.EventoDTO;
 import app.entity.AnioEntity;
+import app.entity.EventoEntity;
 import app.entity.ProvinciaEntity;
 import app.service.ProvinciaServiceImpl;
 import app.util.Constantes;
@@ -86,9 +90,19 @@ public class RestProvincia extends RestControllerGenericNormalImpl<ProvinciaEnti
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
-    
+    @PostMapping("/guardar")
+	public ResponseEntity<?> save(  @ModelAttribute ProvinciaEntity entity){
+		System.out.println("EntidadDTOSave LLEGO:"+entity.toString());
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
+		} catch (Exception e) {//BAD_REQUEST= es error 400
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, Por favor intente mas tarde. \"}");
+		}
+	}
     @PostMapping("/modificar/{id}")
-	public ResponseEntity<?> update(@PathVariable Integer id,ProvinciaEntity entity){
+	public ResponseEntity<?> update(@PathVariable Integer id, @ModelAttribute ProvinciaEntity entity){
 		try {
 			
 			

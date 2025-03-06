@@ -187,6 +187,13 @@ public class ParticipanteServiceImpl extends GenericServiceImplNormal<Participan
 	            // Actualizar la entidad con los datos del logo
 	            entitymod.setImagen(nombreLogo);
 	            entitymod.setImagenDriveId(fileKey); // Guardamos la clave del archivo en S3
+			}else {
+			    if (entitymod.getImagen() != null) {
+	                System.out.println("*******************Eliminando222222 logo anterior de S3: " + entitymod.getImagen());
+	                s3Service.deleteFile(Constantes.nameFolderLogoParticipante + "/" + entitymod.getImagen());
+	            }
+			    entitymod.setImagen(null);
+			    entitymod.setImagenDriveId(null);
 			}
 
 			System.out.println("SE COMPLETO LA MODIFICACION");
