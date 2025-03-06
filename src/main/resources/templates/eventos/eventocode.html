@@ -569,6 +569,24 @@ body {
   }
 }
 
+.certificado{
+	background: #ffef30;
+    padding: 4px;
+    border-radius: 5px;
+    margin-top: 3px;
+    text-align: justify;
+}
+
+.title_complete{
+	background: linear-gradient(to bottom, #FF8000, #FA6900);
+    padding: 0 6px;
+    border-radius: 5px;
+    margin-top: 3px;
+    text-align: justify;
+    color: white;
+    font-weight: bold;
+}
+
 </style>
 
 </head>
@@ -618,9 +636,9 @@ body {
 				<span style="-index: 9;">D</span> <span style="-index: 10;">O</span>
 			</div>
 
-			<span class="badge bg-warning text-dark lt_detalle">Complete
+			<span class="title_complete">Complete
 				el formulario de registro correctamente porfavor</span>
-			<!-- 		Complete el formulario de registro porfavor -->
+		
 		</div>
 		<div class=" mt-1 ">
 			<form name="formulario" role="form" id="formulario" method="post"
@@ -678,7 +696,8 @@ body {
 							</div>
 							<div class="col-md-4">
 								<div class="">
-									<label for="exp" class=""><b>EXPEDIDO</b></label> <select
+									<label for="exp" class=""><b>EXPEDIDO</b></label> 
+									<select
 										required="required" class="form-select field_css"
 										aria-label=".form-select-sm example" id="exp" name="exp">
 										<option selected value="">Seleccionar</option>
@@ -837,18 +856,40 @@ body {
 <!-- 								</div> -->
 
 <!-- 							</div> -->
+<!-- 							<div class="col-md-12"> -->
+<!-- 								<div class=""> -->
+<!-- 									<label for="exampleFormControlInput1" class=""><b>DIRECCIÓN</b></label> -->
+<!-- 									<textarea rows="" cols="" -->
+<!-- 										placeholder="Ingrese la direccion donde vive " -->
+<!-- 										class="form-control fg-input data-per field_css" -->
+<!-- 										name="direccion" id="direccion" required="required" -->
+<!-- 										onkeyup="this.value = this.value.toUpperCase();"></textarea> -->
+
+<!-- 								</div> -->
+<!-- 							</div> -->
+							
 							<div class="col-md-12">
 								<div class="">
-									<label for="exampleFormControlInput1" class=""><b>DIRECCIÓN</b></label>
-									<textarea rows="" cols=""
-										placeholder="Ingrese la direccion donde vive "
-										class="form-control fg-input data-per field_css"
-										name="direccion" id="direccion" required="required"
-										onkeyup="this.value = this.value.toUpperCase();"></textarea>
-
+									<label for="exampleFormControlInput1" class=""><b>REQUIERE TU CERTIFICADO</b></label><br>
+									<span>Te informamos que apartir de ahora nuestros certificados cuentan con un codigo QR único
+										  de autenticidad, por lo que puedes escoger, si deseas tu certificación física o digital.	
+									</span>
+									<select
+										required="required" class="form-select field_css"
+										aria-label=".form-select-sm example" id="tipocertificado" name="tipocertificado">
+										<option selected value="">Elige tu certificado</option>
+										<option value="FISICO">FISICO</option>
+										<option value="DIGITAL">DIGITAL</option>
+									</select>
+									<div style="" class="certificado">
+										<span class=""> * En caso de que sea físico se enviará hasta su ciudad de residencia <br>
+										* En caso de que sea digital se enviará a su correo electrónico y whapsapp.
+										</span>
+									</div>
+									
 								</div>
 							</div>
-
+							
 							<div class=" col-md-12 mt-1">
 
 								<div class="shadow evento_comprobantepago "

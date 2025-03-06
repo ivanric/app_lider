@@ -693,14 +693,16 @@ td {
 					<table id="table" class="table align-middle mb-0 bg-white" style="width: 100%; background: white;">
 						<thead class="bg-light">
 							<tr>
+								<th>NRO.FOLIO</th>
 								<th>CI</th>
 								<th>NOMBRE COMPLETO</th>
 								<th>CORREO</th>
 								<th>CELULAR</th>
 								<th>CIUDAD</th>
 								<th>SUCURSAL</th>
-								<th>CURSO</th>
 								<th>CERTIFICADO</th>
+								<th>CURSO</th>
+								<th>IMPRIMIR</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -2557,6 +2559,8 @@ td {
 	                { "data": "id" },
 	                { "data": "id" },
 	                { "data": "id" },
+	                { "data": "id" },
+	                { "data": "id" },
 	                { "data": "id" }
 //	                 { "data": "id" }
 	      		]
@@ -2564,16 +2568,18 @@ td {
 	            "createdRow":function(row,data,index){
 	                console.log("DATA2:",data)
 	                $('td',row).eq(0).html(data.nrofolio+""+`<input type="hidden" value="${data.id}" class="idhidden">`).addClass('text-center');
-	                $('td',row).eq(1).html(data.nombrecompleto);
-	                $('td',row).eq(2).html(data.email);
-	                $('td',row).eq(3).html(data.celular);
-	                $('td',row).eq(4).html("");
-	                $('td',row).eq(5).html("");
-	                $('td',row).eq(6).html(data.nombrecurso);
+	                $('td',row).eq(1).html(data.ci);
+	                $('td',row).eq(2).html(data.nombrecompleto);
+	                $('td',row).eq(3).html(data.email);
+	                $('td',row).eq(4).html(data.celular);
+	                $('td',row).eq(5).html(data.ciudad);
+	                $('td',row).eq(6).html(data.sucursal);
+	                $('td',row).eq(7).html(data.tipocertificado);
+	                $('td',row).eq(8).html(data.nombrecurso);
 // 	                $('td',row).eq(5).html('SI').addClass('text-center');
 	                
 	                // Aquí agregarás el checkbox
-	                $('td', row).eq(7).html(`
+	                $('td', row).eq(9).html(`
 	                    <input type="checkbox" class="row-checkbox" data-id="${data.id}">
 	                `).addClass('text-center');
 

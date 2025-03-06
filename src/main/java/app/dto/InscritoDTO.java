@@ -41,6 +41,7 @@ public class InscritoDTO {
 	private ProvinciaEntity provincia;
 	private String localidad;	
 	private String direccion;
+	private String tipocertificado;
 	private Integer estado;
 	  
 	//datos extras de inscrito
@@ -73,9 +74,9 @@ public class InscritoDTO {
 			String imagenpago, String ci, String exp, String nombres, String apellidos, String genero,
 			LocalDate fechanacimiento, Integer edad, Integer celular, GradoAcademicoEntity gradoacademico,
 			ProfesionEntity profesion, String email, DepartamentoEntity departamento, ProvinciaEntity provincia,
-			String localidad, String direccion, Integer estado, String nrocuenta, BancoEntity banco, double importe,
-			double cantidad, double precio, double descuento, double subtotal, EventoEntity evento, AnioEntity anio,
-			MultipartFile archivoimgparticipante, MultipartFile archivoimgpago) {
+			String localidad, String direccion, String tipocertificado, Integer estado, String nrocuenta,
+			BancoEntity banco, double importe, double cantidad, double precio, double descuento, double subtotal,
+			EventoEntity evento, AnioEntity anio, MultipartFile archivoimgparticipante, MultipartFile archivoimgpago) {
 		super();
 		this.id = id;
 		this.idper = idper;
@@ -98,6 +99,7 @@ public class InscritoDTO {
 		this.provincia = provincia;
 		this.localidad = localidad;
 		this.direccion = direccion;
+		this.tipocertificado = tipocertificado;
 		this.estado = estado;
 		this.nrocuenta = nrocuenta;
 		this.banco = banco;
@@ -280,6 +282,14 @@ public class InscritoDTO {
 		this.direccion = direccion;
 	}
 
+	public String getTipocertificado() {
+		return tipocertificado;
+	}
+
+	public void setTipocertificado(String tipocertificado) {
+		this.tipocertificado = tipocertificado;
+	}
+
 	public Integer getEstado() {
 		return estado;
 	}
@@ -384,10 +394,11 @@ public class InscritoDTO {
 				+ ", fechanacimiento=" + fechanacimiento + ", edad=" + edad + ", celular=" + celular
 				+ ", gradoacademico=" + gradoacademico + ", profesion=" + profesion + ", email=" + email
 				+ ", departamento=" + departamento + ", provincia=" + provincia + ", localidad=" + localidad
-				+ ", direccion=" + direccion + ", estado=" + estado + ", nrocuenta=" + nrocuenta + ", banco=" + banco
-				+ ", importe=" + importe + ", cantidad=" + cantidad + ", precio=" + precio + ", descuento=" + descuento
-				+ ", subtotal=" + subtotal + ", evento=" + evento + ", anio=" + anio + ", archivoimgparticipante="
-				+ archivoimgparticipante + ", archivoimgpago=" + archivoimgpago + "]";
+				+ ", direccion=" + direccion + ", tipocertificado=" + tipocertificado + ", estado=" + estado
+				+ ", nrocuenta=" + nrocuenta + ", banco=" + banco + ", importe=" + importe + ", cantidad=" + cantidad
+				+ ", precio=" + precio + ", descuento=" + descuento + ", subtotal=" + subtotal + ", evento=" + evento
+				+ ", anio=" + anio + ", archivoimgparticipante=" + archivoimgparticipante + ", archivoimgpago="
+				+ archivoimgpago + "]";
 	}
 
 	

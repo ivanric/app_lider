@@ -21,8 +21,8 @@ public interface ParticipanteRepository extends GenericRepositoryNormal<Particip
 	@Query(value="SELECT COALESCE(max(codigo),0)+1 as codigo from participante",nativeQuery = true)
 	public Integer getCodigo();
 	
-	@Query(value = "select t.* from participante t,persona p where t.fk_persona=p.id and  (t.estado=:estado or :estado=-1) and  (upper(concat(t.id,p.ci,'')) like concat('%',upper(:search),'%')) ORDER BY t.id ASC LIMIT :length OFFSET :start ",
-			countQuery ="SELECT count(t.*) FROM participante t where t.fk_persona=p.id and  (t.estado=:estado or :estado=-1) and  (upper(concat(t.id,p.ci,'')) like concat('%',upper(:search),'%')) LIMIT :length OFFSET :start ",		
+	@Query(value = "select t.* from participante t,persona p where t.fk_persona=p.id and  (t.estado=:estado or :estado=-1) and  (upper(concat(t.id,p.ci,p.nombres,p.apellidos,'')) like concat('%',upper(:search),'%')) ORDER BY t.id ASC LIMIT :length OFFSET :start ",
+			countQuery ="SELECT count(t.*) FROM participante t where t.fk_persona=p.id and  (t.estado=:estado or :estado=-1) and  (upper(concat(t.id,p.ci,p.nombres,p.apellidos,'')) like concat('%',upper(:search),'%')) LIMIT :length OFFSET :start ",		
 			nativeQuery = true)
 	public List<ParticipanteEntity> findAll(@Param("estado") int estado,@Param("search") String search,@Param("length") int length,@Param("start") int start);
 	

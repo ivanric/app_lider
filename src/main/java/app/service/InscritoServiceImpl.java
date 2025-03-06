@@ -202,6 +202,7 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
 				participantemod.setGradoacademico(InscritoDTO.getGradoacademico());
 				participantemod.setProfesion(InscritoDTO.getProfesion());
 				participantemod.setDepartamento(InscritoDTO.getDepartamento());
+				participantemod.setProvincia(InscritoDTO.getProvincia());
 				participantemod.setLocalidad(InscritoDTO.getLocalidad());
 				participantemod.setPersona(persona2);
 				
@@ -338,6 +339,7 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
 	            CertificadoEntity.setLugarcurso(InscritoDTO.getEvento().getEventodetalle().get(i).getLugarcurso());
 	            CertificadoEntity.setHorasacademicas(InscritoDTO.getEvento().getEventodetalle().get(i).getHorasacademicas());
 	            CertificadoEntity.setExpositor(InscritoDTO.getEvento().getEventodetalle().get(i).getExpositor());
+	            CertificadoEntity.setTipocertificado(InscritoDTO.getTipocertificado());
 	            CertificadoEntity CertificadoEntity2=this.CertificadoCursoRepository.save(CertificadoEntity);            
          	}
 	

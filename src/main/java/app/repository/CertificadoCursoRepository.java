@@ -149,11 +149,15 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 	
 	@Query(value = "SELECT DISTINCT ct.id,\r\n"
 			+ "ct.nrofolio,\r\n"
+			+ "p.ci,\r\n"
 			+ "concat('',p.nombres,' ',p.apellidos) as nombrecompleto,\r\n"
 			+ "p.email,\r\n"
 			+ "p.celular,\r\n"
 			+ "c.nombrecurso, \r\n"
-			+ "cat.nombre as categoria\r\n"
+			+ "cat.nombre as categoria,\r\n"
+			+ "(select dep.nombre from departamento dep where dep.id=pa.fk_departamento ) as ciudad,\r\n"
+			+ "(select prov.nombre from provincia prov where prov.id=pa.fk_provincia ) as sucursal,\r\n"
+			+ "ct.tipocertificado\r\n"
 			+ "FROM certificadocurso ct\r\n"
 			+ "JOIN participante pa ON ct.fk_participante = pa.id\r\n"
 			+ "JOIN persona p ON pa.fk_persona = p.id\r\n"
@@ -163,11 +167,11 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "JOIN eventodetalle ed ON c.id = ed.fk_curso \r\n"
 			+ "JOIN evento e ON ct.fk_evento = e.id \r\n"
 			+ "WHERE (ct.estado = :estado OR :estado = -1) \r\n"
-			+ "AND (upper(c.id || c.nombrecurso || '') LIKE concat('%', upper(:search), '%'))\r\n"
+			+ "AND (upper(concat(p.ci , p.nombres,p.apellidos , '')) LIKE concat('%', upper(:search), '%'))\r\n"
 			+ "AND (e.id = :idevento OR :idevento = -1)\r\n"
 			+ "AND (cat.id = :idcategoria OR :idcategoria= -1)\r\n"
-			+ "AND (ct.fk_anio = :idanio OR :idanio= -1)\r\n"
-			+ "AND (c.id = :idcurso OR :idcurso= -1)\r\n"
+			+ "AND (ct.fk_anio =:idanio OR :idanio= -1)\r\n"
+			+ "AND (c.id =:idcurso OR :idcurso= -1)\r\n"
 			+ "ORDER BY ct.id ASC\r\n"
 			+ "LIMIT :length OFFSET :start",
 	    nativeQuery = true)
@@ -217,12 +221,12 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "JOIN eventodetalle ed ON c.id = ed.fk_curso \r\n"
 			+ "JOIN evento e ON ct.fk_evento = e.id \r\n"
 			+ "WHERE (ct.estado = :estado OR :estado = -1) \r\n"
-			+ "AND (upper(c.id || c.nombrecurso || '') LIKE concat('%', upper(:search), '%'))\r\n"
+			+ "AND (upper(concat(p.ci , p.nombres,p.apellidos , '')) LIKE concat('%', upper(:search), '%'))\r\n"
 			+ "AND (e.id = :idevento OR :idevento = -1)\r\n"
-			+ "AND (cat.id = :idcategoria OR :idcategoria = -1)\r\n"
+			+ "AND (cat.id =:idcategoria OR :idcategoria = -1)\r\n"
 			+ "AND (ct.fk_anio = :idanio OR :idanio = -1)\r\n"
 			+ "AND (c.id= :idcurso OR :idcurso = -1)\r\n"
-			+ "ORDER BY ct.id ASC\r\n",
+			+ "ORDER BY ct.id ASC",
 	    nativeQuery = true)
 	public List<Map<String, Object>> getIdCertiByCurso(
 	        @Param("estado") int estado,
@@ -266,14 +270,16 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "JOIN categoria cat ON c.fk_categoria = cat.id\r\n"
 			+ "JOIN eventodetalle ed ON c.id = ed.fk_curso \r\n"
 			+ "JOIN evento e ON ct.fk_evento = e.id \r\n"
-			+ "WHERE (ct.estado = :estado OR :estado= -1) \r\n"
-			+ "AND (upper(c.id || c.nombrecurso || '') LIKE concat('%', upper(:search), '%'))\r\n"
-			+ "AND (e.id = :idevento OR :idevento = -1)\r\n"
-			+ "AND (cat.id = :idcategoria OR :idcategoria= -1)\r\n"
+			+ "WHERE (ct.estado = :estado OR :estado = -1) \r\n"
+			+ "AND (upper(concat(p.ci , p.nombres,p.apellidos , '')) LIKE concat('%', upper(:search), '%'))\r\n"
+			+ "AND (e.id = -:idevento OR :idevento = -1)\r\n"
+			+ "AND (cat.id = :idcategoria OR :idcategoria = -1)\r\n"
 			+ "AND (ct.fk_anio = :idanio OR :idanio= -1)\r\n"
-			+ "AND (c.id= :idcurso OR :idcurso= -1)\r\n"
+			+ "AND (ct.fk_participante = :idparticipante OR :idparticipante = -1)\r\n"
+			+ "\r\n"
+			+ ""
 			+ " ",nativeQuery = true)
-	public Integer getTotAll_curso(@Param("estado") Integer estado,@Param("search") String search,@Param("idevento") int idevento,@Param("idcategoria") int idcategoria,@Param("idanio") int idanio,@Param("idcurso") int idcurso);
+	public Integer getTotAll_curso(@Param("estado") Integer estado,@Param("search") String search,@Param("idevento") int idevento,@Param("idcategoria") int idcategoria,@Param("idanio") int idanio,@Param("idparticipante") int idparticipante);
 
 	@Query(value = "SELECT DISTINCT e.id, e.detalle, e.estado "
 			+ "FROM certificadocurso ct "
