@@ -272,11 +272,12 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "JOIN evento e ON ct.fk_evento = e.id \r\n"
 			+ "WHERE (ct.estado = :estado OR :estado = -1) \r\n"
 			+ "AND (upper(concat(p.ci , p.nombres,p.apellidos , '')) LIKE concat('%', upper(:search), '%'))\r\n"
-			+ "AND (e.id = -:idevento OR :idevento = -1)\r\n"
-			+ "AND (cat.id = :idcategoria OR :idcategoria = -1)\r\n"
-			+ "AND (ct.fk_anio = :idanio OR :idanio= -1)\r\n"
-			+ "AND (ct.id = :idcurso OR :idcurso = -1)\r\n"
-			+ " ",nativeQuery = true)
+			+ "AND (e.id = :idevento OR :idevento = -1)\r\n"
+			+ "AND (cat.id = :idcategoria OR :idcategoria= -1)\r\n"
+			+ "AND (ct.fk_anio =:idanio OR :idanio= -1)\r\n"
+			+ "AND (c.id =:idcurso OR :idcurso= -1)\r\n"
+			+ "\r\n"
+			+ "",nativeQuery = true)
 	public Integer getTotAll_curso(@Param("estado") Integer estado,@Param("search") String search,@Param("idevento") int idevento,@Param("idcategoria") int idcategoria,@Param("idanio") int idanio,@Param("idcurso") int idcurso);
 
 	@Query(value = "SELECT DISTINCT e.id, e.detalle, e.estado "
