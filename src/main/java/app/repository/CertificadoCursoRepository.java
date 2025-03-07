@@ -275,11 +275,9 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "AND (e.id = -:idevento OR :idevento = -1)\r\n"
 			+ "AND (cat.id = :idcategoria OR :idcategoria = -1)\r\n"
 			+ "AND (ct.fk_anio = :idanio OR :idanio= -1)\r\n"
-			+ "AND (ct.fk_participante = :idparticipante OR :idparticipante = -1)\r\n"
-			+ "\r\n"
-			+ ""
+			+ "AND (ct.id = :idcurso OR :idcurso = -1)\r\n"
 			+ " ",nativeQuery = true)
-	public Integer getTotAll_curso(@Param("estado") Integer estado,@Param("search") String search,@Param("idevento") int idevento,@Param("idcategoria") int idcategoria,@Param("idanio") int idanio,@Param("idparticipante") int idparticipante);
+	public Integer getTotAll_curso(@Param("estado") Integer estado,@Param("search") String search,@Param("idevento") int idevento,@Param("idcategoria") int idcategoria,@Param("idanio") int idanio,@Param("idcurso") int idcurso);
 
 	@Query(value = "SELECT DISTINCT e.id, e.detalle, e.estado "
 			+ "FROM certificadocurso ct "
