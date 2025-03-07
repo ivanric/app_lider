@@ -1101,7 +1101,7 @@ td {
                 
 // //                 $('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
                 
-            	$('#js_filtro').on( 'keyup', function () {
+            	$('#js_filtro_curso_detalle').on( 'keyup', function () {
                     DTtable.search(this.value ).draw();
                 }) 
 
@@ -2586,7 +2586,7 @@ td {
 	            } 
 	            ,
 	            "drawCallback":function(settings){
-	            	$('#js_filtro_curso_detalle').on( 'keyup', function () {
+	            	$('#js_filtro').on( 'keyup', function () {
 	            		DTtable_INSCRITO.search(this.value ).draw();
 	                }) 
 				        // Sincronizar los checkboxes con los certificadosIds
