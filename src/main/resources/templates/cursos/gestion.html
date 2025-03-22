@@ -669,12 +669,13 @@ td {
 						<span class="opciones_btn_ver_certificados_marcados">
 							<button id="btnVerCertificadosMarcados" class="btn btn-secondary waves-effect btn-sm " style="margin: 0 2px;" onclick="funcVerCertificadosMarcados()" data-mdb-ripple-init>VER CERTIFICADOS</button>
 						</span>
-<!-- 						<span class="opciones_btn_qr"> -->
-<!-- 							<button id="btnHabilitarQr" class="btn btn-secondary waves-effect btn-sm" style="margin: 0 2px;" onclick="funcRenovarQr()" data-mdb-ripple-init>ENVIAR CERTIFICADO</button> -->
-<!-- 						</span> -->
-<!-- 						<span class="opciones_btn_qr"> -->
-<!-- 							<button id="btnHabilitarQr" class="btn btn-secondary waves-effect btn-sm" style="margin: 0 2px;" onclick="funcRenovarQr()" data-mdb-ripple-init>ENVIAR TODOS LOS CERTIFICADO</button> -->
-<!-- 						</span> -->
+						<span class="opciones_btn_ver_certificados_marcados">
+							<button id="btnVerCertificadosMarcados" class="btn btn-secondary waves-effect btn-sm " style="margin: 0 2px;" onclick="funcEnviarCertificado()" data-mdb-ripple-init>ENVIAR CERTIFICADO</button>
+						</span>
+						<span class="opciones_btn_qr">
+							<button id="btnHabilitarQr" class="btn btn-secondary waves-effect btn-sm" style="margin: 0 2px;" onclick="funcEnviarCertificadosMarcados()" data-mdb-ripple-init>ENVIAR CERTIFICADOS</button>
+						</span>
+
 					</div>
 
 				</div>
@@ -754,6 +755,7 @@ td {
 		
 		var DTtable_INSCRITO=''
 		var nameEntity_INSCRITO="../RestCertificadosCursos"
+		var nameEntity_CORREO="../RestCertificadosCursosCorreos"
 		var nameEntityd2="../RestCategorias"
 
 		
@@ -2755,64 +2757,64 @@ td {
 	}*/
 	
 	
-	function funcVerCertificadosMarcados() {
-	    // Verificar si el array selectedIds está vacío
-	    if (selectedIds.length === 0) {
-	        alert("No se han seleccionado certificados.");
-	        return;
-	    }
-
-	    // Verificar si realmente hay checkboxes marcados en la tabla
-	    var checkedCount = $('#table .row-checkbox:checked').length;
-	    if (checkedCount === 0) {
-	        alert("No se ha seleccionado ningún certificado.");
-	        return;
-	    }
-
-	    // Mostrar el modal de carga antes de iniciar la solicitud
-	    $("#cargando").modal("show");
-
-	    // Iniciar medición del tiempo
-	    var start_time = new Date().getTime();
-
-	    // Construir la URL del backend
-	    var urlCertificados = nameEntity_INSCRITO + "/Imprimir_certificados/";
-
-	    // Enviar la lista de IDs al backend
-	    fetch(urlCertificados, {
-	        method: 'POST',
-	        headers: { 'Content-Type': 'application/json' },
-	        body: JSON.stringify({ ids: selectedIds })  
-	    })
-	    .then(response => response.blob())
-	    .then(blob => { 
-	        // Crear una URL para el archivo PDF
-	        const url = window.URL.createObjectURL(blob);  
-
-	        // Obtener referencia al iframe
-	        var frame = $("#frameReportes");
-
-	        // Configurar evento para cerrar el modal de carga después de cargar el PDF
-	        frame.off("load").on("load", function () {
-	            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
-	            console.log("Tiempo de carga del reporte:", elapsed_time, "segundos");
-
-	            // Ocultar el modal de carga
-	            $("#cargando").modal("hide");
-
-	            // Mostrar el modal de reportes
-	            $("#reportes").modal("show");
-	        });
-
-	        // Asignar la URL al iframe (esto iniciará la carga del PDF)
-	        frame.attr("src", url);
-	    })
-	    .catch(error => {
-	        console.error("Error al generar los certificados:", error);
-	        $("#cargando").modal("hide");
-	        alert("Hubo un error al generar los certificados.");
-	    });
-	}
+		function funcVerCertificadosMarcados() {
+		    // Verificar si el array selectedIds está vacío
+		    if (selectedIds.length === 0) {
+		        alert("No se han seleccionado certificados.");
+		        return;
+		    }
+	
+		    // Verificar si realmente hay checkboxes marcados en la tabla
+		    var checkedCount = $('#table .row-checkbox:checked').length;
+		    if (checkedCount === 0) {
+		        alert("No se ha seleccionado ningún certificado.");
+		        return;
+		    }
+	
+		    // Mostrar el modal de carga antes de iniciar la solicitud
+		    $("#cargando").modal("show");
+	
+		    // Iniciar medición del tiempo
+		    var start_time = new Date().getTime();
+	
+		    // Construir la URL del backend
+		    var urlCertificados = nameEntity_INSCRITO + "/Imprimir_certificados/";
+	
+		    // Enviar la lista de IDs al backend
+		    fetch(urlCertificados, {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/json' },
+		        body: JSON.stringify({ ids: selectedIds })  
+		    })
+		    .then(response => response.blob())
+		    .then(blob => { 
+		        // Crear una URL para el archivo PDF
+		        const url = window.URL.createObjectURL(blob);  
+	
+		        // Obtener referencia al iframe
+		        var frame = $("#frameReportes");
+	
+		        // Configurar evento para cerrar el modal de carga después de cargar el PDF
+		        frame.off("load").on("load", function () {
+		            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+		            console.log("Tiempo de carga del reporte:", elapsed_time, "segundos");
+	
+		            // Ocultar el modal de carga
+		            $("#cargando").modal("hide");
+	
+		            // Mostrar el modal de reportes
+		            $("#reportes").modal("show");
+		        });
+	
+		        // Asignar la URL al iframe (esto iniciará la carga del PDF)
+		        frame.attr("src", url);
+		    })
+		    .catch(error => {
+		        console.error("Error al generar los certificados:", error);
+		        $("#cargando").modal("hide");
+		        alert("Hubo un error al generar los certificados.");
+		    });
+		}
 
 
 			// Array para almacenar los IDs seleccionados
@@ -2978,6 +2980,130 @@ $('#btn_select_all_global').on('click', function () {
 			        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL CERTIFICADO!");
 			    }
 			}
+			
+			function funcEnviarCertificado() {
+			    if (GDATO_INSCRITO != "") {
+			        // Mostrar el modal de carga antes de iniciar la solicitud
+			        $("#cargando").modal("show");
+			
+			        // Medir tiempo de carga
+			        var start_time = new Date().getTime();
+			
+				    $.ajax({
+				        url: nameEntity_CORREO + "/enviarcertificado",
+				        type: "POST",
+// 				        contentType: false,
+// 				        processData: false,
+				        data: {
+				        	idcertificado:GID_INSCRITO
+				        }, 
+				        success: function (res) {
+				            // Medir el tiempo de respuesta
+				            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+				            console.log("Tiempo de carga del servidor:", elapsed_time, "segundos");
+
+				            // Ocultar el modal de carga
+				            $("#cargando").modal("hide");
+
+				            console.log("Registrado:", res);
+				            Swal.fire({
+				                title: "Enviado",
+				                text: "Se ha enviando exitosamente el certificado",
+				                icon: "success",
+				                timer: 500,
+				                showConfirmButton: false
+				            }).then(() => {
+				                // Mostrar mensaje de registro y recargar después de unos segundos
+// 				                document.getElementById("registrado").classList.add("mostrar");
+// 				                setTimeout(() => {
+// 				                    location.reload();
+// 				                }, 3000); // 7 segundos
+				            });
+				        },
+				        error: function (err) {
+				            console.log(err);
+
+				            // Ocultar el modal de carga en caso de error
+				            $("#cargando").modal("hide");
+
+				            Swal.fire({
+				                icon: 'error',
+				                title: "Cancelado",
+				                text: "No se realizó la operación, comuníquese con el administrador del sistema. Gracias",
+				                timer: 500,
+				                showCancelButton: false,
+				                showConfirmButton: false
+				            });
+				        }
+				    });
+			    } else {
+			        alert("¡SELECCIONE UN ESTUDIANTE PARA ENVIAR EL CERTIFICADO DIGITAL!");
+			    }
+			}
+			
+			function funcEnviarCertificadosMarcados() {
+			    // Verificar si hay certificados seleccionados
+			    if (selectedIds.length === 0) {
+			        alert("No se han seleccionado certificados.");
+			        return;
+			    }
+
+			    var checkedCount = $('#table .row-checkbox:checked').length;
+			    if (checkedCount === 0) {
+			        alert("No se ha seleccionado ningún certificado.");
+			        return;
+			    }
+
+			    // Mostrar el modal de carga
+			    $("#cargando").modal("show");
+
+			    // Iniciar medición del tiempo
+			    var start_time = new Date().getTime();
+
+			    // Construir la URL del backend
+			    var urlCertificados = nameEntity_CORREO + "/enviar_certificados";
+
+			    $.ajax({
+			        url: urlCertificados,
+			        type: "POST",
+			        contentType: "application/json",  // 💡 Especificamos que enviamos JSON
+			        data: JSON.stringify({ ids: selectedIds }),  // 💡 Convertimos los datos a JSON
+			        success: function (res) {
+			            // Medir el tiempo de respuesta
+			            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+			            console.log("Tiempo de carga del servidor:", elapsed_time, "segundos");
+
+			            // Ocultar el modal de carga
+			            $("#cargando").modal("hide");
+
+			            console.log("Registrado:", res);
+			            Swal.fire({
+			                title: "Enviado",
+			                text: "Se ha enviando exitosamente los certificados",
+			                icon: "success",
+			                timer: 500,
+			                showConfirmButton: false
+			            });
+			        },
+			        error: function (err) {
+			            console.log(err);
+
+			            // Ocultar el modal de carga en caso de error
+			            $("#cargando").modal("hide");
+
+			            Swal.fire({
+			                icon: 'error',
+			                title: "Cancelado",
+			                text: "No se realizó la operación, comuníquese con el administrador del sistema. Gracias",
+			                timer: 500,
+			                showCancelButton: false,
+			                showConfirmButton: false
+			            });
+			        }
+			    });
+			}
+
+
 
 	</script>
 </body>

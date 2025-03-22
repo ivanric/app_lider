@@ -2752,51 +2752,91 @@ td {
 			
 	console.log("Certificados marcados: ", selectedIds);		
 			
-	function funcVerCertificadosMarcados() {
-	    // Verificar si el array selectedIds está vacío
-	    if (selectedIds.length === 0) {
-	        // Si no hay ningún ID seleccionado, mostrar una alerta
-	        alert("No se han seleccionado certificados.");
-	    } else {
-	        // Verificar si realmente hay checkboxes marcados en la tabla
-	        var checkedCount = $('#table_certificados .row-checkbox:checked').length;
-	
-	        // Si no hay checkboxes marcados, mostrar la alerta
-	        if (checkedCount === 0) {
-	            alert("No se ha seleccionado ningún certificado.");
-	        } else {
-	            // Si hay checkboxes marcados, proceder con la lógica deseada
-	            console.log("Certificados marcados: ", selectedIds);
-	            // Aquí podrías agregar el código para mostrar los certificados
-	            
-	            var urlCertificados = nameEntity_INSCRITO + "/Imprimir_certificados/";
-	         // Enviar el array al backend usando fetch
-	         // Enviar la lista de IDs al backend
-	            fetch(urlCertificados, {
-	                method: 'POST',
-	                headers: { 
-	                    'Content-Type': 'application/json'
-	                },
-	                body: JSON.stringify({ ids: selectedIds })  // Enviar los IDs como JSON
-	            })
-	            .then(response => response.blob())
-	            .then(blob => { 
-	                // Crear una URL para el archivo PDF
-	                const url = window.URL.createObjectURL(blob);  
-	                
-	                // Establecer el src del iframe con la URL del PDF
-	                $("#frameReportes").attr("src", url);
-	                
-	                // Mostrar el modal con el iframe
-	                $("#reportes").modal('show');
-	            })
-	            .catch(error => {
-	                console.error("Error al generar los certificados:", error);
-	            });
+			function funcVerCertificadosMarcados() {
+			    // Verificar si hay certificados seleccionados
+			    if (selectedIds.length === 0) {
+			        alert("No se han seleccionado certificados.");
+			        return;
+			    }
 
-	        }
-	    }
-	}
+			    var checkedCount = $('#table_certificados .row-checkbox:checked').length;
+			    if (checkedCount === 0) {
+			        alert("No se ha seleccionado ningún certificado.");
+			        return;
+			    }
+
+			    // Mostrar el modal de carga antes de iniciar la solicitud
+			    $("#cargando").modal("show");
+
+			    // Iniciar medición del tiempo
+			    var start_time = new Date().getTime();
+
+			    // Construir la URL del backend
+			    var urlCertificados = nameEntity_INSCRITO + "/Imprimir_certificados/";
+
+			    // Enviar la lista de IDs al backend
+			    fetch(urlCertificados, {
+			        method: 'POST',
+			        headers: { 'Content-Type': 'application/json' },
+			        body: JSON.stringify({ ids: selectedIds })  
+			    })
+			    .then(response => {
+			        if (!response.ok) {
+			            throw new Error("Error en la respuesta del servidor.");
+			        }
+			        return response.blob();
+			    })
+			    .then(blob => { 
+			        // Crear una URL para el archivo PDF
+			        const url = window.URL.createObjectURL(blob);
+
+			        // Obtener referencia al iframe
+			        var frame = $("#frameReportes");
+
+			        // Verificar si el iframe existe
+			        if (frame.length === 0) {
+			            alert("Error: No se encontró el contenedor del reporte.");
+			            $("#cargando").modal("hide");
+			            return;
+			        }
+
+			        // Remover eventos previos para evitar duplicaciones
+			        frame.off("load error");
+
+			        // Evento cuando el iframe carga correctamente
+			        frame.on("load", function () {
+			            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+			            console.log("Tiempo de carga del reporte:", elapsed_time, "segundos");
+
+			            $("#cargando").modal("hide"); // Ocultar modal de carga
+			            $("#reportes").modal("show"); // Mostrar modal del reporte
+			        });
+
+			        // Manejo de error si la carga del PDF falla
+			        frame.on("error", function () {
+			            console.error("Error al cargar los certificados.");
+			            $("#cargando").modal("hide");
+			            alert("Error al cargar los certificados. Inténtelo nuevamente.");
+			        });
+
+			        // Establecer un tiempo máximo de espera (30 segundos)
+			        setTimeout(function () {
+			            if ($("#cargando").is(":visible")) {
+			                $("#cargando").modal("hide");
+			                alert("Los certificados están tardando demasiado en cargar. Verifique su conexión o intente más tarde.");
+			            }
+			        }, 30000); // 30 segundos
+
+			        // Asignar la URL al iframe para iniciar la carga del PDF
+			        frame.attr("src", url);
+			    })
+			    .catch(error => {
+			        console.error("Error al generar los certificados:", error);
+			        $("#cargando").modal("hide");
+			        alert("Hubo un error al generar los certificados.");
+			    });
+			}
+
 
 			// Array para almacenar los IDs seleccionados
 // 			var selectedIds = [];
@@ -2911,22 +2951,57 @@ $('#btn_select_all_global').on('click', function () {
 
 
 
-			function funcVerCertificado() {
- 
-			    if (GDATO_INSCRITO != "") {
-			        // Construir la URL para obtener el reporte
-			        var urlCertificado = nameEntity_INSCRITO + "/Imprimir_d1/" + GID_INSCRITO;
+function funcVerCertificado() {
+    if (GDATO_INSCRITO !== "") {
+        var frame = $("#frameReportes");
 
-			        // Establecer el src del iframe
-			        $("#frameReportes").attr("src", urlCertificado);
+        // Verificar si el iframe existe
+        if (frame.length === 0) {
+            alert("Error: No se encontró el contenedor del reporte.");
+            return;
+        }
 
-			        // Mostrar el modal
-			        $("#reportes").modal('show');
-			    } else {
-			        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL CERTIFICADO!");
-			    }
+        // Mostrar el modal de carga antes de iniciar la solicitud
+        $("#cargando").modal("show");
 
-			} 
+        // Medir tiempo de carga
+        var start_time = new Date().getTime();
+        var urlCertificado = nameEntity_INSCRITO + "/Imprimir_d1/" + GID_INSCRITO;
+
+        // Remover eventos previos para evitar acumulación de handlers
+        frame.off("load error");
+
+        // Evento cuando el iframe carga correctamente
+        frame.on("load", function () {
+            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+            console.log("Tiempo de carga del reporte:", elapsed_time, "segundos");
+
+            $("#cargando").modal("hide"); // Ocultar modal de carga
+            $("#reportes").modal("show"); // Mostrar modal del reporte
+        });
+
+        // Manejo de error si la carga falla
+        frame.on("error", function () {
+            console.error("Error al cargar el reporte.");
+            $("#cargando").modal("hide");
+            alert("Error al cargar el certificado. Inténtelo nuevamente.");
+        });
+
+        // Establecer un tiempo máximo de espera (30 segundos)
+        setTimeout(function () {
+            if ($("#cargando").is(":visible")) {
+                $("#cargando").modal("hide");
+                alert("El reporte está tardando demasiado en cargar. Verifique su conexión o intente más tarde.");
+            }
+        }, 30000); // 30 segundos
+
+        // Asignar la URL al iframe para iniciar la carga
+        frame.attr("src", urlCertificado);
+    } else {
+        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL CERTIFICADO!");
+    }
+}
+
 	</script>
 </body>
 </html>

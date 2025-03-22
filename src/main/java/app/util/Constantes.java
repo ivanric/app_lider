@@ -24,5 +24,6 @@ public class Constantes {
 	//conf mail
 	public static String NOMBRE_PAGINA_EMAIL="info@academialider.com.bo";
 	public static String DETALLE_EMAIL="Tu inscripción se realizó correctamente";
+	public static String DETALLE_EMAIL_CERTIFICADO="Es un honor expresar nuestro más profundo agradecimiento por su participación activa, aportes y compromiso.";
 	
 }

@@ -167,7 +167,7 @@ public class RestInscritos extends RestControllerGenericNormalImpl<InscritoEntit
 		}
 	}
     
-    
+
     
     
 	@RequestMapping({"findEstudiante"})
