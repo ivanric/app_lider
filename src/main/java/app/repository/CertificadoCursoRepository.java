@@ -86,7 +86,7 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "AND (e.id = :idevento OR :idevento = -1)\r\n"
 			+ "AND (cat.id = :idcategoria OR :idcategoria = -1) \r\n"
 			+ "AND (e.fk_anio =:idanio OR :idanio = -1)\r\n"
-			+ "ORDER BY cat.nombre  ASC\r\n"
+			+ "ORDER BY e.id,cat.nombre  ASC\r\n"
 			+ "LIMIT :length OFFSET :start",
 	    nativeQuery = true)
 	public List<Map<String, Object>> findAll_listar_curso(
@@ -157,6 +157,7 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "cat.nombre as categoria,\r\n"
 			+ "(select dep.nombre from departamento dep where dep.id=pa.fk_departamento ) as ciudad,\r\n"
 			+ "(select prov.nombre from provincia prov where prov.id=pa.fk_provincia ) as sucursal,\r\n"
+			+ "ct.certificadoenviado,\r\n"
 			+ "ct.tipocertificado\r\n"
 			+ "FROM certificadocurso ct\r\n"
 			+ "JOIN participante pa ON ct.fk_participante = pa.id\r\n"
@@ -172,6 +173,7 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "AND (cat.id = :idcategoria OR :idcategoria= -1)\r\n"
 			+ "AND (ct.fk_anio =:idanio OR :idanio= -1)\r\n"
 			+ "AND (c.id =:idcurso OR :idcurso= -1)\r\n"
+			+ "AND (ct.tipocertificado =:tipocertificado OR :tipocertificado= '')\r\n"
 			+ "ORDER BY ct.id ASC\r\n"
 			+ "LIMIT :length OFFSET :start",
 	    nativeQuery = true)
@@ -182,6 +184,7 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 	        @Param("idcategoria") int idcategoria,
 	        @Param("idanio") int idanio,
 	        @Param("idcurso") int idcurso,
+	        @Param("tipocertificado") String tipocertificado,
 	        @Param("length") int length,
 	        @Param("start") int start);
 
@@ -226,6 +229,7 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "AND (cat.id =:idcategoria OR :idcategoria = -1)\r\n"
 			+ "AND (ct.fk_anio = :idanio OR :idanio = -1)\r\n"
 			+ "AND (c.id= :idcurso OR :idcurso = -1)\r\n"
+			+ "AND (ct.tipocertificado =:tipocertificado OR :tipocertificado= '')\r\n"
 			+ "ORDER BY ct.id ASC",
 	    nativeQuery = true)
 	public List<Map<String, Object>> getIdCertiByCurso(
@@ -234,7 +238,9 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 	        @Param("idevento") int idevento,
 	        @Param("idcategoria") int idcategoria,
 	        @Param("idanio") int idanio,
-	        @Param("idcurso") int idcurso);
+	        @Param("idcurso") int idcurso,
+	        @Param("tipocertificado") String tipocertificado
+	        );
 	
 	@Modifying 
 	@Query(value="UPDATE certificadocurso SET estado= CASE ?1 WHEN 1 THEN 0 ELSE 1 END WHERE id=?2",nativeQuery = true)
@@ -276,9 +282,10 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "AND (cat.id = :idcategoria OR :idcategoria= -1)\r\n"
 			+ "AND (ct.fk_anio =:idanio OR :idanio= -1)\r\n"
 			+ "AND (c.id =:idcurso OR :idcurso= -1)\r\n"
+			+ "AND (ct.tipocertificado =:tipocertificado OR :tipocertificado= '')\r\n"
 			+ "\r\n"
 			+ "",nativeQuery = true)
-	public Integer getTotAll_curso(@Param("estado") Integer estado,@Param("search") String search,@Param("idevento") int idevento,@Param("idcategoria") int idcategoria,@Param("idanio") int idanio,@Param("idcurso") int idcurso);
+	public Integer getTotAll_curso(@Param("estado") Integer estado,@Param("search") String search,@Param("idevento") int idevento,@Param("idcategoria") int idcategoria,@Param("idanio") int idanio,@Param("idcurso") int idcurso,@Param("tipocertificado") String tipocertificado);
 
 	@Query(value = "SELECT DISTINCT e.id, e.detalle, e.estado "
 			+ "FROM certificadocurso ct "

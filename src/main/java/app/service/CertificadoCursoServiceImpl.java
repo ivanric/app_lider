@@ -125,10 +125,10 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
 	}
 	@Override
 	@Transactional
-	public List<Map<String, Object>> getIdCertiByCurso( int estado,String search,int idevento,int idcategoria,int idanio,int idcurso) throws Exception {
+	public List<Map<String, Object>> getIdCertiByCurso( int estado,String search,int idevento,int idcategoria,int idanio,int idcurso,String tipocertificado) throws Exception {
         try{
 //            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
-            List<Map<String, Object>> entities = CertificadoCursoRepository.getIdCertiByCurso(estado, search,idevento,idcategoria,idanio,idcurso);
+            List<Map<String, Object>> entities = CertificadoCursoRepository.getIdCertiByCurso(estado, search,idevento,idcategoria,idanio,idcurso,tipocertificado);
             return entities;
         } catch (Exception e){
         	e.printStackTrace();
@@ -216,10 +216,10 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
       }
 	}
 	@Override
-	public Integer getTotAll_curso(int estado,String search,int idevento,int idcategoria,int idanio,int idcurso) throws Exception {
+	public Integer getTotAll_curso(int estado,String search,int idevento,int idcategoria,int idanio,int idcurso,String tipocertificado) throws Exception {
 		
         try{
-        	int total = CertificadoCursoRepository.getTotAll_curso(estado,search, idevento,idcategoria,idanio,idcurso );
+        	int total = CertificadoCursoRepository.getTotAll_curso(estado,search, idevento,idcategoria,idanio,idcurso,tipocertificado);
           return total;
       } catch (Exception e){
       		System.out.println(e.getMessage());
@@ -393,10 +393,10 @@ public class CertificadoCursoServiceImpl extends GenericServiceImplNormal<Certif
 
 	@Override
 	@Transactional
-	public List<Map<String, Object>> findAll_m_curso(int estado,String search,int idevento,int idcategoria,int idanio,int idcurso,int length,int start ) throws Exception {
+	public List<Map<String, Object>> findAll_m_curso(int estado,String search,int idevento,int idcategoria,int idanio,int idcurso,int length,int start,String tipocertificado) throws Exception {
         try{
 //            List<PaisEntity> entities = paisRepository.findAll(Sort.by("idpais").ascending());
-            List<Map<String, Object>> entities = CertificadoCursoRepository.findAll_m_curso(estado, search,idevento,idcategoria,idanio,idcurso, length, start);
+            List<Map<String, Object>> entities = CertificadoCursoRepository.findAll_m_curso(estado, search,idevento,idcategoria,idanio,idcurso,tipocertificado, length, start);
             return entities;
         } catch (Exception e){
         	e.printStackTrace();

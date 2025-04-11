@@ -143,7 +143,8 @@ public class RestCertificadosCursosCorreo extends RestControllerGenericNormalImp
             Map<String, Object> variables = Map.of(
                 "nombre", certificadoEntity.getParticipante().getPersona().getNombres() + " " + certificadoEntity.getParticipante().getPersona().getApellidos(),
                 "detalle", Optional.ofNullable(certificadoEntity.getEvento().getDetalleemail()).orElse(Constantes.DETALLE_EMAIL_CERTIFICADO),
-                "evento", certificadoEntity.getEvento().getDetalle()+" - "+certificadoEntity.getCurso().getNombrecurso(),
+                "evento", certificadoEntity.getCurso().getNombrecurso()+"/"+certificadoEntity.getEvento().getDetalle(),
+                "numero", certificadoEntity.getCurso().getCategoria().getContacto(),
                 "fecha", certificadoEntity.getEvento().getFechainicial(),
                 "fecha2", certificadoEntity.getEvento().getFechafinal(),
                 "pagina", Constantes.NOMBRE_PAGINA_EMAIL
@@ -157,7 +158,11 @@ public class RestCertificadosCursosCorreo extends RestControllerGenericNormalImp
                 "no-reply@academialider.com",
                 pdfFile
             );
-
+            
+            //actualizar el estado del certificado enviado
+            certificadoEntity.setCertificadoenviado(1);
+            servicio.save(certificadoEntity);
+            
             System.out.println("Correo enviado exitosamente.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -167,6 +172,7 @@ public class RestCertificadosCursosCorreo extends RestControllerGenericNormalImp
     private File generarCertificadoPDF(Integer id) {
         try {
             CertificadoEntity certificadoEntity = servicio.findById(id);
+            System.out.println("CERTIFICADO:"+certificadoEntity.toString());
             if (certificadoEntity == null) throw new RuntimeException("Certificado no encontrado para el ID: " + id);
 
             // Iniciar las descargas en paralelo

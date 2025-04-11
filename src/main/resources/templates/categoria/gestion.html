@@ -58,6 +58,15 @@
 									</div>
 
 								</div>
+								<div class="col-md-12">
+									<div class="mb-1">
+										<label for="exampleFormControlInput1" class=""><b>CONTACTO PARA MATERIAL</b></label>
+										<input placeholder="Ingrese contacto "
+											class="form-control fg-input data-per field_css"
+											name="contacto" type="text" required="required">
+									</div>
+
+								</div>
 							</div>
 
 
@@ -111,6 +120,7 @@
 								<th width="">#</th>
 								<th>Nombre</th>
 								<th>Abreviatura</th>
+								<th>Contacto</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -190,6 +200,7 @@
             "columns": [
                 { "data": "id" },
                 { "data": "id" },
+                { "data": "id" },
                 { "data": "id" }
       		]
             ,
@@ -199,6 +210,7 @@
             	
             	$('td',row).eq(1).html(data.nombre).addClass('text-center');
             	$('td',row).eq(2).html(data.abreviatura).addClass('text-center');
+            	$('td',row).eq(3).html(data.contacto).addClass('text-center');
 
             } 
         

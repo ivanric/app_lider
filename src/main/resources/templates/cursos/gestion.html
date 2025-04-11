@@ -681,10 +681,15 @@ td {
 				</div>
 				<div class="col-md-2 col-xs-12">
 					<input type="text" id="js_filtro" name="" class="form-control"
-						placeholder="Carnet de Identidad..">
+						placeholder="Ingresar carnet de identidad..">
 				</div>
-
-				
+				<div class="col-md-2 col-xs-12">
+					<select class="form-select field_css" aria-label=".form-select-sm example" id="tipocertificado" name="tipocertificado">
+						<option selected="" value="">Tipo de certificado</option>
+						<option value="FISICO">FISICO</option>
+						<option value="DIGITAL">DIGITAL</option>
+					</select>
+				</div>
 				<div class="col-md-12 col-xs-12" style="text-align: right;margin-bottom: 2px;background: #e9eced;padding: 5px;margin-top: 5px;">
 					<button id="btn_select_all" class="btn_select_all">Seleccionar todos de pagina actual</button>
 					<button id="btn_select_all_global" class="btn_select_all_global">Seleccionar todos de todas las paginas</button>
@@ -701,7 +706,8 @@ td {
 								<th>CELULAR</th>
 								<th>CIUDAD</th>
 								<th>SUCURSAL</th>
-								<th>CERTIFICADO</th>
+								<th>TIPO CERTIFICADO</th>
+								<th>ENVIADO</th>
 								<th>CURSO</th>
 								<th>IMPRIMIR</th>
 							</tr>
@@ -752,6 +758,8 @@ td {
 		
 		var GSEARCH_INSCRITO=""
 		var GESTADO_INSCRITO=-1;
+		
+		var GID_TIPOCERTIFICADO_DET=""
 		
 		var DTtable_INSCRITO=''
 		var nameEntity_INSCRITO="../RestCertificadosCursos"
@@ -928,6 +936,19 @@ td {
 		GSEARCH=$('#js_filtro').val()
 		GESTADO=$('input[name="iestado"]:checked').val();
 		
+		$("#tipocertificado").on('change',function(){
+			var idtipo=$(this).val();
+			console.log("idtipocertificado:",idtipo)
+			if(idtipo==""){
+				console.log("entro evento blanco")
+				GID_TIPOCERTIFICADO_DET="";
+			}else{
+				GID_TIPOCERTIFICADO_DET=idtipo;
+			}
+			$('#table').dataTable().fnDraw('page');
+		})
+			
+		
 		
 // 		listarTable()
 		$('#js_filtro').on('keyup',function(){
@@ -1099,11 +1120,8 @@ td {
         
             ,
             "drawCallback":function(settings){
- 	   
-                
-// //                 $('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
-                
-            	$('#js_filtro_curso_detalle').on( 'keyup', function () {
+				////$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+            	$('#js_filtro_curso_detalle').on( 'keyup', function (){
                     DTtable.search(this.value ).draw();
                 }) 
 
@@ -1143,7 +1161,7 @@ td {
             } else {
                 console.error('La respuesta del servidor no es un array:', data);
             }
-        }).fail(function (xhr, status, error) {
+        }).fail(function (xhr, status, error){
             console.error('Error en la solicitud:', error);
         });
         
@@ -1183,7 +1201,39 @@ td {
         
         
 		function mostrarCategoriasDetalle(){
+	        // Construye la URL con los dos parámetros
+	        $.get(`${nameEntity}/getCategoryByIdAnio/${GID_EVENTO_DET_S}/${GID_ANIO_DET}`, function (data) {
+	            if (Array.isArray(data)) {
+	                const $select = $('select[name="scategoriacurso"]'); // Buscar el <select>
+	                if ($select.length === 0) {
+	                    console.error('No se encontró el <select> con el nombre "scategoriacurso".');
+	                    return;
+	                }
 
+	                // Limpiar opciones previas
+	                $select.empty();
+
+	                // Agregar opción por defecto
+	                $select.append($('<option>', {
+	                    value: "",
+	                    text: "Todas las categorías"
+	                }));
+
+	                // Agregar opciones desde los datos recibidos
+	                $.each(data, function (index, item) {
+	                    if (item.estado === 1) {
+	                        $select.append($('<option>', {
+	                            value: item.id,
+	                            text: item.nombre
+	                        }));
+	                    }
+	                });
+	            } else {
+	                console.error('La respuesta del servidor no es un array:', data);
+	            }
+	        }).fail(function (xhr, status, error) {
+	            console.error('Error en la solicitud:', error);
+	        });
 		}
         
 
@@ -1207,11 +1257,10 @@ td {
 		
 	  //INICIO QUERY PRINCIPAL
 
-			
 			//eventos
 			var GDATO="";
 			//click en la tabla
-			$('#table_certificados tbody').on( 'click dblclick', 'tr', function (e) {
+			$('#table_certificados tbody').on( 'click dblclick', 'tr', function (e){
 				let G_JSON_ENTITY=new Object();
 				var row = $(this).closest('tr');
 				if(e.type=='dblclick'){//mostramos el modal para el CRUD
@@ -1611,7 +1660,7 @@ td {
 		
 			function funcMostrarCertificados() {
 
-				if (GDATO!="" ) {
+				if (GDATO!="" ){
 					$('#table_certificados').dataTable().fnDraw('page');
 				}else{
 					alert("!SELECCIONE UN REGISTRO DE LA LISTA DE PARTICIPANTES PARA MOSTRAR LOS CURSOS!")
@@ -1656,7 +1705,6 @@ td {
 			}
 			function addPutForm(value) {
 				$('#formulario #div_put').html("")
-				
 				if(value!== undefined){
 				//+console.log("value",value)
 					$('#formulario #div_put').html(`<input type="hidden" name="_method" value="PUT">`)
@@ -1846,8 +1894,7 @@ td {
           			
 		        }, 'json');
 			}
-			function getEntityIdNew() {
-				
+			function getEntityIdNew(){
 
 			}
 			
@@ -1918,7 +1965,7 @@ td {
 			}
 
 			function updateTable(id,objectMod){
-                $('#table > tbody  > tr').each(function(index, tr) {
+                $('#table > tbody  > tr').each(function(index, tr){
              	   
 	               	var row = $(this).closest('tr');
 	    			var idrow = parseInt(row.find('.idhidden').val(), 10);
@@ -1971,7 +2018,7 @@ td {
 	                	
 	                 })
 				}
-			function updatePlantillaCurso1() {
+			function updatePlantillaCurso1(){
 	            
                 let formData = new FormData(document.getElementById('formulario2'))
                 console.log("ID MOD:",GID)
@@ -2143,8 +2190,8 @@ td {
 			}
 			
 			
-			function updateQRSocio() {
-//                 console.log("G_JSON_ENTITY_ANTES:",G_JSON_ENTITY)
+			function updateQRSocio(){
+//          console.log("G_JSON_ENTITY_ANTES:",G_JSON_ENTITY)
                 
 
                 async function construirJsonEntity() {
@@ -2474,7 +2521,7 @@ td {
 
 				resetSelectCategoria();
                 
-				mostrarCategoriasDetalle();
+// 				mostrarCategoriasDetalle();
 			}else{
 				GID_EVENTO_DET=idevento;
 				GID_EVENTO_DET_S=idevento;
@@ -2536,14 +2583,14 @@ td {
 	            "ajax": {
 	            "type": "GET",
 	              "url": nameEntity_INSCRITO+""+"/listarbyCurso",
-	          	"data": function ( d ) {
+	          	"data": function ( d ){
 	          		 	d.estado = 1
 	                    d.idevento= GID_EVENTO_CERT
 // 	                    d.anio=$('body').find('#select-anios option:selected').text();
 	                    d.idanio=GID_ANIO_DET
 	                    d.idcurso= GID_CURSO_CERT
 	                    d.idcategoria= GID_CATEGORIA_CERT
-
+	                    d.tipocertificado=GID_TIPOCERTIFICADO_DET
 	             }
 	             ,
 	             "dataSrc": function(json) {
@@ -2554,6 +2601,7 @@ td {
 	            }
 	            ,
 	            "columns": [
+	                { "data": "id" },
 	                { "data": "id" },
 	                { "data": "id" },
 	                { "data": "id" },
@@ -2577,11 +2625,23 @@ td {
 	                $('td',row).eq(5).html(data.ciudad);
 	                $('td',row).eq(6).html(data.sucursal);
 	                $('td',row).eq(7).html(data.tipocertificado);
-	                $('td',row).eq(8).html(data.nombrecurso);
+	                let s_certificado_enviado=""
+	                if (data.tipocertificado=="DIGITAL") {
+	                	if (data.certificadoenviado==1) {
+	                		$('td',row).eq(8).html('<span class="badge rounded-pill badge-success">Enviado</span>');
+						} else {
+							$('td',row).eq(8).html('<span class="badge rounded-pill badge-warning">Pendiente</span>');
+						}
+	                	
+					}else{
+						$('td',row).eq(8).html("");
+					}
+	                
+	                $('td',row).eq(9).html(data.nombrecurso);
 // 	                $('td',row).eq(5).html('SI').addClass('text-center');
 	                
 	                // Aquí agregarás el checkbox
-	                $('td', row).eq(9).html(`
+	                $('td', row).eq(10).html(`
 	                    <input type="checkbox" class="row-checkbox" data-id="${data.id}">
 	                `).addClass('text-center');
 

@@ -306,10 +306,98 @@ td {
 	
 	}
 
+
+
+
+.texto_progress{
+	padding-bottom:20px;
+	font-family: "Roboto", sans-serif;
+	color: white;
+	font-size: 20px;
+	animation: mainFadeIn 2s forwards;
+	animation-delay: 1.6s;
+	display: flex;
+	align-items: baseline;
+	position: relative;
+	justify-content: center;
+}
+
+.demo-container {
+  justify-content: center;
+ 		  display: flex;
+ 		  align-items: center;
+}
+.progress {
+  width: 50% !important;
+   height: 70%; 
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 20px;
+  background: transparent;
+
+}
+.progress-bar {
+  border-radius:10px;
+  background-color: rgb(255 255 255);
+  width: 65%;
+  overflow: hidden;
+  height: 10px;
+ 		  border: none;
+  	  border-radius: 10
+}
+
+.progress-bar-value {
+  width: 100%;
+  height: 100%;
+	  box-shadow: 2px 14px 15px -7px rgba(30, 166, 250, 0.36);
+  background-color: #f7bf42fa;
+  animation: indeterminateAnimation 1s infinite linear;
+  transform-origin: 0% 50%;
+}
+@keyframes indeterminateAnimation {
+  0% {
+    transform:  translateX(0) scaleX(0);
+  }
+  40% {
+    transform:  translateX(0) scaleX(0.4);
+  }
+  100% {
+    transform:  translateX(100%) scaleX(0.5);
+  }
+}
 </style>
 </head>
 <body>
+		<div class="modal fade"  id="cargando" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false"  style=" text-align: center; z-index: 20001;background: rgb(1 3 24 / 95%)">
+			<div class="modal-dialog modal-lg progress" style="width: 100%; text-align: center;margin: auto 25%;" id="ModalMensaje"  >
+				<div class="" id="mdMj" >
 
+					<div class="modal-body">
+						<div class="row text-center" style="justify-content: center;">
+							<img src="../../img/LOGOLIDERWHITE.png" th:href="@{../img/LOGOLIDERWHITE.png}"  id="loadding" style="width: 15rem;">
+
+						</div>
+						
+						<div class="row" >
+							<div class="col-md-12 text-center" style="justify-content: center;">
+								<div class="texto_progress">Descargando.. </div>
+								<div class="demo-container">
+<!-- 								  <img src="../static/img/gif/eess2_inv.png" th:src="@{/img/gif/eess2_inv.png}"  id="loadding" style="width: 10rem;"> -->
+								
+								  <div class="progress-bar">
+								    <div class="progress-bar-value"></div>
+								  </div>
+<!-- 								  <img src="../static/img/gif/eess2.png" th:src="@{/img/gif/eess2.png}"  id="loadding" style="width: 10rem;"> -->
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+	
+			</div> 
+		</div>
 	<form name="formulario" role="form" id="formulario" method="post"
 		enctype="multipart/form-data" data-fv-excluded="disabled">
 
@@ -339,6 +427,8 @@ td {
 			</div>
 		</div>
 	</form>
+	
+
 	<div class="">
     <div class="tarjeta" id="targeta">
     	<input type="hidden" th:value="${code}" id="codigo">
@@ -357,13 +447,16 @@ td {
 			            
 								</div>
 								<div class="cont-data">
-									<h4>Validamos que:</h4>
-									<div class="cont-data-nombre">
-										NOMBRE COMPLETO	
+									<h5>Validamos que:</h5>
+									<div style="text-align: center;">
+										<span class="cont-data-nombre">
+											NOMBRE COMPLETO	
+										</span> &nbsp;
+										<span class="cont-data-apellidos">
+											APELLIDOS	
+										</span>
 									</div>
-									<div class="cont-data-apellidos">
-										APELLIDOS	
-									</div>
+
 									<div class="cont-data-recomendacion">
 										con número de folio <b>COD.CERT.<span class="cont-data-recomendacion-folio">AL-CB-1-12</span></b> 
 										a participado del curso  
@@ -404,124 +497,6 @@ td {
 								 <div class="contenido-certificado  ocultar" id="contenido-certificado">
 								 	 <embed id="frameReporteCertificado" width="100%" height="700px"  ></embed>
 								 </div>
-								<!-- 
-								<div class="row mt-1">
-									<div class="col-md-12 input_group_cata">
-										<label for="exampleFormControlInput1" class="label_cata">Cedula</label>
-										<input placeholder="Ingrese carnet de identidad" class="input_cata fg-input data-per field_css"
-												name="ci" type="text" required="required" readonly="readonly">
-										
-									</div>
-							
-								</div>
-								<div class="row">
-									<div class="col-md-12 input_group_cata">
-										<label for="exampleFormControlInput1" class="label_cata">Matricula</label>
-										<input placeholder="Ingrese carnet de identidad" class="input_cata fg-input data-per field_css"
-												name="matricula" type="text" required="required" readonly="readonly">
-									</div>
-				
-								</div>
-	
-								<div class="row">
-									<div class="col-md-12 input_group_cata">
-										
-										<label for="exampleFormControlInput1" class="label_cata">Nombre</label>
-	
-										<input placeholder="LIC. Nombre Completo del Socio.." class="input_cata fg-input data-per field_css"
-												name="nombresocio" type="text" required="required"
-												onkeyup="this.value = this.value.toUpperCase();" readonly="readonly">
-										
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-12 input_group_cata">
-									
-										<label for="exampleFormControlInput1" class="label_cata">Celular</label>
-										<input placeholder="Celular" class="input_cata form-control fg-input data-per field_css"
-												name="celular" type="number" required="required" readonly="readonly">
-										
-	
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-12 input_group_cata">
-										
-									  <label for="exampleFormControlInput1" class="label_cata">F.Emision</label>		
-									  <input placeholder="Ingrese Fecha Emision" class="input_cata fg-input data-per field_css"
-														name="fechaemision" type="date" required="required" id="fechaemision"
-													    value="" readonly="readonly">
-									
-	
-									</div>
-								</div>
-		
-								<div class="row">
-									<div class="col-md-12 input_group_cata">
-										
-									  <label for="exampleFormControlInput1" class="label_cata">F.Expiracion</label>		
-									  <input placeholder="Ingrese Fecha Expiracion" class="input_cata fg-input data-per field_css"
-														name="fechaexpiracion" type="date" required="required" id="fechaexpiracion"
-													    value="" readonly="readonly">
-										
-	
-									</div>
-								</div>
-								<div class="titulo_descuentos" >
-									  EMPRESAS</div>
-								<ul class="nav nav-tabs nav-justified " id="ex1" role="tablist">
-								  <li class="nav-item" role="presentation">
-								    <a
-								      data-mdb-tab-init
-								      class="nav-link active"
-								      id="ex3-tab-1"
-								      href="#ex3-tabs-1"
-								      role="tab"
-								      aria-controls="ex3-tabs-1"
-								      aria-selected="true"
-								      >SERVICIOS</a
-								    >
-								  </li>
-								  <li class="nav-item" role="presentation">
-								    <a
-								      data-mdb-tab-init
-								      class="nav-link"
-								      id="ex3-tab-2"
-								      href="#ex3-tabs-2"
-								      role="tab"
-								      aria-controls="ex3-tabs-2"
-								      aria-selected="false"
-								      >PRODUCTOS</a
-								    >
-								  </li>
-								
-								</ul>
-
-								<div class="tab-content" id="ex2-content">
-								  <div
-								    class="tab-pane fade show active"
-								    id="ex3-tabs-1"
-								    role="tabpanel"
-								    aria-labelledby="ex3-tab-1"
-								  >
-	   								<div class="descuentos_socios_serv" style="max-width: 450px;">
-									
-									</div>
-								  </div>
-								  <div
-								    class="tab-pane fade"
-								    id="ex3-tabs-2"
-								    role="tabpanel"
-								    aria-labelledby="ex3-tab-2"
-								  >
-   	   									<div class="descuentos_socios_prod" style="max-width: 450px;">
-	
-										</div>
-								  </div>
-								
-								</div>
-		
-								 -->
 
 
 							</div>
@@ -590,28 +565,69 @@ td {
     }, 'json');
     document.getElementById("contenido-certificado").classList.add("ocultar");
     document.getElementById("contenido-certificado").classList.remove("mostrar");
-	function funcVerCertificado() {
-		 
-	    if (GDATO_ID_CERT != "") {
-	        // Construir la URL para obtener el reporte
-	        var urlCertificado = nameEntity + "/Imprimir_d1/" + GDATO_ID_CERT;
-	        // Mostrar en el embed
-// 	        $("#frameReporteCertificado").attr("src", urlCertificado);
-// 	        document.getElementById("contenido-certificado").classList.add("mostrar");
-// 	        document.getElementById("contenido-certificado").classList.remove("ocultar");
 
-	        // Forzar descarga
-	        var link = document.createElement("a");
-	        link.href = urlCertificado;
-	        link.download = "CERTIFICADO.pdf";
-	        document.body.appendChild(link);
-	        link.click();
-	        document.body.removeChild(link);
-	    } else {
-	        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL CERTIFICADO!");
-	    }
+    
+    
+    function funcVerCertificado() {
+        if (GDATO_ID_CERT != "") {
+            // Mostrar el modal de carga
+            $("#cargando").modal("show");
 
-	} 
+            // Iniciar cronómetro de carga
+            var start_time = new Date().getTime();
+
+            // Construir la URL
+            var urlCertificado = nameEntity + "/Imprimir_d1/" + GDATO_ID_CERT;
+
+            // Descargar el archivo usando fetch
+            fetch(urlCertificado)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error al obtener el certificado.");
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    // Crear una URL para el blob
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.download = "CERTIFICADO.pdf";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Tiempo de carga
+                    var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+                    console.log("Tiempo de descarga:", elapsed_time, "segundos");
+
+                    // Ocultar el modal de carga
+                    $("#cargando").modal("hide");
+
+                    // Notificación
+                    Swal.fire({
+                        title: "Descargado",
+                        text: "Se ha descargado el certificado",
+                        icon: "success",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al descargar el certificado:", error);
+                    $("#cargando").modal("hide");
+                    Swal.fire({
+                        title: "Error",
+                        text: "No se pudo descargar el certificado.",
+                        icon: "error"
+                    });
+                });
+
+        } else {
+            alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL CERTIFICADO!");
+        }
+    }
+
     	
 
     </script>

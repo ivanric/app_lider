@@ -2820,12 +2820,12 @@ td {
 			        });
 
 			        // Establecer un tiempo máximo de espera (30 segundos)
-			        setTimeout(function () {
-			            if ($("#cargando").is(":visible")) {
-			                $("#cargando").modal("hide");
-			                alert("Los certificados están tardando demasiado en cargar. Verifique su conexión o intente más tarde.");
-			            }
-			        }, 30000); // 30 segundos
+// 			        setTimeout(function () {
+// 			            if ($("#cargando").is(":visible")) {
+// 			                $("#cargando").modal("hide");
+// 			                alert("Los certificados están tardando demasiado en cargar. Verifique su conexión o intente más tarde.");
+// 			            }
+// 			        }, 30000); 
 
 			        // Asignar la URL al iframe para iniciar la carga del PDF
 			        frame.attr("src", url);

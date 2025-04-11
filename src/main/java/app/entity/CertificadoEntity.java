@@ -64,6 +64,9 @@ public class CertificadoEntity implements Serializable{
 	@Column(name = "tipocertificado")//add2
 	private String tipocertificado;//add2
 	
+	@Column(name = "certificadoenviado")//add2
+	private Integer certificadoenviado;//add2
+	
 //    @Transient//importante para que no cargue una compra previa 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_participante")
@@ -102,11 +105,10 @@ public class CertificadoEntity implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public CertificadoEntity(Integer id, Integer codigo, LocalDateTime fecharegistro, String qr, String linkqr,
 			String nrofolio, String nrodocumento, Integer nota, String lugarcurso, Integer horasacademicas,
-			String tipocertificado, ParticipanteEntity participante, CursoEntity curso, ExpositorEntity expositor,
-			EventoEntity evento, AnioEntity anio, Integer estado) {
+			String tipocertificado, Integer certificadoenviado, ParticipanteEntity participante, CursoEntity curso,
+			ExpositorEntity expositor, EventoEntity evento, AnioEntity anio, Integer estado) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -119,6 +121,7 @@ public class CertificadoEntity implements Serializable{
 		this.lugarcurso = lugarcurso;
 		this.horasacademicas = horasacademicas;
 		this.tipocertificado = tipocertificado;
+		this.certificadoenviado = certificadoenviado;
 		this.participante = participante;
 		this.curso = curso;
 		this.expositor = expositor;
@@ -215,6 +218,14 @@ public class CertificadoEntity implements Serializable{
 		this.tipocertificado = tipocertificado;
 	}
 
+	public Integer getCertificadoenviado() {
+		return certificadoenviado;
+	}
+
+	public void setCertificadoenviado(Integer certificadoenviado) {
+		this.certificadoenviado = certificadoenviado;
+	}
+
 	public ParticipanteEntity getParticipante() {
 		return participante;
 	}
@@ -268,12 +279,13 @@ public class CertificadoEntity implements Serializable{
 		return "CertificadoEntity [id=" + id + ", codigo=" + codigo + ", fecharegistro=" + fecharegistro + ", qr=" + qr
 				+ ", linkqr=" + linkqr + ", nrofolio=" + nrofolio + ", nrodocumento=" + nrodocumento + ", nota=" + nota
 				+ ", lugarcurso=" + lugarcurso + ", horasacademicas=" + horasacademicas + ", tipocertificado="
-				+ tipocertificado + ", participante=" + participante + ", curso=" + curso + ", expositor=" + expositor
-				+ ", evento=" + evento + ", anio=" + anio + ", estado=" + estado + "]";
+				+ tipocertificado + ", certificadoenviado=" + certificadoenviado + ", participante=" + participante
+				+ ", curso=" + curso + ", expositor=" + expositor + ", evento=" + evento + ", anio=" + anio
+				+ ", estado=" + estado + "]";
 	}
-	
-	
 
+	
+	
 	
 	
 }

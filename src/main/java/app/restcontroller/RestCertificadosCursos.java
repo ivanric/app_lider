@@ -202,20 +202,20 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
 	
 	
 	@GetMapping("/listarbyCurso")
-	public ResponseEntity<?> listarbyCurso(HttpServletRequest request,@Param("draw")int draw,@Param("length")int length,@Param("start")int start,@Param("estado")int estado,@Param("idevento")int idevento,@Param("idcategoria")int idcategoria,@Param("idanio")int idanio,@Param("idcurso")int idcurso)throws IOException{
+	public ResponseEntity<?> listarbyCurso(HttpServletRequest request,@Param("draw")int draw,@Param("length")int length,@Param("start")int start,@Param("estado")int estado,@Param("idevento")int idevento,@Param("idcategoria")int idcategoria,@Param("idanio")int idanio,@Param("idcurso")int idcurso,@Param("tipocertificado")String tipocertificado)throws IOException{
 		String total="";
 		Map<String, Object> Data = new HashMap<String, Object>();
 		try {
 			System.out.println("LISTAR CURSOSSsssssss");
 			String search = request.getParameter("search[value]");
 			int tot=Constantes.NUM_MAX_DATATABLE;
-			System.out.println("tot:"+tot+"estado:"+estado+"search:"+search+"length:"+length+"start:"+start+"idevento:"+idevento+"idcategoria:"+idcategoria+"idanio:"+idanio+"idcurso:"+idcurso);
-			List<?> lista= servicio.findAll_m_curso(estado, search,idevento,idcategoria,idanio,idcurso, length, start);
-			List<?> listaidcertificados= servicio.getIdCertiByCurso(estado, search,idevento,idcategoria,idanio,idcurso);
+			System.out.println("tot:"+tot+"estado:"+estado+"search:"+search+"length:"+length+"start:"+start+"idevento:"+idevento+"idcategoria:"+idcategoria+"idanio:"+idanio+"idcurso:"+idcurso+"tipocertificado:"+tipocertificado);
+			List<?> lista= servicio.findAll_m_curso(estado, search,idevento,idcategoria,idanio,idcurso, length, start,tipocertificado);
+			List<?> listaidcertificados= servicio.getIdCertiByCurso(estado, search,idevento,idcategoria,idanio,idcurso,tipocertificado);
 //			List<?> lista= servicio.findAll(estado, search,idevento,idcategoria,idanio,idparticipante, length, start);
 			System.out.println("listar:"+lista.toString()); 
 			try {
-				total=String.valueOf(servicio.getTotAll_curso(estado,search,idevento,idcategoria,idanio,idcurso));					
+				total=String.valueOf(servicio.getTotAll_curso(estado,search,idevento,idcategoria,idanio,idcurso,tipocertificado));					
 			} catch (Exception e) {
 				total="0";
 			}

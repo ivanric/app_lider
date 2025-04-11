@@ -10,14 +10,46 @@
 </head>
 <body>
     <img src="cid:liderLogo" alt="Lider Logo" style="width: 150px; height: auto;">
-    <h1>¡Gracias por participar!</h1>
+    <h3>¡Gracias por ser parte de nuestra Comunidad LÍDER!</h3>
     <p>Hola, <b th:text="${nombre}"></b></p>
-    <p th:text="${detalle}">.</p>
+    <p > 
+    	<span th:text="${detalle}"></span> <span><b th:text="${evento}">.</span>
+    </p> 
     <div class="details">
-         Adjuntamos tu certificado digital en formato PDF. Puedes descargarlo y guardarlo para tu registro, el cual damos por culminado al evento realizado <b><span th:text="${evento}"></span></b>, en fechas 
-         <span th:text="${fecha}"></span> a  <span th:text="${fecha2}"></span>.
+        <b>Adjuntamos su certificado digital en formato PDF.</b> <br> 
+		<p>
+		Recordarle que le enviamos el <b>link de las Grabaciones y Materiales del número oficial:</b>
+		</p>
+		<p>	
+		Ante cualquier duda o consulta por favor puede escribirnos al <span th:text="${numero}"></span>.
+		</p>
+		<p>
+		Es un Privilegio para nosotros Servirte.
+		</p>
+		<p>
+			<b>
+				🔝 ¡¡ESPERAMOS TENERTE PRONTO EN NUESTROS EVENTOS DE CAPACITACIÓN!! 🥇🏆
+				
+			</b>
+		</p><br>
+		<p>
+			¡¡Un Gran Abrazo!!
+			
+		</p>
+		
+		<p>
+			🎓 LÍDER Academia de Capacitación <br>
+			Un Camino de Crecimiento Contínuo💎
+			
+			
+		</p><br><br>
+		
+		<p>
+			<span th:text="${pagina}"></span>
+		</p>
+		
     </div>
-    <p></p>
-    <p>Atentamente,<br><span th:text="${pagina}"></span></p>
+
+<!--     <p>Atentamente,<br><span th:text="${pagina}"></span></p> -->
 </body>
 </html>
