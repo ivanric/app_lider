@@ -367,7 +367,7 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "c.nombrecurso as nombre_curso,\r\n"
 			+ "e.fechainicial,\r\n"
 			+ "e.fechafinal,\r\n"
-			+ "cert.horasacademicas,\r\n"
+			+ "(SELECT edt.horasacademicas from eventodetalle edt where edt.fk_evento=cert.fk_evento and edt.fk_curso=cert.fk_curso) as horasacademicas,\r\n"
 			+ "per2.nombres as nombres_exp,\r\n"
 			+ "per2.apellidos as apellidos_exp\r\n"
 			+ "from certificadocurso cert\r\n"

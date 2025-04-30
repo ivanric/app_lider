@@ -308,7 +308,7 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
     @GetMapping("/findByNrodocumento"+"/{id}")
     public ResponseEntity<?> buscar(@PathVariable String id){ 
         try { 
-        	System.out.println("ID A BUSCAR");
+        	System.out.println("ID A BUSCAR:"+id);
         	Map<String, Object> entity=new HashMap<>();
         	entity=servicio.findByNrodocumento(id);
         	if (entity!=null) {

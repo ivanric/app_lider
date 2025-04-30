@@ -282,7 +282,7 @@ public class EventoServiceImpl extends GenericServiceImplNormal<EventoEntity, In
                 entitymod.setImageneventoDriveId(fileKey);  // Aquí guardamos la clave de S3
             }
 			
-			return null;
+			return entitymod;
 		} catch (Exception e) { 
 			e.printStackTrace();
 			System.out.println(e.getMessage());

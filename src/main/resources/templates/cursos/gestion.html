@@ -1166,7 +1166,7 @@ td {
         });
         
         // Construye la URL con los dos parámetros
-        $.get(`${nameEntity}/getCategoryByIdAnio/${GID_EVENTO_DET_S}/${GID_ANIO_DET}`, function (data) {
+        $.get(`${nameEntity}/getCategoryByIdAnio/${GID_EVENTO_DET_S}/${GID_ANIO_DET}`, function (data){
             if (Array.isArray(data)) {
                 const $select = $('select[name="scategoriacurso"]'); // Buscar el <select>
                 if ($select.length === 0) {
@@ -1184,7 +1184,7 @@ td {
                 }));
 
                 // Agregar opciones desde los datos recibidos
-                $.each(data, function (index, item) {
+                $.each(data, function (index, item){
                     if (item.estado === 1) {
                         $select.append($('<option>', {
                             value: item.id,
