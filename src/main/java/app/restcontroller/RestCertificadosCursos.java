@@ -43,8 +43,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.api.services.drive.Drive;
 import org.springframework.http.HttpStatus;
+
+import app.dto.CertificadoDTO;
+import app.dto.InscritoDTO;
 import app.dto.ParticipanteDTO;
 import app.entity.CertificadoEntity;
+import app.entity.EventoEntity;
 import app.entity.PersonaEntity;
 import app.service.CertificadoCursoServiceImpl;
 import app.service.DepartamentoService;
@@ -145,6 +149,25 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Data);
 		}
 	}
+	
+	
+    @PostMapping("/guardarcertificadoinscrito")
+	public ResponseEntity<?> save(CertificadoDTO DTO){
+		System.out.println("DTO LLEGO:"+DTO.toString());
+
+		try {
+			System.out.println("**IMG PARTICIPANTE**:"+DTO.getArchivoimgparticipante().getOriginalFilename());
+			System.out.println("**IMG PAGO**:"+DTO.getArchivoimgpago().getOriginalFilename());
+//			System.out.println("INSCRITO:"+DTO.getInscrito().toString());
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.guardarcertificadoinscrito(DTO));
+//            return ResponseEntity.status(HttpStatus.OK).body(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error, Por favor intente mas tarde. \"}");
+		}
+	}
+	
 	
 	
 	@GetMapping("/getEventByIdAnio/{idAnio}")
@@ -322,7 +345,21 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
-
+    @GetMapping("/getCertificiado"+"/{id}")
+    public ResponseEntity<?> getCertificiado(@PathVariable("id") Integer id){ 
+        try { 
+        	System.out.println("ID A BUSCAR");
+        	CertificadoEntity entity = servicio.findById(id);
+        	if (entity!=null) {
+        		System.out.println("Socio encontrado:"+entity.toString());	
+			}
+            return ResponseEntity.status(HttpStatus.OK).body(entity);
+        } catch (Exception e) {
+        	System.out.println(e.getMessage());
+        	e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
     @RequestMapping(value = "Imprimir_d1/{id}", method = RequestMethod.GET)
     public void imprimirCertificadoConImagenes(HttpServletResponse response,@PathVariable("id") Integer id) {
         try {

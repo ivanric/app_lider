@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import app.entity.CertificadoEntity;
+import app.entity.InscritoEntity;
 
 
 @Repository 
@@ -381,4 +382,19 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "",
 	    nativeQuery = true)
 	Map<String, Object>  findPorNrodocumento(String codigo);
+	
+	@Query(value="SELECT DISTINCT i.* \r\n"
+			+ "FROM certificadocurso i \r\n"
+			+ "WHERE \r\n"
+			+ "i.fk_participante=:idpart \r\n"
+			+ "AND i.fk_evento=:idevent\r\n"
+			+ "AND i.fk_curso=:idcur",nativeQuery = true)
+	public CertificadoEntity getCertificado(@Param("idevent") Integer id1,@Param("idcur") Integer id2,@Param("idpart") Integer id3);
+	
+	@Query(value="SELECT DISTINCT i.* \r\n"
+			+ "FROM certificadocurso i \r\n"
+			+ "WHERE \r\n"
+			+ "i.fk_participante=:idpart \r\n"
+			+ "AND i.fk_evento=:idevent",nativeQuery = true)
+	public List<CertificadoEntity> getCertificados(@Param("idevent") Integer id1,@Param("idpart") Integer id2);
 } 

@@ -49,7 +49,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.headers().disable()
 		.csrf().disable()
 //		.headers().frameOptions().sameOrigin()
-		.authorizeRequests().antMatchers(
+		.authorizeRequests()
+				// 🚫 Denegar acceso a .well-known completamente
+	    		.antMatchers("/.well-known/**").denyAll()
+				.antMatchers(
 				"/registro**",
 				"/js/**",
 				"/css/**",

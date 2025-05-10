@@ -1,0 +1,278 @@
+.card_data {
+	background: white;
+	border-radius: 5px;
+
+}
+
+.card_img {
+	text-align: center;
+	padding: 0.5rem 0;
+}
+
+.card_img img {
+	width: 190px;
+	height: 190px;
+	border-radius: 6px;
+}
+
+.btn_inscribirme {
+	display: inline-block;
+	border: 0px solid #804000;
+	background: linear-gradient(to bottom, #FF8000, #FA6900);
+	padding: 8px 48px;
+	color: #EEE;
+	text-decoration: none;
+	border-radius: 4px;
+	font-family: Segoe UI;
+	transition: all 0.05s linear, background-color 0.1s linear, color 0.1s
+		linear;
+	font-weight: bold;
+}
+
+.btn_inscribirme:hover {
+	background: linear-gradient(to bottom, #FF8000, #FF9000);
+	color: #FFF;
+}
+
+.content-mas-detalles{
+	display: flex;
+    justify-content: center;
+}
+.btn-mas-detalles{
+	border: 0px;
+}
+.btn-mas-detalles:hover{
+	background: #e7e7e7;
+}
+
+.evento_title {
+	background: #ebebeb;
+	color: black;
+	text-transform: uppercase;
+	font-size: 20px;
+	padding: 15px;
+	border-radius: 4px 4px 0px 0px;
+	font-weight: bold;
+	line-height: normal;
+	font-family: monospace;
+	font-style: italic;
+}
+
+.evento_body {
+	background: #fff;
+}
+
+.evento_content {
+	display: flex;
+}
+
+.evento_content_izq {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: 8px;
+	width: 70%;
+}
+
+.evento_content_der {
+	padding: 8px;
+	display: flex;
+	width: 30%;
+	flex-direction: column;
+}
+
+.evento_afiche {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.evento_body_detalle {
+	background: #fff;
+	padding: 10px;
+	max-height: max-content;
+	font-family: 'DM Sans';
+}
+
+.evento_form_register {
+	background: #d9ecff;
+	border-radius: 3px 3px 0 0;
+	text-decoration: none;
+	color: #222835;
+	height: auto;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	margin-top: 2px;
+	transition: 1s ease;
+}
+
+.evento_form_register:hover {
+	background: #0e0e0e;
+	color: white;
+}
+
+.evento_form_text {
+	font-size: 10px;
+}
+
+.evento_form_register i {
+	background: #ffffff;
+	padding: 9px;
+	margin: 5px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 8px -4px #000000;
+	color: black;
+}
+
+.evento_group_what {
+	background: #e9eaeb;
+	border-radius: 0 0 3px 3px;
+	text-decoration: none;
+	color: #222835;
+	height: auto;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	margin-top: 0.5px;
+	transition: 1s ease;
+}
+
+.evento_group_what:hover {
+	background: #0e0e0e;
+	color: white;
+}
+
+.evento_what_text {
+	font-size: 10px;
+}
+
+.evento_group_what i {
+	background: #31e00e;
+	padding: 9px;
+	margin: 5px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 8px -4px #000000;
+}
+
+.evento_cursos_title {
+	background: #ffffff;
+	color: #000000;
+	padding: 7px;
+	border-radius: 2px;
+	font-size: 15px;
+	font-weight: bold;
+	margin: 2px 0px;
+	border-radius: 4px;
+}
+
+.evento_content_cursos {
+	background: #fff;
+	border-radius: 3px;
+	margin-top: 1px;
+	border-radius: 8px;
+	padding: 5px;
+}
+
+.card_evento_curso {
+	border: 1px solid currentColor;
+	border-color: #DEDEDE;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.evento_metodospagos {
+	background: #fff;
+	margin-top: 1px;
+	border-radius: 2px;
+	/* 	padding: 2px; */
+}
+
+.evento_metodospagos_title {
+	font-weight: bold;
+}
+
+.evento_content_metodospagos {
+	
+}
+
+.card_evento_metodopago {
+	border: 1px solid currentColor;
+	border-color: #DEDEDE;
+	border-radius: 2px;
+	display: flex;
+	flex-direction: row;
+	/* 	width: 100%; */
+	justify-content: end;
+}
+
+.card_evento_metodopago_img {
+	background: #ebebeb;
+	border-radius: 2px 0 0 2px;
+	/* 	flex: 1; */
+	justify-content: flex-end;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	/* 	width: 30%; */
+}
+
+.card_evento_metodopago_img img {
+	/* 	border-radius: 50%; */
+	width: 320px;
+	height: 190px;
+}
+
+.card_evento_curso_img_expositor {
+	background: #ebebeb;
+	border-radius: 8px 0 0 8px;
+	/* 	flex: 1; */
+	justify-content: center;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	width: 30%;
+}
+
+.card_evento_curso_img_expositor img {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	/* 	    background: #ffffff; */
+	/* 	    z-index: 2; */
+	/* 	    position: relative; */
+}
+
+.card_evento_curso_contenido {
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 5px;
+	width: 70%
+}
+
+.card_evento_curso_txt_nombre_curso {
+	font-size: 20px;
+}
+
+.certificado{
+	background: #ffef30;
+    padding: 4px;
+    border-radius: 5px;
+    margin-top: 3px;
+    text-align: justify;
+}
+
+.title_complete{
+	background: linear-gradient(to bottom, #FF8000, #FA6900);
+    padding: 0 6px;
+    border-radius: 5px;
+    margin-top: 3px;
+    text-align: justify;
+    color: white;
+    font-weight: bold;
+}

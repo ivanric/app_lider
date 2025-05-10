@@ -30,5 +30,8 @@ public interface AnioRepository extends GenericRepositoryNormal<AnioEntity, Inte
 	@Query(value="select count(t.*) from anio t where (upper(concat(t.id,t.nombre,'')) like concat('%',upper(:search),'%')) and (t.estado=:estado or :estado=-1) ",nativeQuery = true)
 	public Integer getTotAll(@Param("search") String search,@Param("estado") Integer estado);
 
+	
+//	@Query(value="SELECT * FROM anio WHERE nombre=?1",nativeQuery = true)
+	public AnioEntity findByNombre(String nombre);
 
 } 

@@ -52,6 +52,7 @@
 	    <link rel="stylesheet" href="#" th:href="@{/css/tema/style.css}"/>
 	    <link rel="stylesheet" href="#" th:href="@{/css/tema/mybuttons.css}"/>
 	    <link rel="stylesheet" href="#" th:href="@{/css/tema/mymenu.css}"/>
+	    <link rel="stylesheet" href="#" th:href="@{/css/tema/evento.css}"/>
 		<style type="text/css">
 			*{
 /*   				font-size: 13px;    */
@@ -578,7 +579,7 @@
 			function gestion(link){
 	// 			var enlace=$(link).data('href');
 				var enlace = link.dataset.href;
-				console.log("encale cert:",enlace)
+// 				console.log("encale cert:",enlace)
 	      		
 	
 	    		$.post(enlace,function(resp){

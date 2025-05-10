@@ -3,6 +3,7 @@ package app.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.repository.query.Param;
 
 import app.entity.InscritoEntity;
 
@@ -16,6 +17,8 @@ public interface InscritoService extends GenericServiceNormal<InscritoEntity,Int
 	public void updateStatus(int status,int id) throws Exception;
 	public Integer getTotAll(String search,int estado,int idanio) throws Exception;
 	public InscritoEntity getInscritoByCi(String search,int  idevento)throws Exception;
+	public InscritoEntity getInscritoByIdEventoByIdPart(Integer idevent,Integer idpart) throws Exception;
+	
 //	public Integer getTotCursoPorCategoria(int idcategoria)throws Exception;
 //	public InscritoEntity customPlantillaCurso(Integer id, InscritoEntity entidad) throws Exception;
 }

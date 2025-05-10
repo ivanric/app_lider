@@ -25,6 +25,7 @@ public interface InscritoRepository extends GenericRepositoryNormal<InscritoEnti
 	
 	@Query(value = "SELECT DISTINCT pt.id,p.ci,concat(p.nombres,' ',p.apellidos) as nombrecompleto,p.email,p.celular,\r\n"
 			+ "(select count(*) FROM certificadocurso cert WHERE cert.fk_participante=pt.id) as cantidad_cursos\r\n"
+			+ ",ins.id as idiscrito \r\n"
 			+ "from participante pt,persona p,inscrito ins\r\n"
 			+ "WHERE \r\n"
 			+ "pt.fk_persona=p.id\r\n"
@@ -32,7 +33,7 @@ public interface InscritoRepository extends GenericRepositoryNormal<InscritoEnti
 			+ "and pt.id=ins.fk_participante\r\n"
 			+ "and (ins.estado=:estado or :estado=-1)\r\n"
 			+ "and pt.id IN (SELECT cert2.fk_participante from certificadocurso cert2,anio an where cert2.fk_participante=pt.id and an.id=cert2.fk_anio and (an.id=:idanio or :idanio=-1))\r\n"
-			+ "ORDER BY pt.id ASC\r\n"
+			+ "ORDER BY ins.id ASC\r\n"
 			+ "LIMIT :length OFFSET :start",
 			countQuery ="",		
 			nativeQuery = true)
@@ -62,5 +63,13 @@ public interface InscritoRepository extends GenericRepositoryNormal<InscritoEnti
 			+ "and (upper(concat(p.ci,'')) = concat('',upper(:search),'')) \r\n"
 			+ "and (idt.fk_evento=:idevento or :idevento=-1) and i.estado=1",nativeQuery = true)
 	public InscritoEntity getInscritoByCi(@Param("search") String search,@Param("idevento") Integer idevento);
-
+	
+	
+	
+	@Query(value="SELECT DISTINCT i.* \r\n"
+			+ "FROM inscrito i, inscritodetalle di\r\n"
+			+ "WHERE i.id=di.fk_inscrito and i.estado=1\r\n"
+			+ "AND di.fk_evento=:idevento and i.fk_participante=:idpart\r\n"
+			+ "",nativeQuery = true)
+	public InscritoEntity getInscritoByIdEventoByIdPart(@Param("idevento") Integer id1,@Param("idpart") Integer id2);
 } 

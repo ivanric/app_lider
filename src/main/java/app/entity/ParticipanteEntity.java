@@ -24,6 +24,7 @@ import javax.persistence.UniqueConstraint;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "participante") // el email sera unico
@@ -87,6 +88,7 @@ public class ParticipanteEntity  implements Serializable{
 	
 	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)//CascadeType.REFRESH,cuando hay un cambio en un autor se debe actualizar en un libro
 	@JoinColumn(name = "fk_participante")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "participante"})
 	private List<CertificadoEntity> detallecertificados=new ArrayList<>();
 	
 	@Transient//para que no se guarde en la bd, para que sea tempora

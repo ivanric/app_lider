@@ -1,6 +1,9 @@
 package app.restcontroller;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +11,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.dto.InscritoDTO;
+import app.entity.CertificadoEntity;
 import app.entity.InscritoEntity;
 import app.entity.ParticipanteEntity;
 import app.entity.PersonaEntity;
@@ -31,6 +39,7 @@ import app.service.MailService;
 import app.service.ParticipanteService;
 import app.service.PersonaService;
 import app.service.ProfesionService;
+import app.service.S3Service;
 import app.util.Constantes;
 
 @RestController
@@ -42,7 +51,8 @@ public class RestInscritos extends RestControllerGenericNormalImpl<InscritoEntit
 	@Autowired DepartamentoService departamentoService;
 	@Autowired PersonaService personaService;
 	@Autowired ParticipanteService participanteService;
-	
+    @Autowired
+    private S3Service s3Service;
 	@Autowired
 	private MailService mailService;
 	
@@ -207,6 +217,66 @@ public class RestInscritos extends RestControllerGenericNormalImpl<InscritoEntit
 		mapa.put("participante", participante);
 		return new ResponseEntity<Map<String,Object>>(mapa,HttpStatus.OK);
 	}
+	
+    @GetMapping("/getInscritoByIdEventoByIdPart"+"/{id1}/{id2}")
+    public ResponseEntity<?> getInscritoByIdEventoByIdPart(@PathVariable Integer id1, @PathVariable Integer id2){ 
+        try { 
+        	System.out.println("ids:"+id1+" "+id2);
+        	InscritoEntity entity=this.servicio.getInscritoByIdEventoByIdPart(id1, id2);
+        	System.out.println("***********INSCRITO:"+entity.toString());	
+        	if (entity!=null) {
+        		System.out.println("***********INSCRITOdat:"+entity.toString());	
+			}
+            return ResponseEntity.status(HttpStatus.OK).body(entity);
+        } catch (Exception e) {
+        	System.out.println(e.getMessage());
+        	e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+	
+    
+    @GetMapping("/logourl/{filename}")
+    public ResponseEntity<Resource> getFile_pago_inscrito(@PathVariable String filename) {
+        try {
+            System.out.println("logO: " + filename);
+            
+            // Concatenar la ruta completa en S3 donde está almacenada la imagen
+            String fileKey = Constantes.nameFolderLogoPagoInscrito + "/" + filename;
+
+            // Obtener el archivo desde S3 como InputStream
+            InputStream inputStream = s3Service.downloadFileFromS3(fileKey);
+
+            if (inputStream != null) {
+                // Establecer un tipo de contenido por defecto
+                String contentType = "application/octet-stream"; // Tipo por defecto
+                try {
+                    contentType = Files.probeContentType(Paths.get(filename));
+                    if (contentType == null || !contentType.startsWith("image/")) {
+                        contentType = "application/octet-stream"; // Forzar un tipo por defecto si no es una imagen
+                    }
+                } catch (IOException e) {
+                    System.out.println("No se pudo determinar el tipo de archivo.");
+                }
+
+                // Crear un recurso a partir del InputStream
+                InputStreamResource resource = new InputStreamResource(inputStream);
+
+                // Devolver el archivo como respuesta con los encabezados adecuados
+                return ResponseEntity.ok()
+                        .contentType(MediaType.parseMediaType(contentType))
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + filename + "\"")
+                        .body(resource);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+    
+	
 	/*
     @PostMapping("/guardar")
 	public ResponseEntity<?> save( InscritoDTO InscritoDTO,@RequestParam("logo") MultipartFile file){

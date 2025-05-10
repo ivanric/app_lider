@@ -32,7 +32,7 @@ public interface PersonaRepository extends GenericRepositoryNormal<PersonaEntity
 	@Query(value="select count(t.*) from persona t where (upper(concat(t.id,t.nombres,t.apellidos,'')) like concat('%',upper(:search),'%')) and (t.estado=:estado or :estado=-1) ",nativeQuery = true)
 	public Integer getTotAll(@Param("search") String search,@Param("estado") int estado);
 	
-	@Query(value="select per.* \r\n"
+	@Query(value="select DISTINCT per.* \r\n"
 			+ "from persona per\r\n"
 			+ "where (upper(concat(per.ci,'')) = concat('',upper(:search),'')) and per.estado=1",nativeQuery = true)
 	public PersonaEntity getPersonaByCi(@Param("search") String search);

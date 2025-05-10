@@ -1000,18 +1000,17 @@ td {
            			        option.selected = true;
            				}
          			});
-         			if (data.provincia!=null) {
+         			if (data.provincia!=null){
              			var provinciaSeleccionada=data.provincia.id
              			$.get(nameEntity4 + '/provincias/'+ data.departamento.id, function(provincias) {
              		        let provinciaSelect = document.getElementById("provincia");
              		        provinciaSelect.innerHTML = '<option value="">Seleccione una provincia</option>'; // Limpiar opciones
-
              		        // Agregar nuevas provincias
              		        provincias.forEach(function(provincia) {
              		            let option = document.createElement("option");
              		            option.value = provincia.id;
              		            option.textContent = provincia.nombre;
-             		            if (provincia.id == provinciaSeleccionada) {
+             		            if (provincia.id == provinciaSeleccionada){
              		                option.selected = true; // Seleccionar la provincia correspondiente
              		            }
              		            provinciaSelect.appendChild(option);

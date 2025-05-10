@@ -1,6 +1,7 @@
 package app.service;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import app.dto.EventoDTO;
 import app.dto.InscritoDTO;
+import app.entity.AnioEntity;
 import app.entity.CertificadoEntity;
 import app.entity.InscritoDetalleEntity;
 import app.entity.InscritoEntity;
@@ -27,6 +29,7 @@ import app.repository.InstitucionRepository;
 import app.repository.PersonaRepository;
 import app.repository.UsuarioRepository;
 import app.repository.ParticipanteRepository;
+import app.repository.AnioRepository;
 import app.repository.CertificadoCursoRepository;
 import app.repository.GenericRepositoryNormal;
 import app.repository.InscritoDetalleRepository;
@@ -41,6 +44,7 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
 	@Autowired private InscritoRepository InscritoRepository;
 	@Autowired private InscritoDetalleRepository InscritoDetalleRepository;
 	@Autowired private UsuarioRepository usuarioRepository;
+	@Autowired private AnioRepository anioRepository;
 
 	@Autowired private CertificadoCursoRepository CertificadoCursoRepository;
 
@@ -129,6 +133,15 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
         	System.out.println("EntitySAVE_Servicio:"+InscritoDTO.toString());
         	
 //        	System.out.println("IMAGEN:"+InscritoDTO.getLogo().getOriginalFilename());
+        	
+    		LocalDate ahora = LocalDate.now();
+//    		int dia = ahora.getDayOfMonth();
+//    		int mes = ahora.getMonthValue();
+    		long año = ahora.getYear();
+    		System.out.println("ANIOOOOOO ANT:"+año);
+    		String nombre1=String.valueOf(año);
+    		AnioEntity anio=anioRepository.findByNombre(nombre1);
+        	
         	
         	PersonaEntity persona2=null;
         	ParticipanteEntity participanteEntity2=null;
@@ -282,7 +295,7 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
 			InscritoEntity.setSubtotal(xtotsubtotal);
 			InscritoEntity.setTotal(xtotsubtotal-xtotdescuento);
         	InscritoEntity.setEstado(1);
-        	InscritoEntity.setAnio(InscritoDTO.getAnio());
+        	InscritoEntity.setAnio(anio);
         	InscritoEntity.setParticipante(participanteEntity2);
         	InscritoEntity.setDetalleInscrito(array_detalleIns);
         	
@@ -333,7 +346,7 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
 	            CertificadoEntity.setNrofolio(nrofolio_x);
 	            CertificadoEntity.setParticipante(participanteEntity2);
 	            CertificadoEntity.setCurso(InscritoDTO.getEvento().getEventodetalle().get(i).getCurso());
-	            CertificadoEntity.setAnio(InscritoDTO.getAnio());
+	            CertificadoEntity.setAnio(anio);
 	            CertificadoEntity.setEstado(1);
 	            CertificadoEntity.setEvento(InscritoDTO.getEvento());
 	            CertificadoEntity.setLugarcurso(InscritoDTO.getEvento().getEventodetalle().get(i).getLugarcurso());
@@ -389,7 +402,18 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
           return null;  
       }
 	}
-	
+	@Override
+	public InscritoEntity getInscritoByIdEventoByIdPart(Integer idevent, Integer idpart) throws Exception {
+		InscritoEntity entity= new InscritoEntity();
+        try{
+        	entity= InscritoRepository.getInscritoByIdEventoByIdPart(idevent, idpart);
+          return entity;
+      } catch (Exception e){
+      		System.out.println(e.getMessage());
+//          throw new Exception(e.getMessage());
+          return null;  
+      }
+	}
 /*
 	@Override
 	@Transactional
@@ -442,4 +466,7 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
 	}
 	
 */
+
+
+
 }

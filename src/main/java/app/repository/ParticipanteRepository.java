@@ -35,7 +35,7 @@ public interface ParticipanteRepository extends GenericRepositoryNormal<Particip
 	@Query(value="select count(t.*) from participante t,persona p where t.fk_persona=p.id and (upper(concat(t.id,p.ci,'')) like concat('%',upper(:search),'%')) and (t.estado=:estado or :estado=-1) ",nativeQuery = true)
 	public Integer getTotAll(@Param("search") String search,@Param("estado") Integer estado);
 
-	@Query(value="select pt.* \r\n"
+	@Query(value="select DISTINCT pt.* \r\n"
 			+ "from participante pt,persona p\r\n"
 			+ "where pt.fk_persona=p.id and (upper(concat(p.ci,'')) = concat('',upper(:search),'')) and pt.estado=1",nativeQuery = true)
 	public ParticipanteEntity getParticipanteByCi(@Param("search") String search);

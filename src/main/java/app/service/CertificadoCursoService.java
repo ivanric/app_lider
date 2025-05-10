@@ -3,6 +3,8 @@ package app.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.repository.query.Param;
+
 import app.entity.CertificadoEntity;
 
 
@@ -32,4 +34,8 @@ public interface CertificadoCursoService extends GenericServiceNormal<Certificad
 	public List<Map<String, Object>> getEventByIdAnio(int idanio)throws Exception ;
 	public List<Map<String, Object>> getCategoryByIdAnio(int idevent,int idanio)throws Exception ;
 	public CertificadoEntity renovarQR(CertificadoEntity entidad) throws Exception ;
+	
+	public CertificadoEntity getCertificado(Integer id1,Integer id2, Integer id3);
+	public List<CertificadoEntity> getCertificados(Integer id1,Integer id2);
+
 }

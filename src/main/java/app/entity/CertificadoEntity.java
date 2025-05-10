@@ -22,6 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="certificadocurso")
@@ -67,11 +68,13 @@ public class CertificadoEntity implements Serializable{
 	@Column(name = "certificadoenviado")//add2
 	private Integer certificadoenviado;//add2
 	
-//    @Transient//importante para que no cargue una compra previa 
+//    @Transient//importante para que no cargue una compra previa
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_participante")
-//    @JsonIgnore  // Evita la serialización
-	@JsonBackReference  // Evita la serialización infinita
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "detallecertificados"})
+//  @JsonIgnore  // Evita la serialización
+//	@JsonBackReference  // Evita la serialización infinita
+//	@JsonIgnoreProperties({"detallecertificados"})
 	private ParticipanteEntity participante;
 	
 	@ManyToOne

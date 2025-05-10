@@ -28,11 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import app.dto.ParticipanteDTO;
+import app.entity.InscritoEntity;
 import app.entity.ParticipanteEntity;
 import app.entity.PersonaEntity;
 import app.service.DepartamentoService;
 import app.service.GradoAcademicoService;
+import app.service.ParticipanteService;
 import app.service.ParticipanteServiceImpl;
+import app.service.PersonaService;
 import app.service.ProfesionService;
 import app.service.ProvinciaService;
 import app.service.S3Service;
@@ -46,8 +49,13 @@ public class RestParticipante extends RestControllerGenericNormalImpl<Participan
 	@Autowired ProfesionService profesionService;
 	@Autowired DepartamentoService departamentoService;
 	@Autowired ProvinciaService ProvinciaService;
-    @Autowired
-    private S3Service s3Service;
+    
+	@Autowired PersonaService personaService;
+	@Autowired ParticipanteService participanteService;
+	
+	@Autowired private S3Service s3Service;
+    
+    
 	
 	@GetMapping("/listar")
 	public ResponseEntity<?> getAll(HttpServletRequest request,@Param("draw")int draw,@Param("length")int length,@Param("start")int start,@Param("estado")int estado)throws IOException{
@@ -221,6 +229,40 @@ public class RestParticipante extends RestControllerGenericNormalImpl<Participan
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+    
+	@RequestMapping({"findParticipante"})
+	public ResponseEntity<?> existeCiParticipante(HttpServletRequest req) throws Exception{
+		Map<String, Object> mapa=new HashMap<String, Object>();
+		String ci=req.getParameter("ci");
+//		Integer idevento=Integer.parseInt(req.getParameter("idevento"));
+		boolean existe;
+		System.out.println("tam_"+ci.length());
+		PersonaEntity persona=null;
+		ParticipanteEntity participante=null;
+		
+		
+		if(this.personaService.getPersonaByCi(ci)!=null){
+			persona=this.personaService.getPersonaByCi(ci);
+			if (this.participanteService.getParticipanteByCi(ci)!=null) {
+				participante=participanteService.getParticipanteByCi(ci);
+			}else {
+				participante=null;	
+			}
+		}else{
+//			existe=false;
+			persona=null;
+			participante=null;	
+		}
+//		System.out.println("existe: "+existe);
+		
+		System.out.println("persona:"+persona);
+		System.out.println("participante:"+participante);
+		mapa.put("persona", persona);
+		mapa.put("participante", participante);
+		return new ResponseEntity<Map<String,Object>>(mapa,HttpStatus.OK);
+	}
+    
+    
 /*
     
     @GetMapping("getTotCursoPorCategoria/{id}")
