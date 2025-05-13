@@ -22,7 +22,7 @@ services:
       - bd_posgresql
     volumes:
 #      - ${HOME}/.aws:/root/.aws  # Monta las credenciales de AWS dentro del contenedor
-      - ~/.aws:/root/.aws:ro  # Monta las credenciales de AWS en el contenedor
+      - ~/.aws:/root/.aws  # Monta las credenciales de AWS en el contenedor
 #      - C:/Users/USER/.aws:/root/.aws:ro  # Monta las credenciales de AWS en el contenedor
       - lider_app_data:/home  # Define un volumen llamado 'lider_app_data' montado en '/home' del contenedor
 #    deploy:
