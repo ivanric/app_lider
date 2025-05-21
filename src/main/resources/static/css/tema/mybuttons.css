@@ -23,3 +23,40 @@
     border-right-width: 1px;
     box-shadow: 1px 2px 0 0 rgba(0,0,0,0.3);
 }
+
+
+.btn_select_all {
+	background: #08b8b5;
+	color: white;
+	font-size: 11px;
+	border: 0.5px;
+	padding: 2px 10px;
+	border-radius: 3px;
+}
+
+.btn_del_det{
+	background: #ff3d2b;
+	color: white;
+	font-size: 11px;
+	border: 0.5px;
+	padding: 2px 10px;
+	border-radius: 3px;
+}
+
+.btn_hab_det{
+	background: #34b400;
+	color: white;
+	font-size: 11px;
+	border: 0.5px;
+	padding: 2px 10px;
+	border-radius: 3px;
+}
+
+.btn_select_all_global {
+	background: #d85f03;
+	color: white;
+	font-size: 11px;
+	border: 0.5px;
+	padding: 2px 10px;
+	border-radius: 3px;
+}

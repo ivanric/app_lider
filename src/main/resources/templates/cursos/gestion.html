@@ -565,6 +565,477 @@ td {
 			</div>
 		</div>
 	</form>
+	
+		<form name="formulario4" role="form" id="formulario4" method="post"
+		enctype="multipart/form-data" data-fv-excluded="disabled">
+
+		<div class="modal fade" id="modalInscritoComprobante" tabindex="-1"
+			role="dialog" data-backdrop="static" data-keyboard="false"
+			aria-hidden="true" style="display: none; padding-left: 0">
+
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="card">
+						<div class="modal-header"
+							style="display: flex; flex-direction: column;">
+							<span><b>.:INSCRITO:.</b></span>
+							<div class="opciones_btn_modal4" style="display: flex"></div>
+						</div>
+
+						<div class="modal-body">
+							<input type="hidden" placeholder="id" name="id" value=""> 
+							<input type="hidden" placeholder="idinscrito" name="idinscrito" value=""> 
+							<input type="hidden" placeholder="idevento" name="idevento" value=""> 
+							<input type="hidden" placeholder="idpersona" name="idper" value=""> 
+							<input type="hidden" placeholder="idparticipante" name="idpart" value=""> 
+							<input type="hidden" placeholder="idparticipante" name="idpartact" value=""> 
+					
+							
+							<input placeholder="" class="" name="cantidad" value="0" type="number" style="display: none">
+							<input placeholder="" class="" name="precio" value="0" type="number" step="any" style="display: none"> 
+							<input placeholder="" class="" name="descuento" value="0" type="number" step="any" style="display: none"> 
+							<input placeholder="" class="" name="subtotal" value="0" type="number" step="any" style="display: none"> 
+							<input placeholder="" class="" name="importe" value="0" type="number" step="any" style="display: none"> 
+							
+							<input placeholder="" class="" name="inscrito" value="" type="hidden" style="">
+							<input placeholder="" class="" name="evento" value="" type=""  style="display: none">
+							<input placeholder="" class="" name="anio" value="" type="" style="display: none"> 
+							<input type="" name="estado" value="1" style="display: none">
+							
+							<div class="row" style="">
+								<div class="col-md-12 card_data">
+									<div class="row">
+										<div class="">
+											<div id="msg"></div>
+											<!-- Mensajes de Verificacion -->
+											<div id="error" class="alert alert-warning  ocultar"
+												role="alert">
+												ENCONTRADO: Complete o actualize sus datos!</div>
+											<div id="ok" class="alert alert-success ocultar" role="alert">
+												NUEVO: Completa los campos por favor..</div>
+
+											<div id="error-inscrito" class="alert alert-info ocultar"
+												role="alert">Usted ya está registrado en este evento,gracias..</div>
+										</div>
+										<div class="col-md-8">
+											<div class="">
+												<label for="ci" class=""><b>NÚMERO DE CARNET DE IDENTIDAD</b></label> <input
+													placeholder="Ingrese carnet.. "
+													class="form-control fg-input data-per field_css" name="ci"
+													type="text" required="required" autocomplete="off"  tabindex="-1">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="">
+												<label for="exp" class=""><b>EXPEDIDO</b></label> <select
+													required="required" class="form-select field_css"
+													aria-label=".form-select-sm example" id="exp" name="exp">
+													<option selected value="">Seleccionar</option>
+													<option value="TJA">TARIJA</option>
+													<option value="PT">POTOSI</option>
+													<option value="PD">PANDO</option>
+													<option value="LP">LA PAZ</option>
+													<option value="OR">ORURO</option>
+													<option value="CBBA">COCHABAMBA</option>
+													<option value="BE">BENI</option>
+													<option value="CH">CHUQUISACA</option>
+													<option value="SCZ">SANTA CRUZ</option>
+
+												</select>
+											</div>
+
+										</div>
+										<div class="col-md-12">
+											<div class="">
+												<label for="logo" class=""><b>SUBIR SU
+														FOTOGRAFÍA (4X4) PARA SU CERTIFICADO (OPCIONAL)</b></label> <input
+													placeholder="Ingrese logo"
+													class="form-control fg-input data-per field_css"
+													name="archivoimgparticipante" id="archivoimgparticipante"
+													type="file">
+											</div>
+
+										</div>
+										<div class="col-md-12">
+											<div class="">
+												<label for="nombre" class=""><b>NOMBRE COMPLETO</b></label>
+												<input placeholder="Ingrese su nombre completo.."
+													class="form-control fg-input data-per field_css"
+													name="nombres" type="text" required="required"
+													onkeyup="this.value = this.value.toUpperCase();">
+											</div>
+
+										</div>
+										<div class="col-md-12">
+											<div class="">
+												<label for="nombre" class=""><b>APELLIDOS</b></label> <input
+													placeholder="Ingrese apellidos.."
+													class="form-control fg-input data-per field_css"
+													name="apellidos" type="text" required="required"
+													onkeyup="this.value = this.value.toUpperCase();">
+											</div>
+
+										</div>
+										<div class="col-md-6">
+											<div class="">
+												<label for="genero" class=""><b>GÉNERO</b></label> <select
+													required="required" class="form-select field_css"
+													aria-label=".form-select-sm example" id="genero"
+													name="genero">
+													<option selected value="">Seleccionar</option>
+													<option value="m">MASCULINO</option>
+													<option value="f">FEMENINO</option>
+													<option value="s">SIN ESPESIFICAR</option>
+
+												</select>
+											</div>
+
+										</div>
+										<div class="col-md-6">
+											<div class="">
+												<label for="fechanacimiento" class=""><b>FECHA
+														DE NACIMIENTO</b></label> <input
+													placeholder="Ingrese Fecha Nacimiento.."
+													class="form-control fg-input data-per field_css"
+													name="fechanacimiento" type="date" required="required"
+													id="fechanacimiento" value="">
+											</div>
+
+										</div>
+										<div class="col-md-6">
+											<div class="">
+												<label for="edad" class=""><b>EDAD</b></label> <input
+													placeholder="Edad.."
+													class="form-control fg-input data-per field_css" id="edad"
+													name="edad" type="number" required="required">
+											</div>
+
+										</div>
+										<div class="col-md-6">
+											<div class="">
+												<label for="celular" class=""><b>TELÉFONO/CELULAR
+														(Con WHATSAPP)</b></label> <input
+													placeholder="Ingresar su nro de celular.."
+													class="form-control fg-input data-per field_css"
+													name="celular" type="number" required="required">
+											</div>
+
+										</div>
+										<div class="col-md-6">
+											<div class="">
+												<label for="gradoacademico" class=""><b>GRADO
+														ACADÉMICO</b></label> <select required="required"
+													class="form-select field_css"
+													aria-label=".form-select-sm example" id="gradoacademico"
+													name="gradoacademico">
+													<option selected value="">Seleccionar</option>
+
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="">
+												<label for="profesion" class=""><b>CARRERA </b></label> <select
+													required="required" class="form-select field_css"
+													aria-label=".form-select-sm example" id="profesion"
+													name="profesion">
+													<option selected value="">Seleccionar</option>
+
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-6">
+											<div class="">
+												<label for="email" class=""><b>CORREO
+														ELECTRÓNICO (GMAIL)</b></label> <input
+													placeholder="Ingrese su correo GMAIL.."
+													class="form-control fg-input data-per field_css"
+													name="email" type="text" required="required">
+											</div>
+
+										</div>
+
+										<div class="col-md-6">
+											<div class="">
+												<label for="departamento" class=""><b>CIUDAD DE
+														RESIDENCIA</b></label> <select required="required"
+													class="form-select field_css"
+													aria-label=".form-select-sm example" id="departamento"
+													name="departamento">
+													<option selected value="">Seleccionar</option>
+
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="">
+												<label for="departamento" class=""><b>SUCURSAL
+														DE RESIDENCIA</b></label> <select class="form-select field_css"
+													aria-label=".form-select-sm example" id="provincia"
+													name="provincia">
+													<option selected value="">Seleccionar</option>
+
+												</select>
+											</div>
+										</div>
+
+
+										<div class="col-md-12">
+											<div class="">
+												<label for="exampleFormControlInput1" class=""><b>¿CERTIFICADO
+														FÍSICO Ó DIGITAL?</b></label><br>
+												<!-- 									<span>Te informamos que apartir de ahora nuestros certificados cuentan con un codigo QR único -->
+												<!-- 										  de autenticidad, por lo que puedes escoger, si deseas tu certificación física o digital.	 -->
+												<span>
+													IMPORTANTE: Solo puede escoger una sola modalidad: físico o digital. Ten en cuenta que nuestros certificados contienen un código QR personalizado que valida la autenticidad. 🙌🏻
+												
+												</span> 
+												 <select
+													required="required" class="form-select field_css"
+													aria-label=".form-select-sm example" id="tipocertificado"
+													name="tipocertificado">
+													<option selected value="">Elige tu certificado</option>
+													<option value="FÍSICO">FÍSICO</option>
+													<option value="DIGITAL">DIGITAL</option>
+													<option value="AMBOS">AMBOS</option>
+												</select>
+												<div style="" class="certificado">
+													<span class=""> * En caso de que sea físico se
+														enviará hasta su ciudad de residencia, <b>envío en 7
+															días hábiles. Una vez concluida la capacitación.</b> <br>
+														* En caso de que sea digital se enviará a su correo
+														electrónico y WhatsApp, <b> envío de 8 a 12 horas una
+															vez concluida la capacitación.</b>
+													</span>
+												</div>
+
+											</div>
+										</div>
+
+										<div class=" col-md-12 mt-1">
+
+											<div class="shadow evento_comprobantepago "
+												style="padding: 2px;">
+												<label for="logo" class=""><b>FOTO DEL
+														COMPROBANTE DE PAGO REALIZADO</b></label> <input
+													placeholder="Ingrese logo"
+													class="form-control fg-input data-per field_css"
+													name="archivoimgpago" id="archivoimgpago" type="file"
+													required="required">
+											</div>
+
+
+										</div>
+
+										<div class="col-md-12 content-mas-detalles mt-3">
+											<a class="btn-mas-detalles" type="button">
+												<i class="fa fa-angle-double-down" aria-hidden="true"></i>
+												Más Detalles
+											</a>
+										</div>
+
+										<div class="mt-1 ">
+											<div class="contenido-detalles-evento  ocultar">
+
+												<div class="col-md-12  ">
+													<div class="evento_title">CONGRESO BOLIVIANO DE
+														CONTADURÍA PÚBLICA, CIENCIAS EMPRESARIALES Y FINANCIERAS</div>
+													<div class="shadow evento_body ">
+														<div class="evento_content">
+															<div class="evento_content_izq">
+																<div class=" shadow rounded evento_body_detalle">
+																	<div class="row">
+																		<div class="col-md-6">
+																			<label><b>FECHA INICIO: </b></label> <span
+																				class="evento_f_inicio"> 12-02-2024</span>
+																		</div>
+																		<div class="col-md-6">
+																			<label><b>FECHA FIN: </b></label> <span
+																				class="evento_f_fin"> 22-02-2024</span>
+																		</div>
+																		<div class="col-md-6">
+																			<label><b>HORA DE INICIO: </b></label> <span
+																				class="evento_hora">11:00</span>
+																		</div>
+																		<div class="col-md-6">
+																			<label><b>MODALIDAD: </b></label> <span
+																				class="evento_modalidad">PRESENCIAL</span>
+																		</div>
+
+																		<div class="col-md-6">
+																			<label><b>PRECIO: </b></label> <span
+																				class="evento_precio">200.00</span> Bs.
+																		</div>
+																		<div class="col-md-6">
+																			<label><b>CERTIFICADO: </b></label> <span
+																				class="evento_certificado">SI</span>
+																		</div>
+																		<!-- 														 
+														<div class="col-md-6">
+															<label><b>EVALUACIONES: </b></label> <span
+																class="evento_evaluacion">NO</span>
+														</div>-->
+																		<div class="col-md-12">
+																			<label><b>LUGAR DEL EVENTO: </b></label> <span
+																				class="evento_lugarevento">Lugar del evento</span>
+																		</div>
+																	</div>
+
+																</div>
+																<div class=" shadow evento_cursos_title mt-2">
+																	<div class="">.:DETALLE:.</div>
+																</div>
+																<div class="shadow evento_content_cursos">
+
+																	<div class="card_evento_curso">
+																		<div class="card_evento_curso_img_expositor">
+																			<a href="../../img/poster1.png"
+																				th:href="@{/img/poster1.png}" data-fancybox="">
+																				<img src="../../img/poster1.png"
+																				alt="Trendy Pants and Shoes"
+																				class="img-fluid img-thumbnail " />
+																			</a>
+																		</div>
+																		<div class="card_evento_curso_contenido">
+																			<div class="row mb-1">
+																				<div class="col-md-6">
+																					<b>Categoria: </b><span
+																						class="card_evento_curso_txt_categoria">Auditoria</span>
+																				</div>
+																				<div class="col-md-6">
+																					<b>Nivel: </b><span
+																						class="card_evento_curso_txt_nivel">Basico</span>
+
+																				</div>
+																			</div>
+																			<div class="row">
+																				<div class="col-md-12">
+																					<b> <span
+																						class="card_evento_curso_txt_nombre_curso">Auditoria
+																							Intermedia 2</span></b>
+																				</div>
+																			</div>
+																			<div class="row">
+																				<div class="col-md-12">
+																					<b>Fecha: </b><span
+																						class="card_evento_curso_txt_fechacurso">yyyy-mm-dd</span>
+																				</div>
+
+																			</div>
+																			<div class="row">
+																				<div class="col-md-12">
+																					<b>De Horas: </b><span
+																						class="card_evento_curso_txt_hora_inicial">12:00</span>
+																					- <span class="card_evento_curso_txt_hora_final">14:00</span>
+																				</div>
+
+																			</div>
+																			<div class="row mb-1">
+																				<div class="col-md-12">
+																					<b>En: </b><span
+																						class="card_evento_curso_txt_lugarcurso">Carrera
+																						de Contabilidad Redes </span>
+																				</div>
+
+																			</div>
+																			<div class="row">
+																				<div class="col-md-12">
+																					<b>Por: </b><span
+																						class="card_evento_curso_txt_gradoacademico">PhD.</span>
+																					<span class="card_evento_curso_txt_expositor">Luis
+																						Fernando Garcia P</span>
+																				</div>
+																			</div>
+																			<div class="row">
+																				<div class="col-md-12">
+																					<b><span class="card_evento_curso_txt_rubro">
+																							Catedrático Emérito UMSA</span> </b>
+																				</div>
+																			</div>
+																		</div>
+
+																	</div>
+
+																</div>
+
+															</div>
+															<div class="evento_content_der">
+																<div class="">
+																	<label><b>EVENTO: </b></label> <span
+																		class="evento_tipo">REQUIERE INVERSIÓN</span>
+																</div>
+																<div class="evento_afiche text-center">
+																	<div class="evento_afiche_img">
+																		<a href="../../img/poster1.png"
+																			th:href="@{../../img/poster1.png}" data-fancybox="">
+																			<img src="../../img/poster1.png"
+																			th:src="@{../../img/poster1.png}" alt=""
+																			class="img-fluid img-thumbnail rounded"
+																			style="width: 100%; height: 300px;">
+																		</a>
+																	</div>
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<div class="evento_cursos"></div>
+												</div>
+												<div class="col-md-12">
+
+													<div class=" shadow evento_metodospagos">
+														<div class="evento_metodospagos_title">Formas de
+															Inscripción</div>
+														<div class=" evento_content_metodospagos">
+															<div class="card_evento_metodopago">
+																<div class="card_evento_metodopago_img">
+																	<img src="../../img/poster1.png"
+																		alt="Trendy Pants and Shoes"
+																		class="img-fluid img-thumbnail " />
+																</div>
+															</div>
+														</div>
+													</div>
+
+
+
+												</div>
+											</div>
+											<div class="mt-3 mb-1 col-md-12 text-center">
+												<div class="mx-auto">
+													<div id="registrado" class="alert alert-success  ocultar"
+														role="alert" style="margin-top: 10px;">Hemos
+														registrado con exito su inscripcion, revise su
+														correo@gmail por favor..</div>
+													<button id="btnGuardar_modal " type="submit"
+														class=" btn_inscribirme" style="">
+														<i class="fa fa-floppy-o" aria-hidden="true" style=""></i>
+														GUARDAR CAMBIOS
+													</button>
+
+
+												</div>
+											</div>
+										</div>
+
+
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
 	<h4 class="">
 		<b>.: CURSOS :.</b>
 	</h4>
@@ -675,7 +1146,12 @@ td {
 						<span class="opciones_btn_qr">
 							<button id="btnHabilitarQr" class="btn btn-secondary waves-effect btn-sm" style="margin: 0 2px;" onclick="funcEnviarCertificadosMarcados()" data-mdb-ripple-init>ENVIAR CERTIFICADOS</button>
 						</span>
-
+						<span class="opciones_btn_ver_certificado">
+							<button id="btnVerComprobante"
+								class="btn btn-secondary waves-effect btn-sm "
+								style="margin: 0 2px;" onclick="funcVerComprobante()"
+								data-mdb-ripple-init>VER COMPROBANTE</button>
+						</span>
 					</div>
 
 				</div>
@@ -684,13 +1160,28 @@ td {
 						placeholder="Ingresar carnet de identidad..">
 				</div>
 				<div class="col-md-2 col-xs-12">
-					<select class="form-select field_css" aria-label=".form-select-sm example" id="tipocertificado" name="tipocertificado">
+					<select class="form-select field_css" aria-label=".form-select-sm example" id="tipocertificadofil" name="tipocertificado">
 						<option selected="" value="">Tipo de certificado</option>
 						<option value="FISICO">FISICO</option>
 						<option value="DIGITAL">DIGITAL</option>
+						<option value="AMBOS">AMBOS</option>
 					</select>
 				</div>
 				<div class="col-md-12 col-xs-12" style="text-align: right;margin-bottom: 2px;background: #e9eced;padding: 5px;margin-top: 5px;">
+						
+					<div class="form-check form-check-inline">
+						<input type="radio" class="form-check-input " name="iestadodet"
+							id="activosdet" value="1" autocomplete="off" checked> <label
+							for="activosdet">habilitados</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input type="radio" class="form-check-input" name="iestadodet"
+							id="inactivodet" value="0" autocomplete="off"> <label
+							for="inactivodet">deshabilitados</label>
+					</div>
+					<div class="opciones_btn_eliminardet" style="display: inline-block;"></div>	
+					<div class="opciones_btn_habilitardet" style="display: inline-block;"></div>
+					
 					<button id="btn_select_all" class="btn_select_all">Seleccionar todos de pagina actual</button>
 					<button id="btn_select_all_global" class="btn_select_all_global">Seleccionar todos de todas las paginas</button>
 				</div>
@@ -700,6 +1191,7 @@ td {
 						<thead class="bg-light">
 							<tr>
 								<th>NRO.FOLIO</th>
+								<th>FECHA DE REGISTRO</th>
 								<th>CI</th>
 								<th>NOMBRE COMPLETO</th>
 								<th>CORREO</th>
@@ -766,9 +1258,52 @@ td {
 		var nameEntity_CORREO="../RestCertificadosCursosCorreos"
 		var nameEntityd2="../RestCategorias"
 
+	
+		GSEARCH_INSCRITO=$('#js_filtro').val()
+		GESTADO_INSCRITO=$('input[name="iestadodet"]:checked').val();
 		
+		$('#js_filtro').on('keyup',function(){
+			GSEARCH_INSCRITO=$(this).val()
+
+		})
 		
-		
+        $('input[name="iestadodet"]').on('change',function(){
+	        	console.log("table certificados")
+	        	GESTADO_INSCRITO=$('input[name="iestadodet"]:checked').val();
+	        	GSEARCH_INSCRITO=$('#js_filtro').val()
+	        	setButtonCrud2(GESTADO_INSCRITO)
+	        	GDATO="";//para que al momento de eliminar o habilitar se tenga que seleccionar un registro de la tabla
+// 	        	$('#table_certificados').dataTable().fnDraw('page');
+	        	
+	            var dataTable_estado = $.fn.dataTable.fnIsDataTable($('#table'));
+	            if (dataTable_estado) {
+	                $('#table').DataTable().ajax.reload();
+	            } else {
+	                console.warn("La tabla 'table_certificados' no está inicializada aún.");
+					DTtable_INSCRITO=''
+					iniciando_table_certificados();
+	            }
+	        	
+	        	
+	        	
+        })	
+		setButtonCrud2(GESTADO_INSCRITO)
+		function setButtonCrud2(estado) {
+			if (estado==1) {
+				$('.opciones_btn_habilitardet').html("")
+				$('.opciones_btn_eliminardet').html(`<button id="btnEliminarDet" class="btn_del_det" style="margin: 0 2px;" onclick="funtUpdateRowDet()">Deshabilitar</button>`)
+
+// 			    $('.opciones_btn_nuevo').html(`<button id="btnAdicionar" class="btn btn-secondary btn-md waves-effect btn-sm" onclick="funtNewFormModal()" style="margin: 0 2px;">Nuevo</button>`)  
+
+
+			}else{
+// 			    if(ExisteOpcion('habilitar')){
+// 			    	$('.opciones_btn_nuevo').html('')
+			    	$('.opciones_btn_eliminardet').html('')
+			        $('.opciones_btn_habilitardet').html(`<button id="btnHabilitar" class="btn_hab_det" style="margin: 0 2px;" onclick="funtUpdateRowDet()">Habilitar</button>`)  
+// 			    }
+			}
+		}
 		
 		
 // 		if (typeof G_JSON_ENTITY === 'undefined') {
@@ -936,7 +1471,7 @@ td {
 		GSEARCH=$('#js_filtro').val()
 		GESTADO=$('input[name="iestado"]:checked').val();
 		
-		$("#tipocertificado").on('change',function(){
+		$("#tipocertificadofil").on('change',function(){
 			var idtipo=$(this).val();
 			console.log("idtipocertificado:",idtipo)
 			if(idtipo==""){
@@ -2584,7 +3119,7 @@ td {
 	            "type": "GET",
 	              "url": nameEntity_INSCRITO+""+"/listarbyCurso",
 	          	"data": function ( d ){
-	          		 	d.estado = 1
+	          		 	d.estado = GESTADO_INSCRITO
 	                    d.idevento= GID_EVENTO_CERT
 // 	                    d.anio=$('body').find('#select-anios option:selected').text();
 	                    d.idanio=GID_ANIO_DET
@@ -2611,6 +3146,7 @@ td {
 	                { "data": "id" },
 	                { "data": "id" },
 	                { "data": "id" },
+	                { "data": "id" },
 	                { "data": "id" }
 //	                 { "data": "id" }
 	      		]
@@ -2618,30 +3154,31 @@ td {
 	            "createdRow":function(row,data,index){
 	                console.log("DATA2:",data)
 	                $('td',row).eq(0).html(data.nrofolio+""+`<input type="hidden" value="${data.id}" class="idhidden">`).addClass('text-center');
-	                $('td',row).eq(1).html(data.ci);
-	                $('td',row).eq(2).html(data.nombrecompleto);
-	                $('td',row).eq(3).html(data.email);
-	                $('td',row).eq(4).html(data.celular);
-	                $('td',row).eq(5).html(data.ciudad);
-	                $('td',row).eq(6).html(data.sucursal);
-	                $('td',row).eq(7).html(data.tipocertificado);
+	                $('td',row).eq(1).html(data.fecharegistro);
+	                $('td',row).eq(2).html(data.ci);
+	                $('td',row).eq(3).html(data.nombrecompleto);
+	                $('td',row).eq(4).html(data.email);
+	                $('td',row).eq(5).html(data.celular);
+	                $('td',row).eq(6).html(data.ciudad);
+	                $('td',row).eq(7).html(data.sucursal);
+	                $('td',row).eq(8).html(data.tipocertificado);
 	                let s_certificado_enviado=""
 	                if (data.tipocertificado=="DIGITAL") {
 	                	if (data.certificadoenviado==1) {
-	                		$('td',row).eq(8).html('<span class="badge rounded-pill badge-success">Enviado</span>');
+	                		$('td',row).eq(9).html('<span class="badge rounded-pill badge-success">Enviado</span>');
 						} else {
-							$('td',row).eq(8).html('<span class="badge rounded-pill badge-warning">Pendiente</span>');
+							$('td',row).eq(9).html('<span class="badge rounded-pill badge-warning">Pendiente</span>');
 						}
 	                	
 					}else{
-						$('td',row).eq(8).html("");
+						$('td',row).eq(9).html("");
 					}
 	                
-	                $('td',row).eq(9).html(data.nombrecurso);
+	                $('td',row).eq(10).html(data.nombrecurso);
 // 	                $('td',row).eq(5).html('SI').addClass('text-center');
 	                
 	                // Aquí agregarás el checkbox
-	                $('td', row).eq(10).html(`
+	                $('td', row).eq(11).html(`
 	                    <input type="checkbox" class="row-checkbox" data-id="${data.id}">
 	                `).addClass('text-center');
 
@@ -2990,22 +3527,10 @@ $('#btn_select_all_global').on('click', function () {
 
 
 
-// 			function funcVerCertificado() {
- 
-// 			    if (GDATO_INSCRITO != "") {
-// 			        // Construir la URL para obtener el reporte
-// 			        var urlCertificado = nameEntity_INSCRITO + "/Imprimir_d1/" + GID_INSCRITO;
+	
 
-// 			        // Establecer el src del iframe
-// 			        $("#frameReportes").attr("src", urlCertificado);
 
-// 			        // Mostrar el modal
-// 			        $("#reportes").modal('show');
-// 			    } else {
-// 			        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL CERTIFICADO!");
-// 			    }
 
-// 			} 
 
 			function funcVerCertificado() {
 			    if (GDATO_INSCRITO != "") {
@@ -3162,9 +3687,1229 @@ $('#btn_select_all_global').on('click', function () {
 			        }
 			    });
 			}
+			
+			//informacion de certificado
 
+			function funcVerComprobante() {
+			    if (GDATO_INSCRITO !== "") {
+			    	$('#formulario4')[0].reset();
+			    	console.log("GID_INSCRITO:",GID_INSCRITO)
+			    	$.get(nameEntity0dt + '/getCertificiado/' + GID_INSCRITO, function (data) {
+			    		console.log("certificado:",data)
+			    		mostrarEventoCertificado(data);
+			    		
+			    		mostrarDatosCertificadoInscrito(data);
+			    	})
+			    	 $('#modalInscritoComprobante').modal('show');
+			    } else {
+			        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL COMPROBANTE!");
+			    }
+			}
+
+			function mostrarDatosCertificadoInscrito(cert) {
+					//aqui ponemos los datos del estudiante si se registro como participante
+				var participante=cert.participante
+				var persona=cert.participante.persona
+				console.log("persona:",persona)
+				console.log("participante:",participante)
+
+				
+				if (participante!=null) {
+					//********aqui cargamos la imagen del participante, si en caso tiene registrado
+					$('#formulario4').find('input[name="archivoimgparticipante"]').val('')
+					$('#formulario4').find('input[name="archivoimgparticipante"]').fileinput('destroy');
+					
+					
+					
+					if (participante.imagen!=null) {
+			    		//********aqui cargamos la imagen del participante, si en caso tiene registrado
+			    		$('#formulario4').find('input[name="archivoimgparticipante"]').val('')
+						$('#formulario4').find('input[name="archivoimgparticipante"]').fileinput('destroy');
+			    		
+			    		var xhr1 = new XMLHttpRequest();
+			  			let nombrelogodefecto = participante.imagen; // Nombre del archivo que deseas cargar
+//			           			console.log("nombrelogodefecto:", nombrelogodefecto);
+			  			xhr1.open("GET", nameEntityPdt + "/logourl/" + nombrelogodefecto, true);
+			  			xhr1.responseType = 'blob'; // Cambia el tipo de respuesta a blob
+			    		
+					    xhr1.onload = function() {
+					        var blob = xhr1.response;
+					        var file = new File([blob], nombrelogodefecto);
+					        var inputFile = document.getElementById('archivoimgparticipante');
+					        var fileList = new DataTransfer();
+					        fileList.items.add(file);
+					        inputFile.files = fileList.files;
+					        inputFile.title = nombrelogodefecto;
+					    };
+					    xhr1.send();
+						$('#formulario4').find('input[name="archivoimgparticipante"]').fileinput({
+						  	language:'es',
+						    showUpload: false, // Ocultar el botÃ³n de carga
+						    showRemove: true, 
+			                showCaption: true,
+			                showCancel: true,
+			                allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+			                elErrorContainer: '#errorBlock', // (Opcional) Contenedor para mostrar mensajes de error
+//				 		  	 ,maxImageWidth: 300 // Ancho mï¿½ximo de la imagen previa en pï¿½xeles
+//				 		     ,maxImageHeight: 300 
+						     	initialPreview: [
+				                `<img src="${nameEntityPdt}/logourl/${nombrelogodefecto}" class="file-preview-image" alt="Vista previa" title="${nombrelogodefecto}">`
+				            ],
+				            initialPreviewConfig: [
+				                {
+				                    caption: nombrelogodefecto, // Texto que aparecerá debajo de la imagen en la vista previa
+				                    width: '200px', // Ancho de la imagen en la vista previa
+				                    url: '/', // URL opcional para el enlace de eliminación (en este caso, se establece como '#')
+				                    key: 1 // Clave única para el elemento de vista previa
+				                }
+				            ],
+				            fileActionSettings: {
+				                removeIcon: '', // Vaciar el icono del botón de eliminar
+				                removeClass: 'hide-remove', // Aplicar una clase para ocultar el botón de eliminar
+				                removeTitle: '', // Vaciar el título del botón de eliminar
+				            },
+				            initialCaption: nombrelogodefecto // Para poner el nombre en la caja del file
+
+						});
+			  			//*********************fin de agregar logo
+					}else{
+						logouserdefault()
+					}
+				
+				
+				}else{
+					logouserdefault()
+				}
+				
+					
+				$('#formulario4').find('input[name="idper"]').val(persona.id);
+				$('#formulario4').find('input[name="idpartact"]').val(participante.id);
+				$('#formulario4').find('input[name="idpart"]').val(participante.id);
+				$('#formulario4').find('input[name="ci"]').val(persona.ci);
+					document.querySelectorAll("#exp > option").forEach(function(option) {
+					    if (option.value == persona.exp) {
+					        option.selected = true;
+					    }
+					});
+					$('#formulario4').find('input[name="nombres"]').val(persona.nombres);
+					$('#formulario4').find('input[name="apellidos"]').val(persona.apellidos);
+					
+					if (persona.genero != null) {
+					    const generoSelect = document.querySelector('#formulario4 select[name="genero"]');
+					    if (generoSelect) {
+					        generoSelect.querySelectorAll('option').forEach(function(option) {
+				        	 	if (option.value == persona.genero) {
+							        option.selected = true;
+							    }
+					        });
+					    }
+					}
+					
+				
+					if(persona.fechanacimiento!=null){
+						$('#formulario4').find('input[name="fechanacimiento"]').val(persona.fechanacimiento);
+					}
+					if(persona.edad!=null){
+						$('#formulario4').find('input[name="edad"]').val(persona.edad);
+					}
+					$('#formulario4').find('input[name="celular"]').val(persona.celular);
+					//grado academico
+					// grado académico
+					if (participante.gradoacademico != null) {
+					    const gradoSelect = document.querySelector("#formulario4 select[name='gradoacademico']");
+					    if (gradoSelect) {
+					        gradoSelect.querySelectorAll("option").forEach(function(option) {
+					            if (option.value == participante.gradoacademico.id) {
+					                option.selected = true;
+					            }
+					        });
+					    }
+					}
+
+					// profesión
+					if (participante.profesion != null) {
+					    const profesionSelect = document.querySelector("#formulario4 select[name='profesion']");
+					    if (profesionSelect) {
+					        profesionSelect.querySelectorAll("option").forEach(function(option) {
+					            if (option.value == participante.profesion.id) {
+					                option.selected = true;
+					            }
+					        });
+					    }
+					}
+
+					
+					$('#formulario4').find('input[name="email"]').val(persona.email);
+					
+					//ciudad
+					const departamentoSelect = document.querySelector("#formulario4 select[name='departamento']");
+					if (departamentoSelect && participante.departamento != null) {
+					    departamentoSelect.querySelectorAll("option").forEach(function(option) {
+					        if (option.value == participante.departamento.id) {
+					            option.selected = true;
+					        }
+					    });
+					}
+
+					
+					if (participante.provincia != null) {
+					    var provinciaSeleccionada = participante.provincia.id;
+					    $.get(nameEntity4dt + '/provincias/' + participante.departamento.id, function(provincias) {
+					        let $provincia = $("#formulario4 #provincia");
+					        $provincia.empty().append('<option value="">Seleccione una provincia</option>');
+					        provincias.forEach(function(provincia) {
+					            let selected = provincia.id === provinciaSeleccionada ? 'selected' : '';
+					            $provincia.append(`<option value="${provincia.id}" ${selected}>${provincia.nombre}</option>`);
+					        });
+					    });
+					} else {
+					    $("#formulario4 #provincia").empty().append('<option value="">Seleccionar</option>');
+					}
+					
+//			 		if(participante.localidad!=null){
+//			 			$('#formulario4').find('input[name="localidad"]').val(participante.localidad);
+//			 		}
+//			 		$('#formulario4').find('textarea[name="direccion"]').val(persona.direccion);
+					if (cert.tipocertificado != null) {
+					    const generoSelect = document.querySelector('#formulario4 select[name="tipocertificado"]');
+					    if (generoSelect) {
+					        generoSelect.querySelectorAll('option').forEach(function(option) {
+				        	 	if (option.value == cert.tipocertificado) {
+							        option.selected = true;
+							    }
+					        });
+					    }
+					}
+					//inscrito participante por el evento
+					if (cert.evento != null && cert.participante!=null) {
+					    
+					    $.get(nameEntityIdt + '/getInscritoByIdEventoByIdPart/' + cert.evento.id+"/"+cert.participante.id, function(inscrito) {
+					     	console.log("inscrito:",inscrito)
+					     	
+					     	$('#formulario4').find('input[name="idinscrito"]').val(inscrito.id);
+					     	$('#formulario4').find('input[name="inscrito"]').val(inscrito.id);
+					     	
+					     	if (inscrito.imagen!=null) {
+					    		//********aqui cargamos la imagen del participante, si en caso tiene registrado
+					    		$('#formulario4').find('input[name="archivoimgpago"]').val('')
+								$('#formulario4').find('input[name="archivoimgpago"]').fileinput('destroy');
+					    		
+					    		var xhr1 = new XMLHttpRequest();
+					  			let nombrelogodefecto = inscrito.imagen; // Nombre del archivo que deseas cargar
+					//           			console.log("nombrelogodefecto:", nombrelogodefecto);
+					  			xhr1.open("GET", nameEntityIdt + "/logourl/" + nombrelogodefecto, true);
+					  			xhr1.responseType = 'blob'; // Cambia el tipo de respuesta a blob
+					    		
+							    xhr1.onload = function() {
+							        var blob = xhr1.response;
+							        var file = new File([blob], nombrelogodefecto);
+							        var inputFile = document.getElementById('archivoimgpago');
+							        var fileList = new DataTransfer();
+							        fileList.items.add(file);
+							        inputFile.files = fileList.files;
+							        inputFile.title = nombrelogodefecto;
+							    };
+							    xhr1.send();
+								$('#formulario4').find('input[name="archivoimgpago"]').fileinput({
+								  	language:'es',
+								    showUpload: false, // Ocultar el botÃ³n de carga
+								    showRemove: true, 
+					                showCaption: true,
+					                showCancel: true,
+					                allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+					                elErrorContainer: '#errorBlock', // (Opcional) Contenedor para mostrar mensajes de error
+					//	 		  	 ,maxImageWidth: 300 // Ancho mï¿½ximo de la imagen previa en pï¿½xeles
+					//	 		     ,maxImageHeight: 300 
+								     	initialPreview: [
+						                `<img src="${nameEntityIdt}/logourl/${nombrelogodefecto}" class="file-preview-image" alt="Vista previa" title="${nombrelogodefecto}">`
+						            ],
+						            initialPreviewConfig: [
+						                {
+						                    caption: nombrelogodefecto, // Texto que aparecerá debajo de la imagen en la vista previa
+						                    width: '200px', // Ancho de la imagen en la vista previa
+						                    url: '/', // URL opcional para el enlace de eliminación (en este caso, se establece como '#')
+						                    key: 1 // Clave única para el elemento de vista previa
+						                }
+						            ],
+						            fileActionSettings: {
+						                removeIcon: '', // Vaciar el icono del botón de eliminar
+						                removeClass: 'hide-remove', // Aplicar una clase para ocultar el botón de eliminar
+						                removeTitle: '', // Vaciar el título del botón de eliminar
+						            },
+						            initialCaption: nombrelogodefecto // Para poner el nombre en la caja del file
+					
+								});
+					  			//*********************fin de agregar logo
+							}else{
+								logouserdefaultPago()
+							}
+					     	
+					    });
+					}
+				
+			}
+			function mostrarEventoCertificado(cert) {
+				//cargando el evento con sus cursos respectivos
+				
+//			 	let codigoeventoencript=document.getElementById("codigoeventoencript").value;
+//				console.log("codigoeventoencript:",codigoeventoencript)
+
+				$.get(nameEntity5dt + '/findByCodeEncrypt/' + cert.evento.codigoevento, function (data) {
+					console.log("Evento_data_by_crypt:",data);
+					GID_EVENTOdt=data.id;
+					$('#formulario4').find('input[name="idevento"]').val(data.id);
+					
+					let xcant=1;
+					let xprec=data.precio;
+					$('#formulario4').find('input[name="cantidad"]').val(xcant);
+					$('#formulario4').find('input[name="precio"]').val(xprec);
+					let xsubt= xcant*xprec;
+					$('#formulario4').find('input[name="subtotal"]').val(xsubt);
+					$('#formulario4').find('input[name="evento"]').val(data.id);
+					
+				//		const body = document.querySelector('body');
+				//		const selectElement = body.querySelector('#select-anios');
+				//		const isGestion = selectElement.options[selectElement.selectedIndex].textContent;
+				//		const selectedValue = selectElement.value;
+					$('#formulario4').find('input[name="anio"]').val(data.anio.id);
+					
+					
+					
+					
+				    $('#formulario4').find('.evento_title').html(data.detalle);
+				    $('#formulario4').find('.evento_f_inicio').html(data.fechainicial);
+				    $('#formulario4').find('.evento_f_fin').html(data.fechafinal);
+				    $('#formulario4').find('.evento_hora').html(data.hora);
+				    let xmodalidad="";
+				    if (data.modalidad=="p") {
+				    	xmodalidad="PRESENCIAL"
+					} if(data.modalidad=="sm"){
+						xmodalidad="SEMI PRESENCIAL"
+					}else {
+						xmodalidad="VIRTUAL"
+					}
+					$('#formulario4').find('.evento_modalidad').html(xmodalidad);
+					
+				    let xpago="";
+				    if (data.tipo=="p") {
+				    	xpago="REQUIERE INVERSIÓN"
+					}else {
+						xpago="INGRESO GRATUITO"
+					}
+					$('#formulario4').find('.evento_tipo').html(xpago);
+					$('#formulario4').find('.evento_precio').html(data.precio);
+					
+				    let xcertificado="";
+				    if (parseInt(data.concertificado)==1) {
+				    	xcertificado="SI"
+					}else {
+						xcertificado="NO"
+					}
+				    $('#formulario4').find('.evento_certificado').html(xcertificado);
+				    
+				    let xevaluacion="";
+				    if (parseInt(data.conevaluacion)==1) {
+				    	xevaluacion="SI"
+					}else {
+						xevaluacion="NO"
+					}
+				//     $('#formulario4').find('.evento_evaluacion').html(xevaluacion);
+				    
+				    
+				    $('#formulario4').find('.evento_lugarevento').html(data.lugarevento);
+				    
+				    
+					//mostrando afiche del evento
+					
+					$('#formulario4').find('.evento_afiche_img').html('')
+					$('#formulario4').find('.evento_afiche_img').html(`
+				
+				
+							<a href="${nameEntity5dt}/afiche/${data.imagen}" th:href="@{${nameEntity5dt}/afiche/${data.imagen}}" data-fancybox="">
+							<img src="${nameEntity5dt}/afiche/${data.imagen}" th:src="@{${nameEntity5dt}/afiche/${data.imagen}}" alt="" class="img-fluid img-thumbnail rounded" style="width: 100%;height: 300px;">	
+						</a>
+						`);
+					
+					
+					$('#formulario4').find('.evento_form_register_link').html('')
+					$('#formulario4').find('.evento_form_register_link').html(`
+						<a class="evento_form_register" 
+						   href="/evento/code/j2aj10jZNHNYtJ2lCHZCynULb0RilaY58ahxxBYXCjWrDZylI3oaiaVeedsS" 
+						   onclick="mostrarevento(event, this.href)"> 
+						   <i class="fa fa-id-card-o " aria-hidden="true"></i> 
+						   <span class="evento_form_text">FORMULARIO DE REGISTRO</span>
+						</a>
+					
+					`);
+					
+					$('#formulario4').find('.evento_group_what_link').html('')
+					$('#formulario4').find('.evento_group_what_link').html(`
+						<a class="evento_group_what" 
+						   href="${data.linkgrupo}" 
+						   onclick="mostrargrupowhat(event, this.href)">
+						   <i class="fa fa-whatsapp" aria-hidden="true"></i> 
+						   <span class="evento_what_text">GRUPO DE WHATSAPP</span>
+						</a>
+				
+					`);
+				//		$('#formulario42').find('.evento_content_cursos').html('')
+					
+					// Ejecutar la función
+					$('#formulario4').find('.evento_content_metodospagos').empty();
+					$('#formulario4').find('.evento_metodospagos').empty();
+					if (parseInt(data.metodopagosino)==1 && data.tipo=="p") {
+						$('#formulario4').find('.evento_metodospagos').html(`
+								
+								<div class="evento_metodospagos_title" style="padding: 2px;">Metodos de Pago</div>
+								<div class="evento_content_metodospagos" style="padding: 2px;"></div>
+								`);
+						const arraymetodospagos = data.metodopagos;
+						for (let index = 0; index < arraymetodospagos.length; index++) {
+							const mp = arraymetodospagos[index];
+							$('#formulario4').find('.evento_content_metodospagos').append(`
+								<div class="card_evento_metodopago">
+									<div class="card_evento_metodopago_img">
+					  					<a href="${nameEntity7dt}/logo_mp/${mp.imagen}" th:href="@{${nameEntity7dt}/logo_mp/${mp.imagen}}" data-fancybox="">
+											<img src="${nameEntity7dt}/logo_mp/${mp.imagen}" th:src="@{${nameEntity7dt}/logo_mp/${mp.imagen}}" alt="" class="img-fluid img-thumbnail " style="">	
+										</a>
+				
+					                </div>
+				                </div>
+							`);
+						}
+					}else{
+						$('#formulario4').find('.evento_comprobantepago').empty();
+						$('#formulario4').find('.evento_metodospagos').empty();
+						
+						
+					}
+					
+					
+				//		$('#formulario4').find('.evento_content_cursos').html('')
+					
+					// Ejecutar la función
+					renderEventDetails(data);
+					
+					function renderEventDetails(data) {
+					    // Limpiar el contenedor antes de agregar contenido
+					    $('#formulario4').find('.evento_content_cursos').empty();
+				
+					    // Recorrer el array de cursos de manera síncrona
+					    const eventodetalle = data.eventodetalle; // Supongo que es un array
+					    for (let index = 0; index < eventodetalle.length; index++) {
+					        const eventocurso = eventodetalle[index];
+//			 		        console.log(index);
+//			 		        console.log(`${eventocurso.id}`);
+				
+					        let margen_arriba = "mt-1";
+					        if (index === 0) {
+					            margen_arriba = "";
+					        }
+					        let xnivel=""
+					        if (eventocurso.curso.nivel=="b") {
+					        	xnivel="BASICO"
+							}if((eventocurso.curso.nivel=="i")){
+								xnivel="INTERMEDIO"
+							}else {
+								xnivel="AVANZADO"
+							}
+							let gradoabreviaruta=eventocurso.expositor.gradoacademico.abreviatura;
+							gradoabreviaruta=gradoabreviaruta.trim()
+//			 				console.log("abrevia:",gradoabreviaruta)
+					        let xgradoabre = "";
+					        if (gradoabreviaruta!="") {
+//			 		        	console.log("abre1:",gradoabreviaruta)
+					        	xgradoabre = eventocurso.expositor.gradoacademico.abreviatura+".";
+					        }else if( gradoabreviaruta== "" || gradoabreviaruta != " "){
+					        	console.log("abre2:",gradoabreviaruta)
+					        	xgradoabre=""
+					        }
+				
+					        // Agregar contenido al DOM de forma síncrona
+					        $('#formulario4').find('.evento_content_cursos').append(`
+					            <div class="card_evento_curso ${margen_arriba}">
+					                <div class="card_evento_curso_img_expositor">
+					  					<a href="${nameEntity6dt}/logo_expositor/${eventocurso.expositor.imagen}" th:href="@{${nameEntity6dt}/logo_expositor/${eventocurso.expositor.imagen}}" data-fancybox="">
+											<img src="${nameEntity6dt}/logo_expositor/${eventocurso.expositor.imagen}" th:src="@{${nameEntity6dt}/logo_expositor/${eventocurso.expositor.imagen}}" alt="" class="img-fluid img-thumbnail " style="">	
+										</a>
+				
+					                </div>
+					                <div class="card_evento_curso_contenido">
+					                    <div class="row mb-1">
+					                        <div class="col-md-6">
+					                            <b>Categoria: </b><span class="card_evento_curso_txt_categoria">${eventocurso.categoria || "Auditoria"}</span>
+					                        </div>
+					                        <div class="col-md-6">
+					                            <b>Nivel: </b><span class="card_evento_curso_txt_nivel">${xnivel || "Básico"}</span>
+					                        </div>
+					                    </div>
+					                    <div class="row">
+					                        <div class="col-md-12">
+					                            <b><span class="card_evento_curso_txt_nombre_curso">${eventocurso.curso.nombrecurso || "Curso Desconocido"}</span></b>
+					                        </div>
+					                    </div>
+										<div class="row ">
+											<div class="col-md-12">
+												<b>Fecha: </b><span
+													class="card_evento_curso_txt_fechacurso">${eventocurso.fechacurso || "yyyy-mm-dd"}</span>
+											</div>
+				
+										</div>
+					                    <div class="row ">
+					                        <div class="col-md-12">
+					                            <b>De Horas: </b><span class="card_evento_curso_txt_hora_inicial">${eventocurso.horainicio || "12:00"}</span> - 
+					                                            <span class="card_evento_curso_txt_hora_final">${eventocurso.horafin || "14:00"}</span>
+					                        </div>
+					                    </div>
+										<div class="row mb-1">
+											<div class="col-md-12">
+												<b>En: </b><span
+													class="card_evento_curso_txt_lugarcurso">${eventocurso.lugarcurso || "Lugar de Curso"}</span>
+											</div>
+				
+										</div>
+					                    <div class="row">
+					                        <div class="col-md-12">
+					                            <b>Por: </b><span class="card_evento_curso_txt_gradoacademico">${xgradoabre  || ""}</span> <span class="card_evento_curso_txt_expositor">${eventocurso.expositor.persona.nombres || "Nombres"} ${eventocurso.expositor.persona.apellidos || "Apellidos"}</span>
+					                        </div>
+					                    </div>
+					                    <div class="row">
+					                        <div class="col-md-12">
+					                            <b><span class="card_evento_curso_txt_rubro">${eventocurso.expositor.rubro || "Rubro del expositor"}</span></b>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+					        `);
+					    }
+					}
+				
+				}, 'json');
+			}
+			
+			
 
 
 	</script>
+	
+	<script type="text/javascript">
+		var nameEntityIdt="../../RestInscritos"
+		var nameEntityPdt="../../RestParticipantes"
+		var nameEntity0dt="../../RestCertificadosCursos"
+		var nameEntity1dt="../../RestGradosAcademicos"
+		var nameEntity2dt="../../RestProfesiones" 
+		var nameEntity3dt="../../RestDepartamentos"
+		var nameEntity4dt="../../RestProvincias"
+		var nameEntity5dt="../../RestEventos"
+		var nameEntity6dt="../../RestExpositores"
+		var nameEntity7dt="../../RestMetodosPagos"
+
+		
+		var GID_EVENTOdt=""
+		
+		var GESTADODET='';
+		
+
+		$('#formulario4').find('input[name="archivoimgparticipante"]').fileinput({
+		  	language:'es',
+		    showUpload: false, // Ocultar el botÃ³n de carga
+		    showRemove: true, 
+	        showCaption: true,
+	        showCancel: true,
+	        allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+	        elErrorContainer: '#errorBlock' // (Opcional) Contenedor para mostrar mensajes de error
+		});
+		
+		
+		$('#formulario4').find('input[name="archivoimgpago"]').fileinput({
+		  	language:'es',
+		    showUpload: false, // Ocultar el botÃ³n de carga
+		    showRemove: true, 
+	        showCaption: true,
+	        showCancel: true,
+	        allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+	        elErrorContainer: '#errorBlock' // (Opcional) Contenedor para mostrar mensajes de error
+		});
+		logouserdefault();
+		
+		
+		function funtUpdateRowDet(){
+			console.log("pàra actulizar:",GDATO_INSCRITO,GID_INSCRITO)
+			if (GDATO_INSCRITO!="" ) {
+				console.log("GESTADO_INSCRITO:",GESTADO_INSCRITO)
+				updateStatusEntityDet(GESTADO_INSCRITO)//si quiero dar de baja pongo 0
+			}else{
+				alert("!seleccione un registro de la lista de certificados  para cambiar el estado!")
+			}
+		}
+		
+		function updateStatusEntityDet(status) {
+			console.log("GID_INSCRITO:",GID_INSCRITO," STATUS:",status)
+			
+			
+			const swalWithBootstrapButtons = Swal.mixin({
+			  customClass: {
+			    confirmButton: 'btn btn-success',
+			    cancelButton: 'btn btn-danger'
+			  },
+			  buttonsStyling: false
+			})
+			
+			swalWithBootstrapButtons.fire({
+			  title: "¿Estas Seguro de continuar?",   
+              text: "El sistema actualizará el estado del certificado",   
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonText: 'Si, Continuar!',
+			  cancelButtonText: 'No, Cancelar!',
+			  reverseButtons: true
+			}).then((result) => {
+			  if (result.isConfirmed) {
+       				var data= {
+   	          	    	id:GID_INSCRITO,
+   	          	    	codigo:"",
+   	          	    	nombre:"",
+   	          	    	estado:status
+   	          	    }
+       				console.log(JSON.stringify(data))
+   	                $.ajax({
+   	              	   	url:nameEntity0dt+"/updateStatus",
+   	              	    type: "POST",
+
+
+   		                contentType: "application/json",
+   		                dataType:'json',
+   						'data': JSON.stringify(data),
+   	 
+   	                     success:function(res){
+   							console.log('registrado',res)
+//    							removeRowLastTable(res.id)
+   							$('#table').dataTable().fnDraw('page');
+   	                         Swal.fire({
+   	                             title:"Completado",
+   	                             text:"Se ha completado la transaccion exitosamente",
+   	                             icon:"success",
+   	                             timer:700,   
+   	                             showConfirmButton: false 
+   	                         });
+   	                      	GDATO_INSCRITO=""	
+   	                     }
+   	             		 
+   	                 })
+       	                 $('.modal').modal('hide')  
+				  
+
+			  } else if (
+			    /* Read more about handling dismissals below */
+			    result.dismiss === Swal.DismissReason.cancel
+			  ) {
+				    swalWithBootstrapButtons.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+                        text:"Se ha cancelado operacion",
+                        timer:800,
+                        showCancelButton:false,
+                     	showConfirmButton:false
+				    })
+			  }
+			})
+
+			
+
+		}
+		
+		function resetdataformulario(){
+		    // Resetear inputs específicos
+		    $('#formulario4').find('input[name="id"], input[name="idpart"], input[name="idper"], input[name="nombres"], input[name="apellidos"], input[name="fechanacimiento"], input[name="edad"], input[name="celular"], input[name="email"], input[name="localidad"]').val('');
+
+		    // Resetear textarea específico
+		    $('#formulario4').find('textarea[name="direccion"]').val('');
+
+		    // Resetear selects al primer valor
+		    document.querySelector("#formulario4 select[name='exp']").selectedIndex = 0;
+		    document.querySelector("#formulario4 select[name='genero']").selectedIndex = 0;
+		    document.querySelector("#formulario4 select[name='gradoacademico']").selectedIndex = 0;
+		    document.querySelector("#formulario4 select[name='profesion']").selectedIndex = 0;
+		    document.querySelector("#formulario4 select[name='departamento']").selectedIndex = 0;
+		    
+
+		}
+		function resetdataformulario4(){
+		    // Resetear inputs específicos
+		    $('#formulario4').find('input[name="id"], input[name="idpart"], input[name="idper"], input[name="nombres"], input[name="apellidos"], input[name="fechanacimiento"], input[name="edad"], input[name="celular"], input[name="email"], input[name="localidad"]').val('');
+
+		    // Resetear textarea específico
+		    $('#formulario4').find('textarea[name="direccion"]').val('');
+
+		    // Resetear selects al primer valor
+		    document.querySelector("#formulario4 select[name='exp']").selectedIndex = 0;
+		    document.querySelector("#formulario4 select[name='genero']").selectedIndex = 0;
+		    document.querySelector("#formulario4 select[name='gradoacademico']").selectedIndex = 0;
+		    document.querySelector("#formulario4 select[name='profesion']").selectedIndex = 0;
+		    document.querySelector("#formulario4 select[name='departamento']").selectedIndex = 0;
+		    
+// 		    const select = document.querySelector("#formulario4 select[name='provincia']");
+// 		    select.innerHTML = ''; // Elimina todas las opciones
+// 		    const option = document.createElement("option");
+// 		    option.value = '';
+// 		    option.textContent = 'Seleccionar';
+// 		    select.appendChild(option); // Agrega solo una opción
+// 		    select.selectedIndex = 0; // Selecciona esa opción
+		}
+		function logouserdefault(){
+			$('#formulario4').find('input[name="archivoimgparticipante"]').val('')
+			$('#formulario4').find('input[name="archivoimgparticipante"]').fileinput('destroy');
+			$('#formulario4').find('input[name="archivoimgparticipante"]').fileinput({
+			  	language:'es',
+			    showUpload: false, // Ocultar el botÃ³n de carga
+			    showRemove: true, 
+	            showCaption: true,
+	            showCancel: true,
+	            allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+	            elErrorContainer: '#errorBlock' // (Opcional) Contenedor para mostrar mensajes de error
+			});
+			
+		}
+		function logouserdefaultPago(){
+			$('#formulario4').find('input[name="archivoimgpago"]').val('')
+			$('#formulario4').find('input[name="archivoimgpago"]').fileinput('destroy');
+			$('#formulario4').find('input[name="archivoimgpago"]').fileinput({
+			  	language:'es',
+			    showUpload: false, // Ocultar el botÃ³n de carga
+			    showRemove: true, 
+	            showCaption: true,
+	            showCancel: true,
+	            allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+	            elErrorContainer: '#errorBlock' // (Opcional) Contenedor para mostrar mensajes de error
+			});
+			
+		}
+		
+		
+		
+		// Función para calcular la edad a partir de la fecha de nacimiento
+		function calcularEdad(fechaNacimiento) {
+		    var hoy = new Date();
+		    var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+		    var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+		    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+		        edad--;
+		    }
+		    return edad;
+		}
+
+	    $('#formulario4 input[name="fechanacimiento"]').on('input', function() {
+	        var fechaNacimiento = new Date($(this).val()); // Obtener fecha de nacimiento
+	        var edad = calcularEdad(fechaNacimiento); // Calcular la edad
+	        $('#formulario4  #edad').val(edad); // Mostrar la edad en un campo de texto
+	    });
+
+		
+			
+	    $('#formulario4 #departamento').on('change', function() {
+	        var id = $(this).val();
+
+	        $.ajax({
+	            url: nameEntity4dt + '/provincias/' + id,
+	            type: 'GET',
+	            contentType: 'application/json',
+	            success: function(data) {
+	                var $provincia = $('#provincia');
+	                $provincia.empty(); // Limpiar opciones anteriores
+
+	                // Agregar opción por defecto
+	                $provincia.append($('<option>', {
+	                    value: '',
+	                    text: 'Seleccionar'
+	                }));
+
+	                // Agregar nuevas opciones
+	                $.each(data, function(index, item) {
+	                    if (item.estado == 1) {
+	                        $provincia.append($('<option>', {
+	                            value: item.id,
+	                            text: item.nombre
+	                        }));
+	                    }
+	                });
+	            },
+	            error: function(xhr, status, error) {
+	                console.error('Error al traer la lista:', error);
+	            }
+	        });
+	    });
+			
+			var xhr = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+	  		xhr.open('GET', nameEntity1dt );//abre una solicitud GET y hacia la direccion establecida
+	  		xhr.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+	  		xhr.onload = function() {//cuando se complete la solicitud de manera exitosa
+	   		  if (xhr.status === 200) {//se verifica el estado de la respuesta
+	   		    var data = xhr.response;//se asigna la respuesta
+	   		    // Hacer algo con el resultado aqu�
+// 	 		     console.log("GRADOS ACADEMICOS:",data);
+		   		 data.forEach(function(item) {
+		   		    if (item.estado == 1) {
+		   		        var option = document.createElement('option');
+		   		        option.value = item.id;
+		   		        option.textContent = item.nombre;
+//	 	   		        document.getElementById('gradoacademico').appendChild(option);
+		                var select1 = document.querySelector('#formulario4 select[name="gradoacademico"]');
+		                if (select1) {
+		                    select1.appendChild(option);
+		                }
+		   		    }
+		   		});
+	   		  }
+	   		};
+	   		xhr.send();
+			
+			var xhr1 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+	  		xhr1.open('GET', nameEntity2dt );//abre una solicitud GET y hacia la direccion establecida
+	  		xhr1.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+	  		xhr1.onload = function() {//cuando se complete la solicitud de manera exitosa
+	   		  if (xhr1.status === 200) {//se verifica el estado de la respuesta
+	   		    var data = xhr1.response;//se asigna la respuesta
+	   		    // Hacer algo con el resultado aqu�
+// 	 		     console.log("PROFESIONES:",data);
+		   		 data.forEach(function(item) {
+		   		    if (item.estado == 1) {
+		   		        var option = document.createElement('option');
+		   		        option.value = item.id;
+		   		        option.textContent = item.nombre;
+//	 	   		        document.getElementById('profesion').appendChild(option);
+		                var select2 = document.querySelector('#formulario4 select[name="profesion"]');
+		                if (select2) {
+		                    select2.appendChild(option);
+		                }
+		   		    }
+		   		});
+	   		  }
+	   		};
+	   		xhr1.send();
+	   		
+			var xhr3 = new XMLHttpRequest();//inicializando un objeto para realizar solicitudes HTTP asincronas
+	  		xhr3.open('GET', nameEntity3dt );//abre una solicitud GET y hacia la direccion establecida
+	  		xhr3.responseType = 'json';//el tipo de respuesta que espera desde el servidor
+	  		xhr3.onload = function() {//cuando se complete la solicitud de manera exitosa
+	   		  if (xhr3.status === 200) {//se verifica el estado de la respuesta
+	   		    var data = xhr3.response;//se asigna la respuesta
+	   		    // Hacer algo con el resultado aqu�
+// 	 		     console.log("DEPARTAMENTOS:",data);
+		   		 data.forEach(function(item) {
+		   		    if (item.estado == 1) {
+		   		        var option = document.createElement('option');
+		   		        option.value = item.id;
+		   		        option.textContent = item.nombre;
+//	 	   		        document.getElementById('departamento').appendChild(option);
+		                var select3 = document.querySelector('#formulario4 select[name="departamento"]');
+		                if (select3) {
+		                    select3.appendChild(option);
+		                }
+		   		    }
+		   		});
+	   		  }
+	   		};
+	   		xhr3.send();
+			
+
+
+		
+		
+		
+		function mostrarevento(event, url) {
+			event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+		  	window.open(url, '_blank'); // Abre la URL en una nueva pestaña
+		}
+		function mostrargrupowhat(event, url) {
+		    event.preventDefault(); // Evita que el enlace se abra en la misma pestaña
+	    	window.open(url, '_blank'); // Abre la URL en una nueva pestaña
+		}
+		
+		
+		$("#formulario4").submit(function (event) {
+// 			document.activeElement.blur();
+// 			$("#formulario4 input, #formulario4 select, #formulario4 textarea").blur();
+			event.preventDefault();
+			const swalWithBootstrapButtons = Swal.mixin({
+	        	  customClass: {
+	        	    confirmButton: 'btn btn-success',
+	        	    cancelButton: 'btn btn-danger'
+	        	  },
+	        	  buttonsStyling: false
+	        	})
+	        
+
+	        	
+			swalWithBootstrapButtons.fire({
+				  title: "¿Estas Seguro de continuar?",   
+	              text: "Se registrara su inscripción en el Sistema",   
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonText: 'Si, Continuar!',
+				  cancelButtonText: 'No, Cancelar!',
+				  reverseButtons: true
+				}).then((result) => {
+//						console.log("GOPCION:",GOPCION)
+				  if (result.isConfirmed) {
+//		               	   if(GOPCION=="ADD"){
+						saveEntityForm4()
+//		            	   }else{
+//		            		   updateEntityForm1()
+//		            	   }
+	               	
+				  } else if (
+				    result.dismiss === Swal.DismissReason.cancel
+				  ) {
+				    swalWithBootstrapButtons.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+	                    text:"Se ha cancelado operacion",
+	                    timer:700,
+	                    showCancelButton:false,
+	                 	showConfirmButton:false
+				    })
+				  }
+				  $('.modal').modal('hide')  
+				})
+	        
+				 
+		 	 });
+		
+		async function saveEntityForm4() {
+		    // Mostrar el modal de carga antes de la solicitud
+		
+		    $("#cargando").modal("show");
+
+		    // Iniciar medición del tiempo
+		    var start_time = new Date().getTime();
+
+		    let formData = new FormData(document.getElementById('formulario4'));
+// 		    let selectedOptions = Array.from($('#expositores option:selected'));
+
+		    console.log("formData:", formData);
+
+		    $.ajax({
+		        url: nameEntity0dt + "/guardarcertificadoinscrito",
+		        type: "POST",
+		        contentType: false,
+		        processData: false,
+		        data: formData,
+		        success: function (res) {
+		            // Medir el tiempo de respuesta
+		            var elapsed_time = Math.round((new Date().getTime() - start_time) / 1000);
+		            console.log("Tiempo de carga del servidor:", elapsed_time, "segundos");
+
+		            // Ocultar el modal de carga
+		            $("#cargando").modal("hide");
+
+		            console.log("Registrado:", res);
+		            Swal.fire({
+		                title: "Registrado",
+		                text: "Se ha registrado exitosamente",
+		                icon: "success",
+		                timer: 500,
+		                showConfirmButton: false
+		            }).then(() => {
+		                // Mostrar mensaje de registro y recargar después de unos segundos
+// 		                document.getElementById("registrado").classList.add("mostrar");
+		                $('#table').dataTable().fnDraw('page');
+// 		                setTimeout(() => {
+// 		                    location.reload();
+// 		                }, 3000); // 7 segundos
+		            });
+		        },
+		        error: function (err) {
+		            console.log(err);
+
+		            // Ocultar el modal de carga en caso de error
+		            $("#cargando").modal("hide");
+
+		            Swal.fire({
+		                icon: 'error',
+		                title: "Cancelado",
+		                text: "No se realizó la operación, comuníquese con el administrador del sistema. Gracias",
+		                timer: 500,
+		                showCancelButton: false,
+		                showConfirmButton: false
+		            });
+		        }
+		    });
+		}
+		
+		
+		$("#formulario4 .btn-mas-detalles").click(function (e) {
+//		    	alert('mostrando evento')
+// 			e.preventDefault();
+				$(".contenido-detalles-evento").toggle(100); // 300ms de animación
+		});
+		// Evitar que el campo CI reciba el foco automáticamente
+		window.addEventListener('focus', function () {
+		    if (document.activeElement === $('input[name="ci"]')[0]) {
+		        $('input[name="ci"]').blur(); // Forzar que pierda el foco
+		    }
+		});
+
+
+	    //resetear los datos de validacion
+	  	document.getElementById("ok").classList.add("ocultar");
+	    document.getElementById("error").classList.add("ocultar");
+	    document.getElementById("error-inscrito").classList.add("ocultar");
+			document.getElementById("ok").classList.remove("mostrar");
+	    document.getElementById("error").classList.remove("mostrar");
+	    document.getElementById("error-inscrito").classList.remove("mostrar");
+
+//	     document.getElementById("registrado").classList.add("mostrar");
+	    document.getElementById("registrado").classList.add("ocultar");
+	    
+//			$('#formulario4').find('input[name="ci"]').on('blur mouseout mouseover',function(){
+// 		$('#formulario4').find('input[name="ci"]').on('blur focus',function(){
+		$('#formulario4').find('input[name="ci"]').on('blur',function(){
+				let ci_val=$(this).val()
+				console.log('ci_val:',ci_val)
+
+				if (ci_val!="") {
+				//si no esta vacio los datos del carnet iremos a buscar los datos del estudiante.
+		 		validarParticipante(ci_val);
+			}else{
+				console.log("ci_val:",ci_val)
+// 				console.log("GID_EVENTOdt:",GID_EVENTOdt)
+			}
+
+		})
+			
+
+			
+	function validarParticipante(value) {
+        function asyncSqrt(value,callback){
+            // alert('1')
+            $.ajax({
+                url:nameEntityPdt+"/findParticipante/",
+                data:{
+                    ci:value,
+                },
+                dataType:"json",
+                success:function(resp)
+                {
+                    callback(resp)
+                },  
+                error:function(err){
+                    alert('sin respuesta del servidor')
+                }
+
+            })
+        }
+	        
+	        asyncSqrt(value,function(result){
+	            console.log('resultValidarParticipante: ',result)
+
+	                if(result.persona==null){
+	    	   			// Si no se encontraron datos del carnet ingresado
+	    		        document.getElementById("error").classList.remove("mostrar");
+	    		        document.getElementById("error-inscrito").classList.remove("mostrar");
+	    		        document.getElementById("ok").classList.remove("ocultar");
+	    		        
+	    		        document.getElementById("error-inscrito").classList.add("ocultar");
+	    		        document.getElementById("error").classList.add("ocultar");
+	    		        logouserdefault()//formateamos la imagen del participante
+	    		        resetdataformulario4();
+	                }else{
+
+	                	resetdataformulario4();
+	                	document.getElementById("ok").classList.add("ocultar");
+	                	document.getElementById("error-inscrito").classList.add("ocultar");
+	                	
+	    		        document.getElementById("error").classList.add("mostrar");	
+	                	if(result.participante!=null){
+	                		//aqui ponemos los datos del estudiante si se registro como participante
+	                		console.log("persona2:",result.persona)
+	                		console.log("participante2:",result.participante)
+	                		let persona=result.persona
+	                		let participante=result.participante
+	                		
+	                		if (participante.imagen!=null) {
+		                		//********aqui cargamos la imagen del participante, si en caso tiene registrado
+		                		$('#formulario4').find('input[name="archivoimgparticipante"]').val('')
+			    				$('#formulario4').find('input[name="archivoimgparticipante"]').fileinput('destroy');
+		                		
+		                		var xhr1 = new XMLHttpRequest();
+			          			let nombrelogodefecto = participante.imagen; // Nombre del archivo que deseas cargar
+			//           			console.log("nombrelogodefecto:", nombrelogodefecto);
+			          			xhr1.open("GET", nameEntityPdt + "/logourl/" + nombrelogodefecto, true);
+			          			xhr1.responseType = 'blob'; // Cambia el tipo de respuesta a blob
+		                		
+			    			    xhr1.onload = function() {
+			    			        var blob = xhr1.response;
+			    			        var file = new File([blob], nombrelogodefecto);
+			    			        var inputFile = document.getElementById('archivoimgparticipante');
+			    			        var fileList = new DataTransfer();
+			    			        fileList.items.add(file);
+			    			        inputFile.files = fileList.files;
+			    			        inputFile.title = nombrelogodefecto;
+			    			    };
+			    			    xhr1.send();
+			    				$('#formulario4').find('input[name="archivoimgparticipante"]').fileinput({
+			    				  	language:'es',
+			    				    showUpload: false, // Ocultar el botÃ³n de carga
+			    				    showRemove: true, 
+			                        showCaption: true,
+			                        showCancel: true,
+			                        allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+			                        elErrorContainer: '#errorBlock', // (Opcional) Contenedor para mostrar mensajes de error
+//			    		 		  	 ,maxImageWidth: 300 // Ancho mï¿½ximo de la imagen previa en pï¿½xeles
+//			    		 		     ,maxImageHeight: 300 
+			   				     	initialPreview: [
+						                `<img src="${nameEntityPdt}/logourl/${nombrelogodefecto}" class="file-preview-image" alt="Vista previa" title="${nombrelogodefecto}">`
+						            ],
+						            initialPreviewConfig: [
+						                {
+						                    caption: nombrelogodefecto, // Texto que aparecerá debajo de la imagen en la vista previa
+						                    width: '200px', // Ancho de la imagen en la vista previa
+						                    url: '/', // URL opcional para el enlace de eliminación (en este caso, se establece como '#')
+						                    key: 1 // Clave única para el elemento de vista previa
+						                }
+						            ],
+						            fileActionSettings: {
+						                removeIcon: '', // Vaciar el icono del botón de eliminar
+						                removeClass: 'hide-remove', // Aplicar una clase para ocultar el botón de eliminar
+						                removeTitle: '', // Vaciar el título del botón de eliminar
+						            },
+						            initialCaption: nombrelogodefecto // Para poner el nombre en la caja del file
+
+			    				});
+			          			//*********************fin de agregar logo
+							}else{
+								logouserdefault()
+							}
+	                		
+
+		          			
+	                		$('#formulario4').find('input[name="idper"]').val(persona.id);
+	                		$('#formulario4').find('input[name="idpart"]').val(participante.id);
+	                		$('#formulario4').find('input[name="ci"]').val(persona.ci);
+	             			document.querySelectorAll("#exp > option").forEach(function(option) {
+	               			    if (option.value == persona.exp) {
+	               			        option.selected = true;
+	               			    }
+	               			});
+	              			$('#formulario4').find('input[name="nombres"]').val(persona.nombres);
+	              			$('#formulario4').find('input[name="apellidos"]').val(persona.apellidos);
+	             			
+	              			if(persona.genero!=null){
+	                  			document.querySelectorAll("#genero > option").forEach(function(option) {
+	                   			    if (option.value == persona.genero) {
+	                   			        option.selected = true;
+	                   			    }
+	                   			});
+	             			}
+	              			if(persona.fechanacimiento!=null){
+	              				$('#formulario4').find('input[name="fechanacimiento"]').val(persona.fechanacimiento);
+	              			}
+	              			if(persona.edad!=null){
+	              				$('#formulario4').find('input[name="edad"]').val(persona.edad);
+	              			}
+	              			$('#formulario4').find('input[name="celular"]').val(persona.celular);
+	              			//grado academico
+							// Grado Académico
+							if (participante.gradoacademico != null) {
+							    const selectGrado = document.querySelector("#formulario4 select[name='gradoacademico']");
+							    selectGrado.querySelectorAll("option").forEach(function(option) {
+							        if (option.value == participante.gradoacademico.id) {
+							            option.selected = true;
+							        }
+							    });
+							}
+							
+							// Profesión
+							if (participante.profesion != null) {
+							    const selectProfesion = document.querySelector("#formulario4 select[name='profesion']");
+							    selectProfesion.querySelectorAll("option").forEach(function(option) {
+							        if (option.value == participante.profesion.id) {
+							            option.selected = true;
+							        }
+							    });
+							}
+
+	              			
+	              			$('#formulario4').find('input[name="email"]').val(persona.email);
+	              			//ciudad
+							if (participante.departamento != null) {
+							    const selectDepartamento = document.querySelector("#formulario4 select[name='departamento']");
+							    selectDepartamento.querySelectorAll("option").forEach(function(option) {
+							        if (option.value == participante.departamento.id) {
+							            option.selected = true;
+							        }
+							    });
+							}
+	              			
+	              			
+	              			
+	              			if (participante.provincia != null) {
+	              			    var provinciaSeleccionada = participante.provincia.id;
+	              			    $.get(nameEntity4dt + '/provincias/' + participante.departamento.id, function(provincias) {
+	              			        let $provincia = $("#formulario4 #provincia");
+	              			        $provincia.empty().append('<option value="">Seleccione una provincia</option>');
+	              			        provincias.forEach(function(provincia) {
+	              			            let selected = provincia.id === provinciaSeleccionada ? 'selected' : '';
+	              			            $provincia.append(`<option value="${provincia.id}" ${selected}>${provincia.nombre}</option>`);
+	              			        });
+	              			    });
+	              			} else {
+	              			    $("#formulario4 #provincia").empty().append('<option value="">Seleccionar</option>');
+	              			}
+	              			
+//	              	 		if(participante.localidad!=null){
+//	              	 			$('#formulario4').find('input[name="localidad"]').val(participante.localidad);
+//	              	 		}
+//	              	 		$('#formulario4').find('textarea[name="direccion"]').val(persona.direccion);
+	              			
+	       
+	              			//tipo de certificado el que esta marcado
+	                		
+	                	}else{
+	                		//si solo tenemos datos de la persona, mostramos sus datos personales
+	                		console.log('persona:',result.persona)
+	                		let persona=result.persona
+	                		console.log('participante:',result.participante)
+	                		logouserdefault()
+	                		
+//	                 		$('#formulario4').find('input[name="id"]').val(persona.id);
+	              			$('#formulario4').find('input[name="idper"]').val(persona.id);
+	              			$('#formulario4').find('input[name="ci"]').val(persona.ci);
+	             			document.querySelectorAll("#exp > option").forEach(function(option) {
+	               			    if (option.value == persona.exp) {
+	               			        option.selected = true;
+	               			    }
+	               			});
+	              			$('#formulario4').find('input[name="nombres"]').val(persona.nombres);
+	              			$('#formulario4').find('input[name="apellidos"]').val(persona.apellidos);
+	             			
+	              			if(persona.genero!=null){
+	                  			document.querySelectorAll("#genero > option").forEach(function(option) {
+	                   			    if (option.value == persona.genero) {
+	                   			        option.selected = true;
+	                   			    }
+	                   			});
+	             			}
+	              			if(persona.fechanacimiento!=null){
+	              				$('#formulario4').find('input[name="fechanacimiento"]').val(persona.fechanacimiento);
+	              			}
+	              			if(persona.edad!=null){
+	              				$('#formulario4').find('input[name="edad"]').val(persona.edad);
+	              			}
+	              			$('#formulario4').find('input[name="celular"]').val(persona.celular);
+	              			$('#formulario4').find('input[name="email"]').val(persona.email);
+	              			$('#formulario4').find('textarea[name="direccion"]').val(persona.direccion);
+	              			
+	              			
+	                	}
+	                }
+				
+	            
+
+	            
+	        })
+			}
+	</script>
+	
 </body>
 </html>

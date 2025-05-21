@@ -36,4 +36,6 @@ public interface InscritoDetalleRepository extends GenericRepositoryNormal<Inscr
 	public Integer getTotAll(@Param("search") String search,@Param("estado") Integer estado);
 	*/
 	
+
+	
 } 

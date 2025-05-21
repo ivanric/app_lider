@@ -344,7 +344,7 @@ body {
 			</div>
 
 			<span class="title_complete">Complete
-				el formulario de registro correctamente porfavor</span>
+				el formulario de registro correctamente por favor</span>
 		
 		</div>
 		<div class=" mt-1 ">
@@ -386,7 +386,7 @@ body {
 									de datos, complete o modifique su información!</div>
 								<div id="ok" class="alert alert-success ocultar" role="alert">
 									Completar todos los datos que se indican en el formmulario
-									porfavor..</div>
+									por favor..</div>
 									
 								<div id="error-inscrito" class="alert alert-info ocultar" role="alert">
 									Usted ya está registrado en este evento, gracias..</div>
@@ -394,7 +394,7 @@ body {
 
 							<div class="col-md-8">
 								<div class="">
-									<label for="ci" class=""><b>CEDULA</b></label> <input
+									<label for="ci" class=""><b>NÚMERO DE CANET DE IDENTIDAD</b></label> <input
 										placeholder="Ingrese carnet.. "
 										class="form-control fg-input data-per field_css" name="ci"
 										type="text" required="required" autocomplete="off" tabindex="-1">
@@ -424,7 +424,7 @@ body {
 							</div>
 							<div class="col-md-12">
 								<div class="">
-									<label for="logo" class=""><b>SUBIR SU FOTOGRAFIA
+									<label for="logo" class=""><b>SUBIR SU FOTOGRAFÍA
 											(4X4) PARA SU CERTIFICADO (OPCIONAL)</b></label> <input placeholder="Ingrese logo"
 										class="form-control fg-input data-per field_css"
 										name="archivoimgparticipante" id="archivoimgparticipante"
@@ -454,7 +454,7 @@ body {
 							</div>
 							<div class="col-md-6">
 								<div class="">
-									<label for="genero" class=""><b>GENERO</b></label> <select
+									<label for="genero" class=""><b>GÉNERO</b></label> <select
 										required="required" class="form-select field_css"
 										aria-label=".form-select-sm example" id="genero" name="genero">
 										<option selected value="">Seleccionar</option>
@@ -487,7 +487,7 @@ body {
 							</div>
 							<div class="col-md-6">
 								<div class="">
-									<label for="celular" class=""><b>TELEFONO/CELULAR
+									<label for="celular" class=""><b>TELÉFONO/CELULAR
 											(Con WHATSAPP)</b></label> <input
 										placeholder="Ingresar su nro de celular.."
 										class="form-control fg-input data-per field_css"
@@ -498,7 +498,7 @@ body {
 							<div class="col-md-6">
 								<div class="">
 									<label for="gradoacademico" class=""><b>GRADO
-											ACADEMICO</b></label> <select required="required"
+											ACADÉMICO</b></label> <select required="required"
 										class="form-select field_css"
 										aria-label=".form-select-sm example" id="gradoacademico"
 										name="gradoacademico">
@@ -522,7 +522,7 @@ body {
 
 							<div class="col-md-6">
 								<div class="">
-									<label for="email" class=""><b>CORREO ELECTRONICO
+									<label for="email" class=""><b>CORREO ELECTRÓNICO
 											(GMAIL)</b></label> <input placeholder="Ingrese su correo GMAIL.."
 										class="form-control fg-input data-per field_css" name="email"
 										type="text" required="required">
@@ -560,14 +560,15 @@ body {
 									<label for="exampleFormControlInput1" class=""><b>¿CERTIFICADO FÍSICO Ó DIGITAL?</b></label><br>
 <!-- 									<span>Te informamos que apartir de ahora nuestros certificados cuentan con un codigo QR único -->
 <!-- 										  de autenticidad, por lo que puedes escoger, si deseas tu certificación física o digital.	 -->
-										<span>IMPORTANTE: sólo puede escoger una sóla modalidad de Envío;  bien físico ó bien digital, ten en cuenta que ahora nuestros certificados contienen con un código QR de verificación de autenticidad. 🙌🏾
+										<span>
+											IMPORTANTE: Solo puede escoger una sola modalidad: físico o digital. Ten en cuenta que nuestros certificados contienen un código QR personalizado que valida la autenticidad. 🙌🏻
 										</span>
 									</span>
 									<select
 										required="required" class="form-select field_css"
 										aria-label=".form-select-sm example" id="tipocertificado" name="tipocertificado">
 										<option selected value="">Elige tu certificado</option>
-										<option value="FISICO">FISICO</option>
+										<option value="FÍSICO">FÍSICO</option>
 										<option value="DIGITAL">DIGITAL</option>
 									</select>
 									<div style="" class="certificado">
@@ -594,7 +595,7 @@ body {
 							</div>
 							
 							<div class="col-md-12 content-mas-detalles mt-3">
-								<button class="btn-mas-detalles"><i class="fa fa-angle-double-down" aria-hidden="true"></i> Mas Detalles</button>
+								<button class="btn-mas-detalles"><i class="fa fa-angle-double-down" aria-hidden="true"></i> Más Detalles</button>
 							</div>
 							
 							<div class="mt-1 ">
@@ -774,7 +775,7 @@ body {
 									<div class="mx-auto">
 										<div id="registrado" class="alert alert-success  ocultar"
 											role="alert" style="margin-top: 10px;">Hemos registrado
-											con exito su inscripcion, revise su correo@gmail porfavor..</div>
+											con exito su inscripcion, revise su correo@gmail por favor..</div>
 										<button id="btnGuardar_modal" type="submit"
 											class=" btn_inscribirme" style="">
 											<i class="fa fa-floppy-o" aria-hidden="true" style=""></i>
@@ -1375,16 +1376,19 @@ body {
 		let formSubmitted = false;
 		
 		$("#formulario").submit(function (event) {
-			   // ❌ Si ya fue enviado una vez, no hacer nada
+			
+			event.preventDefault();
+			// ❌ Si ya fue enviado una vez, no hacer nada
 		    if (formSubmitted) {
-		        return;
+		    	  console.warn("Formulario ya fue enviado una vez.");
+		    	return;
 		    }
 			
 
 		    // ⚠️ Desactiva el botón para evitar doble clic
 		    $("#btnGuardar_modal").prop("disabled", true);
 
-			   const swalWithBootstrapButtons = Swal.mixin({
+			const swalWithBootstrapButtons = Swal.mixin({
             	  customClass: {
             	    confirmButton: 'btn btn-success',
             	    cancelButton: 'btn btn-danger'
@@ -1416,9 +1420,12 @@ body {
 // 					console.log("GOPCION:",GOPCION)
 				  if (result.isConfirmed) {
 // 	               	   if(GOPCION=="ADD"){
-						saveEntityForm1()
+						
 						 // ✅ Bloquear más envíos
             			formSubmitted = true;
+						 // Ocultar el modal de confirmación si aplica
+			            $('.modal').modal('hide');
+			            saveEntityForm1()
 // 	            	   }else{
 // 	            		   updateEntityForm1()
 // 	            	   }
@@ -1438,7 +1445,7 @@ body {
 				  $('.modal').modal('hide')  
 				})
             
-				 event.preventDefault();
+				 
 		 	 });
 		
 		async function saveEntityForm1() {
@@ -1637,7 +1644,7 @@ body {
     		        document.getElementById("error").classList.add("ocultar");
     		        setTimeout(() => {
                         location.reload();
-                    }, 5000); // 5000 ms = 5 segundos
+                    }, 10000); // 5000 ms = 5 segundos
                     return;
 				} else {
 	                if(result.persona==null){

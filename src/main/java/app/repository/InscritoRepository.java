@@ -72,4 +72,16 @@ public interface InscritoRepository extends GenericRepositoryNormal<InscritoEnti
 			+ "AND di.fk_evento=:idevento and i.fk_participante=:idpart\r\n"
 			+ "",nativeQuery = true)
 	public InscritoEntity getInscritoByIdEventoByIdPart(@Param("idevento") Integer id1,@Param("idpart") Integer id2);
+
+	
+	@Query(value = "SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END " +
+            "FROM inscrito i " +
+            "JOIN inscritodetalle id ON i.id = id.fk_inscrito " +
+            "WHERE i.fk_participante = :participanteId " +
+            "AND id.fk_evento = :eventoId " +
+            "AND i.estado = 1",
+    nativeQuery = true)
+	public boolean existsByParticipanteIdAndEventoId(
+     @Param("participanteId") Integer participanteId,
+     @Param("eventoId") Integer eventoId);
 } 

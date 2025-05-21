@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import app.entity.ParticipanteEntity;
+import app.entity.PersonaEntity;
 
 
 @Repository 
@@ -39,5 +40,8 @@ public interface ParticipanteRepository extends GenericRepositoryNormal<Particip
 			+ "from participante pt,persona p\r\n"
 			+ "where pt.fk_persona=p.id and (upper(concat(p.ci,'')) = concat('',upper(:search),'')) and pt.estado=1",nativeQuery = true)
 	public ParticipanteEntity getParticipanteByCi(@Param("search") String search);
-	
+	@Query(value="select DISTINCT part.* \r\n"
+			+ "from participante part\r\n"
+			+ "where part.fk_persona=:idper and part.estado=1",nativeQuery = true)
+	public ParticipanteEntity getParticipanteByIdPer(@Param("idper") Integer idper);
 } 

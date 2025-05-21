@@ -150,6 +150,7 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 	
 	@Query(value = "SELECT DISTINCT ct.id,\r\n"
 			+ "ct.nrofolio,\r\n"
+			+ "TO_CHAR(ct.fecharegistro, 'DD/MM/YYYY HH24:MI:SS') AS fecharegistro,\r\n"
 			+ "p.ci,\r\n"
 			+ "concat('',p.nombres,' ',p.apellidos) as nombrecompleto,\r\n"
 			+ "p.email,\r\n"
@@ -397,4 +398,18 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 			+ "i.fk_participante=:idpart \r\n"
 			+ "AND i.fk_evento=:idevent",nativeQuery = true)
 	public List<CertificadoEntity> getCertificados(@Param("idevent") Integer id1,@Param("idpart") Integer id2);
+
+	@Query(value = "SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END " +
+            "FROM certificadocurso c " +
+            "WHERE c.fk_participante = :participanteId " +
+            "AND c.fk_curso = :cursoId " +
+            "AND c.fk_evento = :eventoId " +
+            "AND c.estado = 1",
+	    nativeQuery = true)
+	public boolean existsCertificado(
+	 @Param("participanteId") Integer participanteId,
+	 @Param("cursoId") Integer cursoId,
+	 @Param("eventoId") Integer eventoId
+	);
+
 } 

@@ -64,23 +64,6 @@ td {
 	object-fit: cover;
 }
 
-.btn_select_all {
-	background: #08b8b5;
-	color: white;
-	font-size: 11px;
-	border: 0.5px;
-	padding: 2px 10px;
-	border-radius: 3px;
-}
-
-.btn_select_all_global {
-	background: #d85f03;
-	color: white;
-	font-size: 11px;
-	border: 0.5px;
-	padding: 2px 10px;
-	border-radius: 3px;
-}
 </style>
 </head>
 <body>
@@ -162,7 +145,7 @@ td {
 										</div>
 										<div class="col-md-12">
 											<div class="mb-1">
-												<label for="genero" class=""><b>GENERO</b></label> <select
+												<label for="genero" class=""><b>GÉNERO</b></label> <select
 													required="required" class="form-select field_css"
 													aria-label=".form-select-sm example" id="genero"
 													name="genero">
@@ -204,7 +187,7 @@ td {
 										<div class="col-md-12">
 											<div class="mb-1">
 												<label for="gradoacademico" class=""><b>GRADO
-														ACADEMICO</b></label> <select required="required"
+														ACADÉMICO</b></label> <select required="required"
 													class="form-select field_css"
 													aria-label=".form-select-sm example" id="gradoacademico"
 													name="gradoacademico">
@@ -226,7 +209,7 @@ td {
 										</div>
 										<div class="col-md-12">
 											<div class="mb-1">
-												<label for="celular" class=""><b>TELEFONO/CELULAR
+												<label for="celular" class=""><b>TELÉFONO/CELULAR
 														(Con WHATSAPP)</b></label> <input placeholder="Celular.."
 													class="form-control fg-input data-per field_css"
 													name="celular" type="number" required="required">
@@ -450,7 +433,7 @@ td {
 											name="expositores" multiple="multiple" disabled="disabled">
 
 										</select>
-										<div class="invalid-feedback">PORFAVOR SELECCIONA UNA
+										<div class="invalid-feedback">POR FAVOR SELECCIONA UNA
 											OPCION</div>
 									</div>
 								</div>
@@ -652,14 +635,14 @@ td {
 												role="alert">
 												ENCONTRADO: Complete o actualize sus datos!</div>
 											<div id="ok" class="alert alert-success ocultar" role="alert">
-												NUEVO: Completa los campos porfavor..</div>
+												NUEVO: Completa los campos por favor..</div>
 
 											<div id="error-inscrito" class="alert alert-info ocultar"
 												role="alert">Usted ya está registrado en este evento,gracias..</div>
 										</div>
 										<div class="col-md-8">
 											<div class="">
-												<label for="ci" class=""><b>CEDULA</b></label> <input
+												<label for="ci" class=""><b>NÚMERO DE CARNET DE IDENTIDAD</b></label> <input
 													placeholder="Ingrese carnet.. "
 													class="form-control fg-input data-per field_css" name="ci"
 													type="text" required="required" autocomplete="off"  tabindex="-1">
@@ -688,7 +671,7 @@ td {
 										<div class="col-md-12">
 											<div class="">
 												<label for="logo" class=""><b>SUBIR SU
-														FOTOGRAFIA (4X4) PARA SU CERTIFICADO (OPCIONAL)</b></label> <input
+														FOTOGRAFÍA (4X4) PARA SU CERTIFICADO (OPCIONAL)</b></label> <input
 													placeholder="Ingrese logo"
 													class="form-control fg-input data-per field_css"
 													name="archivoimgparticipante" id="archivoimgparticipante"
@@ -718,7 +701,7 @@ td {
 										</div>
 										<div class="col-md-6">
 											<div class="">
-												<label for="genero" class=""><b>GENERO</b></label> <select
+												<label for="genero" class=""><b>GÉNERO</b></label> <select
 													required="required" class="form-select field_css"
 													aria-label=".form-select-sm example" id="genero"
 													name="genero">
@@ -753,7 +736,7 @@ td {
 										</div>
 										<div class="col-md-6">
 											<div class="">
-												<label for="celular" class=""><b>TELEFONO/CELULAR
+												<label for="celular" class=""><b>TELÉFONO/CELULAR
 														(Con WHATSAPP)</b></label> <input
 													placeholder="Ingresar su nro de celular.."
 													class="form-control fg-input data-per field_css"
@@ -764,7 +747,7 @@ td {
 										<div class="col-md-6">
 											<div class="">
 												<label for="gradoacademico" class=""><b>GRADO
-														ACADEMICO</b></label> <select required="required"
+														ACADÉMICO</b></label> <select required="required"
 													class="form-select field_css"
 													aria-label=".form-select-sm example" id="gradoacademico"
 													name="gradoacademico">
@@ -789,7 +772,7 @@ td {
 										<div class="col-md-6">
 											<div class="">
 												<label for="email" class=""><b>CORREO
-														ELECTRONICO (GMAIL)</b></label> <input
+														ELECTRÓNICO (GMAIL)</b></label> <input
 													placeholder="Ingrese su correo GMAIL.."
 													class="form-control fg-input data-per field_css"
 													name="email" type="text" required="required">
@@ -828,16 +811,18 @@ td {
 														FÍSICO Ó DIGITAL?</b></label><br>
 												<!-- 									<span>Te informamos que apartir de ahora nuestros certificados cuentan con un codigo QR único -->
 												<!-- 										  de autenticidad, por lo que puedes escoger, si deseas tu certificación física o digital.	 -->
-												<span>IMPORTANTE: sólo puede escoger una sóla
-													modalidad de Envío; bien físico ó bien digital, ten en
-													cuenta que ahora nuestros certificados contienen con un
-													código QR de verificación de autenticidad. 🙌🏾 </span> </span> <select
+												<span>
+													IMPORTANTE: Solo puede escoger una sola modalidad: físico o digital. Ten en cuenta que nuestros certificados contienen un código QR personalizado que valida la autenticidad. 🙌🏻
+												
+												</span> 
+												 <select
 													required="required" class="form-select field_css"
 													aria-label=".form-select-sm example" id="tipocertificado"
 													name="tipocertificado">
 													<option selected value="">Elige tu certificado</option>
-													<option value="FISICO">FISICO</option>
+													<option value="FÍSICO">FÍSICO</option>
 													<option value="DIGITAL">DIGITAL</option>
+													<option value="AMBOS">AMBOS</option>
 												</select>
 												<div style="" class="certificado">
 													<span class=""> * En caso de que sea físico se
@@ -870,7 +855,7 @@ td {
 										<div class="col-md-12 content-mas-detalles mt-3">
 											<a class="btn-mas-detalles" type="button">
 												<i class="fa fa-angle-double-down" aria-hidden="true"></i>
-												Mas Detalles
+												Más Detalles
 											</a>
 										</div>
 
@@ -1048,7 +1033,7 @@ td {
 													<div id="registrado" class="alert alert-success  ocultar"
 														role="alert" style="margin-top: 10px;">Hemos
 														registrado con exito su inscripcion, revise su
-														correo@gmail porfavor..</div>
+														correo@gmail por favor..</div>
 													<button id="btnGuardar_modal " type="submit"
 														class=" btn_inscribirme" style="">
 														<i class="fa fa-floppy-o" aria-hidden="true" style=""></i>
@@ -1106,8 +1091,8 @@ td {
 							<div>
 								<span class="opciones_btn_nuevo"></span> <span
 									class="opciones_btn_eliminar"></span> <span
-									class="opciones_btn_habilitar"></span> <span
-									class="opciones_btn_certificado">
+									class="opciones_btn_habilitar"></span> 
+									<span class="opciones_btn_certificado">
 									<button id="btnCertificado"
 										class="btn btn-secondary waves-effect btn-sm "
 										style="margin: 0 2px;" onclick="funcSavePlanillaCertificado()"
@@ -1195,7 +1180,7 @@ td {
 					<input type="text" id="js_filtro_curso_detalle" name=""
 						class="form-control" placeholder="Nombre de curso ..">
 				</div>
-
+				
 				<div class="col-md-3 col-xs-12">
 					<select class="form-select " aria-label=".form-select-sm example"
 						id="seventocurso" name="seventocurso">
@@ -1214,6 +1199,21 @@ td {
 				</div>
 				<div class="col-md-12 col-xs-12"
 					style="text-align: right; margin-bottom: 2px; background: #e9eced; padding: 5px; margin-top: 5px;">
+					
+						
+					<div class="form-check form-check-inline">
+						<input type="radio" class="form-check-input " name="iestadodet"
+							id="activosdet" value="1" autocomplete="off" checked> <label
+							for="activosdet">habilitados</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input type="radio" class="form-check-input" name="iestadodet"
+							id="inactivodet" value="0" autocomplete="off"> <label
+							for="inactivodet">deshabilitados</label>
+					</div>
+					<div class="opciones_btn_eliminardet" style="display: inline-block;"></div>	
+					<div class="opciones_btn_habilitardet" style="display: inline-block;"></div>
+					
 					<button id="btn_select_all" class="btn_select_all">Seleccionar
 						todos de pagina actual</button>
 					<button id="btn_select_all_global" class="btn_select_all_global">Seleccionar
@@ -1490,6 +1490,7 @@ td {
 						GID_PARTICIPANTE_DET=-2
 			            GDATO_INSCRITO=''
 			            GID_INSCRITO=''
+			            GESTADO_INSCRITO=-1
 						GID_CATEGORIA_DET=-1;
 						//fin para resetear la tabla_certificados
 			            
@@ -2892,6 +2893,60 @@ td {
 		var nameEntity_INSCRITO="../RestCertificadosCursos"
 		var nameEntityd2="../RestCategorias"
 		
+		
+		
+		GSEARCH_INSCRITO=$('#js_filtro_curso_detalle').val()
+		GESTADO_INSCRITO=$('input[name="iestadodet"]:checked').val();
+			
+			
+//	 		listarTable()
+		$('#js_filtro_curso_detalle').on('keyup',function(){
+			GSEARCH_INSCRITO=$(this).val()
+
+		})
+			
+	        
+			
+
+	    $('input[name="iestadodet"]').on('change',function(){
+	        	console.log("table certificados")
+	        	GESTADO_INSCRITO=$('input[name="iestadodet"]:checked').val();
+	        	GSEARCH_INSCRITO=$('#js_filtro_curso_detalle').val()
+	        	setButtonCrud2(GESTADO_INSCRITO)
+	        	GDATO="";//para que al momento de eliminar o habilitar se tenga que seleccionar un registro de la tabla
+// 	        	$('#table_certificados').dataTable().fnDraw('page');
+	        	
+	            var dataTable_estado = $.fn.dataTable.fnIsDataTable($('#table_certificados'));
+	            if (dataTable_estado) {
+	                $('#table_certificados').DataTable().ajax.reload();
+	            } else {
+	                console.warn("La tabla 'table_certificados' no está inicializada aún.");
+					DTtable_INSCRITO=''
+					iniciando_table_certificados();
+	            }
+	        	
+	        	
+	        	
+	        })	
+		setButtonCrud2(GESTADO_INSCRITO)
+		function setButtonCrud2(estado) {
+			if (estado==1) {
+				$('.opciones_btn_habilitardet').html("")
+				$('.opciones_btn_eliminardet').html(`<button id="btnEliminarDet" class="btn_del_det" style="margin: 0 2px;" onclick="funtUpdateRowDet()">Deshabilitar</button>`)
+
+// 			    $('.opciones_btn_nuevo').html(`<button id="btnAdicionar" class="btn btn-secondary btn-md waves-effect btn-sm" onclick="funtNewFormModal()" style="margin: 0 2px;">Nuevo</button>`)  
+
+
+			}else{
+// 			    if(ExisteOpcion('habilitar')){
+// 			    	$('.opciones_btn_nuevo').html('')
+			    	$('.opciones_btn_eliminardet').html('')
+			        $('.opciones_btn_habilitardet').html(`<button id="btnHabilitar" class="btn_hab_det" style="margin: 0 2px;" onclick="funtUpdateRowDet()">Habilitar</button>`)  
+// 			    }
+			}
+		}
+		
+		
 		function resetSelectCategoria() {
 			const select_det = document.querySelector('select[name="scategoriacurso"]'); // Buscar el <select> una vez
             if (!select_det) {
@@ -3082,7 +3137,7 @@ td {
 	            "type": "GET",
 	              "url": nameEntity_INSCRITO+""+"/listarbyParticipante",
 	          	"data": function ( d ) {
-	          		 	d.estado = 1
+	          		 	d.estado = GESTADO_INSCRITO
 	                    d.idevento= GID_EVENTO_DET
 // 	                    d.anio=$('body').find('#select-anios option:selected').text();
 	                    d.idanio=GID_ANIO_DET
@@ -4045,6 +4100,9 @@ function mostrarEventoCertificado(cert) {
 
 		
 		var GID_EVENTOdt=""
+		
+		var GESTADODET='';
+		
 
 		$('#formulario4').find('input[name="archivoimgparticipante"]').fileinput({
 		  	language:'es',
@@ -4062,9 +4120,97 @@ function mostrarEventoCertificado(cert) {
 		    showUpload: false, // Ocultar el botÃ³n de carga
 		    showRemove: true, 
 	        showCaption: true,
-	        showCancel: true
+	        showCancel: true,
+	        allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif'], // Solo permitir imágenes
+	        elErrorContainer: '#errorBlock' // (Opcional) Contenedor para mostrar mensajes de error
 		});
 		logouserdefault();
+		
+		
+		function funtUpdateRowDet(){
+			console.log("pàra actulizar:",GDATO_INSCRITO,GID_INSCRITO)
+			if (GDATO_INSCRITO!="" ) {
+				console.log("GESTADO_INSCRITO:",GESTADO_INSCRITO)
+				updateStatusEntityDet(GESTADO_INSCRITO)//si quiero dar de baja pongo 0
+			}else{
+				alert("!seleccione un registro de la lista de certificados  para cambiar el estado!")
+			}
+		}
+		
+		function updateStatusEntityDet(status) {
+			console.log("GID_INSCRITO:",GID_INSCRITO," STATUS:",status)
+			
+			
+			const swalWithBootstrapButtons = Swal.mixin({
+			  customClass: {
+			    confirmButton: 'btn btn-success',
+			    cancelButton: 'btn btn-danger'
+			  },
+			  buttonsStyling: false
+			})
+			
+			swalWithBootstrapButtons.fire({
+			  title: "¿Estas Seguro de continuar?",   
+              text: "El sistema actualizará el estado del certificado",   
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonText: 'Si, Continuar!',
+			  cancelButtonText: 'No, Cancelar!',
+			  reverseButtons: true
+			}).then((result) => {
+			  if (result.isConfirmed) {
+       				var data= {
+   	          	    	id:GID_INSCRITO,
+   	          	    	codigo:"",
+   	          	    	nombre:"",
+   	          	    	estado:status
+   	          	    }
+       				console.log(JSON.stringify(data))
+   	                $.ajax({
+   	              	   	url:nameEntity0dt+"/updateStatus",
+   	              	    type: "POST",
+
+
+   		                contentType: "application/json",
+   		                dataType:'json',
+   						'data': JSON.stringify(data),
+   	 
+   	                     success:function(res){
+   							console.log('registrado',res)
+//    							removeRowLastTable(res.id)
+   							$('#table_certificados').dataTable().fnDraw('page');
+   	                         Swal.fire({
+   	                             title:"Completado",
+   	                             text:"Se ha completado la transaccion exitosamente",
+   	                             icon:"success",
+   	                             timer:700,   
+   	                             showConfirmButton: false 
+   	                         });
+   	                      	GDATO_INSCRITO=""	
+   	                     }
+   	             		 
+   	                 })
+       	                 $('.modal').modal('hide')  
+				  
+
+			  } else if (
+			    /* Read more about handling dismissals below */
+			    result.dismiss === Swal.DismissReason.cancel
+			  ) {
+				    swalWithBootstrapButtons.fire({
+				    	icon:'error',
+				    	title:"Cancelado",
+                        text:"Se ha cancelado operacion",
+                        timer:800,
+                        showCancelButton:false,
+                     	showConfirmButton:false
+				    })
+			  }
+			})
+
+			
+
+		}
 		
 		function resetdataformulario(){
 		    // Resetear inputs específicos
@@ -4320,7 +4466,7 @@ function mostrarEventoCertificado(cert) {
 				  $('.modal').modal('hide')  
 				})
 	        
-				 event.preventDefault();
+// 				 event.preventDefault();
 		 	 });
 		
 		async function saveEntityForm4() {
@@ -4359,7 +4505,7 @@ function mostrarEventoCertificado(cert) {
 		                showConfirmButton: false
 		            }).then(() => {
 		                // Mostrar mensaje de registro y recargar después de unos segundos
-		                document.getElementById("registrado").classList.add("mostrar");
+// 		                document.getElementById("registrado").classList.add("mostrar");
 // 		                setTimeout(() => {
 // 		                    location.reload();
 // 		                }, 3000); // 7 segundos
