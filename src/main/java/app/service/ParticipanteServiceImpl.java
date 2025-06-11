@@ -75,6 +75,8 @@ public class ParticipanteServiceImpl extends GenericServiceImplNormal<Participan
 		// TODO Auto-generated method stub
         try{
         	System.out.println("estado:"+status+" id:"+id);
+        	ParticipanteEntity partm=this.ParticipanteRepository.getById(id);
+        	this.PersonaRepository.updateStatus(1,partm.getPersona().getId());)
         	ParticipanteRepository.updateStatus(status,id);
 
         } catch (Exception e){

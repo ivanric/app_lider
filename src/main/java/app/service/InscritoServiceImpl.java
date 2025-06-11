@@ -345,7 +345,6 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
                 InscritoEntity2 = InscritoRepository.save(InscritoEntity);
 			}
         	
-
          	//agregando certificados
          	int tam= InscritoDTO.getEvento().getEventodetalle().size();
          	for (int i = 0; i < tam; i++) {
@@ -360,48 +359,49 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
              	if (existecertificado) {
             		System.out.println("⚠️ Certificado duplicado: ya existe un certificado para este participante, curso y evento.");
             	}else {
-            		
+            		CertificadoEntity CertificadoEntity=new CertificadoEntity();
+             		CertificadoEntity.setId(this.CertificadoCursoRepository.getIdPrimaryKey());
+             		CertificadoEntity.setCodigo(this.CertificadoCursoRepository.getCodigo());
+             		 // Generar y guardar QR
+//             		String nrofolio_x=InscritoDTO.getEvento().getEventodetalle().get(i).getCurso().getNrodocumento()+"-"+codigox_inscrito+"-"+participanteEntity2.getCodigo();
+             		String nrofolio_x = curso_b.getNrodocumento() + "-" + codigox_inscrito + "-" + participante_b.getCodigo();
+             		System.out.println("nrofolio_x "+ i + ":"+nrofolio_x);
+             		
+             		
+             	// Generar código QR
+                    String codigoDocumento = passwordEncoder.encode(nrofolio_x + "");
+                    codigoDocumento = codigoDocumento.replace("/", "c").replace(".", "a").replace("$", "d");
+                    
+    	            CertificadoEntity.setNrodocumento(codigoDocumento);
+    	            CertificadoEntity.setLinkqr("QRCERT - "+nrofolio_x+ ".png");
+    	            
+    	            InstitucionEntity institucionEntity = InstitucionRepository.findById(1).get();
+    	            String bodyQR = institucionEntity.getHost() + "/certificado/" + codigoDocumento;
+    	            qrCodeGeneratorService.generateQRCode(
+    	            		Constantes.nameFolderQrIncritoCertificado,
+    	            		bodyQR,
+    	            		"QRCERT - "+nrofolio_x
+    	            );
+    			
+    	            CertificadoEntity.setNrofolio(nrofolio_x);
+    	            CertificadoEntity.setParticipante(participanteEntity2);
+    	            CertificadoEntity.setCurso(curso_b);
+    	            CertificadoEntity.setAnio(anio);
+    	            CertificadoEntity.setEstado(1);
+    	            CertificadoEntity.setEvento(InscritoDTO.getEvento());
+    	            CertificadoEntity.setLugarcurso(InscritoDTO.getEvento().getEventodetalle().get(i).getLugarcurso());
+    	            CertificadoEntity.setHorasacademicas(InscritoDTO.getEvento().getEventodetalle().get(i).getHorasacademicas());
+    	            CertificadoEntity.setExpositor(InscritoDTO.getEvento().getEventodetalle().get(i).getExpositor());
+    	            CertificadoEntity.setTipocertificado(InscritoDTO.getTipocertificado());
+    	            CertificadoEntity CertificadoEntity2=this.CertificadoCursoRepository.save(CertificadoEntity);
+    	         // Guardar InscritoEntity final
             	}
          		
-         		CertificadoEntity CertificadoEntity=new CertificadoEntity();
-         		CertificadoEntity.setId(this.CertificadoCursoRepository.getIdPrimaryKey());
-         		CertificadoEntity.setCodigo(this.CertificadoCursoRepository.getCodigo());
-         		 // Generar y guardar QR
-//         		String nrofolio_x=InscritoDTO.getEvento().getEventodetalle().get(i).getCurso().getNrodocumento()+"-"+codigox_inscrito+"-"+participanteEntity2.getCodigo();
-         		String nrofolio_x = curso_b.getNrodocumento() + "-" + codigox_inscrito + "-" + participante_b.getCodigo();
-         		System.out.println("nrofolio_x "+ i + ":"+nrofolio_x);
-         		
-         		
-         	// Generar código QR
-                String codigoDocumento = passwordEncoder.encode(nrofolio_x + "");
-                codigoDocumento = codigoDocumento.replace("/", "c").replace(".", "a").replace("$", "d");
-                
-	            CertificadoEntity.setNrodocumento(codigoDocumento);
-	            CertificadoEntity.setLinkqr("QRCERT - "+nrofolio_x+ ".png");
-	            
-	            InstitucionEntity institucionEntity = InstitucionRepository.findById(1).get();
-	            String bodyQR = institucionEntity.getHost() + "/certificado/" + codigoDocumento;
-	            qrCodeGeneratorService.generateQRCode(
-	            		Constantes.nameFolderQrIncritoCertificado,
-	            		bodyQR,
-	            		"QRCERT - "+nrofolio_x
-	            );
-			
-	            CertificadoEntity.setNrofolio(nrofolio_x);
-	            CertificadoEntity.setParticipante(participanteEntity2);
-	            CertificadoEntity.setCurso(curso_b);
-	            CertificadoEntity.setAnio(anio);
-	            CertificadoEntity.setEstado(1);
-	            CertificadoEntity.setEvento(InscritoDTO.getEvento());
-	            CertificadoEntity.setLugarcurso(InscritoDTO.getEvento().getEventodetalle().get(i).getLugarcurso());
-	            CertificadoEntity.setHorasacademicas(InscritoDTO.getEvento().getEventodetalle().get(i).getHorasacademicas());
-	            CertificadoEntity.setExpositor(InscritoDTO.getEvento().getEventodetalle().get(i).getExpositor());
-	            CertificadoEntity.setTipocertificado(InscritoDTO.getTipocertificado());
-	            CertificadoEntity CertificadoEntity2=this.CertificadoCursoRepository.save(CertificadoEntity);            
+         	            
          	}
 	
 
-        	 // Guardar InscritoEntity final
+        	 
             
             
             //aqui enviamos el mensaje
