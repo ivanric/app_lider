@@ -77,7 +77,7 @@ public class ParticipanteServiceImpl extends GenericServiceImplNormal<Participan
         	System.out.println("estado:"+status+" id:"+id);
         	ParticipanteEntity partm=this.ParticipanteRepository.getById(id);
         	PersonaRepository.updateStatus(1,partm.getPersona().getId());
-//        	this.PersonaRepository.updateStatus(1,partm.getPersona().getId());)
+//        	this.PersonaRepository.updateStatus(1,partm.getPersona().getId());
         	ParticipanteRepository.updateStatus(status,id);
 
         } catch (Exception e){
