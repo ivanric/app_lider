@@ -797,7 +797,7 @@ td {
 													aria-label=".form-select-sm example" id="tipocertificado"
 													name="tipocertificado">
 													<option selected value="">Elige tu certificado</option>
-													<option value="FÍSICO">FÍSICO</option>
+													<option value="FISICO">FISICO</option>
 													<option value="DIGITAL">DIGITAL</option>
 													<option value="AMBOS">AMBOS</option>
 												</select>
@@ -1160,7 +1160,7 @@ td {
 						placeholder="Buscar por nombre o nro. de carnet de identidad..">
 				</div>
 				<div class="col-md-2 col-xs-12">
-					<select class="form-select field_css" aria-label=".form-select-sm example" id="tipocertificadofil" name="tipocertificado">
+					<select class="form-select field_css" aria-label=".form-select-sm example" id="tipocertificadofil" name="tipocertificadofil">
 						<option selected="" value="">Tipo de certificado</option>
 						<option value="FISICO">FISICO</option>
 						<option value="DIGITAL">DIGITAL</option>
@@ -1481,6 +1481,17 @@ td {
 				GID_TIPOCERTIFICADO_DET=idtipo;
 			}
 			$('#table').dataTable().fnDraw('page');
+// 			$('#table').DataTable().ajax.reload();
+// 			console.log("GID_TIPOCERTIFICADO_DET:",GID_TIPOCERTIFICADO_DET)
+//             var dataTable_estado = $.fn.dataTable.fnIsDataTable($('#table'));
+//             console.log("dataTable_estado:",dataTable_estado)
+//             if (dataTable_estado) {
+//                 $('#table').DataTable().ajax.reload();
+//             } else {
+//                 console.warn("La tabla 'table_certificados' no está inicializada aún.");
+// 				DTtable_INSCRITO=''
+// 				iniciando_table_certificados();
+//             }
 		})
 			
 		
