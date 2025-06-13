@@ -242,9 +242,9 @@ public class RestParticipante extends RestControllerGenericNormalImpl<Participan
 		
 		
 		if(this.personaService.getPersonaByCi(ci)!=null){
-			persona=this.personaService.getPersonaByCi(ci);
+			persona=this.personaService.getPersonaByCi(ci).get(0);
 			if (this.participanteService.getParticipanteByCi(ci)!=null) {
-				participante=participanteService.getParticipanteByCi(ci);
+				participante=participanteService.getParticipanteByCi(ci).get(0);
 			}else {
 				participante=null;	
 			}

@@ -12,5 +12,5 @@ public interface PersonaService extends GenericServiceNormal<PersonaEntity,Integ
 	public List<PersonaEntity> findAll(int estado,String search,int length,int start )throws Exception;
 	public void updateStatus(int status,int id) throws Exception;
 	public Integer getTotAll(String search,int estado) throws Exception;
-	public PersonaEntity getPersonaByCi(String search)throws Exception;
+	public List<PersonaEntity> getPersonaByCi(String search)throws Exception;
 }

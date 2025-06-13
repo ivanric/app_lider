@@ -99,11 +99,11 @@ public class PersonaServiceImpl extends GenericServiceImplNormal<PersonaEntity, 
 	}
 
 	@Override
-	public PersonaEntity getPersonaByCi(String  search) throws Exception {
+	public List<PersonaEntity> getPersonaByCi(String  search) throws Exception {
 		PersonaEntity entity= new PersonaEntity();
         try{
-        	entity= personaRepository.getPersonaByCi(search);
-          return entity;
+        	List<PersonaEntity> lista= personaRepository.getPersonaByCi(search);
+          return lista;
       } catch (Exception e){
       		System.out.println(e.getMessage());
 //          throw new Exception(e.getMessage());

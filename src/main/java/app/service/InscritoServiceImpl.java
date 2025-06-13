@@ -151,7 +151,7 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
         	int codigox_inscrito=0;
         	
         	if (InscritoDTO.getIdper()==null) {
-        		PersonaEntity personaExistente  = PersonaRepository.getPersonaByCi(InscritoDTO.getCi());
+        		PersonaEntity personaExistente  = PersonaRepository.getPersonaByCi(InscritoDTO.getCi()).get(0);
         		if (personaExistente!=null) {
 					persona2=personaExistente;
 				}else {
@@ -187,7 +187,7 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
 			}
         	
         	if (InscritoDTO.getIdpart()==null) {
-        		ParticipanteEntity participanteExistente = ParticipanteRepository.getParticipanteByIdPer(persona2.getId());
+        		ParticipanteEntity participanteExistente = ParticipanteRepository.getParticipanteByIdPer(persona2.getId()).get(0);
         		if (participanteExistente != null) {
         		    participanteEntity2 = participanteExistente;
         		} else {
@@ -271,13 +271,15 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
 				}
 				participanteEntity2=this.ParticipanteRepository.save(participantemod);
 			}
-			
+        	System.out.println("registro++");
+			System.out.println("participanteEntity2:"+participanteEntity2.toString());
+			System.out.println("InscritoDTO:"+InscritoDTO.getEvento().toString());
 			
         	boolean existeInscrito = InscritoRepository.existsByParticipanteIdAndEventoId(
         		    participanteEntity2.getId(),
         		    InscritoDTO.getEvento().getId()
         		);
-			
+			System.out.println("**********INSCRITO EXISTE:"+existeInscrito);
         	if (!existeInscrito) {
 
     			List<InscritoDetalleEntity> array_detalleIns=new ArrayList<>();
@@ -430,6 +432,7 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
                 );
             return InscritoEntity2;
         } catch (Exception e){
+        	e.printStackTrace();
             throw new Exception(e.getMessage());
         }
     } 

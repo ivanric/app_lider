@@ -34,8 +34,10 @@ public interface PersonaRepository extends GenericRepositoryNormal<PersonaEntity
 	
 	@Query(value="select DISTINCT per.* \r\n"
 			+ "from persona per\r\n"
-			+ "where (upper(concat(per.ci,'')) = concat('',upper(:search),'')) and per.estado=1",nativeQuery = true)
-	public PersonaEntity getPersonaByCi(@Param("search") String search);
+			+ "where (upper(concat(per.ci,'')) = concat('',upper(:search),'')) "
+			+ "and per.estado=1 "
+			+ "ORDER BY id ASC ",nativeQuery = true)
+	public List<PersonaEntity> getPersonaByCi(@Param("search") String search);
 	
 	
 } 

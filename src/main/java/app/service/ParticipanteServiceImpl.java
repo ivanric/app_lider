@@ -211,11 +211,11 @@ public class ParticipanteServiceImpl extends GenericServiceImplNormal<Participan
 		}
 	}
 	@Override
-	public ParticipanteEntity getParticipanteByCi(String  search) throws Exception {
+	public List<ParticipanteEntity> getParticipanteByCi(String  search) throws Exception {
 		ParticipanteEntity entity= new ParticipanteEntity();
         try{
-        	entity= ParticipanteRepository.getParticipanteByCi(search);
-          return entity;
+        	List<ParticipanteEntity> list= ParticipanteRepository.getParticipanteByCi(search);
+          return list;
       } catch (Exception e){
       		System.out.println(e.getMessage());
 //          throw new Exception(e.getMessage());
