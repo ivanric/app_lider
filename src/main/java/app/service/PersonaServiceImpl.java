@@ -103,6 +103,8 @@ public class PersonaServiceImpl extends GenericServiceImplNormal<PersonaEntity, 
 		PersonaEntity entity= new PersonaEntity();
         try{
         	List<PersonaEntity> lista= personaRepository.getPersonaByCi(search);
+        	System.out.println("******listaperByCi:"+lista.toString());
+        	System.out.println("******listaperByCiSIZE:"+lista.size());
           return lista;
       } catch (Exception e){
       		System.out.println(e.getMessage());

@@ -151,7 +151,11 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
         	int codigox_inscrito=0;
         	
         	if (InscritoDTO.getIdper()==null) {
-        		PersonaEntity personaExistente  = PersonaRepository.getPersonaByCi(InscritoDTO.getCi()).get(0);
+        		PersonaEntity personaExistente  = null;
+        		if (PersonaRepository.getPersonaByCi(InscritoDTO.getCi()).size()!=0) {
+        			personaExistente  = PersonaRepository.getPersonaByCi(InscritoDTO.getCi()).get(0);
+				}
+        		
         		if (personaExistente!=null) {
 					persona2=personaExistente;
 				}else {
@@ -187,7 +191,10 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
 			}
         	
         	if (InscritoDTO.getIdpart()==null) {
-        		ParticipanteEntity participanteExistente = ParticipanteRepository.getParticipanteByIdPer(persona2.getId()).get(0);
+        		ParticipanteEntity participanteExistente = null;
+        		if (ParticipanteRepository.getParticipanteByIdPer(persona2.getId()).size()!=0) {
+        			participanteExistente = ParticipanteRepository.getParticipanteByIdPer(persona2.getId()).get(0);
+				}
         		if (participanteExistente != null) {
         		    participanteEntity2 = participanteExistente;
         		} else {

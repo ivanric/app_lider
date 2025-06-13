@@ -196,11 +196,17 @@ public class RestInscritos extends RestControllerGenericNormalImpl<InscritoEntit
 			mapa.put("inscrito", false);
 		}
 		
-		
+		System.out.println("*************getPersonaByCi:"+this.personaService.getPersonaByCi(ci).size());
 		if(this.personaService.getPersonaByCi(ci)!=null){
-			persona=this.personaService.getPersonaByCi(ci).get(0);
-			if (this.participanteService.getParticipanteByCi(ci)!=null) {
-				participante=participanteService.getParticipanteByCi(ci).get(0);
+			if ( this.personaService.getPersonaByCi(ci).size()!=0) {
+				persona=this.personaService.getPersonaByCi(ci).get(0);
+			}
+			System.out.println("*************getParticipanteByCi:"+this.participanteService.getParticipanteByCi(ci).size());
+			if (this.participanteService.getParticipanteByCi(ci)!=null ) {
+				if (this.participanteService.getParticipanteByCi(ci).size()!=0) {
+					participante=participanteService.getParticipanteByCi(ci).get(0);
+				}
+				
 			}else {
 				participante=null;	
 			}
