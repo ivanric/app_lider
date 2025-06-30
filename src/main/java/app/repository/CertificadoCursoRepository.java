@@ -22,6 +22,9 @@ public interface CertificadoCursoRepository extends GenericRepositoryNormal<Cert
 	@Query(value="SELECT COALESCE(max(codigo),0)+1 as codigo from certificadocurso",nativeQuery = true)
 	public Integer getCodigo();
 	
+	@Query(value="SELECT COALESCE(max(codigocertificado),0)+1 as codigocertificado from certificadocurso where fk_evento=:idevento ",nativeQuery = true)
+	public Integer getCodigoCertificado(@Param("idevento") int idevento);
+	
 	@Query(value = "select DISTINCT ct.* from certificadocurso ct,curso c,eventodetalle ed,evento e,participante pa,persona p,anio a,inscritodetalle idt "
 			+ "where ct.fk_participante=pa.id "
 			+ "and pa.fk_persona=p.id "

@@ -33,7 +33,10 @@ public class CertificadoEntity implements Serializable{
 	private Integer id; 
 	
 	@Column(name = "codigo")
-	private Integer codigo; 	
+	private Integer codigo; 
+	
+	@Column(name = "codigocertificado")
+	private Integer codigocertificado; 
 	
 //	@DateTimeFormat(iso =ISO.DATE_TIME)
 	@DateTimeFormat(iso =ISO.DATE)
@@ -108,13 +111,15 @@ public class CertificadoEntity implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public CertificadoEntity(Integer id, Integer codigo, LocalDateTime fecharegistro, String qr, String linkqr,
-			String nrofolio, String nrodocumento, Integer nota, String lugarcurso, Integer horasacademicas,
-			String tipocertificado, Integer certificadoenviado, ParticipanteEntity participante, CursoEntity curso,
-			ExpositorEntity expositor, EventoEntity evento, AnioEntity anio, Integer estado) {
+	public CertificadoEntity(Integer id, Integer codigo, Integer codigocertificado, LocalDateTime fecharegistro,
+			String qr, String linkqr, String nrofolio, String nrodocumento, Integer nota, String lugarcurso,
+			Integer horasacademicas, String tipocertificado, Integer certificadoenviado,
+			ParticipanteEntity participante, CursoEntity curso, ExpositorEntity expositor, EventoEntity evento,
+			AnioEntity anio, Integer estado) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
+		this.codigocertificado = codigocertificado;
 		this.fecharegistro = fecharegistro;
 		this.qr = qr;
 		this.linkqr = linkqr;
@@ -147,6 +152,14 @@ public class CertificadoEntity implements Serializable{
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+
+	public Integer getCodigocertificado() {
+		return codigocertificado;
+	}
+
+	public void setCodigocertificado(Integer codigocertificado) {
+		this.codigocertificado = codigocertificado;
 	}
 
 	public LocalDateTime getFecharegistro() {
@@ -277,18 +290,20 @@ public class CertificadoEntity implements Serializable{
 		this.estado = estado;
 	}
 
-	@Override
-	public String toString() {
-		return "CertificadoEntity [id=" + id + ", codigo=" + codigo + ", fecharegistro=" + fecharegistro + ", qr=" + qr
-				+ ", linkqr=" + linkqr + ", nrofolio=" + nrofolio + ", nrodocumento=" + nrodocumento + ", nota=" + nota
-				+ ", lugarcurso=" + lugarcurso + ", horasacademicas=" + horasacademicas + ", tipocertificado="
-				+ tipocertificado + ", certificadoenviado=" + certificadoenviado + ", participante=" + participante
-				+ ", curso=" + curso + ", expositor=" + expositor + ", evento=" + evento + ", anio=" + anio
-				+ ", estado=" + estado + "]";
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "CertificadoEntity [id=" + id + ", codigo=" + codigo + ", codigocertificado=" + codigocertificado
+				+ ", fecharegistro=" + fecharegistro + ", qr=" + qr + ", linkqr=" + linkqr + ", nrofolio=" + nrofolio
+				+ ", nrodocumento=" + nrodocumento + ", nota=" + nota + ", lugarcurso=" + lugarcurso
+				+ ", horasacademicas=" + horasacademicas + ", tipocertificado=" + tipocertificado
+				+ ", certificadoenviado=" + certificadoenviado + ", participante=" + participante + ", curso=" + curso
+				+ ", expositor=" + expositor + ", evento=" + evento + ", anio=" + anio + ", estado=" + estado + "]";
+	}
+
 	
 	
 }

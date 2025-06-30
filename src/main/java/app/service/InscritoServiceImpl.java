@@ -356,6 +356,8 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
         	
          	//agregando certificados
          	int tam= InscritoDTO.getEvento().getEventodetalle().size();
+         	int codigocertificado=this.CertificadoCursoRepository.getCodigoCertificado(InscritoDTO.getEvento().getId());
+     		
          	for (int i = 0; i < tam; i++) {
          		// Datos clave para validar duplicidad
          		ParticipanteEntity participante_b = participanteEntity2;
@@ -371,13 +373,16 @@ public class InscritoServiceImpl extends GenericServiceImplNormal<InscritoEntity
             		CertificadoEntity CertificadoEntity=new CertificadoEntity();
              		CertificadoEntity.setId(this.CertificadoCursoRepository.getIdPrimaryKey());
              		CertificadoEntity.setCodigo(this.CertificadoCursoRepository.getCodigo());
-             		 // Generar y guardar QR
+             		
+             		CertificadoEntity.setCodigocertificado(codigocertificado);
+             		// Generar y guardar QR
 //             		String nrofolio_x=InscritoDTO.getEvento().getEventodetalle().get(i).getCurso().getNrodocumento()+"-"+codigox_inscrito+"-"+participanteEntity2.getCodigo();
-             		String nrofolio_x = curso_b.getNrodocumento() + "-" + codigox_inscrito + "-" + participante_b.getCodigo();
+//             		String nrofolio_x = curso_b.getNrodocumento() + "-" + codigox_inscrito + "-" + participante_b.getCodigo();
+             		String nrofolio_x = curso_b.getNrodocumento() + "-" + codigocertificado;
              		System.out.println("nrofolio_x "+ i + ":"+nrofolio_x);
              		
              		
-             	// Generar código QR
+             	// Generar código QRx
                     String codigoDocumento = passwordEncoder.encode(nrofolio_x + "");
                     codigoDocumento = codigoDocumento.replace("/", "c").replace(".", "a").replace("$", "d");
                     

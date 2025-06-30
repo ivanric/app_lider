@@ -154,7 +154,6 @@ public class EventoServiceImpl extends GenericServiceImplNormal<EventoEntity, In
         	int id_x=this.EventoRepository.getIdPrimaryKey();
         	entity.setId(id_x);
         	entity.setCodigo(EventoRepository.getCodigo());
-        	
             // Generar código evento
             String codigoevento_encript = passwordEncoder.encode(EventoRepository.getCodigo() + "");
             codigoevento_encript = codigoevento_encript.replace("/", "a").replace(".", "l").replace("$", "j").replace("_", "a");
