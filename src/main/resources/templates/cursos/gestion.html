@@ -566,7 +566,7 @@ td {
 		</div>
 	</form>
 	
-		<form name="formulario4" role="form" id="formulario4" method="post"
+	<form name="formulario4" role="form" id="formulario4" method="post"
 		enctype="multipart/form-data" data-fv-excluded="disabled">
 
 		<div class="modal fade" id="modalInscritoComprobante" tabindex="-1"
@@ -2735,7 +2735,6 @@ td {
                 
 			}
 			
-			
 			function updateQRSocio(){
 //          console.log("G_JSON_ENTITY_ANTES:",G_JSON_ENTITY)
                 
@@ -3098,11 +3097,7 @@ td {
 // 			mostrarCategoriasDetalle();
 			$('#table_certificados').dataTable().fnDraw('page');
 		})
-		
-		
-		
 
-		
 		function mostrarEventosDetalle() {
 			
 		
@@ -3413,7 +3408,7 @@ td {
 		            // Mostrar el modal de reportes
 		            $("#reportes").modal("show");
 		        });
-	
+
 		        // Asignar la URL al iframe (esto iniciará la carga del PDF)
 		        frame.attr("src", url);
 		    })
@@ -3426,16 +3421,16 @@ td {
 
 
 			// Array para almacenar los IDs seleccionados
-// 			var selectedIds = [];
-
-// Verificar si la tabla está vacía
-function checkTableEmpty() {
-    if ($('#table_certificados tbody tr').length === 0) {
-        alert("La tabla de certificados está vacía.");
-        return true; // La tabla está vacía
-    }
-    return false; // La tabla no está vacía
-}
+	// 			var selectedIds = [];
+	
+	// Verificar si la tabla está vacía
+	function checkTableEmpty() {
+	    if ($('#table_certificados tbody tr').length === 0) {
+	        alert("La tabla de certificados está vacía.");
+	        return true; // La tabla está vacía
+	    }
+	    return false; // La tabla no está vacía
+	}
 
 
 $('#btn_select_all').on('click', function () {
@@ -3649,13 +3644,10 @@ $('#btn_select_all_global').on('click', function () {
 			        alert("No se ha seleccionado ningún certificado.");
 			        return;
 			    }
-
 			    // Mostrar el modal de carga
 			    $("#cargando").modal("show");
-
 			    // Iniciar medición del tiempo
 			    var start_time = new Date().getTime();
-
 			    // Construir la URL del backend
 			    var urlCertificados = nameEntity_CORREO + "/enviar_certificados";
 
@@ -3705,14 +3697,13 @@ $('#btn_select_all_global').on('click', function () {
 			    if (GDATO_INSCRITO !== "") {
 			    	$('#formulario4')[0].reset();
 			    	console.log("GID_INSCRITO:",GID_INSCRITO)
-			    	$.get(nameEntity0dt + '/getCertificiado/' + GID_INSCRITO, function (data) {
+			    	$.get(nameEntity0dt + '/getCertificiado/' + GID_INSCRITO, function (data){
 			    		console.log("certificado:",data)
 			    		mostrarEventoCertificado(data);
-			    		
 			    		mostrarDatosCertificadoInscrito(data);
 			    	})
-			    	 $('#modalInscritoComprobante').modal('show');
-			    } else {
+			    	$('#modalInscritoComprobante').modal('show');
+			    }else{
 			        alert("¡SELECCIONE UN CURSO PARA MOSTRAR EL COMPROBANTE!");
 			    }
 			}

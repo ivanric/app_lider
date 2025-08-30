@@ -329,7 +329,7 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
         }
     }
     @GetMapping("/findByNrodocumento"+"/{id}")
-    public ResponseEntity<?> buscar(@PathVariable String id){ 
+    public ResponseEntity<?> buscar(@PathVariable String id){
         try { 
         	System.out.println("ID A BUSCAR:"+id);
         	Map<String, Object> entity=new HashMap<>();
@@ -346,11 +346,11 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
         }
     }
     @GetMapping("/getCertificiado"+"/{id}")
-    public ResponseEntity<?> getCertificiado(@PathVariable("id") Integer id){ 
+    public ResponseEntity<?> getCertificiado(@PathVariable("id") Integer id){
         try { 
         	System.out.println("ID A BUSCAR");
         	CertificadoEntity entity = servicio.findById(id);
-        	if (entity!=null) {
+        	if (entity!=null){
         		System.out.println("Socio encontrado:"+entity.toString());	
 			}
             return ResponseEntity.status(HttpStatus.OK).body(entity);
@@ -360,6 +360,8 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
+    
+    
     @RequestMapping(value = "Imprimir_d1/{id}", method = RequestMethod.GET)
     public void imprimirCertificadoConImagenes(HttpServletResponse response,@PathVariable("id") Integer id) {
         try {
@@ -531,10 +533,6 @@ public class RestCertificadosCursos extends RestControllerGenericNormalImpl<Cert
             }
         }
     }
-
-
-
-
 
     
 }
