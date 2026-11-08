@@ -63,8 +63,9 @@ public class CertificadosliderApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(CertificadosliderApplication.class, args);
 		BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
-		String password= bCryptPasswordEncoder.encode("LiderAcademia1234");//encrypt password
-		System.out.println(password);//$2a$10$nrjVExWrFoz7NGFYL82ix.O0zMFreoAsaLSGtpfhruCuq1BcY.gDm
+		String password= bCryptPasswordEncoder.encode("AcademiaLider2027**");//encrypt password
+		System.out.println("contraseña_actual:"+password);//$2a$10$nrjVExWrFoz7NGFYL82ix.O0zMFreoAsaLSGtpfhruCuq1BcY.gDm
+		
 		/*
 		URIS uris=new URIS(); 
 		System.out.println("INICIANDO APP");
@@ -73,18 +74,19 @@ public class CertificadosliderApplication extends SpringBootServletInitializer {
 			try {
 				System.out.println("DANDO PERMISOS A LA CARPETA DE ARCHIVOS");
 				Process p = Runtime.getRuntime().exec("chmod -R 777 /opt/");
-//				Process p1 = Runtime.getRuntime().exec("chown -R postgres:postgres /opt/");
+				//Process p1 = Runtime.getRuntime().exec("chown -R postgres:postgres /opt/");
 				System.out.println("ruta_archivos linux :"+uris.obtenerRutaCarpetaRecursos(""));
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
 				System.out.println(e.getMessage());
 			}
-
-			
 		}else if(uris.checkOS().contains("Windows")) {
 			
-		}*/
+		}
+		*/
+		
+		
 	}
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {

@@ -26,6 +26,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -143,6 +144,7 @@ public class EventoEntity implements Serializable{
 	
 	@OneToMany(cascade = CascadeType.REFRESH)//CascadeType.REFRESH,cuando hay un cambio en un autor se debe actualizar en un libro
 	@JoinColumn(name = "fk_evento")
+	@OrderBy("id ASC")
 	private List<EventoDetalleEntity> eventodetalle=new ArrayList<>();
 	
 	

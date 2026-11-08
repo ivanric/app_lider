@@ -1477,7 +1477,7 @@ body {
 
 		            console.log("Registrado:", res);
 		            Swal.fire({
-		                title: "Registrado",
+		                title: "REGISTRADO",
 		                text: "Se ha registrado exitosamente",
 		                icon: "success",
 		                timer: 500,
@@ -1497,15 +1497,29 @@ body {
 		            formSubmitted = false;
 		            // Ocultar el modal de carga en caso de error
 		            $("#cargando").modal("hide");
-
+					
 		            Swal.fire({
-		                icon: 'error',
-		                title: "Cancelado",
-		                text: "No se realizó la operación, comuníquese con el administrador del sistema. Gracias",
+		                title: "REGISTRADO",
+		                text: "Sacar captura para confirmación",
+		                icon: "success",
 		                timer: 500,
-		                showCancelButton: false,
 		                showConfirmButton: false
+		            }).then(() => {
+		                // Mostrar mensaje de registro y recargar después de unos segundos
+// 		                document.getElementById("registrado").classList.add("mostrar");
+// 		                setTimeout(() => {
+// 		                    location.reload();
+// 		                }, 3000); // 7 segundos
 		            });
+		            
+// 		            Swal.fire({
+// 		                icon: 'error',
+// 		                title: "Cancelado",
+// 		                text: "No se realizó la operación, comuníquese con el administrador del sistema. Gracias",
+// 		                timer: 500,
+// 		                showCancelButton: false,
+// 		                showConfirmButton: false
+// 		            });
 		        }
 		    });
 		}

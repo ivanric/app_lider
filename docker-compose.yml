@@ -7,6 +7,12 @@ services:
     build: .
     ports:
       - "8080:8080"
+      
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     environment:
       - DATABASE_URL=jdbc:postgresql://bd_posgresql:5432/certificadoslider
       - DATABASE_USERNAME=postgres
@@ -37,6 +43,13 @@ services:
     container_name: "lider_bd"
     image: postgres:11
     restart: always
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
     ports:
       - "5435:5432"
     environment:
